@@ -5,8 +5,9 @@ namespace ProyectARG.Models;
 public class ProvinciasModel
 {
     [Key]
-    public int ProvinciaId { get; set; }
-    public Provincia Provincia { get; set; }
+    public int ProvinciaID { get; set; }
+    public string Nombre { get; set; }
+    public virtual ICollection<LocalidadesModel> Localidades { get; set; }
 }
 
 public enum Provincia

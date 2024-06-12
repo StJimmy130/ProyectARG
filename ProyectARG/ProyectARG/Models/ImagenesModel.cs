@@ -10,5 +10,7 @@ public class ImagenesModel
     public byte []? Imagen { get; set; }
     public string? ContentType { get; set; }
     public string? NombreArchivo { get; set; }
+    public InmuebleModel InmuebleId { get; set; }
+    public UsuariosModel UsuarioId { get; set; }
 
 }
