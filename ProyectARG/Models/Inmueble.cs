@@ -2,14 +2,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ProyectARG.Models;
 
-public class InmuebleModel
+public class Inmueble
 {
     [Key]
-    public int InmuebleId { get; set; }
-    public int LocalidadId { get; set; }
+    public int InmuebleID { get; set; }
+    public int LocalidadID { get; set; }
     public string Barrio { get; set; }
     public string? Titulo { get; set; }
-    public decimal? Precio { get; set; }
+    public float? Precio { get; set; }
     public int? SuperficieTotal { get; set; }
     public int? SuperficieCubierta { get; set; }
     public Operacion TipoOperacion { get; set; }
@@ -22,13 +22,13 @@ public class InmuebleModel
     public string? Direccion { get; set; }
     public int NroDireccion { get; set; }
     public string? Descripcion { get; set; }
-    public int UsuarioId { get; set; }
+    public int? UsuarioID { get; set; }
 
-    public virtual UsuariosModel Usuario { get; set; }
+    public virtual Usuario Usuario { get; set; }
 
-    public virtual ICollection<ImagenesModel> Imagenes { get; set; }
+    public virtual ICollection<Imagen> Imagenes { get; set; }
 
-    public virtual ICollection<ValoracionModel> Valoraciones { get; set; }
+    public virtual ICollection<Valoracion> Valoraciones { get; set; }
 
 }
 
