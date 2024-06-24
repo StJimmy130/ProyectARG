@@ -2,7 +2,7 @@ window.onload = listadoPublicaciones();
 
 function listadoPublicaciones() {
     $.ajax({
-        url: '../../Publicacion/GetPublicaciones',
+        url: '../../Home/GetPublicaciones',
         data: {  },
         type: 'POST',
         dataType: 'json',
@@ -19,7 +19,7 @@ function listadoPublicaciones() {
                         <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
                 </div>
-             `;});
+            `;});
 
             document.getElementById("publicaciones").innerHTML = contenidoTabla;
 

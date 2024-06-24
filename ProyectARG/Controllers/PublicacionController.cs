@@ -10,7 +10,7 @@ namespace ProyectARG.Controllers;
 // [Authorize]
 public class PublicacionController : Controller
 {
-    private readonly ApplicationDbContext _context;
+    private  ApplicationDbContext _context;
 
     public PublicacionController(ApplicationDbContext context)
     {
@@ -22,14 +22,53 @@ public class PublicacionController : Controller
         return View();
     }
 
-    public JsonResult GetPublicaciones(int InmuebleID)
+    public JsonResult GuardarPublicacion(int InmuebleID, int LocalidadID, string? Barrio, string? Titulo, 
+        float? Precio, int? SuperficieTotal, int? SuperficieCubierta, Operacion TipoOperacion, 
+        TipoInmueble TipoInmueble, bool Amoblado, int Dormitorios, int Banios, int CantidadAmbientes, 
+        bool Cochera, string? Direccion, int NroDireccion, string? Descripcion, int? UsuarioID)
     {
-        var Listado = _context.Inmuebles.ToList();
-        if (InmuebleID != 0)
+        string resultado = "";
+        
+        if (InmuebleID != null)
         {
-            Listado = Listado.Where(i => i.InmuebleID == InmuebleID).ToList();
+            if (InmuebleID != 0)
+            {
+                var Inmueble = new Inmueble
+                {
+                    InmuebleID = InmuebleID,
+                    LocalidadID = LocalidadID,
+                    Barrio = Barrio,
+                    Titulo = Titulo,
+                    Precio = Precio,
+                    SuperficieTotal = SuperficieTotal,
+                    SuperficieCubierta = SuperficieCubierta,
+                    TipoOperacion = TipoOperacion,
+                    TipoInmueble = TipoInmueble,
+                    Amoblado = Amoblado,
+                    Dormitorios = Dormitorios,
+                    Banios = Banios,
+                    CantidadAmbientes = CantidadAmbientes,
+                    Cochera = Cochera,
+                    Direccion = Direccion,
+                    NroDireccion = NroDireccion,
+                    Descripcion = Descripcion,
+                    UsuarioID = UsuarioID
+                };
+                _context.Add(Inmueble);
+                _context.SaveChanges();
+                resultado = " guardado correctamente";
+            }
         }
+        return Json(resultado);
+    }
 
-        return Json(Listado);
+
+    public JsonResult EliminarPublicacion(int InmuebleID)
+    {
+        var Inmueble = _context.Inmuebles.Find(InmuebleID);
+        _context.Remove(Inmueble);
+        _context.SaveChanges();
+
+        return Json(true);
     }
 }

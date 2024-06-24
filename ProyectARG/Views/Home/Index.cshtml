@@ -1,8 +1,26 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="d-flex justify-content-center align-item-center">
+    <div>
+        <label for="provincia">Provincia</label>
+        <select name="provincia" id=""></select>
+    </div>
+    <div>
+        <label for="ciudad">Ciudad</label>
+        <select name="ciudad" id=""></select>
+    </div>
+    <div>
+        <label for="operacion">Operacion</label>
+        <select name="operacion" id=""></select>
+    </div>
 </div>
+
+<div class="Container">
+ <div class="row" id="publicaciones"></div>
+</div>
+
+@section Scripts {
+    <script src="~/js/publicacion.js"></script>
+    }
+

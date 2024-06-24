@@ -1,10 +1,4 @@
-main {
-    background-color: #ffffff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
+
 
 .containerForm {
     width: 30vw;
