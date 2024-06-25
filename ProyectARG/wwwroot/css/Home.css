@@ -1,0 +1,34 @@
+.catalogo {
+    height: 80vh;
+    width: 85vw;
+    background-color: aquamarine;
+}
+
+
+.card {
+    padding: 0;
+    height: 50vh;
+    width: auto;
+    margin: 10px 5px;
+    justify-content: end;
+}
+
+img {
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.card-body {
+    height: 25%;
+    width: 100%;
+    background-color: white;
+    overflow: hidden;
+    position: absolute;
+    transition: 0.5s;
+    
+}
+
+.card-body:hover {
+    height: 80%;
+}

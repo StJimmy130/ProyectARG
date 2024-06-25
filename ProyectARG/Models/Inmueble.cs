@@ -34,14 +34,14 @@ public class Inmueble
 
 public enum Operacion 
 {
-    Alquiler,
+    Alquiler = 1,
     Venta,
     AlquilerTemporal,
 }
 
 public enum TipoInmueble
 {
-    Campo,
+    Campo = 1,
     Casa,
     Cochera,
     Departamento,

@@ -5,6 +5,7 @@ using ProyectARG.Data;
 using Microsoft.AspNetCore.Mvc.TagHelpers;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.CodeAnalysis.Elfie.Diagnostics;
 
 namespace ProyectARG.Controllers;
 
@@ -14,16 +15,12 @@ public class HomeController : Controller
 
     private  ApplicationDbContext _context;
 
-    public HomeController(ApplicationDbContext context)
+    public HomeController(ApplicationDbContext context, ILogger<HomeController> logger)
     {
+        _logger = logger;
         _context = context;
     }
 
-
-    public HomeController(ILogger<HomeController> logger)
-    {
-        _logger = logger;
-    }
 
     public IActionResult Index()
     {

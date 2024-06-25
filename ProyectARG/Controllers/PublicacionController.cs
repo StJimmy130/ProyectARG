@@ -5,6 +5,7 @@ using ProyectARG.Data;
 using Microsoft.AspNetCore.Mvc.TagHelpers;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ProyectARG.Controllers;
 // [Authorize]
@@ -19,6 +20,13 @@ public class PublicacionController : Controller
 
     public IActionResult Index()
     {
+        var selectListItems = new List<SelectListItem>
+        {
+            new SelectListItem { Value = "0", Text = "[SELECCIONE...]" }
+        };
+
+        var enumValues = Enum.GetValues(typeof(Operacion)).Cast<Operacion>();
+
         return View();
     }
 
