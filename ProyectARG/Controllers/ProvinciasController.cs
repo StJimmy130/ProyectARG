@@ -26,7 +26,7 @@ public class ProvinciasController : Controller
     {
         var provincia = _context.Provincias.ToList();
 
-        if (ProvinciaID != null)
+        if (ProvinciaID != 0)
         {
             provincia = _context.Provincias.Where(t => t.ProvinciaID == ProvinciaID).ToList();
         }

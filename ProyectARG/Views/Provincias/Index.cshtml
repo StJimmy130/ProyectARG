@@ -1,11 +1,13 @@
 @{
     ViewData["Title"] = "Provincias";
 }
+@section Scripts {
+  <script src="~/js/Provincias.js"></script>
+}
 
 
-
-<button type="button" class="btn btn-primary" onclick="NuevaProvincia()">Crear provincia</button>
-
+<button type="button" class="btn btn-primary" onclick="NuevaProvincia()" data-bs-toggle="modal" data-bs-target="#ProvinciaModal"">Crear provincia</button>
+<button onclick="ListadoDeProvincias()">recargar</button>
 
 <table class="table" id="table">
   <thead>
@@ -41,6 +43,7 @@
 </div>
 
 
-@section Scripts{
-  <script src="~/js/provincias.js"></script>
-}
+
+
+
+

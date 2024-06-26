@@ -7,7 +7,7 @@ function ListadoDeProvincias() {
         type: 'POST',
         dataType: 'json',
         success: function (provincia) {
-
+            console.log(provincia)
             $("#ProvinciaModal").modal("hide");
             LimpiarModal();
 
@@ -50,8 +50,8 @@ function NuevaProvincia() {
 }
 
 function GuardarProvincia() {
-    let proyectoID = document.getElementById("ProvinciaID").value;
-    let nombre = document.getElementById("NombreProvinca").value;
+    let provinciaID = document.getElementById("ProvinciaID").value;
+    let nombre = document.getElementById("ProvinciaNombre").value;
 
 
     $.ajax({
@@ -73,7 +73,7 @@ function GuardarProvincia() {
 
 function ModalEditar(provinciaID) {
     $.ajax({
-        url: '../../Proyectos/ListadoProyectos',
+        url: '../../Provincias/ListadoProvincias',
         data: { ProvinciaID: provinciaID },
         type: 'POST',
         dataType: 'json',
@@ -82,7 +82,7 @@ function ModalEditar(provinciaID) {
 
             document.getElementById("ProvinciaID").value = provinciaID
             $("#tituloModal").text("Editar provinca");
-            document.getElementById("NombreProvincia").value = provincias.nombre;
+            document.getElementById("ProvinciaNombre").value = provincias.nombre;
             $("#ProvinciaModal").modal("show");
         },
         error: function (xhr, status) {
