@@ -13,10 +13,8 @@ main {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  overflow: auto;
   max-height: 80vh;
   width: 90vw;
-  overflow: auto;
 }
 
 form .form-control{
