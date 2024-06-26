@@ -35,9 +35,9 @@ public class ProvinciasController : Controller
     }
 
 
-    public JsonResult GuardarProvincias(int ProvinciaID, string Nombre)
+    public JsonResult GuardarProvincia(int ProvinciaID, string Nombre)
     {
-       string resultado = "";
+        string resultado = "";
 
         if (!String.IsNullOrEmpty(Nombre))
         {
@@ -91,10 +91,10 @@ public class ProvinciasController : Controller
 
     public JsonResult EliminarProvincia(int ProvinciaID)
     {
-        var provincia = _context.Provincias.Find(ProvinciaID);
-        _context.Remove(provincia);
+        var eliminarProvincia = _context.Provincias.Find(ProvinciaID);
+        _context.Remove(eliminarProvincia);
         _context.SaveChanges();
 
-        return Json(true);
+        return Json(eliminarProvincia);
     }
 }
