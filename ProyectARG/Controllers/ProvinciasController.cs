@@ -28,16 +28,16 @@ public class ProvinciasController : Controller
 
         if (ProvinciaID != null)
         {
-            provincia = Provincias.Where(t => t.ProvinciaID == ProvinciaID).ToList();
+            provincia = _context.Provincias.Where(t => t.ProvinciaID == ProvinciaID).ToList();
         }
 
         return Json(provincia);
     }
 
 
-    public jsonResult GuardarProvincias(int ProvinciaID, string Nombre)
+    public JsonResult GuardarProvincias(int ProvinciaID, string Nombre)
     {
-        resultado = "";
+       string resultado = "";
 
         if (!String.IsNullOrEmpty(Nombre))
         {
