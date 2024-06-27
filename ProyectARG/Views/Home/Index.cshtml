@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="~/css/Home.css">
 
 
-<div class="d-flex justify-content-center align-item-center">
+<div class="contenedor-filtros-principal d-flex justify-content-center align-item-center ">
     <div>
         <label for="provincia">Provincia</label>
         <select name="provincia" id=""></select>
@@ -23,16 +23,37 @@
 <div class="catalogo">
     <div class="filtros">
         <ul>
-            <li><a href="">asda</a></li>
-            <li><a href="">dsaasd</a></li>
-            <li><a href="">dasd</a></li>
-            <li><a href="">asdasd</a></li>
-            <li><a href="">dasda</a></li>
+            <li class="nav-item">
+                <p class="d-inline-flex gap-1">
+                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button"
+                        aria-expanded="false" aria-controls="collapseExample">
+                        Tipo de inmueble
+                    </a>
+                <div class="collapse" id="collapseExample">
+                    <div class="menu-desplegable">
+                        <div>
+                            <input type="radio">Casas
+                        </div>
+                        <div>
+                            <input type="radio">Casas
+                        </div>
+                        <div>
+                            <input type="radio">Casas
+                        </div>
+                        <div>
+                            <input type="radio">Casas
+                        </div>
+                        <div>
+                            <input type="radio">Casas
+                        </div>
+                    </div>
+                </div>
+            </li>
         </ul>
     </div>
     <div class="row" id="publicaciones">
 
-       <div class="col-lg-4 col-md-4 col-sm-12 mb-4">
+        <div class="col-lg-4 col-md-4 col-sm-12 mb-4">
             <div class="card">
                 <img src="https://via.placeholder.com/150" alt="Card image cap">
                 <div class="card-body">

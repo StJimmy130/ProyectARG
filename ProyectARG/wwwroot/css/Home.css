@@ -1,10 +1,27 @@
+body{
+    background-color: rgb(210, 210, 210);
+}
 
+
+.contenedor-filtros-principal{
+    height: 10rem;
+    width: 50rem;
+    background-color: black;
+    
+}
 
 .row {
-    overflow-y: auto;
+    overflow: auto;
     height: 100%;
     width: 100%;
+    border-radius: 15px;
+    background-color: rgb(255, 255, 255);
+/* box-shadow: inset 18px 18px 27px #bababa,
+            inset -18px -18px 27px #ffffff; */
 }
+
+
+
 
 .catalogo {
     height: 80vh;
@@ -12,7 +29,7 @@
     display: flex;
     justify-content: left;
     align-items: start;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(210, 210, 210);
     border-radius: 15px;
 }
 
@@ -34,7 +51,7 @@
 .card:hover {
     transform: scale(1.1);
     z-index: 10000;
-    box-shadow:  0 0 15px 0.5px rgb(0, 0, 0);
+    box-shadow:  0 0 15px 0.5px rgb(140, 135, 135);
 }
 
 img {
@@ -62,9 +79,23 @@ img {
 .filtros {
     display: flex;
     justify-content: space-between;
-    background-color: brown;
+    background-color: rgb(255, 255, 255);
     height: 100%;
     width: 300px;
     margin-right: 20px;
-    border-radius: 15px 0 0 15px;
+    border-radius: 15px;
+    /* box-shadow: inset 18px 18px 27px #a8a5a5,
+            inset -18px -18px 27px #ffffff; */
+}
+
+.menu-desplegable{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: auto;
+    width: 12rem;
+    background-color: rgb(221, 221, 221);
+    border-radius: 15px;
+    padding: 10px;
 }

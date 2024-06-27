@@ -8,6 +8,8 @@ html {
   }
 }
 
+
+
 main {
   display: flex;
   justify-content: center;
@@ -43,3 +45,29 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+/* Ancho del scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 95%;
+}
+
+/* Fondo del track */
+::-webkit-scrollbar-track {
+  background: #ebeaeafd;
+  border-radius: 10px;
+
+}
+
+/* Thumb del scrollbar */
+::-webkit-scrollbar-thumb {
+  background-color: #abacad;
+  border-radius: 10px;
+  border: 10px solid #ffffff00;
+
+}
+
+/* Thumb al pasar el mouse */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #6e6f70;
+} 
