@@ -1,13 +1,9 @@
 
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
+
 .row {
     overflow-y: auto;
-    overflow-x: hidden;
+    height: 100%;
+    width: 100%;
 }
 
 .catalogo {
@@ -16,9 +12,8 @@ body {
     display: flex;
     justify-content: left;
     align-items: start;
-    background-color: aquamarine;
-    overflow-y: auto;
-    overflow-x: hidden;
+    background-color: rgb(255, 255, 255);
+    border-radius: 15px;
 }
 
 .content-catalogo{
@@ -29,12 +24,17 @@ body {
 
 .card {
     padding: 0;
-    height: 30vh;
-    width: 250px;
+    height: 37vh;
     border-radius: 15px;
-    margin: 10px 10px;
+    margin: 20px 20px 0 20px;
     justify-content: end;
-    
+    transition: 0.5s;
+}
+
+.card:hover {
+    transform: scale(1.1);
+    z-index: 10000;
+    box-shadow:  0 0 15px 0.5px rgb(0, 0, 0);
 }
 
 img {
@@ -66,4 +66,5 @@ img {
     height: 100%;
     width: 300px;
     margin-right: 20px;
+    border-radius: 15px 0 0 15px;
 }
