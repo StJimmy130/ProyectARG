@@ -31,7 +31,7 @@ function ListadoDeProvincias() {
                     </tr>
                 `;
             });
-            document.getElementById("tbody").innerHTML = tabla;
+            document.getElementById("tbodyProvincias").innerHTML = tabla;
         },
         error: function (xhr, status) {
             console.log('Disculpe, existió un problema al cargar el listado');
@@ -39,14 +39,14 @@ function ListadoDeProvincias() {
     });
 }
 
-function LimpiarModal() {
+function LimpiarModalProvincia() {
     document.getElementById("ProvinciaID").value = 0;
     document.getElementById("ProvinciaNombre").value = "";
 
 }
 
 function NuevaProvincia() {
-    $("#tituloModal").text("Nueva provincia");
+    $("#TituloModalProvincia").text("Nueva provincia");
 }
 
 function GuardarProvincia() {
@@ -81,7 +81,7 @@ function ModalEditar(provinciaID) {
             let provincias = provincia[0];
 
             document.getElementById("ProvinciaID").value = provinciaID
-            $("#tituloModal").text("Editar provinca");
+            $("#TituloModalProvincia").text("Editar provinca");
             document.getElementById("ProvinciaNombre").value = provincias.nombre;
             $("#ProvinciaModal").modal("show");
         },
