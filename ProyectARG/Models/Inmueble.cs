@@ -55,3 +55,13 @@ public enum TipoInmueble
     TerrenoYLote,
 }
 
+public class VistaInmueble
+{
+    public int InmuebleID { get; set; }
+    public string Titulo { get; set; }
+    public int LoacalidadString { get; set; }
+    public string Direccion { get; set; }
+    public float Precio { get; set; }
+    public string TipoOperacionString { get; set; }
+}
+

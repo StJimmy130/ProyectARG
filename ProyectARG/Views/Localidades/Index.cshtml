@@ -4,6 +4,7 @@
 @section Scripts {
   <script src="~/js/Provincias.js"></script>
   <script src="~/js/Localidades.js"></script>
+  
 }
 
 
@@ -73,12 +74,12 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <input type="hidden" value="0" id="ProvinciaID">
+        <input type="hidden" value="0" id="ProvinciaIDAdd">
         <label for="Nombre">Nombre</label>
         <input type="text" id="ProvinciaNombre" class="form-control">
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="LimpiarModalProvincia()">Cancelar</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="LimpiarModals()">Cancelar</button>
         <button type="button" class="btn btn-primary" onclick="GuardarProvincia()">Guardar Provincia</button>
       </div>
     </div>
@@ -104,7 +105,7 @@
         <input type="text" id="LocalidadNombre" class="form-control">
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="LimpiarModalLocalidad()">Cancelar</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="LimpiarModals()">Cancelar</button>
         <button type="button" class="btn btn-primary" onclick="GuardarLocalidad()">Guardar localidad</button>
       </div>
     </div>

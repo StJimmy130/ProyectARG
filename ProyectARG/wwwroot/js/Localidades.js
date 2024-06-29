@@ -7,8 +7,8 @@ function ListadoDeLocalidades() {
         type: 'POST',
         dataType: 'json',
         success: function (localidad) {
-            $("#LocalidadaModal").modal("hide");
-            LimpiarModalLocalidad();
+            $("#LocalidadModal").modal("hide");
+            LimpiarModals();
 
             let tabla = ``;
 
@@ -19,12 +19,12 @@ function ListadoDeLocalidades() {
                         <td>${localidades.localidadNombre}</td>
                         <td>${localidades.provinciaNombre}</td>
                         <td class="text-center">
-                            <button type="button" class="btn btn-success" onclick="ModalEditar(${localidades.localidadID})">
+                            <button type="button" class="btn btn-success" onclick="ModalEditarLocalidad(${localidades.localidadID})">
                             Editar
                             </button>
                         </td>
                         <td class="text-center">
-                            <button type="button" class="btn btn-danger" onclick="ValidarEliminacion(${localidades.localidadID})">
+                            <button type="button" class="btn btn-danger" onclick="ValidarEliminacionLocalidad(${localidades.localidadID})">
                             Eliminar
                             </button>
                         </td>
@@ -53,14 +53,14 @@ function NuevaLocalidad() {
 function GuardarLocalidad() {
     let localidadID = document.getElementById("LocalidadID").value;
     let provinciaID = document.getElementById("ProvinciaID").value;
-    let localidadNombre = document.getElementById("LocalidadNombre").value;
+    let nombre = document.getElementById("LocalidadNombre").value;
 
 
     $.ajax({
         url: '../../Localidades/GuardarLocalidad',
         data: { LocalidadID: localidadID, 
                 ProvinciaID: provinciaID, 
-                LocalidadNombre: localidadNombre, },
+                Nombre: nombre, },
         type: 'POST',
         dataType: 'json',
         success: function (resultado) {
@@ -96,22 +96,22 @@ function ModalEditarLocalidad(localidadID) {
     });
 }
 
-function ValidarEliminacion(provinciaID) {
+function ValidarEliminacionLocalidad(localidadID) {
     var elimina = confirm("¿Esta seguro que desea eliminar esta provincia?")
     if(elimina == true) {
-        EliminarProvincia(provinciaID)
+        EliminarLocalidad(localidadID)
     }
 }
 
-function EliminarProvincia(provinciaID) {
+function EliminarLocalidad(localidadID) {
     $.ajax({
-        url: '../../Localidades/EliminarProvincia',
-        data: { ProvinciaID: provinciaID },
+        url: '../../Localidades/EliminarLocalidad',
+        data: { LocalidadID: localidadID },
         type: 'POST',
         dataType: 'json',
 
-        success: function (eliminarProyecto) {
-            ListadoDeProvincias();
+        success: function (eliminarLocalidad) {
+            ListadoDeLocalidades();
         },
 
         error: function (xhr, status) {

@@ -9,7 +9,7 @@ function ListadoDeProvincias() {
         success: function (provincia) {
             console.log(provincia)
             $("#ProvinciaModal").modal("hide");
-            LimpiarModal();
+            LimpiarModals();
 
             let tabla = ``;
 
@@ -39,9 +39,12 @@ function ListadoDeProvincias() {
     });
 }
 
-function LimpiarModalProvincia() {
+function LimpiarModals() {
     document.getElementById("ProvinciaID").value = 0;
+    document.getElementById("ProvinciaIDAdd").value = 0;
     document.getElementById("ProvinciaNombre").value = "";
+    document.getElementById("LocalidadID").value = 0;
+    document.getElementById("LocalidadNombre").value = "";
 
 }
 
@@ -50,7 +53,7 @@ function NuevaProvincia() {
 }
 
 function GuardarProvincia() {
-    let provinciaID = document.getElementById("ProvinciaID").value;
+    let provinciaID = document.getElementById("ProvinciaIDAdd").value;
     let nombre = document.getElementById("ProvinciaNombre").value;
 
 
@@ -80,7 +83,7 @@ function ModalEditar(provinciaID) {
         success: function (provincia) {
             let provincias = provincia[0];
 
-            document.getElementById("ProvinciaID").value = provinciaID
+            document.getElementById("ProvinciaIDAdd").value = provinciaID
             $("#TituloModalProvincia").text("Editar provinca");
             document.getElementById("ProvinciaNombre").value = provincias.nombre;
             $("#ProvinciaModal").modal("show");

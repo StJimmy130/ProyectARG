@@ -30,7 +30,7 @@ public class LocalidadesController : Controller
     {
         List<VistaLocalidad> localidadesMostrar = new List<VistaLocalidad>();
 
-        var localidades = _context.Localidades.ToList();
+        var localidades = _context.Localidades.OrderBy(c => c.Nombre).ToList();
 
         if (LocalidadID != 0)
         {
@@ -56,7 +56,7 @@ public class LocalidadesController : Controller
     }
 
 
-    public JsonResult GuardarProvincia(int LocalidadID,int ProvinciaID, string Nombre)
+    public JsonResult GuardarLocalidad(int LocalidadID,int ProvinciaID, string Nombre)
     {
         string resultado = "";
 
@@ -71,7 +71,9 @@ public class LocalidadesController : Controller
                 {
                     var Localidad = new Localidad
                     {
-                        Nombre = Nombre
+                        LocalidadID = LocalidadID,
+                        Nombre = Nombre,
+                        ProvinciaID = ProvinciaID
                     };
                     _context.Add(Localidad);
                     _context.SaveChanges();
@@ -91,6 +93,7 @@ public class LocalidadesController : Controller
                     {
                         //QUIERE DECIR QUE EL ELEMENTO Y ES CORRECTO, ENTONCES CONTINUAMOS CON EL EDITAR
                         localidadEditar.Nombre = Nombre;
+                        localidadEditar.ProvinciaID = ProvinciaID;
                         _context.SaveChanges();
                     }
                     else{

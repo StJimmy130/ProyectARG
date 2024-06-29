@@ -5,31 +5,17 @@
 <link rel="stylesheet" href="~/css/Home.css">
 
 
-<div class="contenedor-filtros-principal d-flex justify-content-center align-item-center ">
-    <div>
-        <label for="provincia">Provincia</label>
-        <select name="provincia" id=""></select>
-    </div>
-    <div>
-        <label for="ciudad">Ciudad</label>
-        <select name="ciudad" id=""></select>
-    </div>
-    <div>
-        <label for="operacion">Operacion</label>
-        <select name="operacion" id=""></select>
-    </div>
-</div>
 
 <div class="catalogo">
     <div class="filtros">
         <ul>
             <li class="nav-item">
-                <p class="d-inline-flex gap-1">
-                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button"
+                    <a class="" data-bs-toggle="collapse" href="#collapse1" role="button"
                         aria-expanded="false" aria-controls="collapseExample">
                         Tipo de inmueble
                     </a>
-                <div class="collapse" id="collapseExample">
+                    <span></span>
+                <div class="collapse" id="collapse1">
                     <div class="menu-desplegable">
                         <div>
                             <input type="radio">Casas
@@ -46,81 +32,77 @@
                         <div>
                             <input type="radio">Casas
                         </div>
+                        
+                    </div>
+                </div>
+                
+            </li>
+            <li class="nav-item">
+                    <a class="" data-bs-toggle="collapse" href="#collapse2" role="button"
+                        aria-expanded="false" aria-controls="collapseExample">
+                        Rango de precio
+                    </a>
+                    <span></span>
+                    <div class="collapse" id="collapse2">
+                    <div class="menu-desplegable">
+                        <input type="range">
+                    </div>
+                </div>
+            </li>
+
+              <li class="nav-item">
+                    <a class="" data-bs-toggle="collapse" href="#collapse3" role="button"
+                        aria-expanded="false" aria-controls="collapseExample">
+                        Provincia
+                    </a>
+                    <span></span>
+                    <div class="collapse" id="collapse3">
+                    <div class="menu-desplegable">
+                        <input type="range">
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                    <a class="" data-bs-toggle="collapse" href="#collapse4" role="button"
+                        aria-expanded="false" aria-controls="collapseExample">
+                        Localidad
+                    </a>
+                    <span></span>
+                    <div class="collapse" id="collapse4">
+                    <div class="menu-desplegable">
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                    <a class="" data-bs-toggle="collapse" href="#collapse5" role="button"
+                        aria-expanded="false" aria-controls="collapseExample">
+                        Operacion
+                    </a>
+                    <span></span>
+                    <div class="collapse" id="collapse5">
+                    <div class="menu-desplegable">
+                        <Select class="form-control">
+                            <option value="0">Seleccione</option>
+                            <option value="1">Alquiler</option>
+                            <option value="2">Alquiler temporal</option>
+                            <option value="3">Compra</option>
+                        </Select>
                     </div>
                 </div>
             </li>
         </ul>
     </div>
+
+    
     <div class="row" id="publicaciones">
-
-        <div class="col-lg-4 col-md-4 col-sm-12 mb-4">
-            <div class="card">
-                <img src="https://via.placeholder.com/150" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">Titulo</h5>
-                    <p class="card-text">Precio</p>
-                    <p>Ubicacion</p>
-                    <div>Operacion</div>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-12 mb-4">
-            <div class="card">
-                <img src="https://via.placeholder.com/150" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">Titulo</h5>
-                    <p class="card-text">Precio</p>
-                    <p>Ubicacion</p>
-                    <div>Operacion</div>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-12 mb-4">
-            <div class="card">
-                <img src="https://via.placeholder.com/150" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">Titulo</h5>
-                    <p class="card-text">Precio</p>
-                    <p>Ubicacion</p>
-                    <div>Operacion</div>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-12 mb-4">
-            <div class="card">
-                <img src="https://via.placeholder.com/150" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">Titulo</h5>
-                    <p class="card-text">Precio</p>
-                    <p>Ubicacion</p>
-                    <div>Operacion</div>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-12 mb-4">
-            <div class="card">
-                <img src="https://via.placeholder.com/150" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">Titulo</h5>
-                    <p class="card-text">Precio</p>
-                    <p>Ubicacion</p>
-                    <div>Operacion</div>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        </div>
-
-
-
 
     </div>
 </div>
 
 
 @section Scripts {
-    <script src="~/js/hom.js"></script>
+    <script src="~/js/home.js"></script>
 }

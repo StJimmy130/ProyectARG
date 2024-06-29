@@ -12,13 +12,18 @@ function ListadoPublicaciones() {
             let contenidoTabla = ``;
             $.each(Listado, function (Index, item) {
                 contenidoTabla += `
-                <div class="card" style="width: 18rem;">
-                    <div class="card-body">
-                        <h5 class="card-title">${item.titulo}</h5>
-                        <p class="card-text">${item.descripcion}</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
+                  <div class="col-lg-4 col-md-4 col-sm-12 mb-4">
+            <div class="card">
+                <img src="https://via.placeholder.com/150" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">${item.titulo}</h5>
+                    <p class="card-text">${item.precio}</p>
+                    <p>${item.localidad} ${item.direccion}</p>
+                    <div>${item.tipoOperacion}</div>
+                    <a href="#" class="btn btn-primary">Ver más</a>
                 </div>
+            </div>
+        </div>
             `;});
 
             document.getElementById("publicaciones").innerHTML = contenidoTabla;

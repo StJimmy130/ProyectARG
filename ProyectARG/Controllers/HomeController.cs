@@ -39,7 +39,34 @@ public class HomeController : Controller
         return Json(Listado);
     }
 
+ public JsonResult ListadoInmuebles(int InmuebleID)
+    {
+        List<VistaInmueble> inmueblesMostrar = new List<VistaInmueble>();
 
+        var Inmuebles = _context.Inmuebles.OrderBy(c => c.Titulo).ToList();
+
+        if (InmuebleID != 0)
+        {
+            Inmuebles = _context.Inmuebles.Where(t => t.InmuebleID == InmuebleID).ToList();
+        }
+
+        var provincias = _context.Provincias.ToList();
+
+        foreach (var Inmueble in Inmuebles)
+        {
+            var provincia = provincias.Where(t => t.ProvinciaID == Localidad.ProvinciaID).Single();
+            var localidadMostrar = new VistaInmueble
+            {
+                LocalidadID = localidad.LocalidadID,
+                LocalidadNombre = localidad.Nombre,
+                ProvinciaID = localidad.ProvinciaID,
+                ProvinciaNombre = provincia.Nombre
+            };
+            localidadesMostrar.Add(localidadMostrar);
+        }
+
+        return Json(localidadesMostrar);
+    }
 
 
 

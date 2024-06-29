@@ -24,7 +24,7 @@ public class ProvinciasController : Controller
 
     public JsonResult ListadoProvincias(int ProvinciaID)
     {
-        var provincia = _context.Provincias.ToList();
+        var provincia = _context.Provincias.OrderBy(c => c.Nombre).ToList();
 
         if (ProvinciaID != 0)
         {

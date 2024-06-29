@@ -19,7 +19,7 @@ main {
   width: 90vw;
 }
 
-form .form-control{
+.form-control{
   width: 100%;
   height: 30px;
   border-radius: 60px;
