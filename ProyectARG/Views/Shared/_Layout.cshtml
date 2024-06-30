@@ -9,91 +9,35 @@
   <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
   <link rel="stylesheet" href="~/ProyectARG.styles.css" asp-append-version="true" />
   <link rel="stylesheet" href="~/css/layout.css">
-
-  <!-- LIBRERIA ICONOS -->
-  <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
-  <!-- GOOGLE FONTS -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-
 </head>
 
 <body>
   <header>
-    <nav>
-      <div class="nav-bar">
-        <i class='bx bx-menu sidebarOpen'></i>
-        <span class="logo navLogo"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">ProyectARG</a></span>
-        <div class="menu">
-          <div class="logo-toggle">
-            <span class="logo"><a href="#">ProyectARG</a></span>
-            <i class='bx bx-x siderbarClose'></i>
-          </div>
-          <ul class="nav-links">
-            <li>
-              <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-            </li>
-            <li>
-              <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Catálogo</a>
-            </li>
-            <li>
-              <a class="nav-link" asp-area="" asp-controller="Localidades" asp-action="Index">Funciones</a>
-            </li>
-            <li><a class="nav-link">Servicios</a></li>
-            <li><a class="nav-link">Contacto</a></li>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">ProyectARG</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Buscar</button>
+          </form>
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Catalogo</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Localidades" asp-action="Index">Provincias</a>
+        </li>
           </ul>
-        </div>
-        <div class="darkLight-searchBox">
-          <div class="dark-light">
-            <i class='bx bx-moon moon'></i>
-            <i class='bx bx-sun sun'></i>
-          </div>
-          <div class="searchBox">
-            <div class="searchToggle">
-              <i class='bx bx-x cancel'></i>
-              <i class='bx bx-search search'></i>
-            </div>
-            <div class="search-field">
-              <input type="text" placeholder="Search...">
-              <i class='bx bx-search'></i>
-            </div>
-          </div>
-        </div>
-        <ul>
           <partial name="_LoginPartial" />
-        </ul>
+        </div>
       </div>
     </nav>
   </header>
-
-
-  @* <header>
-  <nav class="navbar navbar-expand-lg bg-light">
-  <div class="container-fluid">
-  <a class="navbar-brand" href="#">ProyectARG</a>
-  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-  aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-  <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-  <form class="d-flex" role="search">
-  <input class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Search">
-  <button class="btn btn-outline-success" type="submit">Buscar</button>
-  </form>
-  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-  <li class="nav-item">
-  <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Catalogo</a>
-  </li>
-  <li class="nav-item">
-  <a class="nav-link text-dark" asp-area="" asp-controller="Localidades" asp-action="Index">Provincias</a>
-  </li>
-  </ul>
-  <partial name="_LoginPartial" />
-  </div>
-  </div>
-  </nav>
-  </header> *@
 
 
   <div class="d-flex justify-content-center align-item-center">
