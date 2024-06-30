@@ -11,12 +11,13 @@ for details on configuring this project to bundle and minify static web assets. 
 
 /* ===== Colours ===== */
 :root{
-  --body-color: #E4E9F7;
-  --nav-color: #4070F4;
+  --body-color: #8b9993;
+  --nav-color: linear-gradient(180deg, rgba(0,199,99,1) 0%, rgba(0,199,99,1) 95%, rgba(139,153,147,1) 100%);
   --side-nav: #010718;
-  --text-color: #FFF;
+  --text-color: #e6e0e0;
   --search-bar: #F2F2F2;
   --search-text: #010718;
+  --container-color: #EAE6E5;
 }
 body{
   height: 100vh;
@@ -35,7 +36,7 @@ nav{
   left: 0;
   height: 70px;
   width: 100%;
-  background-color: var(--nav-color);
+  background: var(--nav-color);
   z-index: 1;
 }
 body.dark nav{
@@ -51,7 +52,7 @@ nav .nav-bar{
   padding: 0 30px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 }
 nav .nav-bar .sidebarOpen{
   color: var(--text-color);
@@ -72,6 +73,7 @@ nav .nav-bar .logo a{
 .nav-bar .nav-links{
   display: flex;
   align-items: center;
+  margin-bottom: 0rem;
 }
 .nav-bar .nav-links li{
   margin: 0 5px;
@@ -84,6 +86,10 @@ nav .nav-bar .logo a{
   color: var(--text-color);
   text-decoration: none;
   padding: 10px;
+}
+.nav-links li a:hover, .dark-light i:hover,
+.searchToggle i:hover{
+  color: rgb(255, 255, 255);
 }
 .nav-links li a::before{
   content: '';

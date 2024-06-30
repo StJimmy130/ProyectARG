@@ -62,7 +62,7 @@ public class LocalidadesController : Controller
 
         if (!String.IsNullOrEmpty(Nombre))
         {
-            Nombre = Nombre.ToUpper();
+            Nombre = char.ToUpper(Nombre[0]) + Nombre.Substring(1).ToLower();
             
             if (LocalidadID == 0)
             {

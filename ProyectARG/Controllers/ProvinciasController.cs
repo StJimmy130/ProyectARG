@@ -41,7 +41,7 @@ public class ProvinciasController : Controller
 
         if (!String.IsNullOrEmpty(Nombre))
         {
-            Nombre = Nombre.ToUpper();
+            Nombre = char.ToUpper(Nombre[0]) + Nombre.Substring(1).ToLower();
             
             if (ProvinciaID == 0)
             {
