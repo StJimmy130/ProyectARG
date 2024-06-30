@@ -40,33 +40,40 @@ public class HomeController : Controller
     }
 
  public JsonResult ListadoInmuebles(int InmuebleID)
-    {
+        {
         List<VistaInmueble> inmueblesMostrar = new List<VistaInmueble>();
 
-        var Inmuebles = _context.Inmuebles.OrderBy(c => c.Titulo).ToList();
+        var Inmuebles = _context.Inmuebles.ToList();
 
         if (InmuebleID != 0)
         {
             Inmuebles = _context.Inmuebles.Where(t => t.InmuebleID == InmuebleID).ToList();
         }
 
-        var provincias = _context.Provincias.ToList();
+        var Provincias = _context.Provincias.ToList();
+        var Localidades = _context.Localidades.ToList();
 
         foreach (var Inmueble in Inmuebles)
         {
-            var provincia = provincias.Where(t => t.ProvinciaID == Localidad.ProvinciaID).Single();
+            var localidad = Localidades.Where(t => t.LocalidadID == Inmueble.LocalidadID).SingleOrDefault();
+            var provincia = Provincias.Where(t => t.ProvinciaID == localidad.ProvinciaID).SingleOrDefault();
             var localidadMostrar = new VistaInmueble
             {
-                LocalidadID = localidad.LocalidadID,
-                LocalidadNombre = localidad.Nombre,
-                ProvinciaID = localidad.ProvinciaID,
-                ProvinciaNombre = provincia.Nombre
+                InmuebleID = Inmueble.InmuebleID,
+                TituloString = Inmueble.Titulo,
+                ProvinciaString = provincia.Nombre,
+                LoacalidadString = localidad.Nombre,
+                Direccion = Inmueble.Direccion,
+                NroDireccion = Inmueble.NroDireccion,
+                Precio = (float)Inmueble.Precio,
+                TipoOperacionString = Inmueble.TipoOperacion.ToString(),
             };
-            localidadesMostrar.Add(localidadMostrar);
+            inmueblesMostrar.Add(localidadMostrar);
         }
 
-        return Json(localidadesMostrar);
+        return Json(inmueblesMostrar);
     }
+
 
 
 

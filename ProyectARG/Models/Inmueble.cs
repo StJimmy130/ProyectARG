@@ -58,10 +58,11 @@ public enum TipoInmueble
 public class VistaInmueble
 {
     public int InmuebleID { get; set; }
-    public string Titulo { get; set; }
-    public int LoacalidadString { get; set; }
+    public string TituloString { get; set; }
+    public string LoacalidadString { get; set; }
     public string Direccion { get; set; }
+    public int NroDireccion { get; set; }
     public float Precio { get; set; }
+    public string ProvinciaString { get; set; }
     public string TipoOperacionString { get; set; }
 }
-
