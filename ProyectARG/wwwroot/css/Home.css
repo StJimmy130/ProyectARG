@@ -1,16 +1,4 @@
 
-.contenedor-filtros-principal{
-    height: 5rem;
-    width: 25rem;
-    background-color: rgb(255, 255, 255);
-    
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-radius: 15px;
-    /* box-shadow: 18px 18px 27px #a8a5a5,
-            -18px -18px 27px #ffffff; */
-}
 
 
 .catalogo {

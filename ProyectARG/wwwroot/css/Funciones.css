@@ -1,0 +1,15 @@
+.contenedor {
+    background-color: var(--container-color);
+    border-radius: 15px;
+    width: 100%;
+    height: 100%;
+    margin: 0 5px;
+    padding: 15px;
+}
+
+
+.tabla{
+    border-radius: 15px;
+    overflow: auto;
+    max-height: 10vh;
+}

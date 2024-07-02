@@ -5,59 +5,79 @@
 @section Scripts {
   <script src="~/js/Provincias.js"></script>
   <script src="~/js/Localidades.js"></script>
-  
+
 }
 
 
 <div class="container mt-5">
   <div class="row">
+    <!-- Sección de Provincias -->
     <div class="col-lg-3 col-md-3 col-sm-12 mb-4">
-      <div class="row mb-3">
-        <div class="col-12">
-          <button type="button" class="btn btn-primary" onclick="NuevaProvincia()" data-bs-toggle="modal"
-            data-bs-target="#ProvinciaModal">Crear provincia</button>
-          <button class="btn btn-secondary" onclick="ListadoDeProvincias()">Recargar</button>
-        </div>
+      <div class="contenedor">
+      <div class="mb-3">
+        
+        <input type="hidden" value="0" id="ProvinciaIDAdd">
       </div>
-      <div class="row">
-        <div class="col-12">
-          <table class="table" id="table1">
-            <thead>
-              <tr>
-                <th scope="col">Nombre</th>
-                <th scope="col">Editar</th>
-                <th scope="col">Eliminar</th>
-              </tr>
-            </thead>
-            <tbody class="table-dark table-striped" id="tbodyProvincias">
-            </tbody>
-          </table>
-        </div>
+      <div class="mb-3">
+        <label for="ProvinciaNombre">Nombre</label>
+        <input type="text" id="ProvinciaNombre" class="form-control">
+      </div>
+      <div class="mb-3">
+        <button class="btn btn-secondary" onclick="ListadoDeProvincias()">Recargar</button>
+        <button type="button" class="btn btn-success" onclick="GuardarProvincia()">Guardar Provincia</button>
+      </div>
+      <div>
+        <table class="table" id="table1">
+          <thead>
+            <tr>
+              <th scope="col">Nombre</th>
+              <th scope="col">Editar</th>
+              <th scope="col">Eliminar</th>
+            </tr>
+          </thead>
+          <tbody class="tabla" id="tbodyProvincias">
+          </tbody>
+        </table>
+      </div>
       </div>
     </div>
+
+    <!-- Sección de Localidades -->
     <div class="col-lg-9 col-md-9 col-sm-12 mb-4">
+      <div class="contenedor">
       <div class="row mb-3">
         <div class="col-12">
-          <button type="button" class="btn btn-primary" onclick="NuevaLocalidad()" data-bs-toggle="modal"
-            data-bs-target="#LocalidadModal">Crear provincia</button>
-          <button class="btn btn-secondary" onclick="ListadoDeLocalidades()">Recargar</button>
+          
         </div>
       </div>
-      <div class="row">
-        <div class="col-12">
-          <table class="table" id="table2">
-            <thead>
-              <tr>
-                <th scope="col">Nombre</th>
-                <th scope="col">Provincia</th>
-                <th scope="col">Editar</th>
-                <th scope="col">Eliminar</th>
-              </tr>
-            </thead>
-            <tbody id="tbodyLocalidades">
-            </tbody>
-          </table>
+      <div class="row mb-3">
+        <div class="col-6">
+          <label for="ProvinciaID">Seleccione la Provincia:</label>
+          @Html.DropDownList("ProvinciaID", null, htmlAttributes: new { @class = "form-control" })
         </div>
+        <div class="col-6">
+          <label for="LocalidadNombre">Nombre</label>
+          <input type="text" id="LocalidadNombre" class="form-control">
+        </div>
+      </div>
+      <div class="mb-3">
+        <button class="btn btn-secondary" onclick="ListadoDeLocalidades()">Recargar</button>
+        <button type="button" class="btn btn-success" onclick="GuardarLocalidad()">Guardar Localidad</button>
+      </div>
+      <div>
+        <table class="table" id="table2">
+          <thead>
+            <tr>
+              <th scope="col">Nombre</th>
+              <th scope="col">Provincia</th>
+              <th scope="col">Editar</th>
+              <th scope="col">Eliminar</th>
+            </tr>
+          </thead>
+          <tbody id="tbodyLocalidades" class="tabla">
+          </tbody>
+        </table>
+      </div>
       </div>
     </div>
   </div>
@@ -80,7 +100,8 @@
         <input type="text" id="ProvinciaNombre" class="form-control">
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="LimpiarModals()">Cancelar</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+          onclick="LimpiarModals()">Cancelar</button>
         <button type="button" class="btn btn-primary" onclick="GuardarProvincia()">Guardar Provincia</button>
       </div>
     </div>
@@ -106,7 +127,8 @@
         <input type="text" id="LocalidadNombre" class="form-control">
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="LimpiarModals()">Cancelar</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+          onclick="LimpiarModals()">Cancelar</button>
         <button type="button" class="btn btn-primary" onclick="GuardarLocalidad()">Guardar localidad</button>
       </div>
     </div>
