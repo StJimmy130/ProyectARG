@@ -91,14 +91,14 @@ img {
 
 .filtros ul li a{
     text-decoration: none;
-    color: rgb(83, 80, 80);
+    color: var(--text-color2);
     font-size: 20px;
     margin-top: 1rem;
     transition: 0.5s;
 }
 .filtros ul li:hover a{
     color: rgb(190, 182, 182);
-    text-shadow: 0 0 5px rgb(253, 253, 253);
+    text-shadow: 0 0 5px var(--text-color);
     scale: 1.1;
 }
 

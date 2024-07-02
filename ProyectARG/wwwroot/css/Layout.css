@@ -13,6 +13,7 @@ for details on configuring this project to bundle and minify static web assets. 
   --nav-color: linear-gradient(180deg, rgba(0,199,99,1) 0%, rgba(0,199,99,1) 95%, rgba(139,153,147,1) 100%);
   --side-nav: #010718;
   --text-color: #e6e0e0;
+  --text-color2: #181818;
   --search-bar: #F2F2F2;
   --search-text: #010718;
   --container-color: #EAE6E5;
@@ -26,11 +27,14 @@ body.dark{
   --nav-color: #242526;
   --side-nav: #242526;
   --text-color: #CCC;
+  --text-color2: #CCC;
   --search-bar: #242526;
+  --container-color: #5a5a5a;
 }
 nav{
   top: 0;
   left: 0;
+  position: static;
   height: 70px;
   width: 100%;
   background: var(--nav-color);

@@ -17,8 +17,8 @@ function ListadoPublicaciones() {
                 <img src="https://via.placeholder.com/150" alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title">${item.tituloString}</h5>
-                    <p class="card-text">${item.precio}</p>
-                    <p>${item.provinciaString} ${item.loacalidadString} ${item.direccion} ${item.nroDireccion}</p>
+                    <p class="card-text">$ ${item.precio}</p>
+                    <p>${item.provinciaString}, ${item.loacalidadString} - ${item.direccion} ${item.nroDireccion}</p>
                     <div>${item.tipoOperacionString}</div>
                     <a href="#" class="btn btn-primary">Ver más</a>
                 </div>
