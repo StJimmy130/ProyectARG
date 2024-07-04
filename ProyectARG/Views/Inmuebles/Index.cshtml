@@ -1,0 +1,29 @@
+@{
+    ViewData["Title"] = "Publicacion";
+}
+
+
+<form>
+    <div>
+        <label for="operacion">Operación:</label>
+        <select id="operacion" name="operacion">
+            @foreach (var item in ViewBag.Operaciones)
+            {
+                <option value="@item.Value">@item.Text</option>
+            }
+        </select>
+    </div>
+    <div>
+        <label for="tipoInmueble">Tipo de Inmueble:</label>
+        <select id="tipoInmueble" name="tipoInmueble">
+            @foreach (var item in ViewBag.TiposInmueble)
+            {
+                <option value="@item.Value">@item.Text</option>
+            }
+        </select>
+    </div>
+    <button type="submit">Submit</button>
+</form>
+
+
+

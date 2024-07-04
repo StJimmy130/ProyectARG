@@ -62,7 +62,7 @@ public class HomeController : Controller
                 InmuebleID = Inmueble.InmuebleID,
                 TituloString = Inmueble.Titulo,
                 ProvinciaString = provincia.Nombre,
-                LoacalidadString = localidad.Nombre,
+                LocalidadString = localidad.Nombre,
                 Direccion = Inmueble.Direccion,
                 NroDireccion = Inmueble.NroDireccion,
                 Precio = (float)Inmueble.Precio,

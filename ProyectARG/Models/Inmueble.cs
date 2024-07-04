@@ -59,7 +59,7 @@ public class VistaInmueble
 {
     public int InmuebleID { get; set; }
     public string TituloString { get; set; }
-    public string LoacalidadString { get; set; }
+    public string LocalidadString { get; set; }
     public string Direccion { get; set; }
     public int NroDireccion { get; set; }
     public float Precio { get; set; }
