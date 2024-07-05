@@ -2,6 +2,7 @@
     background-color: var(--container-color);
     border-radius: 15px;
     width: 100%;
+    min-width: 300px;
     height: 100%;
     margin: 0 5px;
     padding: 15px;
@@ -10,6 +11,33 @@
 
 .tabla{
     border-radius: 15px;
-    overflow: auto;
-    max-height: 10vh;
+    
+}
+
+.Tbody-class{
+    display: block;
+    overflow-y: auto;
+    max-height: 300px;
+    display: flex;
+
+}
+
+.Tbody-class table {
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+  
+.Tbody-class table thead {
+    background-color: var(--container-color);
+    position: -webkit-sticky; /* Safari... */
+    position: sticky;
+    top: 0;
+    left: 0;
+  }
+
+.texto-recortado {
+    width: 50px; /* Ajustá este valor según necesites */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

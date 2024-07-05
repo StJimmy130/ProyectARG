@@ -17,8 +17,8 @@ function ListadoDeProvincias() {
 
                 tabla += `
                     <tr>
-                        <td>${provincias.nombre}</td>
-                        <td class="text-center">
+                        <td class="texto-recortado">${provincias.nombre}</td>
+                        <td class="text-center ">
                             <button type="button" class="btn btn-success" onclick="ModalEditar(${provincias.provinciaID})">
                             Editar
                             </button>
@@ -83,9 +83,9 @@ function ModalEditar(provinciaID) {
         success: function (provincia) {
             let provincias = provincia[0];
 
-            document.getElementById("ProvinciaIDAdd").value = provinciaID
+            document.getElementById("ProvinciaIDedit").value = provinciaID
             $("#TituloModalProvincia").text("Editar provinca");
-            document.getElementById("ProvinciaNombre").value = provincias.nombre;
+            document.getElementById("ProvinciaNombreEdit").value = provincias.nombre;
             $("#ProvinciaModal").modal("show");
         },
         error: function (xhr, status) {

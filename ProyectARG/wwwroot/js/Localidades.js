@@ -16,8 +16,8 @@ function ListadoDeLocalidades() {
 
                 tabla += `
                     <tr>
-                        <td>${localidades.localidadNombre}</td>
-                        <td>${localidades.provinciaNombre}</td>
+                        <td class"texto-recortado">${localidades.localidadNombre}</td>
+                        <td class"texto-recortado">${localidades.provinciaNombre}</td>
                         <td class="text-center">
                             <button type="button" class="btn btn-success" onclick="ModalEditarLocalidad(${localidades.localidadID})">
                             Editar
@@ -84,10 +84,10 @@ function ModalEditarLocalidad(localidadID) {
         success: function (localidad) {
             let localidades = localidad[0];
 
-            document.getElementById("LocalidadID").value = localidadID
+            document.getElementById("LocalidadIDEdit").value = localidadID
             $("#TituloModalLocalidad").text("Editar localidad");
-            document.getElementById("ProvinciaID").value = localidades.provinciaID;
-            document.getElementById("LocalidadNombre").value = localidades.localidadNombre;
+            document.getElementById("ProvinciaIDEdit").value = localidades.provinciaID;
+            document.getElementById("LocalidadNombreEdit").value = localidades.localidadNombre;
             $("#LocalidadModal").modal("show");
         },
         error: function (xhr, status) {
