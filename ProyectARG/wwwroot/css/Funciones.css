@@ -17,7 +17,7 @@
 .Tbody-class{
     display: block;
     overflow-y: auto;
-    max-height: 300px;
+    max-height: 55vh;
     display: flex;
 
 }

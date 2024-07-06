@@ -19,7 +19,6 @@ for details on configuring this project to bundle and minify static web assets. 
   --container-color: #EAE6E5;
 }
 body{
-  height: 100vh;
   background-color: var(--body-color);
 }
 body.dark{

@@ -54,6 +54,7 @@
       </div>
       <div class="row mb-3">
         <div class="col-6">
+          <input type="hidden" value="0" id="LocalidadID">
           <label for="ProvinciaID">Seleccione la Provincia:</label>
           @Html.DropDownList("ProvinciaID", null, htmlAttributes: new { @class = "form-control" })
         </div>
@@ -122,7 +123,7 @@
 
         <div class="dropdown">
           <label for="ProvinciaID">SELECCIONE LA PROVINCIA:</label>
-          @Html.DropDownList("ProvinciaID", null, htmlAttributes: new { @class = "form-control" })
+          @Html.DropDownList("ProvinciaIDEdit", null, htmlAttributes: new { @class = "form-control" })
         </div>
 
         <label for="LocalidadNombre">Nombre</label>

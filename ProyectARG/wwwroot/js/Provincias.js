@@ -45,6 +45,9 @@ function LimpiarModals() {
     document.getElementById("ProvinciaNombre").value = "";
     document.getElementById("LocalidadID").value = 0;
     document.getElementById("LocalidadNombre").value = "";
+    document.getElementById("ProvinciaNombreEdit").value = "";
+    document.getElementById("LocalidadIDEdit").value = 0;
+    document.getElementById("LocalidadNombreEdit").value = "";
 
 }
 
