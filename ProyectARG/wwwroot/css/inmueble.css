@@ -1,0 +1,24 @@
+.contenedor {
+    background-color: var(--container-color);
+    border-radius: 15px;
+    width: auto;
+    min-width: 300px;
+    height: auto;
+    margin: 2rem 5px;
+    padding: 15px;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+}
+form{
+    height: auto;
+    width: 100%;
+}
+form div div div div{
+    margin: .5rem;
+}
+

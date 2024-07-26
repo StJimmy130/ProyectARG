@@ -33,7 +33,7 @@ body.dark{
 nav{
   top: 0;
   left: 0;
-  position: static;
+  position: relative;
   height: 70px;
   width: 100%;
   background: var(--nav-color);
@@ -102,7 +102,7 @@ nav .nav-bar .logo a{
   border-radius: 50%;
   background-color: var(--text-color);
   opacity: 0;
-  transition: all 0.3s ease;
+  transition: all 0.4s ease;
 }
 .nav-links li:hover a::before{
   opacity: 1;
@@ -126,7 +126,7 @@ nav .nav-bar .logo a{
   color: var(--text-color);
   font-size: 22px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.4s ease;
 }
 .dark-light i.sun{
   opacity: 0;
@@ -169,7 +169,7 @@ nav .nav-bar .logo a{
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
   opacity: 0;
   pointer-events: none;
-  transition: all 0.3s ease;
+  transition: all 0.4s ease;
 }
 .searchToggle.active ~ .search-field{
   bottom: -74px;
@@ -232,7 +232,7 @@ body.dark .search-field i{
   }
   nav.active .nav-bar .navLogo a{
       opacity: 0;
-      transition: all 0.3s ease;
+      transition: all 0.4s ease;
   }
   .menu .logo-toggle{
       display: block;

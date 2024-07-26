@@ -52,16 +52,37 @@ public class InmueblesController : Controller
         });
     }
 
+    var provincias = _context.Provincias.ToList();
+    var localidades = _context.Localidades.ToList();
+
+    provincias.Add(new Provincia { ProvinciaID = 0, Nombre = "[SELECCIONE...]" });
+    ViewBag.ProvinciaID = new SelectList(provincias.OrderBy(c => c.Nombre), "ProvinciaID", "Nombre");
+
+    localidades.Add(new Localidad { LocalidadID = 0, Nombre = "[SELECCIONE...]" });
+    ViewBag.LocalidadID = new SelectList(localidades.OrderBy(c => c.Nombre), "LocalidadID", "Nombre");
+
     ViewBag.Operaciones = selectListItemsOperacion;
     ViewBag.TiposInmueble = selectListItemsTipoInmueble;
 
     return View();
 }
 
-private string SplitCamelCase(string input)
-{
-    return System.Text.RegularExpressions.Regex.Replace(input, "(\\B[A-Z])", " $1");
-}
+    private string SplitCamelCase(string input)
+    {
+        return System.Text.RegularExpressions.Regex.Replace(input, "(\\B[A-Z])", " $1");
+    }
+
+
+    public JsonResult GetDetallePublicacion (int InmuebleID)
+    {
+        var Detalle = _context.Inmuebles.ToList();
+        if (InmuebleID != 0)
+        {
+            Detalle = Detalle.Where(i => i.InmuebleID == InmuebleID).ToList();
+        }
+        return Json(Detalle);
+    }
+    
 
 
     public JsonResult GuardarPublicacion(int InmuebleID, int LocalidadID, string? Barrio, string? Titulo,
@@ -133,11 +154,11 @@ private string SplitCamelCase(string input)
 
     public JsonResult EliminarPublicacion(int InmuebleID)
     {
-        var Inmueble = _context.Inmuebles.Find(InmuebleID);
-        _context.Remove(Inmueble);
+        var eliminarPublicacion = _context.Inmuebles.Find(InmuebleID);
+        _context.Remove(eliminarPublicacion);
         _context.SaveChanges();
 
-        return Json(true);
+        return Json(eliminarPublicacion);
     }
 }
 

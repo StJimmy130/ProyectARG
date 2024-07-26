@@ -63,9 +63,9 @@ public class HomeController : Controller
                 TituloString = Inmueble.Titulo,
                 ProvinciaString = provincia.Nombre,
                 LocalidadString = localidad.Nombre,
-                Direccion = Inmueble.Direccion,
-                NroDireccion = Inmueble.NroDireccion,
-                Precio = (float)Inmueble.Precio,
+                DireccionString = Inmueble.Direccion,
+                NroDireccionString = Inmueble.NroDireccion,
+                PrecioString = (float)Inmueble.Precio,
                 TipoOperacionString = Inmueble.TipoOperacion.ToString(),
             };
             inmueblesMostrar.Add(localidadMostrar);

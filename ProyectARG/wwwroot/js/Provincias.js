@@ -111,7 +111,7 @@ function EliminarProvincia(provinciaID) {
         type: 'POST',
         dataType: 'json',
 
-        success: function (eliminarProyecto) {
+        success: function (eliminarProvincia) {
             ListadoDeProvincias();
         },
 

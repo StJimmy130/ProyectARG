@@ -1,6 +1,7 @@
 function GuardarPublicacion(){
     let inmuebleID = document.getElementById("InmuebleID").value;
     let localidadID = document.getElementById("LocalidadID").value;
+    let provinciaID = document.getElementById("ProvinciaID").value;
     let barrio = document.getElementById("Barrio").value;
     let titulo = document.getElementById("Titulo").value;
     let precio = document.getElementById("Precio").value;
@@ -19,10 +20,11 @@ function GuardarPublicacion(){
     let usuarioID = document.getElementById("UsuarioID").value;
 
     $.ajax({
-        url: "/Publicacion/GuardarPublicacion",
+        url: "/Inmuebles/GuardarPublicacion",
         data: {
             InmuebleID: inmuebleID,
             LocalidadID: localidadID,
+            provinciaID: provinciaID,
             Barrio: barrio,
             Titulo: titulo,
             Precio: precio,
@@ -52,3 +54,36 @@ function GuardarPublicacion(){
         },
     });
 }
+
+function MostrarPublicacion(){
+    $.ajax({
+        
+    });
+}
+
+
+
+function ValidarEliminacion(inmuebleID) {
+    var elimina = confirm("¿Esta seguro que desea eliminar esta publicación?")
+    if(elimina == true) {
+        EliminarPublicacion(inmuebleID)
+    }
+}
+
+function EliminarPublicacion(inmuebleID) {
+    $.ajax({
+        url: '../../Inmuebles/EliminarPublicacion',
+        data: { InmuebleID: inmuebleID },
+        type: 'POST',
+        dataType: 'json',
+
+        success: function (eliminarPublicacion) {
+        
+        },
+
+        error: function (xhr, status) {
+            console.log('Disculpe, existió un problema al cargar el listado');
+        }
+    });
+}
+
