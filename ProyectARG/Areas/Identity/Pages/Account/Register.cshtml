@@ -7,34 +7,37 @@
 }
 
 
-<div class="row">
-  <div class="col-md-4">
-    <div class="wrapper">
-      <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-        <h2>Registrate!</h2>
-        <div asp-validation-summary="ModelOnly" role="alert"></div>
-        <div class="input-field">
-          <input type="text" required asp-for="Input.Email" autocomplete="username" aria-required="true">
-          <label asp-for="Input.Email">Introduce tu email</label>
-          <span asp-validation-for="Input.Email" class="text-danger"></span>
-        </div>
-        <div class="input-field">
+<div class="container">
+  <div class="content">
+    <div class="image-box">
+      <img src="~/img/ImagenLogoMano.jpeg" alt="">
+    </div>
+    <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+      <div class="topic">Regístrate!</div>
+      <div asp-validation-summary="ModelOnly" role="alert"></div>
+      <div class="input-box">
+        <input type="text" required asp-for="Input.Email" autocomplete="username" aria-required="true">
+        <label asp-for="Input.Email">Introduce tu email</label>
+        <span asp-validation-for="Input.Email" class="text-danger"></span>
+      </div>
+      <div class="input-box">
           <input asp-for="Input.Password" autocomplete="new-password" aria-required="true" type="password" required>
           <label asp-for="Input.Password">Introduce una contraseña</label>
           <span asp-validation-for="Input.Password"></span>
-        </div>
-        <div class="input-field">
-          <input asp-for="Input.ConfirmPassword" autocomplete="new-password" aria-required="true" type="password"
-            required>
-          <label asp-for="Input.ConfirmPassword">Confirmar contraseña</label>
-          <span asp-validation-for="Input.ConfirmPassword"></span>
-        </div>
-        <button id="registerSubmit" type="submit">Registrarse</button>
-        <div class="register">
-          <p>¿Tienes cuenta? <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl">Ingresá!</a></p>
-        </div>
-      </form>
-    </div>
+      </div>
+      <div class="input-box">
+        <input asp-for="Input.ConfirmPassword" autocomplete="new-password" aria-required="true" type="password"
+        required>
+        <label asp-for="Input.ConfirmPassword">Confirmar contraseña</label>
+        <span asp-validation-for="Input.ConfirmPassword"></span>
+      </div>
+      <div class="input-box">
+        <input id="registerSubmit" type="submit" value="Registrarse">
+      </div>
+      <div class="register">
+        <p>¿Tienes cuenta? <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl">Ingresá!</a></p>
+      </div>
+    </form>
   </div>
 </div>
 

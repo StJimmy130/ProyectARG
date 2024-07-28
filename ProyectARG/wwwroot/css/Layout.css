@@ -4,7 +4,9 @@ for details on configuring this project to bundle and minify static web assets. 
 *{
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
-  transition: all 0.4s ease;;
+  transition: all 0.4s ease;
+  margin: 0;
+  padding: 0;
 }
 
 /* ===== Colours ===== */
@@ -39,7 +41,7 @@ nav{
   height: 70px;
   width: 100%;
   background: var(--nav-color);
-  z-index: 1;
+  z-index: 1000;
 }
 body.dark nav{
   border: 1px solid #393838;
@@ -292,7 +294,8 @@ button.accept-policy {
 
 /* FOOTER */
 footer{
-  margin-top: 100px;
+  top: 100px;
+  z-index: 1000;
   position: relative;
   background: var(--nav-color);
   width: 100%;
