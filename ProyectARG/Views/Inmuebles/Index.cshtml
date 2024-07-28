@@ -2,130 +2,68 @@
     ViewData["Title"] = "Publicacion";
 }
 <link rel="stylesheet" href="~/css/inmueble.css">
-
+<script src="~/js/Inmuebles.js"></script>
 
 
 <form>
-    <div class="container">
-        <div class="row">
-            <div class="col-xl-4 contenedor">
-                <div class="d-flex column">
-                    <input type="hidden" name="InmuebleID">
-                    <label for="Operacion">Operación:</label>
-                    <select class="form-control" id="Operacion" name="Operacion">
-                        @foreach (var item in ViewBag.Operaciones)
-                        {
-                            <option value="@item.Value">@item.Text</option>
-                        }
-                    </select>
-                </div>
-                <div class="d-flex column">
-                    <label for="TipoInmueble">Tipo de Inmueble:</label>
-                    <select class="form-control" id="TipoInmueble" name="TipoInmueble">
-                        @foreach (var item in ViewBag.TiposInmueble)
-                        {
-                            <option value="@item.Value">@item.Text</option>
-                        }
-                    </select>
-                </div>
-                <div class="d-flex column">
-                    <label for="ProvinciaID" class="form-label">Provincia:</label>
-                    @Html.DropDownList("ProvinciaID", null, htmlAttributes: new { @class = "form-control" })
-                </div>
-                <div class="d-flex column">
-                    <label for="LocalidadID" class="form-label">Localidad:</label>
-                    @Html.DropDownList("LocalidadID", null, htmlAttributes: new { @class = "form-control" })
-                </div>
-               
-                <div class="d-flex column">
-                    <label for="Precio">Precio:
-                    </label>
-                    <input type="number" class="form-control" id="Precio" name="Precio">
-                </div>
-                <div>
-                    <button class="btn btn-success" type="submit">Submit</button>
-                </div>
-            </div>
-
-             <div class="col-xl-4 contenedor">
-                <div class="d-flex column">
-                    <input type="hidden" name="InmuebleID">
-                    <label for="operacion">Operación:</label>
-                    <select class="form-control" id="operacion" name="operacion">
-                        @foreach (var item in ViewBag.Operaciones)
-                        {
-                            <option value="@item.Value">@item.Text</option>
-                        }
-                    </select>
-                </div>
-                <div class="d-flex column">
-                    <label for="tipoInmueble">Tipo de Inmueble:</label>
-                    <select class="form-control" id="tipoInmueble" name="tipoInmueble">
-                        @foreach (var item in ViewBag.TiposInmueble)
-                        {
-                            <option value="@item.Value">@item.Text</option>
-                        }
-                    </select>
-                </div>
-                <div class="d-flex column">
-                    <label for="ProvinciaID" class="form-label">Provincia:</label>
-                    @Html.DropDownList("ProvinciaID", null, htmlAttributes: new { @class = "form-control" })
-                </div>
-                <div class="d-flex column">
-                    <label for="LocalidadID" class="form-label">Localidad:</label>
-                    @Html.DropDownList("LocalidadID", null, htmlAttributes: new { @class = "form-control" })
-                </div>
-               
-                <div class="d-flex column">
-                    <label for="Precio">Precio:
-                    </label>
-                    <input type="number" class="form-control" id="Precio" name="Precio">
-                </div>
-                <div>
-                    <button class="btn btn-success" type="submit">Submit</button>
-                </div>
-            </div>
-
-            
-             <div class="col-xl-4 contenedor">
-                <div class="d-flex column">
-                    <input type="hidden" name="InmuebleID">
-                    <label for="operacion">Operación:</label>
-                    <select class="form-control" id="operacion" name="operacion">
-                        @foreach (var item in ViewBag.Operaciones)
-                        {
-                            <option value="@item.Value">@item.Text</option>
-                        }
-                    </select>
-                </div>
-                <div class="d-flex column">
-                    <label for="tipoInmueble">Tipo de Inmueble:</label>
-                    <select class="form-control" id="tipoInmueble" name="tipoInmueble">
-                        @foreach (var item in ViewBag.TiposInmueble)
-                        {
-                            <option value="@item.Value">@item.Text</option>
-                        }
-                    </select>
-                </div>
-                <div class="d-flex column">
-                    <label for="ProvinciaID" class="form-label">Provincia:</label>
-                    @Html.DropDownList("ProvinciaID", null, htmlAttributes: new { @class = "form-control" })
-                </div>
-                <div class="d-flex column">
-                    <label for="LocalidadID" class="form-label">Localidad:</label>
-                    @Html.DropDownList("LocalidadID", null, htmlAttributes: new { @class = "form-control" })
-                </div>
-               
-                <div class="d-flex column">
-                    <label for="Precio">Precio:
-                    </label>
-                    <input type="number" class="form-control" id="Precio" name="Precio">
-                </div>
-                <div>
-                    <button class="btn btn-success" type="submit">Submit</button>
-                </div>
-            </div>
-
+  <div class="container">
+    <div class="row">
+      <!-- Step 1 -->
+      <div class="col-xl-4 contenedor step active">
+        <div class="d-flex flex-column">
+          <input type="hidden" name="InmuebleID">
+          <label for="Operacion">Operación:</label>
+          <select class="form-control" id="Operacion" name="Operacion">
+            @foreach (var item in ViewBag.Operaciones)
+            {
+              <option value="@item.Value">@item.Text</option>
+            }
+          </select>
         </div>
+        <div class="d-flex flex-column">
+          <label for="TipoInmueble">Tipo de Inmueble:</label>
+          <select class="form-control" id="TipoInmueble" name="TipoInmueble">
+            @foreach (var item in ViewBag.TiposInmueble)
+            {
+              <option value="@item.Value">@item.Text</option>
+            }
+          </select>
+        </div>
+        <div class="d-flex flex-column">
+          <label for="ProvinciaID" class="form-label">Provincia:</label>
+          @Html.DropDownList("ProvinciaID", null, htmlAttributes: new { @class = "form-control" })
+        </div>
+        <div class="d-flex flex-column">
+          <label for="LocalidadID" class="form-label">Localidad:</label>
+          @Html.DropDownList("LocalidadID", null, htmlAttributes: new { @class = "form-control" })
+        </div>
+        <div>
+          <button type="button" class="btn btn-primary next-btn">Next</button>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="col-xl-4 contenedor step">
+        <div class="d-flex flex-column">
+          <label for="Precio">Precio:</label>
+          <input type="number" class="form-control" id="Precio" name="Precio">
+        </div>
+        <div>
+          <button type="button" class="btn btn-secondary prev-btn">Previous</button>
+          <button type="button" class="btn btn-primary next-btn">Next</button>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="col-xl-4 contenedor step">
+        <div class="d-flex flex-column">
+          <p>Confirmar detalles y enviar.</p>
+        </div>
+        <div>
+          <button type="button" class="btn btn-secondary prev-btn">Previous</button>
+          <button class="btn btn-success" type="submit">Submit</button>
+        </div>
+      </div>
     </div>
+  </div>
 </form>

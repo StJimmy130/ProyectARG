@@ -47,9 +47,6 @@ html {
   min-height: 100%;
 }
 
-body {
-  margin-bottom: 60px;
-}
 
 /* Ancho del scrollbar */
 ::-webkit-scrollbar {
