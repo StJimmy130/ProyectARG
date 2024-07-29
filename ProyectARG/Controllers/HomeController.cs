@@ -2,6 +2,7 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using ProyectARG.Models;
 using ProyectARG.Data;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.TagHelpers;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.AspNetCore.Authorization;
@@ -13,7 +14,7 @@ public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
 
-    private  ApplicationDbContext _context;
+    private ApplicationDbContext _context;
 
     public HomeController(ApplicationDbContext context, ILogger<HomeController> logger)
     {
@@ -24,6 +25,15 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
+        var localidades = _context.Localidades.ToList();
+        var provincias = _context.Provincias.ToList();
+
+        provincias.Add(new Provincia { ProvinciaID = 0, Nombre = "[SELECCIONE...]" });
+        ViewBag.ProvinciaID = new SelectList(provincias.OrderBy(c => c.Nombre), "ProvinciaID", "Nombre");
+
+        localidades.Add(new Localidad { LocalidadID = 0, Nombre = "[SELECCIONE...]" });
+        ViewBag.LocalidadID = new SelectList(localidades.OrderBy(c => c.Nombre), "LocalidadID", "Nombre");
+
         return View();
     }
 
@@ -39,8 +49,8 @@ public class HomeController : Controller
         return Json(Listado);
     }
 
- public JsonResult ListadoInmuebles(int InmuebleID)
-        {
+    public JsonResult ListadoInmuebles(int InmuebleID)
+    {
         List<VistaInmueble> inmueblesMostrar = new List<VistaInmueble>();
 
         var Inmuebles = _context.Inmuebles.ToList();
