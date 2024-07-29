@@ -12,7 +12,7 @@ for details on configuring this project to bundle and minify static web assets. 
 /* ===== Colours ===== */
 :root{
   --body-color: #8b9993;
-  --nav-color: linear-gradient(180deg, rgba(0,199,99,1) 0%, rgba(0,199,99,1) 95%, rgba(139,153,147,1) 100%);
+  --nav-color: #00c763;
   --nav-color2: #008f51;
   --side-nav: #010718;
   --text-color: #e6e0e0;
@@ -294,7 +294,7 @@ button.accept-policy {
 
 /* FOOTER */
 footer{
-  top: 100px;
+  top: 120px;
   z-index: 1000;
   position: relative;
   background: var(--nav-color);
@@ -306,7 +306,7 @@ footer::before{
   content: '';
   position: absolute;
   left: 0;
-  top: 100px;
+  top: 120px;
   height: 1px;
   width: 100%;
   background: #AFAFB6;
@@ -333,14 +333,19 @@ footer .content .top{
   height: 40px;
   width: 40px;
   margin: 0 8px;
+  border: solid 1px #fff;
   border-radius: 50%;
   text-align: center;
   vertical-align: middle;
-  line-height: 43px;
-  color: #fff;
-  font-size: 21px;
+  line-height: 42px;
+  color: #ffffff;
+  font-size: 24px;
   text-decoration: none;
   transition: all 0.2s ease;
+}
+.dark .content .top .media-icons a{
+  border: none;
+  line-height: 43px;
 }
 .top .media-icons a:nth-child(1){
   background: #4267B2;
@@ -357,10 +362,10 @@ footer .content .top{
   background: #fff;
 }
 .top .media-icons a:nth-child(3){
-  background: #0077B5;
+  background: #25d366;
 }
 .top .media-icons a:nth-child(3):hover{
-  color: #0077B5;
+  color: #25d366;
   background: #fff;
 }
 .top .media-icons a:nth-child(4){
@@ -379,7 +384,7 @@ footer .content .link-boxes .box{
   width: calc(100% / 5 - 10px);
 }
 .content .link-boxes .box .link_name{
-  color: #fff;
+  color: #ffffffff;
   font-size: 18px;
   font-weight: 400;
   margin-bottom: 10px;
@@ -392,57 +397,22 @@ footer .content .link-boxes .box{
   bottom: -2px;
   height: 2px;
   width: 35px;
-  background: #fff;
+  background: #ffffffff;
 }
 .content .link-boxes .box li{
   margin: 6px 0;
   list-style: none;
 }
-.content .link-boxes .box li a{
-  color: #fff;
+.content .link-boxes .box li p{
+  color: #ffffff;
   font-size: 14px;
-  font-weight: 400;
+  font-weight: 300;
   text-decoration: none;
   opacity: 0.8;
   transition: all 0.4s ease
 }
-.content .link-boxes .box li a:hover{
-  opacity: 1;
-  text-decoration: underline;
-}
-.content .link-boxes .input-box{
-  margin-right: 55px;
-}
-.link-boxes .input-box input{
-  height: 40px;
-  width: calc(100% + 55px);
-  outline: none;
-  border: 2px solid #AFAFB6;
-  background: var(--nav-color2);
-  border-radius: 4px;
-  padding: 0 15px;
-  font-size: 15px;
-  color: #fff;
-  margin-top: 5px;
-}
-.link-boxes .input-box input::placeholder{
-  color: #AFAFB6;
-  font-size: 16px;
-}
-.link-boxes .input-box input[type="button"]{
-  background: #fff;
-  color: #140B5C;
-  border: none;
-  font-size: 18px;
-  font-weight: 500;
-  margin: 4px 0;
-  opacity: 0.8;
-  cursor: pointer;
-  transition: all 0.4s ease;
-}
-.input-box input[type="button"]:hover{
-  opacity: 1;
-}
+
+
 footer .bottom-details{
   width: 100%;
   background: var(--nav-color2);
@@ -458,7 +428,7 @@ footer .bottom-details .bottom_text{
 .bottom-details .bottom_text a{
   font-size: 14px;
   font-weight: 300;
-  color: #fff;
+  color: #ffffff;
   opacity: 0.8;
   text-decoration: none;
 }
@@ -485,7 +455,7 @@ footer .bottom-details .bottom_text{
   .content .top .logo-details{
     font-size: 26px;
   }
-  .content .top .media-icons a{
+  .content .top .media-icons p{
     height: 35px;
     width: 35px;
     font-size: 14px;
@@ -498,7 +468,7 @@ footer .bottom-details .bottom_text{
     width: 60%;
   }
   .bottom-details .bottom_text span,
-  .bottom-details .bottom_text a{
+  .bottom-details .bottom_text p{
     font-size: 12px;
   }
 }
