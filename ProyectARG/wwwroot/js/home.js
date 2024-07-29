@@ -1,33 +1,51 @@
 window.onload = function() {
     ListadoPublicaciones();
 
-    document.addEventListener('DOMContentLoaded', function () {
-        const filterToggles = document.querySelectorAll('.filter-toggle');
-        const collapseIds = ['#collapse1', '#collapse2', '#collapse3', '#collapse4', '#collapse5'];
+    
+};
 
-        filterToggles.forEach(toggle => {
-            toggle.addEventListener('click', function (event) {
-                event.preventDefault(); // Previene el comportamiento por defecto del enlace
+document.addEventListener('DOMContentLoaded', function () {
+    const filterToggles = document.querySelectorAll('.filter-toggle');
+    const collapseIds = ['#collapse1', '#collapse2', '#collapse3', '#collapse4', '#collapse5'];
 
-                const targetId = this.getAttribute('href');
-                const targetCollapse = document.querySelector(targetId);
+    filterToggles.forEach(toggle => {
+        toggle.addEventListener('click', function (event) {
+            event.preventDefault(); // Previene el comportamiento por defecto del enlace
 
-                // Cierra todos los colapsos excepto el que se va a abrir
-                collapseIds.forEach(id => {
-                    const collapse = document.querySelector(id);
-                    if (collapse !== targetCollapse && collapse.classList.contains('show')) {
-                        collapse.classList.remove('show');
-                    }
+            const targetId = this.getAttribute('href');
+            const targetCollapse = document.querySelector(targetId);
+
+            // Si el targetCollapse está abierto, simplemente ciérralo y salimos de la función
+            if (targetCollapse.classList.contains('show')) {
+                const bsTargetCollapse = bootstrap.Collapse.getInstance(targetCollapse) || new bootstrap.Collapse(targetCollapse, {
+                    toggle: false
                 });
+                bsTargetCollapse.hide();
+                return; // Salimos de la función para evitar abrir otro colapso
+            }
 
-                // Alterna el colapso del filtro seleccionado
-                if (!targetCollapse.classList.contains('show')) {
-                    targetCollapse.classList.add('show');
+            // Cierra todos los colapsos excepto el que se va a abrir
+            collapseIds.forEach(id => {
+                const collapse = document.querySelector(id);
+                if (collapse.classList.contains('show')) {
+                    const bsCollapse = bootstrap.Collapse.getInstance(collapse) || new bootstrap.Collapse(collapse, {
+                        toggle: false
+                    });
+                    bsCollapse.hide();
                 }
             });
+
+            // Abre el colapso del filtro seleccionado
+            const bsTargetCollapse = bootstrap.Collapse.getInstance(targetCollapse) || new bootstrap.Collapse(targetCollapse, {
+                toggle: false
+            });
+            bsTargetCollapse.show();
         });
     });
-};
+});
+
+
+
 function ListadoPublicaciones() {
     $.ajax({
         url: '../../Home/ListadoInmuebles',
@@ -45,7 +63,7 @@ function ListadoPublicaciones() {
                         <div class="card-body">
                             <h5 class="card-title">${item.tituloString}</h5>
                             <p class="card-text">$ ${item.precioString}</p>
-                            <p>${item.provinciaString}, ${item.loacalidadString} - ${item.direccionString} ${item.nroDireccionString}</p>
+                            <p>${item.provinciaString}, ${item.localidadString} - ${item.direccionString} ${item.nroDireccionString}</p>
                             <div>${item.tipoOperacionString}</div>
                             <a href="#" class="btn btn-primary">Ver más</a>
                         </div>
@@ -61,3 +79,40 @@ function ListadoPublicaciones() {
         }
     });
 }
+
+
+function updatePriceRange() {
+    const minPriceInput = document.getElementById('min-price-input');
+    const maxPriceInput = document.getElementById('max-price-input');
+    const minPriceRange = document.getElementById('min-price');
+    const maxPriceRange = document.getElementById('max-price');
+    
+    const minPriceValue = document.getElementById('min-price-value');
+    const maxPriceValue = document.getElementById('max-price-value');
+    
+    const minPrice = parseInt(minPriceInput.value);
+    const maxPrice = parseInt(maxPriceInput.value);
+    
+    // Asegurarse de que el valor mínimo no sea mayor al máximo
+    if (minPrice >= maxPrice) {
+      minPriceInput.value = maxPrice - minPriceInput.step;
+    }
+    
+    // Sincronizar los inputs con los ranges
+    minPriceRange.value = minPriceInput.value;
+    maxPriceRange.value = maxPriceInput.value;
+    
+    minPriceValue.textContent = `$${minPriceInput.value}`;
+    maxPriceValue.textContent = `$${maxPriceInput.value}`;
+    
+    // Acá podrías agregar la lógica para filtrar tus elementos según el rango de precios
+    // filterItemsByPrice(minPrice, maxPrice);
+  }
+  
+  function syncInput(id) {
+    const input = document.getElementById(`${id}-input`);
+    const range = document.getElementById(id);
+    
+    input.value = range.value;
+    updatePriceRange();
+  }

@@ -2,7 +2,8 @@
 
 
 .catalogo {
-    height: 80vh;
+    height: 10000000vh;
+
     width: 100%;
     display: flex;
     justify-content: left;
@@ -69,7 +70,7 @@ img {
     justify-content: start;
     align-items: start;
     background-color: var(--container-color);
-    height: auto;
+    height: 100%;
     width: 300px;
     margin-right: 20px;
     border-radius: 15px;
@@ -92,7 +93,7 @@ img {
 .filtros ul li a{
     text-decoration: none;
     color: var(--text-color2);
-    font-size: 20px;
+    font-size: 16px;
     margin-top: 1rem;
     transition: 0.5s;
 }
@@ -124,7 +125,7 @@ li span{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: center;
+    align-items: start;
     height: auto;
     width: 12rem;
     background-color: rgb(221, 221, 221);
@@ -133,11 +134,29 @@ li span{
     margin: 1rem 0;
     
 }
+li:first-child .menu-desplegable{
+    padding: 20px;
+}
 
 .menu-desplegable .form-control {
     border-radius: 10px;
     height: auto;
 }
+
+.price-filter {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+  }
+  
+  .price-filter label {
+    font-weight: bold;
+  }
+  
+  .price-filter p {
+    margin-left: 10px;
+    font-weight: bold;
+  }
 
 input[type="range"] {
     -webkit-appearance: none;
@@ -149,6 +168,7 @@ input[type="range"] {
     opacity: 0.7;
     -webkit-transition: .2s;
     transition: opacity .2s;
+    margin: 10px 0;
   }
   
   input[type="range"]:hover {
