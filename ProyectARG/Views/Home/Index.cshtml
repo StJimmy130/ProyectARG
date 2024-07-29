@@ -8,7 +8,8 @@
     <div class="filtros">
         <ul>
             <li class="nav-item">
-                <a class="filter-toggle" data-bs-toggle="collapse" href="#collapse1" role="button" aria-expanded="false" aria-controls="collapse1">
+                <a class="filter-toggle" data-bs-toggle="collapse" href="#collapse1" role="button" aria-expanded="false"
+                    aria-controls="collapse1">
                     Tipo de inmueble
                 </a>
                 <span></span>
@@ -33,46 +34,58 @@
                 </div>
             </li>
             <li class="nav-item">
-                <a class="filter-toggle" data-bs-toggle="collapse" href="#collapse2" role="button" aria-expanded="false" aria-controls="collapse2">
+                <a class="filter-toggle" data-bs-toggle="collapse" href="#collapse2" role="button" aria-expanded="false"
+                    aria-controls="collapse2">
                     Rango de precio
                 </a>
                 <span></span>
                 <div class="collapse" id="collapse2">
                     <div class="menu-desplegable">
-                        <input type="range">
+                        <label for="min-price">Precio mínimo:</label>
+                        <input type="number" id="min-price-input" name="min-price-input" min="0" max="1000" step="10"
+                            value="0" oninput="updatePriceRange()">
+                        <input type="range" id="min-price" name="min-price" min="0" max="1000" step="10" value="0"
+                            oninput="syncInput('min-price')">
+                        <p id="min-price-value">$0</p>
+
+                        <label for="max-price">Precio máximo:</label>
+                        <input type="number" id="max-price-input" name="max-price-input" min="0" max="1000" step="10"
+                            value="1000" oninput="updatePriceRange()">
+                        <input type="range" id="max-price" name="max-price" min="0" max="1000" step="10" value="1000"
+                            oninput="syncInput('max-price')">
+                        <p id="max-price-value">$1000</p>
                     </div>
                 </div>
             </li>
             <li class="nav-item">
-                <a class="filter-toggle" data-bs-toggle="collapse" href="#collapse3" role="button" aria-expanded="false" aria-controls="collapse3">
+                <a class="filter-toggle" data-bs-toggle="collapse" href="#collapse3" role="button" aria-expanded="false"
+                    aria-controls="collapse3">
                     Provincia
                 </a>
                 <span></span>
                 <div class="collapse" id="collapse3">
                     <div class="d-flex flex-column menu-desplegable">
-                        <select class="form-control">
-                            <option>Provincia 1</option>
-                            <option>Provincia 2</option>
-                        </select>
+                        <label for="ProvinciaID" class="form-label">Provincia:</label>
+                        @Html.DropDownList("ProvinciaID", null, htmlAttributes: new { @class = "form-control" })
                     </div>
                 </div>
             </li>
             <li class="nav-item">
-                <a class="filter-toggle" data-bs-toggle="collapse" href="#collapse4" role="button" aria-expanded="false" aria-controls="collapse4">
+                <a class="filter-toggle" data-bs-toggle="collapse" href="#collapse4" role="button" aria-expanded="false"
+                    aria-controls="collapse4">
                     Localidad
                 </a>
                 <span></span>
                 <div class="collapse" id="collapse4">
                     <div class="menu-desplegable">
-                        <select class="form-control">
-                            <option>Localidad 1</option>
-                            <option>Localidad 2</option>
-                        </select>
+                        <label for="LocalidadID" class="form-label">Localidad:</label>
+                        @Html.DropDownList("LocalidadID", null, htmlAttributes: new { @class = "form-control" })
                     </div>
                 </div>
             </li>
             <li class="nav-item">
-                <a class="filter-toggle" data-bs-toggle="collapse" href="#collapse5" role="button" aria-expanded="false" aria-controls="collapse5">
+                <a class="filter-toggle" data-bs-toggle="collapse" href="#collapse5" role="button" aria-expanded="false"
+                    aria-controls="collapse5">
                     Operacion
                 </a>
                 <span></span>

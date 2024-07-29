@@ -2,6 +2,7 @@
     background-color: var(--container-color);
     border-radius: 15px;
     width: 100%;
+    color: var(--text-color2);
     min-width: 300px;
     height: 100%;
     margin: 0 5px;
@@ -11,7 +12,7 @@
 
 .tabla{
     border-radius: 15px;
-    
+    color: var(--text-color2);
 }
 
 .Tbody-class{
@@ -29,6 +30,7 @@
   
 .Tbody-class table thead {
     background-color: var(--container-color);
+    color: var(--text-color2);
     position: -webkit-sticky; /* Safari... */
     position: sticky;
     top: 0;
