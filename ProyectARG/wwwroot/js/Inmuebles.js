@@ -34,35 +34,31 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 
-function GuardarPublicacion(){
+  function GuardarPublicacion() {
     let inmuebleID = document.getElementById("InmuebleID").value;
     let localidadID = document.getElementById("LocalidadID").value;
     let provinciaID = document.getElementById("ProvinciaID").value;
-    let barrio = document.getElementById("Barrio").value;
-    let titulo = document.getElementById("Titulo").value;
     let precio = document.getElementById("Precio").value;
-    let superficieTotal = document.getElementById("SuperficieTotal").value;
-    let superficieCubierta = document.getElementById("superficieCubierta").value;
-    let tipoOperacion = document.getElementById("TipoOperacion").value;
-    let tipoInmueble = document.getElementById("TipoInmueble");
-    let amoblado = document.getElementById("Amoblado").value;
-    let dormitorios = document.getElementById("Dormitorios").value;
+    let superficieTotal = document.getElementById("Area").value;
+    let superficieCubierta = document.getElementById("AreaCubierta").value;
+    let tipoOperacion = document.getElementById("Operacion").value;
+    let tipoInmueble = document.getElementById("TipoInmueble").value;
+    let amoblado = document.getElementById("Amoblado").checked ? 1 : 0;
+    let dormitorios = document.getElementById("Habitaciones").value;
     let banios = document.getElementById("Banios").value;
-    let cantidadAmbientes = document.getElementById("CantidadAmbientes").value;
-    let cochera = document.getElementById("Cochera").value;
+    let cantidadAmbientes = document.getElementById("Ambientes").value;
+    let cochera = document.getElementById("Estacionamiento").checked ? 1 : 0;
     let direccion = document.getElementById("Direccion").value;
     let nroDireccion = document.getElementById("NroDireccion").value;
     let descripcion = document.getElementById("Descripcion").value;
-    let usuarioID = document.getElementById("UsuarioID").value;
+
 
     $.ajax({
         url: "/Inmuebles/GuardarPublicacion",
         data: {
             InmuebleID: inmuebleID,
             LocalidadID: localidadID,
-            provinciaID: provinciaID,
-            Barrio: barrio,
-            Titulo: titulo,
+            ProvinciaID: provinciaID,
             Precio: precio,
             SuperficieTotal: superficieTotal,
             SuperficieCubierta: superficieCubierta,
@@ -76,20 +72,19 @@ function GuardarPublicacion(){
             Direccion: direccion,
             NroDireccion: nroDireccion,
             Descripcion: descripcion,
-            UsuarioID: usuarioID
+        
         },
         type: "POST",
         dataType: "json",
-        success: function (resultado) 
-        {
-            if(resultado != "")
-            {
+        success: function (resultado) {
+            if (resultado != "") {
                 alert(resultado);
             }
-            ListadoPublicaciones();    
-        },
+            // Actualizar el listado de publicaciones o cualquier otra acción
+        }
     });
 }
+
 
 function MostrarPublicacion(){
     $.ajax({
@@ -122,4 +117,37 @@ function EliminarPublicacion(inmuebleID) {
         }
     });
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+  const fileInput = document.getElementById('Imagen');
+  const previewContainer = document.getElementById('preview-container');
+  
+  fileInput.addEventListener('change', (event) => {
+    previewContainer.innerHTML = ''; // Limpiar el contenedor de vista previa
+    const files = event.target.files;
+  
+    // Mostrar hasta tres imágenes
+    const maxPreview = 3;
+    for (let i = 0; i < Math.min(files.length, maxPreview); i++) {
+      const file = files[i];
+  
+      // Crear una URL para la imagen
+      const fileReader = new FileReader();
+      fileReader.onload = function(e) {
+        const img = document.createElement('img');
+        img.src = e.target.result;
+        previewContainer.appendChild(img);
+      }
+      fileReader.readAsDataURL(file);
+    }
+  
+    // Mostrar contador si hay más de tres imágenes
+    if (files.length > maxPreview) {
+      const imageCounter = document.createElement('div');
+      imageCounter.id = 'image-counter';
+      imageCounter.innerText = `+${files.length - maxPreview}`;
+      previewContainer.appendChild(imageCounter);
+    }
+  });
+});
 
