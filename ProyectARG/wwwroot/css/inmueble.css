@@ -13,11 +13,15 @@ html{
 .contenedor {
     background-color: var(--container-color);
     border-radius: 15px;
-    width: auto;
+    width: 50vw;
     min-width: 300px;
-    height: auto;
+    height: 50vh;
     margin: 2rem 5px;
     padding: 15px;
+}
+
+.form-control{
+    width: 100%;
 }
 
 .column {
@@ -34,3 +38,38 @@ form div div div div{
     margin: .5rem;
 }
 
+.botonera{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50%;
+}
+
+.botonera .btn{
+    width: 6rem;
+    height: 6rem;
+    border-radius: 50%;
+    margin: 8rem;
+    font-size: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+input[type="number"] {
+    -webkit-appearance: none; /* Para Safari y Chrome */
+  appearance: none; /* Para otros navegadores */
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"]:focus {
+  outline: none;
+  -webkit-appearance: none; /* Para Safari y Chrome */
+  appearance: none; /* Para otros navegadores */
+}

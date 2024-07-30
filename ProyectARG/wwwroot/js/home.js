@@ -83,36 +83,39 @@ function ListadoPublicaciones() {
 
 function updatePriceRange() {
     const minPriceInput = document.getElementById('min-price-input');
-    const maxPriceInput = document.getElementById('max-price-input');
     const minPriceRange = document.getElementById('min-price');
-    const maxPriceRange = document.getElementById('max-price');
-    
-    const minPriceValue = document.getElementById('min-price-value');
-    const maxPriceValue = document.getElementById('max-price-value');
-    
+  
     const minPrice = parseInt(minPriceInput.value);
+    const maxPriceInput = document.getElementById('max-price-input');
     const maxPrice = parseInt(maxPriceInput.value);
-    
+  
     // Asegurarse de que el valor mínimo no sea mayor al máximo
     if (minPrice >= maxPrice) {
       minPriceInput.value = maxPrice - minPriceInput.step;
     }
-    
-    // Sincronizar los inputs con los ranges
+  
+    // Actualizar el valor del input range del precio mínimo
     minPriceRange.value = minPriceInput.value;
-    maxPriceRange.value = maxPriceInput.value;
-    
-    minPriceValue.textContent = `$${minPriceInput.value}`;
-    maxPriceValue.textContent = `$${maxPriceInput.value}`;
-    
-    // Acá podrías agregar la lógica para filtrar tus elementos según el rango de precios
-    // filterItemsByPrice(minPrice, maxPrice);
+  }
+  
+  function updateMaxPrice() {
+    const maxPriceInput = document.getElementById('max-price-input');
+    const maxPriceRange = document.getElementById('max-price');
+    const minPriceRange = document.getElementById('min-price');
+  
+    const maxPrice = parseInt(maxPriceInput.value);
+  
+    // Actualizar el máximo del range del precio máximo
+    maxPriceRange.max = maxPrice;
+  
+    // Ajustar el máximo del range del precio mínimo
+    minPriceRange.max = maxPrice;
   }
   
   function syncInput(id) {
     const input = document.getElementById(`${id}-input`);
     const range = document.getElementById(id);
-    
+  
+    // Sincronizar el valor del input de número con el range
     input.value = range.value;
-    updatePriceRange();
   }

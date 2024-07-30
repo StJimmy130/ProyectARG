@@ -1,5 +1,5 @@
 ﻿@* @{
-    ViewData["Title"] = "Home Page";
+ViewData["Title"] = "Home Page";
 } *@
 
 <link rel="stylesheet" href="~/css/Home.css">
@@ -28,7 +28,28 @@
                             <input type="radio">Locales
                         </div>
                         <div>
+                            <input type="radio">Campo
+                        </div>
+                        <div>
+                            <input type="radio">Cochera
+                        </div>
+                        <div>
+                            <input type="radio">Depósito
+                        </div>
+                        <div>
+                            <input type="radio">Galpon
+                        </div>
+                        <div>
+                            <input type="radio">Fondo de comercio
+                        </div>
+                        <div>
                             <input type="radio">Oficinas
+                        </div>
+                        <div>
+                            <input type="radio">Qunichos
+                        </div>
+                        <div>
+                            <input type="radio">Otros
                         </div>
                     </div>
                 </div>
@@ -42,18 +63,20 @@
                 <div class="collapse" id="collapse2">
                     <div class="menu-desplegable">
                         <label for="min-price">Precio mínimo:</label>
-                        <input type="number" id="min-price-input" name="min-price-input" min="0" max="1000" step="10"
-                            value="0" oninput="updatePriceRange()">
+                        <div>
+                            $<input type="number" id="min-price-input" name="min-price-input" min="0" max="1000"
+                                step="10" value="0" oninput="updatePriceRange()">
+                        </div>
                         <input type="range" id="min-price" name="min-price" min="0" max="1000" step="10" value="0"
                             oninput="syncInput('min-price')">
-                        <p id="min-price-value">$0</p>
 
                         <label for="max-price">Precio máximo:</label>
-                        <input type="number" id="max-price-input" name="max-price-input" min="0" max="1000" step="10"
-                            value="1000" oninput="updatePriceRange()">
+                        <div>
+                            $<input type="number" id="max-price-input" name="max-price-input" min="0" max="1000"
+                                step="10" value="1000" oninput="updateMaxPrice()">
+                        </div>
                         <input type="range" id="max-price" name="max-price" min="0" max="1000" step="10" value="1000"
                             oninput="syncInput('max-price')">
-                        <p id="max-price-value">$1000</p>
                     </div>
                 </div>
             </li>

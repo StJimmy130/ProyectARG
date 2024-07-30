@@ -143,20 +143,26 @@ li:first-child .menu-desplegable{
     height: auto;
 }
 
-.price-filter {
-    display: flex;
-    flex-direction: column;
-    gap: 0px;
-  }
-  
-  .price-filter label {
-    font-weight: bold;
-  }
-  
-  .price-filter p {
-    margin-left: 10px;
-    font-weight: bold;
-  }
+.menu-desplegable input[type="number"] {
+  width: auto;
+  background: none;
+  border: none;
+  outline: none;
+  -webkit-appearance: none; /* Para Safari y Chrome */
+  appearance: none; /* Para otros navegadores */
+}
+
+.menu-desplegable input[type="number"]::-webkit-outer-spin-button,
+.menu-desplegable input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.menu-desplegable input[type="number"]:focus {
+  outline: none;
+  -webkit-appearance: none; /* Para Safari y Chrome */
+  appearance: none; /* Para otros navegadores */
+}
 
 input[type="range"] {
     -webkit-appearance: none;
