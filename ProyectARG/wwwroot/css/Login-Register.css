@@ -12,9 +12,10 @@ body {
   body::before {
     content: "";
     position: absolute;
+    top: 0;
     width: 100%;
     height: 100%;
-    background-color: #0000003b;
+    background-color: var(--overlay-login);
     z-index: -1;
     background-position: center;
     background-size: cover;
@@ -27,7 +28,7 @@ body {
     margin-bottom: 100px;
     max-width: 1050px;
     width: 100%;
-    background: #fff;
+    background: var(--container-color);
     border-radius: 12px;
     margin: 0 20px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
@@ -48,7 +49,7 @@ body {
   .content .topic{
     font-size: 22px;
     font-weight: 500;
-    color: var(--nav-color);
+    color: var(--text-color2);
   }
   .content form{
     width: 40%;
@@ -68,20 +69,21 @@ body {
     font-size: 16px;
     outline: none;
     padding-left: 16px;
-    background: #fae9fb;
-    border: 2px solid transparent;
+    background: var(--container-color);
+    border: 2px solid gray ;
     transition: all 0.3s ease;
   }
   .content .input-box input:focus,
   .content .input-box input:valid{
     border-color: var(--nav-color);
-    background-color: #fff;
+    background-color: var(--container-color);
   }
   .content .input-box label{
     position: absolute;
     left: 18px;
     top: 50%;
-    color: #636c72;
+    color: var(--text-color2);
+    background-color: transparent;
     font-size: 15px;
     pointer-events: none;
     transform: translateY(-50%);
@@ -93,7 +95,9 @@ body {
     left: 12px;
     display: 14px;
     color: var(--nav-color);
-    background: #fff;
+    background: var(--container-color);
+    border-radius: 10px;
+    padding: 2px;
   }
   .content .message-box{
     min-height: 100px;

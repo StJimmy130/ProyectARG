@@ -63,11 +63,15 @@ function ListadoPublicaciones() {
                             <img src="img/Casa.jpg" alt="Casa">
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title">${item.tituloString}</h5>
-                            <p class="card-text">$ ${item.precioString}</p>
+                            <h5 class="card-title fs-4">${item.tituloString}</h5>
+                            <p class="card-text fs-5">$ ${item.precioString} - ${item.tipoOperacionString}</p>
                             <p>${item.provinciaString}, ${item.localidadString} - ${item.direccionString} ${item.nroDireccionString}</p>
-                            <div>${item.tipoOperacionString}</div>
-                            <a href="Inmuebles/Detalle" class="btn btn-primary">Ver más</a>
+                            
+                            <div class="container d-flex justify-content-end">
+                            
+                            <a href="Inmuebles/Detalle" class="btn btn-success">Ver más</a>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>

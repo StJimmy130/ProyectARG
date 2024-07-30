@@ -1,64 +1,70 @@
 document.addEventListener('DOMContentLoaded', () => {
-    let currentStep = 0;
-    const steps = document.querySelectorAll('.step');
-  
-    function showStep(index) {
-      steps.forEach((step, i) => {
-        step.classList.toggle('active', i === index);
-      });
-    }
-  
-    function nextStep() {
-      if (currentStep < steps.length - 1) {
-        currentStep++;
-        showStep(currentStep);
-      }
-    }
-  
-    function prevStep() {
-      if (currentStep > 0) {
-        currentStep--;
-        showStep(currentStep);
-      }
-    }
-  
-    document.querySelectorAll('.next-btn').forEach(button => {
-      button.addEventListener('click', nextStep);
+  let currentStep = 0;
+  const steps = document.querySelectorAll('.step');
+
+  function showStep(index) {
+    steps.forEach((step, i) => {
+      step.classList.toggle('active', i === index);
     });
-  
-    document.querySelectorAll('.prev-btn').forEach(button => {
-      button.addEventListener('click', prevStep);
-    });
-  
-    showStep(currentStep); // Inicializa mostrando el primer paso
+  }
+
+  function nextStep() {
+    if (currentStep < steps.length - 1) {
+      currentStep++;
+      showStep(currentStep);
+    }
+  }
+
+  function prevStep() {
+    if (currentStep > 0) {
+      currentStep--;
+      showStep(currentStep);
+    }
+  }
+
+  document.querySelectorAll('.next-btn').forEach(button => {
+    button.addEventListener('click', nextStep);
   });
+
+  document.querySelectorAll('.prev-btn').forEach(button => {
+    button.addEventListener('click', prevStep);
+  });
+
+  showStep(currentStep); // Inicializa mostrando el primer paso
+});
 
 
   function GuardarPublicacion() {
     let inmuebleID = document.getElementById("InmuebleID").value;
     let localidadID = document.getElementById("LocalidadID").value;
     let provinciaID = document.getElementById("ProvinciaID").value;
+    let barrio = document.getElementById("Barrio").value;
+    let titulo = document.getElementById("Titulo").value;
     let precio = document.getElementById("Precio").value;
     let superficieTotal = document.getElementById("Area").value;
     let superficieCubierta = document.getElementById("AreaCubierta").value;
     let tipoOperacion = document.getElementById("Operacion").value;
     let tipoInmueble = document.getElementById("TipoInmueble").value;
-    let amoblado = document.getElementById("Amoblado").checked ? 1 : 0;
+    let amoblado = document.getElementById("Amoblado").checked; // Cambiado a .checked
     let dormitorios = document.getElementById("Habitaciones").value;
     let banios = document.getElementById("Banios").value;
     let cantidadAmbientes = document.getElementById("Ambientes").value;
-    let cochera = document.getElementById("Estacionamiento").checked ? 1 : 0;
+    let cochera = document.getElementById("Estacionamiento").checked; // Cambiado a .checked
     let direccion = document.getElementById("Direccion").value;
     let nroDireccion = document.getElementById("NroDireccion").value;
+    let piso = document.getElementById("Piso").value; // Nuevo input
+    let nroDepartamento = document.getElementById("NroDepartamento").value; // Nuevo input
     let descripcion = document.getElementById("Descripcion").value;
-
+    
 
     $.ajax({
         url: "/Inmuebles/GuardarPublicacion",
         data: {
             InmuebleID: inmuebleID,
             LocalidadID: localidadID,
-            ProvinciaID: provinciaID,
+            ProvinciaID: provinciaID, // Se cambió a mayúscula inicial para mantener consistencia
+            Barrio: barrio,
+            Titulo: titulo,
             Precio: precio,
             SuperficieTotal: superficieTotal,
             SuperficieCubierta: superficieCubierta,
@@ -71,8 +77,9 @@ document.addEventListener('DOMContentLoaded', () => {
             Cochera: cochera,
             Direccion: direccion,
             NroDireccion: nroDireccion,
+            Piso: piso, // Incluido en los datos enviados
+            NroDepartamento: nroDepartamento, // Incluido en los datos enviados
             Descripcion: descripcion,
-        
         },
         type: "POST",
         dataType: "json",
@@ -80,8 +87,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (resultado != "") {
                 alert(resultado);
             }
-            // Actualizar el listado de publicaciones o cualquier otra acción
-        }
+            ListadoPublicaciones();
+        },
     });
 }
 

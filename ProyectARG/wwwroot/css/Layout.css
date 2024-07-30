@@ -22,6 +22,7 @@ for details on configuring this project to bundle and minify static web assets. 
   --search-bar: #F2F2F2;
   --search-text: #010718;
   --container-color: #EAE6E5;
+  --overlay-login: #0000003b;
 }
 body{
   background-color: var(--body-color);
@@ -36,6 +37,7 @@ body.dark{
   --text-color2: #CCC;
   --search-bar: #242526;
   --container-color: #5a5a5a;
+  --overlay-login: #0000008a;
 }
 nav{
   top: 0;
