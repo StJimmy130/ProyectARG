@@ -19,53 +19,53 @@ public class InmueblesController : Controller
     }
 
     public IActionResult Index()
-{
-    var selectListItemsOperacion = new List<SelectListItem>
+    {
+        var selectListItemsOperacion = new List<SelectListItem>
     {
         new SelectListItem { Value = "0", Text = "[SELECCIONE...]" }
     };
 
-    var enumValuesOperacion = Enum.GetValues(typeof(Operacion)).Cast<Operacion>();
+        var enumValuesOperacion = Enum.GetValues(typeof(Operacion)).Cast<Operacion>();
 
-    foreach (var value in enumValuesOperacion)
-    {
-        selectListItemsOperacion.Add(new SelectListItem
+        foreach (var value in enumValuesOperacion)
         {
-            Value = ((int)value).ToString(),
-            Text = SplitCamelCase(value.ToString())
-        });
-    }
+            selectListItemsOperacion.Add(new SelectListItem
+            {
+                Value = ((int)value).ToString(),
+                Text = SplitCamelCase(value.ToString())
+            });
+        }
 
-    var selectListItemsTipoInmueble = new List<SelectListItem>
+        var selectListItemsTipoInmueble = new List<SelectListItem>
     {
         new SelectListItem { Value = "0", Text = "[SELECCIONE...]" }
     };
 
-    var enumValuesTipoInmueble = Enum.GetValues(typeof(TipoInmueble)).Cast<TipoInmueble>();
+        var enumValuesTipoInmueble = Enum.GetValues(typeof(TipoInmueble)).Cast<TipoInmueble>();
 
-    foreach (var value in enumValuesTipoInmueble)
-    {
-        selectListItemsTipoInmueble.Add(new SelectListItem
+        foreach (var value in enumValuesTipoInmueble)
         {
-            Value = ((int)value).ToString(),
-            Text = SplitCamelCase(value.ToString())
-        });
+            selectListItemsTipoInmueble.Add(new SelectListItem
+            {
+                Value = ((int)value).ToString(),
+                Text = SplitCamelCase(value.ToString())
+            });
+        }
+
+        var provincias = _context.Provincias.ToList();
+        var localidades = _context.Localidades.ToList();
+
+        provincias.Add(new Provincia { ProvinciaID = 0, Nombre = "[SELECCIONE...]" });
+        ViewBag.ProvinciaID = new SelectList(provincias.OrderBy(c => c.Nombre), "ProvinciaID", "Nombre");
+
+        localidades.Add(new Localidad { LocalidadID = 0, Nombre = "[SELECCIONE...]" });
+        ViewBag.LocalidadID = new SelectList(localidades.OrderBy(c => c.Nombre), "LocalidadID", "Nombre");
+
+        ViewBag.Operaciones = selectListItemsOperacion;
+        ViewBag.TiposInmueble = selectListItemsTipoInmueble;
+
+        return View();
     }
-
-    var provincias = _context.Provincias.ToList();
-    var localidades = _context.Localidades.ToList();
-
-    provincias.Add(new Provincia { ProvinciaID = 0, Nombre = "[SELECCIONE...]" });
-    ViewBag.ProvinciaID = new SelectList(provincias.OrderBy(c => c.Nombre), "ProvinciaID", "Nombre");
-
-    localidades.Add(new Localidad { LocalidadID = 0, Nombre = "[SELECCIONE...]" });
-    ViewBag.LocalidadID = new SelectList(localidades.OrderBy(c => c.Nombre), "LocalidadID", "Nombre");
-
-    ViewBag.Operaciones = selectListItemsOperacion;
-    ViewBag.TiposInmueble = selectListItemsTipoInmueble;
-
-    return View();
-}
 
     private string SplitCamelCase(string input)
     {
@@ -73,7 +73,7 @@ public class InmueblesController : Controller
     }
 
 
-    public JsonResult GetDetallePublicacion (int InmuebleID)
+    public JsonResult GetDetallePublicacion(int InmuebleID)
     {
         var Detalle = _context.Inmuebles.ToList();
         if (InmuebleID != 0)
@@ -82,7 +82,7 @@ public class InmueblesController : Controller
         }
         return Json(Detalle);
     }
-    
+
 
 
     public JsonResult GuardarPublicacion(int InmuebleID, int LocalidadID, string? Barrio, string? Titulo,
@@ -159,6 +159,14 @@ public class InmueblesController : Controller
         _context.SaveChanges();
 
         return Json(eliminarPublicacion);
+    }
+
+
+
+
+    public IActionResult Detalle(){
+
+        return View();
     }
 }
 
