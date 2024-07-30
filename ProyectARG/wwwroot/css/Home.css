@@ -33,7 +33,7 @@
 }
 
 .card:hover {
-  transform: scale(1.05);
+  transform: scale(1.02);
   z-index: 2;
   box-shadow: 0 0 15px 0.5px rgb(140, 135, 135);
 }
@@ -113,12 +113,10 @@
     color: var(--text-color2);
     font-size: 16px;
     margin-top: 1rem;
-    transition: 0.5s;
+    transition: 0.2s;
 }
 .filtros ul li:hover a{
     color: rgb(190, 182, 182);
-    text-shadow: 0 0 5px var(--text-color);
-    scale: 1.1;
 }
 
 li span{
@@ -127,14 +125,12 @@ li span{
     height: 2px;
     border-radius: 20px;
     background-color: rgb(192, 192, 192);
-    box-shadow: 0 .5px 2px 0 hsla(0, 0%, 0%, .2);
     transition: .5s;
     margin-top: 3px;
   }
   
   li:hover span{
     width: 80%;
-    box-shadow: 0 1px 4px 3px hsla(0, 0%, 82%, 0.2);
     
   }
 

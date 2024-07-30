@@ -93,11 +93,6 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 
 
-function MostrarPublicacion(){
-    $.ajax({
-        
-    });
-}
 
 
 

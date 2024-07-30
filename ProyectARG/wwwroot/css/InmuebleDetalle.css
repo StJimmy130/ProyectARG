@@ -6,7 +6,7 @@ body{
 .vistaDetalle{
     position: relative;
     display: flex;
-    background-color: #fff;   
+    background-color: #d3d3d3;   
     margin-left: 80px;
     margin-right: 80px;
     padding: 20px;
@@ -29,18 +29,20 @@ body{
     border-radius: 5px;
 }
 
-.miniaturas{
+.miniaturas {
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-start; /* Ajusta las miniaturas al principio */
     align-items: center;
     border-radius: 5px;
     margin: 5px 40px 0 40px;
     padding: 10px;
-    background-color: var(--body-color);
-    
+    background-color: #fff;
+    overflow-x: auto; /* Permite el desplazamiento horizontal si es necesario */
+    white-space: nowrap; /* Evita el salto de línea para mantener las miniaturas en una línea */
 }
 .miniatura{
     height: 80px;
+    margin: 0 5px;
     object-fit: cover;
     opacity: .7;
     transition: all .3s ease;
@@ -58,6 +60,7 @@ body{
 
 .container .img-container {
     position: relative;
+    border-radius: 10px;
 }
 
 .container .img-container .main-img{
@@ -65,8 +68,7 @@ body{
     height: 80%;
     object-fit: cover; 
     object-position: center; 
-    border-radius: 5px;
-    box-shadow: 0 5px 5px rgba(1, 23, 46, 0.6);
+    border-radius: 10px;
 }
 
 .container .miniatura-container{
@@ -78,8 +80,10 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    margin-top: 5px;
     padding: 15px;
-    background-color: #d9d9d9;
+    border-radius: 5px;
+    background-color: #fff;
     overflow-y: auto; 
 }
 
@@ -94,7 +98,10 @@ body{
 
 .property-details {
     padding: 15px;
+    margin-top: 15px;
+    border-radius: 5px;
     align-items: start;
+    background-color: #fff;
 }
 
 .property-details h3 {
