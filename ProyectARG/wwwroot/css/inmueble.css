@@ -12,6 +12,7 @@ html{
 
 .contenedor {
     background-color: var(--container-color);
+    position: relative;
     border-radius: 15px;
     width: 50vw;
     min-width: 300px;
@@ -40,18 +41,21 @@ form div div div div{
 
 .botonera{
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-around;
+    align-items: end;
+    position: absolute;
+    bottom: 0px;
+    left: -9px;
     width: 100%;
-    height: 50%;
+    height: 25%;
 }
 
 .botonera .btn{
     width: 6rem;
     height: 6rem;
     border-radius: 50%;
-    margin: 8rem;
     font-size: 4rem;
+    margin-bottom: 1.5rem;
     display: flex;
     justify-content: center;
     align-items: center;

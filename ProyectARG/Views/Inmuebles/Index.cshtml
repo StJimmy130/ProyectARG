@@ -51,20 +51,54 @@
     </div>
 
 
- <!-- Step 2 -->
+   <!-- Step 2 -->
 <div class="row justify-content-center align-items-center">
   <div class="col-12 justify-content-center align-items-center contenedor step active">
     <div class="d-flex flex-column">
       <div class="d-flex">
         <div class="container">
-          <input type="file">
+          <label for="Imagen">Imagen:</label>
+          <input type="file" id="Imagen" name="Imagen">
+        </div>
+        <div class="container">
           <label for="Precio">Precio:</label>
           <input type="number" class="form-control" id="Precio" name="Precio">
         </div>
       </div>
+      <div class="d-flex">
+        <div class="container">
+          <label for="Area">Área en m²:</label>
+          <input type="number" class="form-control" id="Area" name="Area">
+        </div>
+        <div class="container">
+          <label for="AreaCubierta">Área cubierta en m²:</label>
+          <input type="number" class="form-control" id="AreaCubierta" name="AreaCubierta">
+        </div>
+      </div>
+      <div class="d-flex">
+        <div class="container">
+          <label for="Habitaciones">Habitaciones:</label>
+          <input type="number" class="form-control" id="Habitaciones" name="Habitaciones">
+        </div>
+        <div class="container">
+          <label for="Banios">Baños:</label>
+          <input type="number" class="form-control" id="Banios" name="Banios">
+        </div>
+        <div class="container">
+          <label for="Ambientes">Ambientes:</label>
+          <input type="number" class="form-control" id="Ambientes" name="Ambientes">
+        </div>
+        
+      </div>
+      <div class="container">
+          <label for="Estacionamiento">Estacionamiento:</label>
+          <input type="checkbox" id="Estacionamiento" name="Estacionamiento">
+          <label for="Amoblado">Amoblado:</label>
+          <input type="checkbox" id="Amoblado" name="Amoblado">
+        </div>
     </div>
     <div class="botonera">
-      <button type="button" class="btn btn-secondary prev-btn"><i class='bx bx-left-arrow-alt'></i></button>
+      <button type="button" class="btn btn-primary prev-btn"><i class='bx bx-left-arrow-alt'></i></button>
       <button type="button" class="btn btn-primary next-btn"><i class='bx bx-right-arrow-alt'></i></button>
     </div>
   </div>
@@ -72,20 +106,20 @@
 
 
     <!-- Step 3 -->
-<div class="row justify-content-center align-items-center">
-  <div class="col-12 justify-content-center align-items-center contenedor step active">
-    <div class="d-flex flex-column">
-      <div class="d-flex">
-        <div class="container">
-          <p>Confirmar detalles y enviar.</p>
+    <div class="row justify-content-center align-items-center">
+      <div class="col-12 justify-content-center align-items-center contenedor step active">
+        <div class="d-flex flex-column">
+          <div class="d-flex">
+            <div class="container">
+              <p>Confirmar detalles y enviar.</p>
+            </div>
+          </div>
+        </div>
+        <div class="botonera">
+          <button type="button" class="btn btn-primary prev-btn"><i class='bx bx-left-arrow-alt'></i></button>
+          <button class="btn btn-success" type="submit"><i class='bx bx-plus-circle'></i></button>
         </div>
       </div>
     </div>
-    <div class="botonera">
-      <button type="button" class="btn btn-secondary prev-btn"><i class='bx bx-left-arrow-alt'></i></button>
-      <button class="btn btn-success" type="submit"><i class='bx bx-plus-circle'></i></button>
-    </div>
-  </div>
-</div>
 
 </form>
