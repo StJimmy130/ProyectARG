@@ -67,7 +67,7 @@ function ListadoPublicaciones() {
                             <p class="card-text">$ ${item.precioString}</p>
                             <p>${item.provinciaString}, ${item.localidadString} - ${item.direccionString} ${item.nroDireccionString}</p>
                             <div>${item.tipoOperacionString}</div>
-                            <a href="Inmuebles/Detalle" class="btn btn-primary">Ver más</a>
+                            <a href="Inmuebles/Detalle?InmuebleID=${item.inmuebleID}" class="btn btn-primary">Ver más</a>
                         </div>
                     </div>
                 </div>
