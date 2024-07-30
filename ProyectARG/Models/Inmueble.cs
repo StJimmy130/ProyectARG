@@ -7,7 +7,7 @@ public class Inmueble
     [Key]
     public int InmuebleID { get; set; }
     public int LocalidadID { get; set; }
-    public string Barrio { get; set; }
+    public string? Barrio { get; set; }
     public string? Titulo { get; set; }
     public float? Precio { get; set; }
     public int? SuperficieTotal { get; set; }
@@ -22,6 +22,8 @@ public class Inmueble
     public string? Direccion { get; set; }
     public int NroDireccion { get; set; }
     public string? Descripcion { get; set; }
+    public int? Piso { get; set; }
+    public string? NroDepartamento { get; set; }
     public int? UsuarioID { get; set; }
 
     public virtual Usuario Usuario { get; set; }
