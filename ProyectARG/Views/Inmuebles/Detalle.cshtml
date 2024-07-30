@@ -2,39 +2,48 @@
 <script src="~/js/InmuebleDetalle.js"></script>
 
 <body>
-  <div class="row">
-    <div class="col-md-8 col-sm-12">
-      <div class="image-container">
-        <img src="~/img/fondo2.jpeg" alt="">
-      </div>
-    </div>
-    <div class="col-md-4 col-sm-12">
-      <div class="info-container">
-        <div class="property-info">
-          <h2>Título del Inmueble</h2>
-          <p>Precio: $300,000</p>
-        </div>
-        <div class="seller-info">
-          <h2>Datos del Vendedor</h2>
-          <p>Nombre: Juan Pérez</p>
-          <p>Teléfono: (123) 456-7890</p>
-          <p>Email: juan.perez@example.com</p>
+  <section class="vistaDetalle">
+    <div class="row">
+      <div class="col-md-8 col-sm-12">
+        <div class="container">
+          <div class="image-container">
+            <img id="mainImage" src="/img/Casa.jpg" alt="Main Image">
+          </div>
+          <div class="miniaturas">
+            <img src="/img/Casa.jpg" alt="Miniatura 1" class="miniatura active" onclick="changeImage(this)">
+            <img src="/img/Fondo2.jpeg" alt="Miniatura 2" class="miniatura" onclick="changeImage(this)">
+            <img src="/img/Casa.jpg" alt="Miniatura 3" class="miniatura" onclick="changeImage(this)">
+            <img src="/img/Casa.jpg" alt="Miniatura 4" class="miniatura" onclick="changeImage(this)">
+            <img src="/img/Casa.jpg" alt="Miniatura 5" class="miniatura" onclick="changeImage(this)">
+          </div>
         </div>
       </div>
-    </div>
-  </div>
 
-  <div class="row">
-    <div class="col-12">
-      <div class="property-details">
-        <h3>Detalles de la Propiedad</h3>
-        <p>Metros Cuadrados Totales: 120 m²</p>
-        <p>Metros Cuadrados Cubiertos: 80 m²</p>
-        <p>Habitaciones: 3</p>
-        <!-- Más detalles -->
+      <div class="col-md-4 col-sm-12">
+        <div class="info-container">
+          <div class="property-info">
+            <h2>Título del Inmueble</h2>
+            <h3>Precio: $300,000</h3>
+          </div>
+          <div class="seller-info">
+            <h2>Datos del Vendedor</h2>
+            <p>Nombre: Juan Pérez</p>
+            <p>Teléfono: (123) 456-7890</p>
+            <p>Email: juan.perez@example.com</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="property-details">
+              <h3>Detalles de la Propiedad</h3>
+              <p>Metros Cuadrados Totales: 120 m²</p>
+              <p>Metros Cuadrados Cubiertos: 80 m²</p>
+              <p>Habitaciones: 3</p>
+              <!-- Más detalles -->
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-
-
+  </section>
 </body>

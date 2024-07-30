@@ -6,6 +6,9 @@ for details on configuring this project to bundle and minify static web assets. 
   font-family: 'Poppins', sans-serif;
   margin: 0;
   padding: 0;
+  text-decoration: none;
+  list-style: none;
+  scroll-behavior: smooth;
 }
 
 /* ===== Colours ===== */
@@ -22,6 +25,7 @@ for details on configuring this project to bundle and minify static web assets. 
 }
 body{
   background-color: var(--body-color);
+  margin-top: 80px;
 }
 body.dark{
   --body-color: #18191A;
@@ -36,11 +40,12 @@ body.dark{
 nav{
   top: 0;
   left: 0;
-  position: relative;
+  position: fixed;
   height: 70px;
   width: 100%;
   background: var(--nav-color);
   z-index: 1000;
+  bottom: 120px;
 }
 body.dark nav{
   border: 1px solid #393838;
@@ -341,10 +346,6 @@ footer .content .top{
   font-size: 24px;
   text-decoration: none;
   transition: all 0.2s ease;
-}
-.dark .content .top .media-icons a{
-  border: none;
-  line-height: 43px;
 }
 .top .media-icons a:nth-child(1){
   background: #4267B2;

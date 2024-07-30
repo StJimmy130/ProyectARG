@@ -59,7 +59,9 @@ function ListadoPublicaciones() {
                 contenidoTabla += `
                 <div class="col-lg-4 col-md-4 col-sm-12 mb-4">
                     <div class="card">
-                        <img src="https://via.placeholder.com/150" alt="Card image cap">
+                        <div class="image-container">
+                            <img src="img/Casa.jpg" alt="Casa">
+                        </div>
                         <div class="card-body">
                             <h5 class="card-title">${item.tituloString}</h5>
                             <p class="card-text">$ ${item.precioString}</p>
