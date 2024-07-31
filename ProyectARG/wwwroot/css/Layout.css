@@ -300,7 +300,7 @@ button.accept-policy {
 
 /* FOOTER */
 footer{
-  top: 120px;
+  margin-top: 300px;
   z-index: 1000;
   position: relative;
   background: var(--nav-color);

@@ -57,7 +57,7 @@ function ListadoPublicaciones() {
             let contenidoTabla = ``;
             $.each(Listado, function (Index, item) {
                 contenidoTabla += `
-                <div class="col-lg-4 col-md-4 col-sm-12 mb-4">
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                     <div class="card">
                         <div class="image-container">
                             <img src="img/Casa.jpg" alt="Casa">

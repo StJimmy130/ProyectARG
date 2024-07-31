@@ -8,8 +8,8 @@ public class Inmueble
     public int InmuebleID { get; set; }
     public int LocalidadID { get; set; }
     public string? Barrio { get; set; }
-    public string? Titulo { get; set; }
-    public float? Precio { get; set; }
+    public string? Titulo { get; set; } 
+    public float? Precio { get; set; } 
     public int? SuperficieTotal { get; set; }
     public int? SuperficieCubierta { get; set; }
     public Operacion TipoOperacion { get; set; }
@@ -61,20 +61,20 @@ public class VistaInmueble
 {
     public int InmuebleID { get; set; }
     public string TituloString { get; set; }
-    public string LocalidadString { get; set; }
-    public string DireccionString { get; set; }
-    public int NroDireccionString { get; set; }
-    public float PrecioString { get; set; }
-    public string ProvinciaString { get; set; }
-    public string TipoOperacionString { get; set; }
-    public string TipoInmuebleString { get; set;}
+    public string LocalidadString { get; set; } 
+    public string DireccionString { get; set; } 
+    public int NroDireccionString { get; set; } 
+    public float PrecioString { get; set; } 
+    public string ProvinciaString { get; set; } 
+    public string TipoOperacionString { get; set; } 
+    public string TipoInmuebleString { get; set;} 
     public string BarrioString { get; set; }
-    public string SuperficieTotalString { get; set; }
-    public string SuperficieCubiertaString { get; set; }
-    public string AmobladoString { get; set; }
-    public string DormitoriosString { get; set; }
-    public string BaniosString { get; set; }
-    public string CantidadAmbientesString { get; set; }
-    public string CocheraString { get; set; }
+    public string SuperficieTotalString { get; set; } 
+    public string SuperficieCubiertaString { get; set; } 
+    public string AmobladoString { get; set; } 
+    public string DormitoriosString { get; set; } 
+    public string BaniosString { get; set; } 
+    public string CantidadAmbientesString { get; set; } 
+    public string CocheraString { get; set; } 
     public string DescripcionString { get; set; }
 }
