@@ -14,9 +14,9 @@ html{
     background-color: var(--container-color);
     position: relative;
     border-radius: 15px;
-    width: 50vw;
+    width: 70vw;
     min-width: 300px;
-    height: 50vh;
+    height: 70vh;
     margin: 2rem 5px;
     padding: 15px;
     font-size: 1.2rem;
@@ -226,22 +226,21 @@ label[for="Imagen"]:hover{
 }
 
 #preview-container {
-  height: 60px;
+  height: 180px;
   width: auto;
-  min-width: 60px;
+  min-width: 180px;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row-reverse;
   align-items: center;
   gap: 5px;
- 
   background-color: rgb(197, 196, 194);
   border-radius: 5px;
 }
 
 #preview-container img {
-  max-width: 50px;
-  max-height: 50px;
+  max-width: 150px;
+  max-height: 150px;
   border: 1px solid #ddd;
   border-radius: 5px;
   object-fit: cover;
