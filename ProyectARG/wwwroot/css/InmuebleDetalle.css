@@ -1,4 +1,4 @@
-body {
+body{
     padding-top: 50px;
 }
 
@@ -18,19 +18,22 @@ body {
 
 .image-container {
     position: relative;
-    height: 400px; /* Establece una altura fija */
-    width: 100%;
-    max-width: 800px; /* Establece un ancho máximo */
+    height: 420px; /* Establece una altura fija */
+    width: 100%; /* Toma todo el ancho disponible */
+    max-width: 600px; /* Ajusta según sea necesario */
     margin: 0 auto;
     border-radius: 10px;
     overflow: hidden;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    vertical-align: middle;
 }
 
 .image-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 10px;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* Mantiene la relación de aspecto */
 }
 
 .miniaturas {
@@ -65,14 +68,16 @@ body {
     width: 120px;
     margin: 0 10px;
     object-fit: cover;
-    opacity: 0.7;
+    opacity: 0.5;
     transition: all 0.3s ease;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .miniatura:hover,
 .miniatura.active {
     opacity: 1;
+    border: 2px solid var(--nav-color);
 }
 
 .info-container {
