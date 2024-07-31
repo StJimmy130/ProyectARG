@@ -1,21 +1,24 @@
-// Selecciona la imagen principal usando un selector adecuado
-const main_img = document.querySelector('#mainImage');  // Usando ID o .main-img si es una clase
+// Obtener todos los elementos de las miniaturas
+var thumbnails = document.querySelectorAll('.miniatura');
 
-// Selecciona todas las miniaturas
-const miniaturas = document.querySelectorAll('.miniatura');
+// Agregar evento de clic a cada miniatura
+thumbnails.forEach(function(thumbnail) {
+  thumbnail.addEventListener('click', function() {
+    // Obtener el elemento de la imagen principal
+    var mainImage = document.getElementById("mainImage");
 
-miniaturas.forEach(thumb => {
-    thumb.addEventListener('click', function(){
-        // Remueve la clase 'active' de la miniatura actualmente activa
-        const active = document.querySelector('.active');
-        if (active) {
-            active.classList.remove('active');
-        }
+    // Obtener la URL de la imagen del elemento del thumbnail clickeado
+    var newImageSrc = this.getAttribute("src");
 
-        // Añade la clase 'active' a la miniatura clickeada
-        this.classList.add('active');
+    // Actualizar la fuente de la imagen principal
+    mainImage.src = newImageSrc;
 
-        // Cambia la imagen principal por la imagen de la miniatura clickeada
-        main_img.src = this.src;
+    // Remover la clase "active" de todos los thumbnails
+    thumbnails.forEach(function(thumb) {
+      thumb.classList.remove("active");
     });
+
+    // Agregar la clase "active" al thumbnail clickeado
+    this.classList.add("active");
+  });
 });

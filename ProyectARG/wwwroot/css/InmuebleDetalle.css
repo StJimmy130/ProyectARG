@@ -1,8 +1,8 @@
-body{
+body {
     padding-top: 50px;
 }
 
-.vistaDetalle{
+.vistaDetalle {
     position: relative;
     height: auto;
     display: flex;
@@ -16,67 +16,65 @@ body{
     margin-top: 200px;
 }
 
-
 .image-container {
     position: relative;
-
+    height: 400px; /* Establece una altura fija */
+    width: 100%;
+    max-width: 800px; /* Establece un ancho máximo */
+    margin: 0 auto;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 .image-container img {
     width: 100%;
     height: 100%;
-    object-fit: cover; 
-    object-position: center;
-    border-radius: 5px;
+    object-fit: cover;
+    border-radius: 10px;
 }
 
 .miniaturas {
     display: flex;
-    justify-content: flex-start; /* Ajusta las miniaturas al principio */
+    justify-content: flex-start; 
     align-items: center;
     border-radius: 5px;
-    margin: 5px 40px 0 40px;
+    margin: 10px 40px 0 40px;
     padding: 10px;
     background-color: #fff;
-    overflow-x: auto; /* Permite el desplazamiento horizontal si es necesario */
-    white-space: nowrap; /* Evita el salto de línea para mantener las miniaturas en una línea */
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: thin;
+    scrollbar-color: #ccc #f1f1f1;
 }
-.miniatura{
+
+.miniaturas::-webkit-scrollbar {
+    height: 6px;
+}
+
+.miniaturas::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+}
+
+.miniaturas::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 3px;
+}
+
+.miniatura {
     height: 80px;
-    margin: 0 5px;
+    width: 120px;
+    margin: 0 10px;
     object-fit: cover;
-    opacity: .7;
-    transition: all .3s ease;
+    opacity: 0.7;
+    transition: all 0.3s ease;
     border-radius: 5px;
 }
 
-.miniatura:hover{
+.miniatura:hover,
+.miniatura.active {
     opacity: 1;
 }
 
-.miniatura.active{
-    opacity: 1;
-}
-
-
-.container .img-container {
-    position: relative;
-    border-radius: 10px;
-}
-
-.container .img-container .main-img{
-    width: 100%;
-    height: 80%;
-    object-fit: cover; 
-    object-position: center; 
-    border-radius: 10px;
-}
-
-.container .miniatura-container{
-    height: 80px;
-    display: flex;
-    justify-content: space-between;
-}
 .info-container {
     display: flex;
     flex-direction: column;
@@ -88,12 +86,13 @@ body{
     overflow-y: auto; 
 }
 
-.info-container h3{
+.info-container h3 {
     margin: 0;
     font-size: 20px;
 }
 
-.info-container .seller-info, .info-container .property-info {
+.info-container .seller-info,
+.info-container .property-info {
     margin-bottom: 20px;
 }
 
@@ -108,9 +107,8 @@ body{
 
 .property-details h3 {
     margin-top: 0;
-
 }
 
 .property-details p {
     margin: 10px 0;
-} 
+}
