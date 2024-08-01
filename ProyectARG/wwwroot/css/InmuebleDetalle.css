@@ -30,6 +30,10 @@ body{
     }
     
 }
+.contenedor-imagenes{
+    background: #fff;
+    border-radius: 10px;
+}
 
 .image-container {
     position: relative;
