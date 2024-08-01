@@ -79,13 +79,14 @@ body.dark{
     background-color: var(--bg-info);
     overflow-x: auto;
     white-space: nowrap;
-    scrollbar-width: thin;
-    scrollbar-color: var(--scrollbar-color) var(--bg-info);
+    /* scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-color) var(--bg-info); */
 
 }
 
 .miniaturas::-webkit-scrollbar {
-    height: 6px;
+    height: 5px;
+    width: 100%;
 }
 
 .miniaturas::-webkit-scrollbar-track {
