@@ -122,14 +122,16 @@ function EliminarPublicacion(inmuebleID) {
 
 document.addEventListener('DOMContentLoaded', function() {
   const fileInput = document.getElementById('Imagen');
+  const listContainer = document.getElementById('list-container');
   const previewContainer = document.getElementById('preview-container');
   
   fileInput.addEventListener('change', (event) => {
+    listContainer.innerHTML = ''; // Limpiar el contenedor de lista
     previewContainer.innerHTML = ''; // Limpiar el contenedor de vista previa
     const files = event.target.files;
   
-    // Mostrar hasta tres imágenes
-    const maxPreview = 3;
+    // Mostrar hasta diez imágenes en list-container
+    const maxPreview = 10;
     for (let i = 0; i < Math.min(files.length, maxPreview); i++) {
       const file = files[i];
   
@@ -138,18 +140,82 @@ document.addEventListener('DOMContentLoaded', function() {
       fileReader.onload = function(e) {
         const img = document.createElement('img');
         img.src = e.target.result;
-        previewContainer.appendChild(img);
+        img.classList.add('miniatura');
+        listContainer.appendChild(img);
+
+        // Si es la primera imagen, también agregarla al preview-container
+        if (i === 0) { // Cambié de i === 1 a i === 0
+          const previewImg = document.createElement('img');
+          previewImg.src = e.target.result;
+          previewImg.id = 'mainImage';
+          previewContainer.appendChild(previewImg);
+        }
+        
+        // Actualizar los eventos de clic para las miniaturas
+        updateThumbnailEvents();
       }
       fileReader.readAsDataURL(file);
     }
   
-    // Mostrar contador si hay más de tres imágenes
+    // Mostrar contador si hay más de diez imágenes
     if (files.length > maxPreview) {
       const imageCounter = document.createElement('div');
       imageCounter.id = 'image-counter';
       imageCounter.innerText = `+${files.length - maxPreview}`;
-      previewContainer.appendChild(imageCounter);
+      listContainer.appendChild(imageCounter);
     }
   });
+
+  function updateThumbnailEvents() {
+    const thumbnails = listContainer.querySelectorAll('img.miniatura');
+    
+    // Agregar evento de clic a cada miniatura
+    thumbnails.forEach(function(thumbnail) {
+      thumbnail.addEventListener('click', function() {
+        // Obtener el elemento de la imagen principal
+        const mainImage = document.getElementById("mainImage");
+
+        // Obtener la URL de la imagen del elemento del thumbnail clickeado
+        const newImageSrc = this.getAttribute("src");
+
+        // Actualizar la fuente de la imagen principal
+        mainImage.src = newImageSrc;
+
+        // Remover la clase "active" de todos los thumbnails
+        thumbnails.forEach(function(thumb) {
+          thumb.classList.remove("active");
+        });
+
+        // Agregar la clase "active" al thumbnail clickeado
+        this.classList.add("active");
+      });
+    });
+  }
 });
 
+
+// funcion para hacer aparecer inputs de departamentos
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Obtener el select y los contenedores de los inputs
+  const tipoInmuebleSelect = document.getElementById('TipoInmueble');
+  const pisoContainer = document.getElementById('piso-container');
+  const departamentoContainer = document.getElementById('departamento-container');
+
+  // Función para mostrar/ocultar los inputs
+  function toggleInputs() {
+    if (tipoInmuebleSelect.value === '4') {
+      pisoContainer.style.display = 'block';
+      departamentoContainer.style.display = 'block';
+    } else {
+      pisoContainer.style.display = 'none';
+      departamentoContainer.style.display = 'none';
+    }
+  }
+
+  // Inicializar la visibilidad de los inputs
+  toggleInputs();
+
+  // Agregar un event listener para detectar cambios en el select
+  tipoInmuebleSelect.addEventListener('change', toggleInputs);
+});
