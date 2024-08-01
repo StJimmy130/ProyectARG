@@ -3,10 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using ProyectARG.Models;
 using ProyectARG.Data;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.Mvc.TagHelpers;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.CodeAnalysis.Elfie.Diagnostics;
+using Microsoft.EntityFrameworkCore;
 
 namespace ProyectARG.Controllers;
 
@@ -49,11 +46,18 @@ public class HomeController : Controller
         return Json(Listado);
     }
 
-    public JsonResult ListadoInmuebles(int InmuebleID)
+    public JsonResult ListadoInmuebles(int InmuebleID, int? provinciaID, int? localidadID)
     {
         List<VistaInmueble> inmueblesMostrar = new List<VistaInmueble>();
 
         var Inmuebles = _context.Inmuebles.ToList();
+
+
+        if (localidadID != 0)
+        {
+            Inmuebles = Inmuebles.Where(t => t.LocalidadID == localidadID).ToList();
+        }
+
 
         if (InmuebleID != 0)
         {
@@ -65,20 +69,33 @@ public class HomeController : Controller
 
         foreach (var Inmueble in Inmuebles)
         {
+            bool mostrar = true;
+
             var localidad = Localidades.Where(t => t.LocalidadID == Inmueble.LocalidadID).SingleOrDefault();
             var provincia = Provincias.Where(t => t.ProvinciaID == localidad.ProvinciaID).SingleOrDefault();
-            var localidadMostrar = new VistaInmueble
+
+
+            if (provinciaID != 0 && localidad.ProvinciaID != provinciaID)
             {
-                InmuebleID = Inmueble.InmuebleID,
-                TituloString = Inmueble.Titulo,
-                ProvinciaString = provincia.Nombre,
-                LocalidadString = localidad.Nombre,
-                DireccionString = Inmueble.Direccion,
-                NroDireccionString = Inmueble.NroDireccion,
-                PrecioString = (float)Inmueble.Precio,
-                TipoOperacionString = Inmueble.TipoOperacion.ToString(),
-            };
-            inmueblesMostrar.Add(localidadMostrar);
+                mostrar = false;
+            }
+
+            if (mostrar)
+            {
+
+                var localidadMostrar = new VistaInmueble
+                {
+                    InmuebleID = Inmueble.InmuebleID,
+                    TituloString = Inmueble.Titulo,
+                    ProvinciaString = provincia.Nombre,
+                    LocalidadString = localidad.Nombre,
+                    DireccionString = Inmueble.Direccion,
+                    NroDireccionString = Inmueble.NroDireccion,
+                    PrecioString = (float)Inmueble.Precio,
+                    TipoOperacionString = Inmueble.TipoOperacion.ToString(),
+                };
+                inmueblesMostrar.Add(localidadMostrar);
+            }
         }
 
         return Json(inmueblesMostrar);

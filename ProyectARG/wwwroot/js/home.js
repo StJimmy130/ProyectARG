@@ -46,10 +46,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-function ListadoPublicaciones() {
+function ListadoPublicaciones(ProvinciaID,LocalidadID) {
+
+    let provinciaID = document.getElementById("ProvinciaID").value;
+    let localidadID = document.getElementById("LocalidadID").value;
+
     $.ajax({
         url: '../../Home/ListadoInmuebles',
-        data: {},
+        data: {
+            ProvinciaID: provinciaID,
+            LocalidadID: localidadID
+        },
         type: 'POST',
         dataType: 'json',
         success: function (Listado) {
