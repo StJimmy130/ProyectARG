@@ -291,7 +291,7 @@ label[for="Imagen"]:hover {
 .list-container img:hover,
 .list-container img:focus {
   opacity: 1;
-  border: 2px solid var(--nav-color);
+  outline: 2px solid var(--nav-color);
 }
 
 img.active {

@@ -13,7 +13,7 @@ for details on configuring this project to bundle and minify static web assets. 
 
 /* ===== Colours ===== */
 :root{
-  --body-color: #8b9993;
+  --body-color: #b2bab7;
   --nav-color: #00c763;
   --nav-color2: #008f51;
   --side-nav: #010718;
@@ -29,7 +29,7 @@ body{
   margin-top: 80px;
 }
 body.dark{
-  --body-color: #18191A;
+  --body-color: #363738;
   --nav-color: #242526;
   --nav-color2: #000000;
   --side-nav: #242526;

@@ -2,11 +2,25 @@ body{
     padding-top: 50px;
 }
 
+:root{
+    --scrollbar-color: #00c763;
+    --text-info: #414141;
+    --bg-info: #d7d7d7;
+    --container-color: #ffffff;
+}
+
+body.dark{
+    --scrollbar-color: #00c763;
+    --text-info: #e1e1e1;
+    --bg-info: #474747;
+    --container-color: #cfcfcf;
+}
+
 .vistaDetalle {
     position: relative;
     height: auto;
     display: flex;
-    background-color: #d3d3d3;   
+    background-color: var(--container-color);   
     margin-left: 80px;
     margin-right: 80px;
     padding: 20px;
@@ -15,32 +29,33 @@ body{
     
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1600px) {
     .vistaInmueble {
-        margin-bottom: 1400px;
+        margin-bottom: 1000px;
         
     }
     body{
-        padding-top: 270px;
+        padding-top: 120px;
     }
 
     footer{
-        margin-top: 500px;
+        margin-top: 200px;
     }
     
 }
 .contenedor-imagenes{
-    background: #fff;
-    border-radius: 10px;
+    background: var(--body-color);
+    border-radius: 5px;
+    padding: 10px;
 }
 
 .image-container {
     position: relative;
     height: 420px; /* Establece una altura fija */
     width: 100%; /* Toma todo el ancho disponible */
-    max-width: 600px; /* Ajusta según sea necesario */
+    max-width: 700px; /* Ajusta según sea necesario */
     margin: 0 auto;
-    border-radius: 10px;
+    border-radius: 5px;
     overflow: hidden;
     background-color: #fff;
     display: flex;
@@ -61,11 +76,12 @@ body{
     border-radius: 5px;
     margin: 10px 40px 0 40px;
     padding: 10px;
-    background-color: #fff;
+    background-color: var(--bg-info);
     overflow-x: auto;
     white-space: nowrap;
     scrollbar-width: thin;
-    scrollbar-color: #ccc #f1f1f1;
+    scrollbar-color: var(--scrollbar-color) var(--bg-info);
+
 }
 
 .miniaturas::-webkit-scrollbar {
@@ -73,11 +89,12 @@ body{
 }
 
 .miniaturas::-webkit-scrollbar-track {
-    background-color: #f1f1f1;
+    background-color: var(--bg-info);
+    border-radius: 3px;
 }
 
 .miniaturas::-webkit-scrollbar-thumb {
-    background-color: #ccc;
+    background-color: var(--scrollbar-color);
     border-radius: 3px;
 }
 
@@ -86,7 +103,7 @@ body{
     width: 120px;
     margin: 0 10px;
     object-fit: cover;
-    opacity: 0.5;
+    opacity: 0.7;
     transition: all 0.3s ease;
     border-radius: 5px;
     cursor: pointer;
@@ -95,17 +112,18 @@ body{
 .miniatura:hover,
 .miniatura.active {
     opacity: 1;
-    border: 2px solid var(--nav-color);
+    outline: 2px solid var(--scrollbar-color);
 }
 
 .info-container {
     display: flex;
+    color: var(--text-info);
     flex-direction: column;
     justify-content: space-between;
     margin-top: 5px;
     padding: 15px;
     border-radius: 5px;
-    background-color: #fff;
+    background-color: var(--bg-info);
     overflow-y: auto; 
 }
 
@@ -125,7 +143,8 @@ body{
     margin-top: 15px;
     border-radius: 5px;
     align-items: start;
-    background-color: #fff;
+    color: var(--text-info);
+    background-color: var(--bg-info);
 }
 
 .property-details h3 {
