@@ -69,7 +69,7 @@ function ListadoPublicaciones() {
                             
                             <div class="container d-flex justify-content-end">
                             
-                            <a href="Inmuebles/Detalle" class="btn btn-success">Ver más</a>
+                            <a href="Inmuebles/Detalle/${item.inmuebleID}" class="btn btn-success">Ver más</a>
                             </div>
                             
                         </div>

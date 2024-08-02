@@ -164,7 +164,7 @@ public class InmueblesController : Controller
 
 
 
-    public IActionResult Detalle(){
+    public IActionResult Detalle(int InmuebleID){
 
         return View();
     }
