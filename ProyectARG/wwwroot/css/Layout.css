@@ -26,7 +26,6 @@ for details on configuring this project to bundle and minify static web assets. 
 }
 body{
   background-color: var(--body-color);
-  margin-top: 80px;
 }
 body.dark{
   --body-color: #363738;
@@ -300,7 +299,7 @@ button.accept-policy {
 
 /* FOOTER */
 footer{
-  margin-top: 100px;
+  margin-top: 50px;
   z-index: 1000;
   position: relative;
   background: var(--nav-color);

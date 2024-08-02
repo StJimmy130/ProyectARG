@@ -1,9 +1,12 @@
 window.onload = ListadoDeLocalidades();
 
 function ListadoDeLocalidades() {
+    let provinciaID = document.getElementById("ProvinciaID").value;
     $.ajax({
         url: '../../Localidades/ListadoLocalidades',
-        data: {},
+        data: {
+            ProvinciaID: provinciaID
+        },
         type: 'POST',
         dataType: 'json',
         success: function (localidad) {
@@ -38,6 +41,7 @@ function ListadoDeLocalidades() {
         }
     });
 }
+
 
 function LimpiarModalLocalidad() {
     document.getElementById("LocalidadID").value = 0;

@@ -2,11 +2,7 @@
   ViewData["Title"] = "Provincias";
 }
 <link rel="stylesheet" href="~/css/Funciones.css">
-@section Scripts {
-  <script src="~/js/Provincias.js"></script>
-  <script src="~/js/Localidades.js"></script>
 
-}
 
 
 <div class="container mt-5">
@@ -56,7 +52,7 @@
         <div class="col-6">
           <input type="hidden" value="0" id="LocalidadID">
           <label for="ProvinciaID">Seleccione la Provincia:</label>
-          @Html.DropDownList("ProvinciaID", null, htmlAttributes: new { @class = "form-control" })
+          @Html.DropDownList("ProvinciaID", null, htmlAttributes: new { @class = "form-control" , @onchange = "ListadoDeLocalidades()" })
         </div>
         <div class="col-6">
           <label for="LocalidadNombre">Nombre de la localidad:</label>
@@ -137,3 +133,9 @@
     </div>
   </div>
 </div>
+
+@section Scripts {
+  <script src="~/js/Provincias.js"></script>
+  <script src="~/js/Localidades.js"></script>
+
+}

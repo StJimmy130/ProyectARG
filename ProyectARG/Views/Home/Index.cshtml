@@ -2,6 +2,9 @@
 ViewData["Title"] = "Home Page";
 } *@
 
+@section Scripts {
+    <script src="~/js/home.js"></script>
+}
 <link rel="stylesheet" href="~/css/Home.css">
 
 <div class="catalogo">
@@ -16,40 +19,40 @@ ViewData["Title"] = "Home Page";
                 <div class="collapse" id="collapse1">
                     <div class="menu-desplegable">
                         <div>
-                            <input type="radio">Casas
+                            <input type="checkbox" value="2" class="ui-checkbox" >Casas
                         </div>
                         <div>
-                            <input type="radio">Departamentos
+                            <input type="checkbox" value="4" class="ui-checkbox">Departamentos
                         </div>
                         <div>
-                            <input type="radio">Lotes
+                            <input type="checkbox" value="12"class="ui-checkbox" >Lotes
                         </div>
                         <div>
-                            <input type="radio">Locales
+                            <input type="checkbox" value="8" class="ui-checkbox">Locales
                         </div>
                         <div>
-                            <input type="radio">Campo
+                            <input type="checkbox" value="1" class="ui-checkbox">Campo
                         </div>
                         <div>
-                            <input type="radio">Cochera
+                            <input type="checkbox" value="3" class="ui-checkbox">Cochera
                         </div>
                         <div>
-                            <input type="radio">Depósito
+                            <input type="checkbox" value="5" class="ui-checkbox">Depósito
                         </div>
                         <div>
-                            <input type="radio">Galpon
+                            <input type="checkbox" value="6" class="ui-checkbox">Galpon
                         </div>
                         <div>
-                            <input type="radio">Fondo de comercio
+                            <input type="checkbox" value="7" class="ui-checkbox">Fondo de comercio
                         </div>
                         <div>
-                            <input type="radio">Oficinas
+                            <input type="checkbox" value="9" class="ui-checkbox">Oficinas
                         </div>
                         <div>
-                            <input type="radio">Qunichos
+                            <input type="checkbox" value="11" class="ui-checkbox">Qunichos
                         </div>
                         <div>
-                            <input type="radio">Otros
+                            <input type="checkbox" value="10" class="ui-checkbox">Otros
                         </div>
                     </div>
                 </div>
@@ -68,15 +71,15 @@ ViewData["Title"] = "Home Page";
                                 step="10" value="0" oninput="updatePriceRange()">
                         </div>
                         <input type="range" id="min-price" name="min-price" min="0" max="1000" step="10" value="0"
-                            oninput="syncInput('min-price')">
+                            oninput="syncInput('min-price')" >
 
                         <label for="max-price">Precio máximo:</label>
                         <div>
-                            $<input type="number" id="max-price-input" name="max-price-input" min="0" max="1000"
-                                step="10" value="1000" oninput="updateMaxPrice()">
+                            $<input type="number" id="max-price-input" name="max-price-input" min="0" max="2500000"
+                                step="10" value="2500000" oninput="updateMaxPrice()">
                         </div>
-                        <input type="range" id="max-price" name="max-price" min="0" max="1000" step="10" value="1000"
-                            oninput="syncInput('max-price')">
+                        <input type="range" id="max-price" name="max-price" min="0" max="2500000" step="10" value="2500000"
+                            oninput="syncInput('max-price')" >
                     </div>
                 </div>
             </li>
@@ -89,8 +92,7 @@ ViewData["Title"] = "Home Page";
                 <div class="collapse" id="collapse3">
                     <div class="d-flex flex-column menu-desplegable">
                         <label for="ProvinciaID" class="form-label">Provincia:</label>
-                        @Html.DropDownList("ProvinciaID", null, htmlAttributes: new { @class = "form-control" ,
-                            @onchange = "ListadoPublicaciones()" })
+                        @Html.DropDownList("ProvinciaID", null, htmlAttributes: new { @class = "form-control", @onchange = "actualizarLocalidades()"})
                     </div>
                 </div>
             </li>
@@ -103,8 +105,7 @@ ViewData["Title"] = "Home Page";
                 <div class="collapse" id="collapse4">
                     <div class="menu-desplegable">
                         <label for="LocalidadID" class="form-label">Localidad:</label>
-                        @Html.DropDownList("LocalidadID", null, htmlAttributes: new { @class = "form-control",
-                            @onchange = "ListadoPublicaciones()"})
+                        @Html.DropDownList("LocalidadID", null, htmlAttributes: new { @class = "form-control"})
                     </div>
                 </div>
             </li>
@@ -116,7 +117,7 @@ ViewData["Title"] = "Home Page";
                 <span></span>
                 <div class="collapse" id="collapse5">
                     <div class="menu-desplegable">
-                        <select class="form-control">
+                        <select class="form-control" id="OperacionID" ">
                             <option value="0">Seleccione</option>
                             <option value="1">Alquiler</option>
                             <option value="2">Alquiler temporal</option>
@@ -125,12 +126,13 @@ ViewData["Title"] = "Home Page";
                     </div>
                 </div>
             </li>
+            <li>
+            <button class="btn btn-success" onclick="ListadoPublicaciones()" >Filtrar</button>
+            </li>
         </ul>
     </div>
 
     <div class="row" id="publicaciones"></div>
 </div>
 
-@section Scripts {
-    <script src="~/js/home.js"></script>
-}
+

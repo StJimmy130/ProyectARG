@@ -92,6 +92,8 @@
     width: 300px;
     margin-right: 20px;
     border-radius: 15px;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 .filtros ul{
     padding: 0;
@@ -200,7 +202,7 @@ input[type="range"] {
     appearance: none;
     width: 18px;
     height: 18px;
-    background: #65b5ff;
+    background: var(--nav-color);
     cursor: pointer;
     border-radius: 50%;
     box-shadow: 0 0 10px rgba(0,0,0,0.2);

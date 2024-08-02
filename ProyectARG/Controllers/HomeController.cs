@@ -34,6 +34,16 @@ public class HomeController : Controller
         return View();
     }
 
+    public JsonResult GetLocalidadesByProvincia(int provinciaID)
+{
+    var localidades = _context.Localidades
+                              .Where(l => l.ProvinciaID == provinciaID)
+                              .OrderBy(l => l.Nombre)
+                              .ToList();
+
+    return Json(localidades);
+}
+
 
     public JsonResult GetPublicaciones(int InmuebleID)
     {
@@ -46,7 +56,7 @@ public class HomeController : Controller
         return Json(Listado);
     }
 
-    public JsonResult ListadoInmuebles(int InmuebleID, int? provinciaID, int? localidadID)
+    public JsonResult ListadoInmuebles(int InmuebleID, int? provinciaID, int? localidadID, List<TipoInmueble> TipoInmueble, int? precioMinimo, int? precioMaximo, Operacion Operacion)
     {
         List<VistaInmueble> inmueblesMostrar = new List<VistaInmueble>();
 
@@ -77,6 +87,19 @@ public class HomeController : Controller
 
             if (provinciaID != 0 && localidad.ProvinciaID != provinciaID)
             {
+                mostrar = false;
+            }
+
+            if(Inmueble.Precio > precioMaximo || Inmueble.Precio < precioMinimo){
+                mostrar = false;
+            }
+           
+            if(Operacion != 0 && Operacion != Inmueble.TipoOperacion){
+                mostrar = false;
+            }
+
+
+             if (TipoInmueble != null && TipoInmueble.Count > 0 && !TipoInmueble.Contains(Inmueble.TipoInmueble)){
                 mostrar = false;
             }
 

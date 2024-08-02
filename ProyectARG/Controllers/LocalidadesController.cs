@@ -27,7 +27,7 @@ public class LocalidadesController : Controller
     }
 
 
-    public JsonResult ListadoLocalidades(int LocalidadID)
+    public JsonResult ListadoLocalidades(int LocalidadID, int? ProvinciaID)
     {
         List<VistaLocalidad> localidadesMostrar = new List<VistaLocalidad>();
 
@@ -42,15 +42,25 @@ public class LocalidadesController : Controller
 
         foreach (var localidad in localidades)
         {
+            bool mostrar = true;
             var provincia = provincias.Where(t => t.ProvinciaID == localidad.ProvinciaID).Single();
-            var localidadMostrar = new VistaLocalidad
+
+            if(ProvinciaID != 0 && localidad.ProvinciaID != ProvinciaID)
             {
+                mostrar = false;
+            }
+            
+            if(mostrar)
+            {
+                var localidadMostrar = new VistaLocalidad{
                 LocalidadID = localidad.LocalidadID,
                 LocalidadNombre = localidad.Nombre,
                 ProvinciaID = localidad.ProvinciaID,
                 ProvinciaNombre = provincia.Nombre
-            };
-            localidadesMostrar.Add(localidadMostrar);
+                };
+                localidadesMostrar.Add(localidadMostrar);
+            }
+            
         }
 
         return Json(localidadesMostrar);

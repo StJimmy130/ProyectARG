@@ -44,23 +44,59 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+function actualizarLocalidades() {
+    var provinciaID = document.getElementById("ProvinciaID").value;
 
+    // Realizar la solicitud AJAX para obtener las localidades
+    $.ajax({
+        url: '../../Home/GetLocalidadesByProvincia',
+        type: 'GET',
+        data: { provinciaID: provinciaID },
+        success: function (localidades) {
+            var localidadSelect = document.getElementById("LocalidadID");
+            localidadSelect.innerHTML = '<option value="0">[SELECCIONE...]</option>'; // Limpiar opciones anteriores
 
-function ListadoPublicaciones(ProvinciaID,LocalidadID) {
+            // Agregar nuevas opciones
+            localidades.forEach(function (localidad) {
+                var option = document.createElement("option");
+                option.value = localidad.localidadID;
+                option.text = localidad.nombre;
+                localidadSelect.add(option);
+            });
+        },
+        error: function () {
+            console.log('Error al cargar las localidades.');
+        }
+    });
+}
 
+function ListadoPublicaciones() {
     let provinciaID = document.getElementById("ProvinciaID").value;
     let localidadID = document.getElementById("LocalidadID").value;
+    let precioMinimo = document.getElementById("min-price").value;
+    let precioMaximo = document.getElementById("max-price").value;
+    let operacion = document.getElementById("OperacionID").value;
+    let selectedValues = [];
+
+    // Obtener valores seleccionados de los checkboxes
+    document.querySelectorAll('input[type="checkbox"]:checked').forEach(checked => {
+        selectedValues.push(checked.value);
+    });
 
     $.ajax({
         url: '../../Home/ListadoInmuebles',
         data: {
             ProvinciaID: provinciaID,
-            LocalidadID: localidadID
+            LocalidadID: localidadID,
+            TipoInmueble: selectedValues,
+            Operacion: operacion,
+            PrecioMinimo: precioMinimo,
+            PrecioMaximo: precioMaximo
         },
         type: 'POST',
         dataType: 'json',
         success: function (Listado) {
-            console.log(Listado)
+            console.log(Listado);
             let contenidoTabla = ``;
             $.each(Listado, function (Index, item) {
                 contenidoTabla += `
@@ -73,12 +109,9 @@ function ListadoPublicaciones(ProvinciaID,LocalidadID) {
                             <h5 class="card-title fs-4">${item.tituloString}</h5>
                             <p class="card-text fs-5">$ ${item.precioString} - ${item.tipoOperacionString}</p>
                             <p>${item.provinciaString}, ${item.localidadString} - ${item.direccionString} ${item.nroDireccionString}</p>
-                            
                             <div class="container d-flex justify-content-end">
-                            
-                            <a href="Inmuebles/Detalle/${item.inmuebleID}" class="btn btn-success">Ver más</a>
+                                <a href="Inmuebles/Detalle/${item.inmuebleID}" class="btn btn-success">Ver más</a>
                             </div>
-                            
                         </div>
                     </div>
                 </div>
@@ -92,7 +125,6 @@ function ListadoPublicaciones(ProvinciaID,LocalidadID) {
         }
     });
 }
-
 
 function updatePriceRange() {
     const minPriceInput = document.getElementById('min-price-input');
