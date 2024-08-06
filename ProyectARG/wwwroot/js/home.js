@@ -96,28 +96,31 @@ function ListadoPublicaciones() {
         type: 'POST',
         dataType: 'json',
         success: function (Listado) {
-            console.log(Listado);
+            
             let contenidoTabla = ``;
             $.each(Listado, function (Index, item) {
                 contenidoTabla += `
                 <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                     <div class="card">
                         <div class="image-container">
-                            <img src="img/Casa.jpg" alt="Casa">
+                            <img src="${item.imagenSrc}" alt="Imagen del Inmueble">
                         </div>
                         <div class="card-body">
                             <h5 class="card-title fs-4">${item.tituloString}</h5>
                             <p class="card-text fs-5">$ ${item.precioString} - ${item.tipoOperacionString}</p>
                             <p>${item.provinciaString}, ${item.localidadString} - ${item.direccionString} ${item.nroDireccionString}</p>
                             <div class="container d-flex justify-content-end">
-                                <a href="Inmuebles/Detalle/${item.inmuebleID}" class="btn btn-success">Ver más</a>
+                            <a href="Inmuebles/Detalle/${item.inmuebleID}" class="btn btn-primary">Ver más</a>
                             </div>
                         </div>
                     </div>
                 </div>
+                
                 `;
+                console.log(item.imagenSrc);
             });
 
+            
             document.getElementById("publicaciones").innerHTML = contenidoTabla;
         },
         error: function (xhr, status) {

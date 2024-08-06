@@ -86,70 +86,74 @@ public class InmueblesController : Controller
 
 
     public JsonResult GuardarPublicacion(int InmuebleID, int LocalidadID, string? Barrio, string? Titulo,
-        float? Precio, int? SuperficieTotal, int? SuperficieCubierta, Operacion TipoOperacion,
-        TipoInmueble TipoInmueble, bool Amoblado, int Dormitorios, int Banios, int CantidadAmbientes,
-        bool Cochera, string? Direccion, int NroDireccion, string? Descripcion, int? UsuarioID)
-    {
-        string resultado = "";
-
-        if (InmuebleID != null)
+            float? Precio, int? SuperficieTotal, int? SuperficieCubierta, Operacion TipoOperacion,
+            TipoInmueble TipoInmueble, bool Amoblado, int Dormitorios, int Banios, int CantidadAmbientes,
+            bool Cochera, string? Direccion, int NroDireccion, string? Descripcion, int? UsuarioID,
+            List<IFormFile> Imagenes)
         {
-            if (InmuebleID == 0)
+            string resultado = "";
+
+            if (InmuebleID != null)
             {
-                var Inmueble = new Inmueble
+                Inmueble inmueble = InmuebleID == 0 ? new Inmueble() : _context.Inmuebles.SingleOrDefault(t => t.InmuebleID == InmuebleID);
+
+                if (inmueble != null)
                 {
-                    InmuebleID = InmuebleID,
-                    LocalidadID = LocalidadID,
-                    Barrio = Barrio,
-                    Titulo = Titulo,
-                    Precio = Precio,
-                    SuperficieTotal = SuperficieTotal,
-                    SuperficieCubierta = SuperficieCubierta,
-                    TipoOperacion = TipoOperacion,
-                    TipoInmueble = TipoInmueble,
-                    Amoblado = Amoblado,
-                    Dormitorios = Dormitorios,
-                    Banios = Banios,
-                    CantidadAmbientes = CantidadAmbientes,
-                    Cochera = Cochera,
-                    Direccion = Direccion,
-                    NroDireccion = NroDireccion,
-                    Descripcion = Descripcion,
-                    UsuarioID = UsuarioID
-                };
-                _context.Add(Inmueble);
-                _context.SaveChanges();
-                resultado = " guardado correctamente";
-            }
-            else
-            {
-                var PublicacionEditar = _context.Inmuebles.Where(t => t.InmuebleID == InmuebleID).SingleOrDefault();
-                if (PublicacionEditar != null)
-                {
-                    PublicacionEditar.LocalidadID = LocalidadID;
-                    PublicacionEditar.Barrio = Barrio;
-                    PublicacionEditar.Titulo = Titulo;
-                    PublicacionEditar.Precio = Precio;
-                    PublicacionEditar.SuperficieTotal = SuperficieTotal;
-                    PublicacionEditar.SuperficieCubierta = SuperficieCubierta;
-                    PublicacionEditar.TipoOperacion = TipoOperacion;
-                    PublicacionEditar.TipoInmueble = TipoInmueble;
-                    PublicacionEditar.Amoblado = Amoblado;
-                    PublicacionEditar.Dormitorios = Dormitorios;
-                    PublicacionEditar.Banios = Banios;
-                    PublicacionEditar.CantidadAmbientes = CantidadAmbientes;
-                    PublicacionEditar.Cochera = Cochera;
-                    PublicacionEditar.Direccion = Direccion;
-                    PublicacionEditar.NroDireccion = NroDireccion;
-                    PublicacionEditar.Descripcion = Descripcion;
-                    PublicacionEditar.UsuarioID = UsuarioID;
-                    _context.SaveChanges();
-                    resultado = " editado correctamente";
+                    inmueble.LocalidadID = LocalidadID;
+                    inmueble.Barrio = Barrio;
+                    inmueble.Titulo = Titulo;
+                    inmueble.Precio = Precio;
+                    inmueble.SuperficieTotal = SuperficieTotal;
+                    inmueble.SuperficieCubierta = SuperficieCubierta;
+                    inmueble.TipoOperacion = TipoOperacion;
+                    inmueble.TipoInmueble = TipoInmueble;
+                    inmueble.Amoblado = Amoblado;
+                    inmueble.Dormitorios = Dormitorios;
+                    inmueble.Banios = Banios;
+                    inmueble.CantidadAmbientes = CantidadAmbientes;
+                    inmueble.Cochera = Cochera;
+                    inmueble.Direccion = Direccion;
+                    inmueble.NroDireccion = NroDireccion;
+                    inmueble.Descripcion = Descripcion;
+                    inmueble.UsuarioID = UsuarioID;
+
+                    if (InmuebleID == 0)
+                    {
+                        _context.Add(inmueble);
+                        _context.SaveChanges();
+                        resultado = " guardado correctamente";
+                    }
+                    else
+                    {
+                        _context.SaveChanges();
+                        resultado = " editado correctamente";
+                    }
+
+                    if (Imagenes != null && Imagenes.Count > 0)
+                    {
+                        foreach (var imagen in Imagenes)
+                        {
+                            using (var memoryStream = new System.IO.MemoryStream())
+                            {
+                                imagen.CopyTo(memoryStream);
+                                var imagenEntity = new Imagen
+                                {
+                                    ImagenByte = memoryStream.ToArray(),
+                                    ContentType = imagen.ContentType,
+                                    NombreArchivo = imagen.FileName,
+                                    InmuebleID = inmueble.InmuebleID,
+                                    // UsuarioID = UsuarioID
+                                };
+                                _context.Imagenes.Add(imagenEntity);
+                            }
+                        }
+                        _context.SaveChanges();
+                    }
                 }
             }
+
+            return Json(resultado);
         }
-        return Json(resultado);
-    }
 
 
     public JsonResult EliminarPublicacion(int InmuebleID)

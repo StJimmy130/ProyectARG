@@ -77,4 +77,5 @@ public class VistaInmueble
     public string CantidadAmbientesString { get; set; } 
     public string CocheraString { get; set; } 
     public string DescripcionString { get; set; }
+    public string? ImagenSrc { get; set; }
 }

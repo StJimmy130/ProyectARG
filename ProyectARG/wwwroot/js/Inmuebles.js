@@ -34,62 +34,74 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-  function GuardarPublicacion() {
-    let inmuebleID = document.getElementById("InmuebleID").value;
-    let localidadID = document.getElementById("LocalidadID").value;
-    let provinciaID = document.getElementById("ProvinciaID").value;
-    let barrio = document.getElementById("Barrio").value;
-    let titulo = document.getElementById("Titulo").value;
-    let precio = document.getElementById("Precio").value;
-    let superficieTotal = document.getElementById("Area").value;
-    let superficieCubierta = document.getElementById("AreaCubierta").value;
-    let tipoOperacion = document.getElementById("Operacion").value;
-    let tipoInmueble = document.getElementById("TipoInmueble").value;
-    let amoblado = document.getElementById("Amoblado").checked; // Cambiado a .checked
-    let dormitorios = document.getElementById("Habitaciones").value;
-    let banios = document.getElementById("Banios").value;
-    let cantidadAmbientes = document.getElementById("Ambientes").value;
-    let cochera = document.getElementById("Estacionamiento").checked; // Cambiado a .checked
-    let direccion = document.getElementById("Direccion").value;
-    let nroDireccion = document.getElementById("NroDireccion").value;
-    let piso = document.getElementById("Piso").value; // Nuevo input
-    let nroDepartamento = document.getElementById("NroDepartamento").value; // Nuevo input
-    let descripcion = document.getElementById("Descripcion").value;
-    
+function GuardarPublicacion() {
+  let inmuebleID = document.getElementById("InmuebleID").value;
+  let localidadID = document.getElementById("LocalidadID").value;
+  let provinciaID = document.getElementById("ProvinciaID").value;
+  let barrio = document.getElementById("Barrio").value;
+  let titulo = document.getElementById("Titulo").value;
+  let precio = document.getElementById("Precio").value;
+  let superficieTotal = document.getElementById("Area").value;
+  let superficieCubierta = document.getElementById("AreaCubierta").value;
+  let tipoOperacion = document.getElementById("Operacion").value;
+  let tipoInmueble = document.getElementById("TipoInmueble").value;
+  let amoblado = document.getElementById("Amoblado").checked;
+  let dormitorios = document.getElementById("Habitaciones").value;
+  let banios = document.getElementById("Banios").value;
+  let cantidadAmbientes = document.getElementById("Ambientes").value;
+  let cochera = document.getElementById("Estacionamiento").checked;
+  let direccion = document.getElementById("Direccion").value;
+  let nroDireccion = document.getElementById("NroDireccion").value;
+  let piso = document.getElementById("Piso").value;
+  let nroDepartamento = document.getElementById("NroDepartamento").value;
+  let descripcion = document.getElementById("Descripcion").value;
+  let imagenes = document.getElementById("Imagen").files; // Nuevo input para archivos de imagen
 
-    $.ajax({
-        url: "/Inmuebles/GuardarPublicacion",
-        data: {
-            InmuebleID: inmuebleID,
-            LocalidadID: localidadID,
-            ProvinciaID: provinciaID, // Se cambió a mayúscula inicial para mantener consistencia
-            Barrio: barrio,
-            Titulo: titulo,
-            Precio: precio,
-            SuperficieTotal: superficieTotal,
-            SuperficieCubierta: superficieCubierta,
-            TipoOperacion: tipoOperacion,
-            TipoInmueble: tipoInmueble,
-            Amoblado: amoblado,
-            Dormitorios: dormitorios,
-            Banios: banios,
-            CantidadAmbientes: cantidadAmbientes,
-            Cochera: cochera,
-            Direccion: direccion,
-            NroDireccion: nroDireccion,
-            Piso: piso, // Incluido en los datos enviados
-            NroDepartamento: nroDepartamento, // Incluido en los datos enviados
-            Descripcion: descripcion,
-        },
-        type: "POST",
-        dataType: "json",
-        success: function (resultado) {
-            if (resultado != "") {
-                alert(resultado);
-            }
-            ListadoPublicaciones();
-        },
-    });
+  // Crear un objeto FormData para enviar los datos y archivos
+  let formData = new FormData();
+  formData.append("InmuebleID", inmuebleID);
+  formData.append("LocalidadID", localidadID);
+  formData.append("ProvinciaID", provinciaID);
+  formData.append("Barrio", barrio);
+  formData.append("Titulo", titulo);
+  formData.append("Precio", precio);
+  formData.append("SuperficieTotal", superficieTotal);
+  formData.append("SuperficieCubierta", superficieCubierta);
+  formData.append("TipoOperacion", tipoOperacion);
+  formData.append("TipoInmueble", tipoInmueble);
+  formData.append("Amoblado", amoblado);
+  formData.append("Dormitorios", dormitorios);
+  formData.append("Banios", banios);
+  formData.append("CantidadAmbientes", cantidadAmbientes);
+  formData.append("Cochera", cochera);
+  formData.append("Direccion", direccion);
+  formData.append("NroDireccion", nroDireccion);
+  formData.append("Piso", piso);
+  formData.append("NroDepartamento", nroDepartamento);
+  formData.append("Descripcion", descripcion);
+
+  // Agregar cada imagen al FormData
+  for (let i = 0; i < imagenes.length; i++) {
+      formData.append("Imagenes", imagenes[i]);
+  }
+
+  $.ajax({
+      url: "/Inmuebles/GuardarPublicacion",
+      data: formData,
+      type: "POST",
+      dataType: "json",
+      contentType: false,
+      processData: false,
+      success: function (resultado) {
+          if (resultado != "") {
+              alert(resultado);
+          }
+          ListadoPublicaciones();
+      },
+      error: function (err) {
+          console.error(err);
+      }
+  });
 }
 
 

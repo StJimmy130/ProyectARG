@@ -61,6 +61,7 @@ public class HomeController : Controller
         List<VistaInmueble> inmueblesMostrar = new List<VistaInmueble>();
 
         var Inmuebles = _context.Inmuebles.ToList();
+        var Imagenes = _context.Imagenes.ToList(); // Traer todas las imágenes
 
 
         if (localidadID != 0)
@@ -106,6 +107,13 @@ public class HomeController : Controller
             if (mostrar)
             {
 
+                 // Obtener la imagen asociada al inmueble
+            var imagen = Imagenes.FirstOrDefault(img => img.InmuebleID == Inmueble.InmuebleID);
+            string imagenBase64 = imagen != null ? Convert.ToBase64String(imagen.ImagenByte) : null;
+            string imagenSrc = imagen != null ? $"data:{imagen.ContentType};base64,{imagenBase64}" : "/path/to/default/image.jpg"; // Ruta a una imagen por defecto
+
+            
+
                 var localidadMostrar = new VistaInmueble
                 {
                     InmuebleID = Inmueble.InmuebleID,
@@ -116,6 +124,7 @@ public class HomeController : Controller
                     NroDireccionString = Inmueble.NroDireccion,
                     PrecioString = (float)Inmueble.Precio,
                     TipoOperacionString = Inmueble.TipoOperacion.ToString(),
+                    ImagenSrc = imagenSrc // Añadir URL de la imagen
                 };
                 inmueblesMostrar.Add(localidadMostrar);
             }
