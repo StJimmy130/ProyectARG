@@ -107,7 +107,7 @@ public class HomeController : Controller
             if (mostrar)
             {
 
-                 // Obtener la imagen asociada al inmueble
+            // Obtener la imagen asociada al inmueble
             var imagen = Imagenes.FirstOrDefault(img => img.InmuebleID == Inmueble.InmuebleID);
             string imagenBase64 = imagen != null ? Convert.ToBase64String(imagen.ImagenByte) : null;
             string imagenSrc = imagen != null ? $"data:{imagen.ContentType};base64,{imagenBase64}" : "/path/to/default/image.jpg"; // Ruta a una imagen por defecto

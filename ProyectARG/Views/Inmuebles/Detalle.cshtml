@@ -3,35 +3,21 @@
 
 <body>
   <section class="vistaDetalle">
-    <div id="vistaPublicacion"></div>
     <div class="row">
       <div class="col-md-8 col-sm-12">
         <div class="container contenedor-imagenes">
           <div class="image-container">
-            <img id="mainImage" src="/img/casa.jpg" alt="Main Image">
+            <img id="MainImage" src="/img/casa.jpg" alt="Main Image">
           </div>
-          <div class="miniaturas">
-            <img src="/img/casa.jpg" alt="Miniatura 1" class="miniatura active" onclick="changeImage(this)">
-            <img src="/img/casa2.jpg" alt="Miniatura 2" class="miniatura" onclick="changeImage(this)">
-            <img src="/img/casa3.jpg" alt="Miniatura 3" class="miniatura" onclick="changeImage(this)">
-            <img src="/img/casa4.jpg" alt="Miniatura 4" class="miniatura" onclick="changeImage(this)">
-            <img src="/img/casa5.jpg" alt="Miniatura 5" class="miniatura" onclick="changeImage(this)">
-            <img src="/img/casa6.jpg" alt="Miniatura 6" class="miniatura" onclick="changeImage(this)">
-            <img src="/img/casa7.jpg" alt="Miniatura 7" class="miniatura" onclick="changeImage(this)">
-            <img src="/img/casa8.jpg" alt="Miniatura 8" class="miniatura" onclick="changeImage(this)">
-            <img src="/img/casa9.jpg" alt="Miniatura 9" class="miniatura" onclick="changeImage(this)">
-            <img src="/img/casa10.jpg" alt="Miniatura 10" class="miniatura" onclick="changeImage(this)">
+          <div class="miniaturas" id="Miniaturas-container">
+            <!-- Las miniaturas se generarán dinámicamente -->
           </div>
         </div>
         <div class="row">
           <div class="col-12">
             <div class="property-details">
               <h6>Descripción:</h6>
-              <p>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel impedit recusandae ullam, id debitis
-                expedita itaque placeat dolore, officiis, nam dolorum. Provident reiciendis unde quasi dicta corporis
-                saepe, exercitationem consectetur. Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates
-              </p>
+              <p id="Descripcion"></p>
             </div>
           </div>
         </div>
@@ -39,14 +25,11 @@
 
       <div class="col-md-4 col-sm-12">
         <div class="info-container">
-          <div class="property-info">
-            <h2>Título del Inmueble</h2>
-            <h3>$ 1,000,000</h3>
-            <h4>Provincia-Localidad</h4>
-            <h4>TipoInmueble en Operación</h4>
+          <div class="property-info" id="DatosPrincipales">
+
           </div>
           <div class="seller-info">
-            <h2>Datos del Vendedor</h2>
+            <h2>Vendedor</h2>
             <p>Nombre: Juan Pérez</p>
             <p>Teléfono: (123) 456-7890</p>
             <p>Email: juan.perez@example.com</p>
@@ -54,78 +37,12 @@
         </div>
         <div class="row">
           <div class="col-12">
-            <div class="property-details">
-              <h3>Detalles de la Propiedad</h3>
-              <p>Superficie total: m²</p>
-              <p>Superficie cubierta: m²</p>
-              <p>Habitaciones: 3</p>
-              <p>Baños: 1</p>
-              <p>Ambientes: 3</p>
-              <p>Cochera: Si</p>
-              <p>Amoblado: Si</p>
-              <p>barrio: Centro</p>
-              <p>Dirección: Dirección - NroDir</p>
-            </div>
+            <div class="property-details" id="DetallesPublicaciones"></div>
           </div>
         </div>
       </div>
     </div>
   </section>
-  
-  @* <section class="vistaDetalle">
-    <div class="row">
-      <div class="col-md-8 col-sm-12">
-        <div class="container contenedor-imagenes">
-          <div class="image-container">
-            <img id="mainImage" src="" alt="Main Image">
-          </div>
-          <div class="miniaturas" id="miniaturasContainer">
-            <!-- Miniaturas se cargarán aquí -->
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-12">
-            <div class="property-details">
-              <h6>Descripción:</h6>
-              <p id="descripcion"></p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 col-sm-12">
-        <div class="info-container">
-          <div class="property-info">
-            <h2 id="tituloInmueble"></h2>
-            <h3 id="precioInmueble"></h3>
-            <h4 id="ubicacionInmueble"></h4>
-            <h4 id="tipoOperacionInmueble"></h4>
-          </div>
-          <div class="seller-info">
-            <h2>Datos del Vendedor</h2>
-            <p id="nombreVendedor"></p>
-            <p id="telefonoVendedor"></p>
-            <p id="emailVendedor"></p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-12">
-            <div class="property-details">
-              <h3>Detalles de la Propiedad</h3>
-              <p id="superficieTotal"></p>
-              <p id="superficieCubierta"></p>
-              <p id="habitaciones"></p>
-              <p id="banos"></p>
-              <p id="ambientes"></p>
-              <p id="cochera"></p>
-              <p id="amoblado"></p>
-              <p id="barrio"></p>
-              <p id="direccion"></p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section> *@
 </body>
 
 

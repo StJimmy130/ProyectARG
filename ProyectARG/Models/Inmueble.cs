@@ -59,8 +59,8 @@ public enum TipoInmueble
 
 public class VistaInmueble
 {
-    public int InmuebleID { get; set; }
-    public string TituloString { get; set; }
+    public int InmuebleID { get; set; } 
+    public string TituloString { get; set; } 
     public string LocalidadString { get; set; } 
     public string DireccionString { get; set; } 
     public int NroDireccionString { get; set; } 
@@ -68,7 +68,7 @@ public class VistaInmueble
     public string ProvinciaString { get; set; } 
     public string TipoOperacionString { get; set; } 
     public string TipoInmuebleString { get; set;} 
-    public string BarrioString { get; set; }
+    public string BarrioString { get; set; } 
     public string SuperficieTotalString { get; set; } 
     public string SuperficieCubiertaString { get; set; } 
     public string AmobladoString { get; set; } 
@@ -77,5 +77,6 @@ public class VistaInmueble
     public string CantidadAmbientesString { get; set; } 
     public string CocheraString { get; set; } 
     public string DescripcionString { get; set; }
-    public string? ImagenSrc { get; set; }
+    public string? ImagenSrc { get; set; } // Propiedad para una sola imagen
+
 }
