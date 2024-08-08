@@ -3,41 +3,46 @@
 
 <body>
   <section class="vistaDetalle">
-    <div class="row">
-      <div class="col-md-8 col-sm-12">
-        <div class="container contenedor-imagenes">
-          <div class="image-container">
-            <img id="MainImage" src="/img/casa.jpg" alt="Main Image">
+    <div class="container">
+      <div class="row">
+        <!-- Columna principal de las imágenes y descripción -->
+        <div class="col-md-8 col-12">
+          <div class="container-fluid contenedor-imagenes">
+            <div class="image-container">
+              <img id="MainImage" src="/img/casa.jpg" alt="Main Image">
+            </div>
+            <div class="miniaturas" id="Miniaturas-container">
+              <!-- Las miniaturas se generarán dinámicamente -->
+            </div>
           </div>
-          <div class="miniaturas" id="Miniaturas-container">
-            <!-- Las miniaturas se generarán dinámicamente -->
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-12">
-            <div class="property-details">
-              <h6>Descripción:</h6>
-              <p id="Descripcion"></p>
+          <div class="row">
+            <div class="col-12">
+              <div class="property-details">
+                <h6>Descripción:</h6>
+                <p id="Descripcion"></p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-
-      <div class="col-md-4 col-sm-12">
-        <div class="info-container">
-          <div class="property-info" id="DatosPrincipales">
-
+        <!-- Columna secundaria con la información del vendedor -->
+        <div class="col-md-4 col-12">
+          <div class="info-container">
+            <div class="property-info" id="DatosPrincipales">
+              <!-- Los datos principales se generarán dinámicamente -->
+            </div>
+            <div class="seller-info">
+              <h2>Vendedor</h2>
+              <p>Nombre: Juan Pérez</p>
+              <p>Teléfono: (123) 456-7890</p>
+              <p>Email: juan.perez@example.com</p>
+            </div>
           </div>
-          <div class="seller-info">
-            <h2>Vendedor</h2>
-            <p>Nombre: Juan Pérez</p>
-            <p>Teléfono: (123) 456-7890</p>
-            <p>Email: juan.perez@example.com</p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-12">
-            <div class="property-details" id="DetallesPublicaciones"></div>
+          <div class="row">
+            <div class="col-12">
+              <div class="property-details" id="DetallesPublicaciones">
+                <!-- Detalles adicionales de la publicación -->
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -19,7 +19,6 @@ body.dark{
 .vistaDetalle {
     position: relative;
     height: auto;
-    min-width: 1080px;
     display: flex;
     background-color: var(--container-color);   
     margin-left: 80px;
@@ -48,7 +47,6 @@ body.dark{
 .contenedor-imagenes{
     background: var(--body-color);
     border-radius: 5px;
-    min-width: 700px;
     padding: 10px;
 }
 
@@ -163,3 +161,4 @@ body.dark{
     max-height: 30vh;
     overflow-y: auto;
 }
+
