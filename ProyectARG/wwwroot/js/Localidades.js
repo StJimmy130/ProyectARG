@@ -11,7 +11,7 @@ function ListadoDeLocalidades() {
         dataType: 'json',
         success: function (localidad) {
             $("#LocalidadModal").modal("hide");
-            LimpiarModals();
+            
 
             let tabla = ``;
 

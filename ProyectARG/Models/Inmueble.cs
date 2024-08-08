@@ -46,6 +46,7 @@ public enum TipoInmueble
     Campo = 1,
     Casa,
     Cochera,
+    Cabaña,
     Departamento,
     Deposito,
     Galpon,

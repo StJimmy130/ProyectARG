@@ -33,6 +33,33 @@ document.addEventListener('DOMContentLoaded', () => {
   showStep(currentStep); // Inicializa mostrando el primer paso
 });
 
+function actualizarLocalidades() {
+  var provinciaID = document.getElementById("ProvinciaID").value;
+
+  // Realizar la solicitud AJAX para obtener las localidades
+  $.ajax({
+      url: '../../Home/GetLocalidadesByProvincia',
+      type: 'GET',
+      data: { provinciaID: provinciaID },
+      success: function (localidades) {
+          var localidadSelect = document.getElementById("LocalidadID");
+          localidadSelect.innerHTML = '<option value="0">[SELECCIONE...]</option>'; // Limpiar opciones anteriores
+
+          // Agregar nuevas opciones
+          localidades.forEach(function (localidad) {
+              var option = document.createElement("option");
+              option.value = localidad.localidadID;
+              option.text = localidad.nombre;
+              localidadSelect.add(option);
+          });
+      },
+      error: function () {
+          console.log('Error al cargar las localidades.');
+      }
+  });
+}
+
+
 
 function GuardarPublicacion() {
   let inmuebleID = document.getElementById("InmuebleID").value;

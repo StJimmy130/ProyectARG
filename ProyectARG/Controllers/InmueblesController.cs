@@ -72,6 +72,15 @@ public class InmueblesController : Controller
         return System.Text.RegularExpressions.Regex.Replace(input, "(\\B[A-Z])", " $1");
     }
 
+    public JsonResult GetLocalidadesByProvincia(int provinciaID)
+{
+    var localidades = _context.Localidades
+                              .Where(l => l.ProvinciaID == provinciaID)
+                              .OrderBy(l => l.Nombre)
+                              .ToList();
+
+    return Json(localidades);
+}
 
  public JsonResult GetDetallePublicacion(int InmuebleID, int? localidadID)
 {

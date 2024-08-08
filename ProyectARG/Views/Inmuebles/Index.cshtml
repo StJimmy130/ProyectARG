@@ -46,7 +46,7 @@
         <div class="d-flex">
           <div class="container">
             <label for="ProvinciaID" class="form-label">Provincia:</label>
-            @Html.DropDownList("ProvinciaID", null, htmlAttributes: new { @class = "form-control", @id = "ProvinciaID" })
+            @Html.DropDownList("ProvinciaID", null, htmlAttributes: new { @class = "form-control", @id = "ProvinciaID", @onChange = "actualizarLocalidades()" })
           </div>
           <div class="container">
             <label for="LocalidadID" class="form-label">Localidad:</label>
