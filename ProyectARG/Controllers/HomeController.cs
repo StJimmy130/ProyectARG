@@ -25,6 +25,24 @@ public class HomeController : Controller
         var localidades = _context.Localidades.ToList();
         var provincias = _context.Provincias.ToList();
 
+        {
+        var selectListItemsOperacion = new List<SelectListItem>
+    {
+        new SelectListItem { Value = "0", Text = "[SELECCIONE...]" }
+    };
+
+        var enumValuesOperacion = Enum.GetValues(typeof(Operacion)).Cast<Operacion>();
+
+        foreach (var value in enumValuesOperacion)
+        {
+            selectListItemsOperacion.Add(new SelectListItem
+            {
+                Value = ((int)value).ToString(),
+                Text = SplitCamelCase(value.ToString())
+            });
+        }
+
+
         provincias.Add(new Provincia { ProvinciaID = 0, Nombre = "[SELECCIONE...]" });
         ViewBag.ProvinciaID = new SelectList(provincias.OrderBy(c => c.Nombre), "ProvinciaID", "Nombre");
 
@@ -32,6 +50,12 @@ public class HomeController : Controller
         ViewBag.LocalidadID = new SelectList(localidades.OrderBy(c => c.Nombre), "LocalidadID", "Nombre");
 
         return View();
+    }
+    }
+
+    private string SplitCamelCase(string input)
+    {
+        return System.Text.RegularExpressions.Regex.Replace(input, "(\\B[A-Z])", " $1");
     }
 
     public JsonResult GetLocalidadesByProvincia(int provinciaID)
@@ -123,7 +147,7 @@ public class HomeController : Controller
                     DireccionString = Inmueble.Direccion,
                     NroDireccionString = Inmueble.NroDireccion,
                     PrecioString = (float)Inmueble.Precio,
-                    TipoOperacionString = Inmueble.TipoOperacion.ToString(),
+                    TipoOperacionString = SplitCamelCase(Inmueble.TipoOperacion.ToString()),
                     ImagenSrc = imagenSrc // Añadir URL de la imagen
                 };
                 inmueblesMostrar.Add(localidadMostrar);
