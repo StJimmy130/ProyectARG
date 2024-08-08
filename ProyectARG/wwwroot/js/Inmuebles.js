@@ -170,7 +170,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const files = event.target.files;
   
     // Mostrar hasta diez imágenes en list-container
-    const maxPreview = 10;
+    const maxPreview = 100;
     for (let i = 0; i < Math.min(files.length, maxPreview); i++) {
       const file = files[i];
   

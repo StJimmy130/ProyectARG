@@ -32,16 +32,16 @@ body.dark{
 
 @media screen and (max-width: 1600px) {
     .vistaInmueble {
-        margin-bottom: 1000px;
+        margin-bottom: 400px;
         
     }
     body{
-        padding-top: 120px;
-        margin-top: 80px;
+        padding-top: 80px;
+        margin-top: 60px;
     }
 
     footer{
-        margin-top: 200px;
+        margin-top: 100px;
     }
     
 }
