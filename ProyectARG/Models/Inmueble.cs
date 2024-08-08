@@ -78,5 +78,12 @@ public class VistaInmueble
     public string CocheraString { get; set; } 
     public string DescripcionString { get; set; }
     public string? ImagenSrc { get; set; } // Propiedad para una sola imagen
+    public List<ImagenVista> Imagenes { get; set; } 
 
+}
+
+public class ImagenVista
+{
+    public int ImagenID { get; set; }
+    public string ImagenSrc { get; set; }
 }

@@ -73,64 +73,65 @@ public class InmueblesController : Controller
     }
 
 
-    public JsonResult GetDetallePublicacion(int InmuebleID, int? localidadID)
+ public JsonResult GetDetallePublicacion(int InmuebleID, int? localidadID)
+{
+    List<VistaInmueble> inmuebleDetalleMostrar = new List<VistaInmueble>();
+
+    var Inmuebles = _context.Inmuebles.ToList();
+    var Imagenes = _context.Imagenes.ToList(); // Traer todas las imágenes
+
+    if (localidadID != 0)
     {
-        List<VistaInmueble> inmuebleDetalleMostrar = new List<VistaInmueble>();
-
-        var Inmuebles = _context.Inmuebles.ToList();
-        var Imagenes = _context.Imagenes.ToList(); // Traer todas las imágenes
-
-        if (localidadID != 0)
-        {
-            Inmuebles = Inmuebles.Where(t => t.LocalidadID == localidadID).ToList();
-        }
-
-
-        if (InmuebleID != 0)
-        {
-            Inmuebles = _context.Inmuebles.Where(t => t.InmuebleID == InmuebleID).ToList();
-        }
-
-        var Provincias = _context.Provincias.ToList();
-        var Localidades = _context.Localidades.ToList();
-
-        foreach (var Inmueble in Inmuebles)
-        {
-            // Obtener la imagen asociada al inmueble
-            var localidad = Localidades.Where(t => t.LocalidadID == Inmueble.LocalidadID).SingleOrDefault();
-            var provincia = Provincias.Where(t => t.ProvinciaID == localidad.ProvinciaID).SingleOrDefault();
-
-            var imagen = Imagenes.FirstOrDefault(img => img.InmuebleID == Inmueble.InmuebleID);
-            string imagenBase64 = imagen != null ? Convert.ToBase64String(imagen.ImagenByte) : null;
-            string imagenSrc = imagen != null ? $"data:{imagen.ContentType};base64,{imagenBase64}" : "/path/to/default/image.jpg"; // Ruta a una imagen por defecto
-
-            var localidadMostrar = new VistaInmueble
-            {
-                InmuebleID = Inmueble.InmuebleID,
-                TituloString = Inmueble.Titulo,
-                ProvinciaString = provincia.Nombre,
-                LocalidadString = localidad.Nombre,
-                BarrioString = Inmueble.Barrio,
-                DireccionString = Inmueble.Direccion,
-                NroDireccionString = Inmueble.NroDireccion,
-                SuperficieTotalString = Inmueble.SuperficieTotal.ToString(),
-                SuperficieCubiertaString = Inmueble.SuperficieCubierta.ToString(),
-                AmobladoString = Inmueble.Amoblado.ToString(),
-                DormitoriosString = Inmueble.Dormitorios.ToString(),
-                BaniosString = Inmueble.Banios.ToString(),
-                CantidadAmbientesString = Inmueble.CantidadAmbientes.ToString(),
-                CocheraString = Inmueble.Cochera.ToString(),
-                DescripcionString = Inmueble.Descripcion,
-                PrecioString = (float)Inmueble.Precio,
-                TipoOperacionString = Inmueble.TipoOperacion.ToString(),
-                TipoInmuebleString = Inmueble.TipoInmueble.ToString(),
-                ImagenSrc = imagenSrc // Añadir URL de la imagen
-            };
-            inmuebleDetalleMostrar.Add(localidadMostrar);
-        }
-
-        return Json(inmuebleDetalleMostrar);
+        Inmuebles = Inmuebles.Where(t => t.LocalidadID == localidadID).ToList();
     }
+
+    if (InmuebleID != 0)
+    {
+        Inmuebles = _context.Inmuebles.Where(t => t.InmuebleID == InmuebleID).ToList();
+    }
+
+    var Provincias = _context.Provincias.ToList();
+    var Localidades = _context.Localidades.ToList();
+
+    foreach (var Inmueble in Inmuebles)
+    {
+        var localidad = Localidades.Where(t => t.LocalidadID == Inmueble.LocalidadID).SingleOrDefault();
+        var provincia = Provincias.Where(t => t.ProvinciaID == localidad.ProvinciaID).SingleOrDefault();
+
+        var imagenesInmueble = Imagenes.Where(img => img.InmuebleID == Inmueble.InmuebleID).ToList();
+        var imagenesBase64 = imagenesInmueble.Select(imagen => new ImagenVista
+        {
+            ImagenID = imagen.ImagenID,
+            ImagenSrc = $"data:{imagen.ContentType};base64,{Convert.ToBase64String(imagen.ImagenByte)}"
+        }).ToList();
+
+        var vistaInmueble = new VistaInmueble
+        {
+            InmuebleID = Inmueble.InmuebleID,
+            TituloString = Inmueble.Titulo,
+            ProvinciaString = provincia.Nombre,
+            LocalidadString = localidad.Nombre,
+            BarrioString = Inmueble.Barrio,
+            DireccionString = Inmueble.Direccion,
+            NroDireccionString = Inmueble.NroDireccion,
+            SuperficieTotalString = Inmueble.SuperficieTotal.ToString(),
+            SuperficieCubiertaString = Inmueble.SuperficieCubierta.ToString(),
+            AmobladoString = Inmueble.Amoblado.ToString(),
+            DormitoriosString = Inmueble.Dormitorios.ToString(),
+            BaniosString = Inmueble.Banios.ToString(),
+            CantidadAmbientesString = Inmueble.CantidadAmbientes.ToString(),
+            CocheraString = Inmueble.Cochera.ToString(),
+            DescripcionString = Inmueble.Descripcion,
+            PrecioString = (float)Inmueble.Precio,
+            TipoOperacionString = Inmueble.TipoOperacion.ToString(),
+            TipoInmuebleString = Inmueble.TipoInmueble.ToString(),
+            Imagenes = imagenesBase64 // Usar la lista de ImagenVista
+        };
+        inmuebleDetalleMostrar.Add(vistaInmueble);
+    }
+
+    return Json(inmuebleDetalleMostrar);
+}
 
 
 

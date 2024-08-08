@@ -7,7 +7,7 @@ function setupThumbnailClickHandler() {
   thumbnails.forEach(function (thumbnail) {
     thumbnail.addEventListener("click", function () {
       // Obtener el elemento de la imagen principal
-      var mainImage = document.getElementById("mainImage");
+      var mainImage = document.getElementById("MainImage");
 
       // Obtener la URL de la imagen del elemento del thumbnail clickeado
       var newImageSrc = this.getAttribute("src");
@@ -30,46 +30,49 @@ function cargarImagenDetallePublicacion() {
   const url = window.location.href; // Obtiene la URL completa
   const partes = url.split("/"); // Divide la URL en partes usando el slash como delimitador
   const inmuebleID = partes[partes.length - 1]; // El ID es la última parte de la URL
+
   $.ajax({
-    url: "../../Inmuebles/GetDetallePublicacion",
-    data: { InmuebleID: inmuebleID }, // Asegúrate de que el parámetro coincida con el esperado por el servidor
-    type: "POST",
-    dataType: "json",
-    success: function (data) {
-      console.log("Datos recibidos:", data); // Verifica los datos recibidos
+      url: "../../Inmuebles/GetDetallePublicacion",
+      data: { InmuebleID: inmuebleID }, // Asegúrate de que el parámetro coincida con el esperado por el servidor
+      type: "POST",
+      dataType: "json",
+      success: function (data) {
+          console.log("Datos recibidos:", data); // Verifica los datos recibidos
 
-      // Suponiendo que 'data' es una lista de objetos que contienen las URLs de las imágenes
-      let miniaturas = ``;
-      $.each(data, function (index, item) {
-        if (index === 0) {
-          // Establecer la imagen principal inicial
-          $("#MainImage").attr("src", item.imagenSrc);
-          // Establecer la descripción inicial
-          $("#Descripcion").text(item.descripcionString);
-        }
-        miniaturas += `
-          <img src="${item.imagen}" alt="Miniatura ${
-          index + 1
-        }" class="miniatura ${index === 0 ? "active" : ""}">
-        `;
-      });
-      $("#Miniaturas-container").html(miniaturas);
+          if (data.length > 0) {
+              let inmueble = data[0]; // Supone que sólo hay un inmueble en la respuesta
 
-      // Llamar a la función para manejar la selección de imágenes
-      setupThumbnailClickHandler();
-    },
-    error: function (xhr, status, error) {
-      console.log(
-        "Disculpe, existió un problema al cargar los detalles del inmueble",
-        status,
-        error
-      );
-    },
+
+
+              $("#MainImage").attr("src", inmueble.imagenes[0].imagenSrc);
+              // Establecer la descripción inicial
+              $("#Descripcion").text(inmueble.descripcionString);
+
+              // Suponiendo que 'Imagenes' es una lista de objetos que contienen las URLs de las imágenes
+              let miniaturas = ``;
+              $.each(inmueble.imagenes, function (index, imagen) {
+                  miniaturas += `
+                      <img src="${imagen.imagenSrc}" alt="Miniatura ${index + 1}" class="miniatura ${index === 0 ? "active" : ""}">
+                  `;
+              });
+              $("#Miniaturas-container").html(miniaturas);
+
+              // Llamar a la función para manejar la selección de imágenes
+              setupThumbnailClickHandler();
+          }
+      },
+      error: function (xhr, status, error) {
+          console.log(
+              "Disculpe, existió un problema al cargar los detalles del inmueble",
+              status,
+              error
+          );
+      },
   });
 }
 
 function changeImage(element) {
-  $("#mainImage").attr("src", $(element).attr("src"));
+  $("#MainImage").attr("src", $(element).attr("src"));
 }
 
 function cargarDetallePublicacion() {
