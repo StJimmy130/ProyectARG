@@ -86,6 +86,7 @@ function ModalEditarLocalidad(localidadID) {
         type: 'POST',
         dataType: 'json',
         success: function (localidad) {
+            console.log(localidad[0])
             let localidades = localidad[0];
 
             document.getElementById("LocalidadIDEdit").value = localidadID
