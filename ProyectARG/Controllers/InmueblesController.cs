@@ -228,9 +228,9 @@ public class InmueblesController : Controller
 
 
     public IActionResult Detalle(int InmuebleID)
-    {
+{
 
-        return View();
-    }
+    return View();
+}
 }
 

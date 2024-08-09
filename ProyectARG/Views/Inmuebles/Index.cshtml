@@ -16,9 +16,9 @@
             <input type="text" name="Titulo" id="Titulo" class="form-control">
           </div>
           <div class="container">
-              <label for="Precio">Precio:</label>
-              <input type="number" class="form-control" id="Precio" name="Precio">
-            </div>
+            <label for="Precio">Precio:</label>
+            <input type="number" class="form-control" id="Precio" name="Precio">
+          </div>
         </div>
         <div class="d-flex flex-column">
           <div class="d-flex">
@@ -46,66 +46,78 @@
         <div class="d-flex">
           <div class="container">
             <label for="ProvinciaID" class="form-label">Provincia:</label>
-            @Html.DropDownList("ProvinciaID", null, htmlAttributes: new { @class = "form-control", @id = "ProvinciaID", @onChange = "actualizarLocalidades()" })
+            @Html.DropDownList("ProvinciaID", null, htmlAttributes: new
+              {
+                @class = "form-control",
+                @id = "ProvinciaID",
+                @onChange = "actualizarLocalidades()"
+              })
           </div>
           <div class="container">
             <label for="LocalidadID" class="form-label">Localidad:</label>
-            @Html.DropDownList("LocalidadID", null, htmlAttributes: new { @class = "form-control", @id = "LocalidadID" })
+            @Html.DropDownList("LocalidadID", null, htmlAttributes: new
+              {
+                @class = "form-control",
+                @id = "LocalidadID"
+              })
           </div>
         </div>
 
         <div class="row">
-        <div class="col-md-6 col-xl-4 col-4 mb-3">
-          <div class="container mx-auto">
-            <div class="d-flex justify-content-center">
-            <label for="Barrio">Barrio:
-              <input type="text" name="Barrio" id="Barrio" class="form-control">
-            </label></div>
+          <div class="col-md-6 col-xl-4 col-4 mb-3">
+            <div class="container mx-auto">
+              <div class="d-flex justify-content-center">
+                <label for="Barrio">Barrio:
+                  <input type="text" name="Barrio" id="Barrio" class="form-control">
+                </label>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="col-md-6 col-xl-4 mb-3">
-          <div class="container mx-auto">
-            <div class="d-flex justify-content-center">
-            <label for="Direccion">Dirección:
-              <input type="text" name="Direccion" id="Direccion" class="form-control">
-            </label></div>
+          <div class="col-md-6 col-xl-4 mb-3">
+            <div class="container mx-auto">
+              <div class="d-flex justify-content-center">
+                <label for="Direccion">Dirección:
+                  <input type="text" name="Direccion" id="Direccion" class="form-control">
+                </label>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="col-md-6 col-xl-4 mb-3">
-          <div class="container mx-auto">
-            <div class="d-flex justify-content-center">
-            <label for="NroDireccion">Número de Dirección:
-              <input type="text" name="NroDireccion" id="NroDireccion" class="form-control">
-            </label></div>
+          <div class="col-md-6 col-xl-4 mb-3">
+            <div class="container mx-auto">
+              <div class="d-flex justify-content-center">
+                <label for="NroDireccion">Número de Dirección:
+                  <input type="text" name="NroDireccion" id="NroDireccion" class="form-control">
+                </label>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="col-md-6 col-lg-6 mb-3" id="piso-container">
-  <div class="container d-flex justify-content-center">
-    <label for="Piso">Piso:
-      <input type="text" name="Piso" id="Piso" class="form-control">
-    </label>
-  </div>
-</div>
-<div class="col-md-6 col-lg-6 mb-3" id="departamento-container">
-  <div class="container d-flex justify-content-center">
-    <label for="NroDepartamento">Número de Departamento:
-      <input type="text" name="NroDepartamento" id="NroDepartamento" class="form-control">
-    </label>
-  </div>
-</div>
-        <div class="botonera">
-          <button type="button" class="btn btn-secondary prev-btn"><i class='bx bx-left-arrow-alt'></i></button>
-          <button type="button" class="btn btn-primary next-btn"><i class='bx bx-right-arrow-alt'></i></button>
+          <div class="col-md-6 col-lg-6 mb-3" id="piso-container">
+            <div class="container d-flex justify-content-center">
+              <label for="Piso">Piso:
+                <input type="text" name="Piso" id="Piso" class="form-control">
+              </label>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-6 mb-3" id="departamento-container">
+            <div class="container d-flex justify-content-center">
+              <label for="NroDepartamento">Número de Departamento:
+                <input type="text" name="NroDepartamento" id="NroDepartamento" class="form-control">
+              </label>
+            </div>
+          </div>
+          <div class="botonera">
+            <button type="button" class="btn btn-secondary prev-btn"><i class='bx bx-left-arrow-alt'></i></button>
+            <button type="button" class="btn btn-primary next-btn"><i class='bx bx-right-arrow-alt'></i></button>
+          </div>
         </div>
       </div>
-    </div>
     </div>
 
     <!-- Step 2 -->
     <div class="row justify-content-center align-items-center">
       <div class="col-12 justify-content-center align-items-center contenedor step">
         <div class="d-flex flex-column">
-          
+
           <div class="d-flex">
             <div class="container">
               <label for="Area">Superficie en m²:</label>
@@ -145,11 +157,11 @@
           </div>
         </div>
         <div class="col-md-12 col-lg-12 mb-3 mx-6">
-          
-            <label for="Descripcion">Descripción:</label>
-              <textarea name="Descripcion" id="Descripcion" class="form-control"></textarea>
-            
-          
+
+          <label for="Descripcion">Descripción:</label>
+          <textarea name="Descripcion" id="Descripcion" class="form-control"></textarea>
+
+
         </div>
         <div class="botonera">
           <button type="button" class="btn btn-primary prev-btn"><i class='bx bx-left-arrow-alt'></i></button>
@@ -159,35 +171,36 @@
     </div>
 
     <!-- Step 3 -->
- <div class="row justify-content-center align-items-center">
-  <div class="col-12 contenedor step">
-    <div class="d-flex flex-column">
-      <div class="row">
-        <div class="d-flex">
-            <div class="container">
-              <div class="row">
-                <label for="Imagen"><i class='bx bx-photo-album'></i></label>
-                <input type="file" id="Imagen" name="Imagen" multiple>
-                <div class="list-container" id="list-container" class="col-2"></div>
-                <div class="col-9 container" id="preview-container">
+    <div class="row justify-content-center align-items-center">
+      <div class="col-12 contenedor step">
+        <div class="d-flex flex-column">
+          <div class="row">
+            <div class="d-flex">
+              <div class="container">
+                <div class="row">
+                  <label for="Imagen"><i class='bx bx-photo-album'></i></label>
+                  <input type="file" id="Imagen" name="Imagen" multiple>
+                  <div class="list-container" id="list-container" class="col-2"></div>
+                  <div class="col-9 container" id="preview-container">
 
+                  </div>
                 </div>
               </div>
+
             </div>
-            
+
+
           </div>
-        
-        
+          <div class="container text-center">
+            <p>Confirmar detalles y enviar.</p>
+          </div>
+        </div>
+        <div class="botonera">
+          <button type="button" class="btn btn-primary prev-btn"><i class='bx bx-left-arrow-alt'></i></button>
+          <button type="button" class="btn btn-success" onclick="GuardarPublicacion()"><i
+              class='bx bx-plus-circle'></i></button>
+        </div>
       </div>
-      <div class="container text-center">
-        <p>Confirmar detalles y enviar.</p>
-      </div>
-    </div>
-    <div class="botonera">
-      <button type="button" class="btn btn-primary prev-btn"><i class='bx bx-left-arrow-alt'></i></button>
-      <button type="button"class="btn btn-success" onclick="GuardarPublicacion()"><i class='bx bx-plus-circle'></i></button>
     </div>
   </div>
-</div>
-
 </form>
