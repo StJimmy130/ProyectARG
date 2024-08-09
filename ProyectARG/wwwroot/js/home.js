@@ -1,8 +1,26 @@
 window.onload = function() {
-    ListadoPublicaciones();
-
-    
+    ListadoPublicaciones();    
 };
+
+$(document).ready(function () {
+    // Cerrar el menú al hacer clic fuera de él
+    $(document).click(function (event) {
+        var $target = $(event.target);
+        var $menu = $('#filterMenu');
+        var $toggler = $('.navbar-toggler');
+
+        // Si el clic no está dentro del menú o en el botón de toggler
+        if (!$target.closest($menu).length && !$target.closest($toggler).length && $menu.hasClass('show')) {
+            $menu.collapse('hide');
+        }
+    });
+
+    // Cerrar el menú al hacer clic en el botón "Filtrar"
+    $('.btn-success').click(function () {
+        $('#filterMenu').collapse('hide');
+    });
+});
+
 
 document.addEventListener('DOMContentLoaded', function () {
     const filterToggles = document.querySelectorAll('.filter-toggle');

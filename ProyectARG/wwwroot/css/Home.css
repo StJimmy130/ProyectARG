@@ -5,15 +5,47 @@
   justify-content: left;
   align-items: start;
   background-color: var(--body-color);
-  border-radius: 15px;
+  border-radius: 5px;
   margin-top: 5rem;
 }
+
+
+
+@media screen and (max-width: 1015px) {
+  #filterMenu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 75%;
+    height: 100%;
+    z-index: 100; /* Asegura que esté sobre el contenido */
+  }
+  .filtros{
+    padding-top: 100px;
+  }
+  .collapse {
+    transition: height 0.3s ease, opacity 0.3s ease;
+  }
+  
+  .collapse.show {
+    opacity: 1;
+  }
+  
+  .collapse:not(.show) {
+    opacity: 0;
+  }
+  
+}
+.navbar-toggler {
+  z-index: 1100; /* Asegura que el botón esté sobre el menú */
+}
+
 
 .row {
   overflow: auto;
   height: 100%;
   width: 100%;
-  border-radius: 15px;
+  border-radius: 10px;
   background-color: var(--container-color);
 }
 
@@ -30,7 +62,7 @@ footer{
   position: relative;
   padding: 0;
   height: 50vh;
-  border-radius: 15px;
+  border-radius: 10px;
   margin: 20px 0 0 0;
   transition: 0.5s;
   overflow: hidden;
@@ -39,14 +71,14 @@ footer{
 .card:hover {
   transform: scale(1.02);
   z-index: 2;
-  box-shadow: 0 0 15px 0.5px rgb(140, 135, 135);
+  box-shadow: 0 0 8px 0.5px rgb(36, 35, 35);
 }
 
 .card img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 15px;
+  border-radius: 10px;
   transition: 0.5s;
 }
 
@@ -72,7 +104,7 @@ p.card-text{
   color: #fff;
   text-shadow: 0 0 5px black;
   overflow: hidden;
-  border-radius: 0 0 15px 15px;
+  border-radius: 0 0 10px 10px;
   transition: 0.5s;
   opacity: 1;
   visibility: visible;
@@ -109,9 +141,9 @@ p.card-text{
     align-items: start;
     background-color: var(--container-color);
     height: 100%;
-    width: 300px;
+    width: 250px;
     margin-right: 20px;
-    border-radius: 15px;
+    border-radius: 10px;
     overflow-x: hidden;
     overflow-y: auto;
 }
@@ -144,15 +176,15 @@ p.card-text{
 li span{
     display: block;
     width: 65%;
-    height: 2px;
+    height: 1px;
     border-radius: 20px;
-    background-color: rgb(192, 192, 192);
+    background-color: rgb(141, 132, 132);
     transition: .5s;
     margin-top: 3px;
   }
   
   li:hover span{
-    width: 80%;
+    width: 75%;
     
   }
 
@@ -165,7 +197,7 @@ li span{
     height: auto;
     width: 12rem;
     background-color: rgb(221, 221, 221);
-    border-radius: 15px;
+    border-radius: 5px;
     padding: 10px;
     margin: 1rem 0;
     
@@ -175,7 +207,7 @@ li:first-child .menu-desplegable{
 }
 
 .menu-desplegable .form-control {
-    border-radius: 10px;
+    border-radius: 5px;
     height: auto;
 }
 
@@ -233,7 +265,7 @@ input[type="range"] {
     height: 25px;
     background: #4CAF50;
     cursor: pointer;
-    border-radius: 50%;
+    border-radius: 100%;
     box-shadow: 0 0 2px rgba(0,0,0,0.2);
   }
   
@@ -245,3 +277,40 @@ input[type="range"] {
     border-radius: 50%;
     box-shadow: 0 0 2px rgba(0,0,0,0.2);
   }
+
+
+
+.contenedor-boton{
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  padding-right: 20px;
+}
+
+
+.boton-filtrar{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  padding: 8px 15px;
+  gap: 15px;
+  background-color: #007ACC;
+  outline: 3px #007ACC solid;
+  outline-offset: -3px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: 400ms;
+  color: white;
+}
+
+.boton-filtrar i{
+  font-size: 20px;
+  margin-right: -10px;
+}
+
+.boton-filtrar:hover {
+  background-color: transparent;
+  color: #007ACC;
+}

@@ -7,132 +7,149 @@ ViewData["Title"] = "Home Page";
 }
 <link rel="stylesheet" href="~/css/Home.css">
 
-<div class="catalogo">
-    <div class="filtros">
-        <ul>
-            <li class="nav-item">
-                <a class="filter-toggle" data-bs-toggle="collapse" href="#collapse1" role="button" aria-expanded="false"
-                    aria-controls="collapse1">
-                    Tipo de inmueble
-                </a>
-                <span></span>
-                <div class="collapse" id="collapse1">
-                    <div class="menu-desplegable">
-                        <div>
-                            <input type="checkbox" value="2" class="ui-checkbox" >Casas
-                        </div>
-                        <div>
-                            <input type="checkbox" value="4" class="ui-checkbox">Departamentos
-                        </div>
-                        <div>
-                            <input type="checkbox" value="12"class="ui-checkbox" >Lotes
-                        </div>
-                        <div>
-                            <input type="checkbox" value="8" class="ui-checkbox">Locales
-                        </div>
-                        <div>
-                            <input type="checkbox" value="1" class="ui-checkbox">Campo
-                        </div>
-                        <div>
-                            <input type="checkbox" value="3" class="ui-checkbox">Cochera
-                        </div>
-                        <div>
-                            <input type="checkbox" value="5" class="ui-checkbox">Depósito
-                        </div>
-                        <div>
-                            <input type="checkbox" value="6" class="ui-checkbox">Galpon
-                        </div>
-                        <div>
-                            <input type="checkbox" value="7" class="ui-checkbox">Fondo de comercio
-                        </div>
-                        <div>
-                            <input type="checkbox" value="9" class="ui-checkbox">Oficinas
-                        </div>
-                        <div>
-                            <input type="checkbox" value="11" class="ui-checkbox">Qunichos
-                        </div>
-                        <div>
-                            <input type="checkbox" value="10" class="ui-checkbox">Otros
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="filter-toggle" data-bs-toggle="collapse" href="#collapse2" role="button" aria-expanded="false"
-                    aria-controls="collapse2">
-                    Rango de precio
-                </a>
-                <span></span>
-                <div class="collapse" id="collapse2">
-                    <div class="menu-desplegable">
-                        <label for="min-price">Precio mínimo:</label>
-                        <div>
-                            $<input type="number" id="min-price-input" name="min-price-input" min="0" max="1000"
-                                step="10" value="0" oninput="updatePriceRange()">
-                        </div>
-                        <input type="range" id="min-price" name="min-price" min="0" max="1000" step="10" value="0"
-                            oninput="syncInput('min-price')" >
 
-                        <label for="max-price">Precio máximo:</label>
-                        <div>
-                            $<input type="number" id="max-price-input" name="max-price-input" min="0" max="250000000"
-                                step="10" value="250000000" oninput="updateMaxPrice()">
-                        </div>
-                        <input type="range" id="max-price" name="max-price" min="0" max="250000000" step="10" value="250000000"
-                            oninput="syncInput('max-price')" >
-                    </div>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="filter-toggle" data-bs-toggle="collapse" href="#collapse3" role="button" aria-expanded="false"
-                    aria-controls="collapse3">
-                    Provincia
-                </a>
-                <span></span>
-                <div class="collapse" id="collapse3">
-                    <div class="d-flex flex-column menu-desplegable">
-                        <label for="ProvinciaID" class="form-label">Provincia:</label>
-                        @Html.DropDownList("ProvinciaID", null, htmlAttributes: new { @class = "form-control", @onchange = "actualizarLocalidades()"})
-                    </div>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="filter-toggle" data-bs-toggle="collapse" href="#collapse4" role="button" aria-expanded="false"
-                    aria-controls="collapse4">
-                    Localidad
-                </a>
-                <span></span>
-                <div class="collapse" id="collapse4">
-                    <div class="menu-desplegable">
-                        <label for="LocalidadID" class="form-label">Localidad:</label>
-                        @Html.DropDownList("LocalidadID", null, htmlAttributes: new { @class = "form-control"})
-                    </div>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="filter-toggle" data-bs-toggle="collapse" href="#collapse5" role="button" aria-expanded="false"
-                    aria-controls="collapse5">
-                    Operacion
-                </a>
-                <span></span>
-                <div class="collapse" id="collapse5">
-                    <div class="menu-desplegable">
-                        <select class="form-control" id="OperacionID" ">
-                            <option value="0">Seleccione</option>
-                            <option value="1">Alquiler</option>
-                            <option value="2">Alquiler temporal</option>
-                            <option value="3">Venta</option>
-                        </select>
-                    </div>
-                </div>
-            </li>
-            <li>
-            <button class="btn btn-success" onclick="ListadoPublicaciones()" >Filtrar</button>
-            </li>
-        </ul>
+
+<div class="catalogo">
+    <div>
+        <!-- Botón de menú "sandwich" -->
+        <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#filterMenu"
+            aria-controls="filterMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class=""><i class='bx bx-menu-alt-left'></i></span>
+        </button>
     </div>
+    <!-- Menú de filtros -->
+    <div class="collapse d-lg-block" id="filterMenu">
+        <div class="filtros">
+            <ul>
+                <li class="nav-item">
+                    <a class="filter-toggle" data-bs-toggle="collapse" href="#collapse1" role="button"
+                        aria-expanded="false" aria-controls="collapse1">
+                        Tipo de inmueble
+                    </a>
+                    <span></span>
+                    <div class="collapse" id="collapse1">
+                        <div class="menu-desplegable">
+                            <!-- Opciones de filtro de tipo de inmueble -->
+                            <div>
+                                <input type="checkbox" value="2" class="ui-checkbox">Casas
+                            </div>
+                            <div>
+                                <input type="checkbox" value="4" class="ui-checkbox">Departamentos
+                            </div>
+                            <div>
+                                <input type="checkbox" value="12" class="ui-checkbox">Lotes
+                            </div>
+                            <div>
+                                <input type="checkbox" value="8" class="ui-checkbox">Locales
+                            </div>
+                            <div>
+                                <input type="checkbox" value="1" class="ui-checkbox">Campo
+                            </div>
+                            <div>
+                                <input type="checkbox" value="3" class="ui-checkbox">Cochera
+                            </div>
+                            <div>
+                                <input type="checkbox" value="5" class="ui-checkbox">Depósito
+                            </div>
+                            <div>
+                                <input type="checkbox" value="6" class="ui-checkbox">Galpon
+                            </div>
+                            <div>
+                                <input type="checkbox" value="7" class="ui-checkbox">Fondo de comercio
+                            </div>
+                            <div>
+                                <input type="checkbox" value="9" class="ui-checkbox">Oficinas
+                            </div>
+                            <div>
+                                <input type="checkbox" value="11" class="ui-checkbox">Qunichos
+                            </div>
+                            <div>
+                                <input type="checkbox" value="10" class="ui-checkbox">Otros
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="filter-toggle" data-bs-toggle="collapse" href="#collapse2" role="button"
+                        aria-expanded="false" aria-controls="collapse2">
+                        Rango de precio
+                    </a>
+                    <span></span>
+                    <div class="collapse" id="collapse2">
+                        <div class="menu-desplegable">
+                            <!-- Opciones de rango de precio -->
+                            <label for="min-price">Precio mínimo:</label>
+                            <div>
+                                $<input type="number" id="min-price-input" name="min-price-input" min="0" max="1000"
+                                    step="10" value="0" oninput="updatePriceRange()">
+                            </div>
+                            <input type="range" id="min-price" name="min-price" min="0" max="1000" step="10" value="0"
+                                oninput="syncInput('min-price')">
+
+                            <label for="max-price">Precio máximo:</label>
+                            <div>
+                                $<input type="number" id="max-price-input" name="max-price-input" min="0"
+                                    max="250000000" step="10" value="250000000" oninput="updateMaxPrice()">
+                            </div>
+                            <input type="range" id="max-price" name="max-price" min="0" max="250000000" step="10"
+                                value="250000000" oninput="syncInput('max-price')">
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="filter-toggle" data-bs-toggle="collapse" href="#collapse3" role="button"
+                        aria-expanded="false" aria-controls="collapse3">
+                        Provincia
+                    </a>
+                    <span></span>
+                    <div class="collapse" id="collapse3">
+                        <div class="d-flex flex-column menu-desplegable">
+                            <label for="ProvinciaID" class="form-label">Provincia:</label>
+                            @Html.DropDownList("ProvinciaID", null, htmlAttributes: new
+                                {
+                                    @class = "form-control",
+                                    @onchange = "actualizarLocalidades()"
+                                })
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="filter-toggle" data-bs-toggle="collapse" href="#collapse4" role="button"
+                        aria-expanded="false" aria-controls="collapse4">
+                        Localidad
+                    </a>
+                    <span></span>
+                    <div class="collapse" id="collapse4">
+                        <div class="menu-desplegable">
+                            <label for="LocalidadID" class="form-label">Localidad:</label>
+                            @Html.DropDownList("LocalidadID", null, htmlAttributes: new { @class = "form-control" })
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="filter-toggle" data-bs-toggle="collapse" href="#collapse5" role="button"
+                        aria-expanded="false" aria-controls="collapse5">
+                        Operacion
+                    </a>
+                    <span></span>
+                    <div class="collapse" id="collapse5">
+                        <div class="menu-desplegable">
+                            <select class="form-control" id="OperacionID">
+                                <option value="0">Seleccione</option>
+                                <option value="1">Alquiler</option>
+                                <option value="2">Alquiler temporal</option>
+                                <option value="3">Venta</option>
+                            </select>
+                        </div>
+                    </div>
+                </li>
+                <div class="contenedor-boton">
+                    <button class="boton-filtrar btn btn-success" onclick="ListadoPublicaciones()"><i class='bx bx-slider'></i>Filtrar</button>
+                </div>
+            </ul>
+        </div>
+    </div>
+
 
     <div class="row" id="publicaciones"></div>
 </div>
-
-
