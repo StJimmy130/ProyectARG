@@ -45,9 +45,6 @@ function LimpiarModals() {
     document.getElementById("ProvinciaNombre").value = "";
     document.getElementById("LocalidadID").value = 0;
     document.getElementById("LocalidadNombre").value = "";
-    document.getElementById("ProvinciaNombreEdit").value = "";
-    document.getElementById("LocalidadIDEdit").value = 0;
-    document.getElementById("LocalidadNombreEdit").value = "";
 
 }
 
@@ -86,9 +83,9 @@ function ModalEditar(provinciaID) {
         success: function (provincia) {
             let provincias = provincia[0];
 
-            document.getElementById("ProvinciaIDedit").value = provinciaID
+            document.getElementById("ProvinciaIDAdd").value = provinciaID
             $("#TituloModalProvincia").text("Editar provinca");
-            document.getElementById("ProvinciaNombreEdit").value = provincias.nombre;
+            document.getElementById("ProvinciaNombre").value = provincias.nombre;
             $("#ProvinciaModal").modal("show");
         },
         error: function (xhr, status) {

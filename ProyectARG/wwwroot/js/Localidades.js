@@ -89,10 +89,10 @@ function ModalEditarLocalidad(localidadID) {
             console.log(localidad[0])
             let localidades = localidad[0];
 
-            document.getElementById("LocalidadIDEdit").value = localidadID
+            document.getElementById("LocalidadID").value = localidadID
             $("#TituloModalLocalidad").text("Editar localidad");
-            document.getElementById("ProvinciaIDEdit").value = localidades.provinciaID;
-            document.getElementById("LocalidadNombreEdit").value = localidades.localidadNombre;
+            document.getElementById("ProvinciaID").value = localidades.provinciaID;
+            document.getElementById("LocalidadNombre").value = localidades.localidadNombre;
             $("#LocalidadModal").modal("show");
         },
         error: function (xhr, status) {

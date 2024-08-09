@@ -86,53 +86,7 @@
 
 
 
-<div class="modal" tabindex="-1" id="ProvinciaModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 id="TituloModalProvincia"></h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <input type="hidden" value="0" id="ProvinciaIDedit">
-        <label for="Nombre">Nombre</label>
-        <input type="text" id="ProvinciaNombreEdit" class="form-control">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-          onclick="LimpiarModals()">Cancelar</button>
-        <button type="button" class="btn btn-primary" onclick="GuardarProvincia()">Guardar Provincia</button>
-      </div>
-    </div>
-  </div>
-</div>
 
-<div class="modal" tabindex="-1" id="LocalidadModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 id="TituloModalLocalidad"></h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <input type="hidden" value="0" id="LocalidadIDEdit">
-
-        <div class="dropdown">
-          <label for="ProvinciaID">SELECCIONE LA PROVINCIA:</label>
-          @Html.DropDownList("ProvinciaIDEdit", null, htmlAttributes: new { @class = "form-control" })
-        </div>
-
-        <label for="LocalidadNombre">Nombre</label>
-        <input type="text" id="LocalidadNombreEdit" class="form-control">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-          onclick="LimpiarModals()">Cancelar</button>
-        <button type="button" class="btn btn-primary" onclick="GuardarLocalidad()">Guardar localidad</button>
-      </div>
-    </div>
-  </div>
-</div>
 
 @section Scripts {
   <script src="~/js/Provincias.js"></script>
