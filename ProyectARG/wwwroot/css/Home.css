@@ -1,5 +1,5 @@
 .catalogo {
-  height: 85vh;
+  height: auto;
   width: 100%;
   display: flex;
   justify-content: left;
@@ -42,7 +42,6 @@
 
 
 .row {
-  overflow: auto;
   height: 100%;
   width: 100%;
   border-radius: 10px;
