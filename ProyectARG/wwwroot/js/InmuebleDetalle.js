@@ -1,28 +1,56 @@
 (window.onload = cargarDetallePublicacion()), cargarImagenDetallePublicacion();
 
+function toggleMiniaturasVisibility() {
+  const miniaturasContainer = document.getElementById("Miniaturas-container");
+
+  if (window.innerWidth < 768) {
+      miniaturasContainer.style.display = "none";
+  } else {
+      miniaturasContainer.style.display = "block";
+  }
+}
+
+// Ejecutar la función al cargar la página
+toggleMiniaturasVisibility();
+
+// Escuchar el evento de cambio de tamaño de la ventana
+window.addEventListener("resize", toggleMiniaturasVisibility);
+
 function setupThumbnailClickHandler() {
-  var thumbnails = document.querySelectorAll(".miniatura");
+  const thumbnails = document.querySelectorAll(".miniatura");
+  let currentImageIndex = 0;
 
-  // Agregar evento de clic a cada miniatura
-  thumbnails.forEach(function (thumbnail) {
+  // Función para actualizar la imagen principal y la clase active
+  function updateMainImage(index) {
+    const mainImage = document.getElementById("MainImage");
+    const newImageSrc = thumbnails[index].getAttribute("src");
+
+    mainImage.src = newImageSrc;
+
+    // Remover la clase "active" de todos los thumbnails
+    thumbnails.forEach((thumb) => thumb.classList.remove("active"));
+
+    // Agregar la clase "active" al thumbnail seleccionado
+    thumbnails[index].classList.add("active");
+  }
+
+  // Asignar evento a cada miniatura para actualizar la imagen principal al hacer clic
+  thumbnails.forEach((thumbnail, index) => {
     thumbnail.addEventListener("click", function () {
-      // Obtener el elemento de la imagen principal
-      var mainImage = document.getElementById("MainImage");
-
-      // Obtener la URL de la imagen del elemento del thumbnail clickeado
-      var newImageSrc = this.getAttribute("src");
-
-      // Actualizar la fuente de la imagen principal
-      mainImage.src = newImageSrc;
-
-      // Remover la clase "active" de todos los thumbnails
-      thumbnails.forEach(function (thumb) {
-        thumb.classList.remove("active");
-      });
-
-      // Agregar la clase "active" al thumbnail clickeado
-      this.classList.add("active");
+      currentImageIndex = index;
+      updateMainImage(currentImageIndex);
     });
+  });
+
+  // Manejar los botones de navegación
+  document.querySelector(".bx-chevron-right").addEventListener("click", function () {
+    currentImageIndex = (currentImageIndex + 1) % thumbnails.length;
+    updateMainImage(currentImageIndex);
+  });
+
+  document.querySelector(".bx-chevron-left").addEventListener("click", function () {
+    currentImageIndex = (currentImageIndex - 1 + thumbnails.length) % thumbnails.length;
+    updateMainImage(currentImageIndex);
   });
 }
 
