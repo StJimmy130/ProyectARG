@@ -136,6 +136,7 @@ p.card-text{
 
 .filtros {
     display: flex;
+    position: sticky;
     justify-content: start;
     align-items: start;
     background-color: var(--container-color);
