@@ -70,11 +70,25 @@ nav .nav-bar .sidebarOpen{
   cursor: pointer;
   display: none;
 }
-nav .nav-bar .logo a{
+.link-logo{
   font-size: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
+  text-shadow: 0 0 2px black;
   font-weight: 500;
   color: var(--text-color);
   text-decoration: none;
+}
+
+.link-logo:hover{
+  color: var(--text-color);
+}
+.logo{
+  height: 4rem;
+  width: 8rem;
+  filter: drop-shadow(0 0 2px black);
 }
 .menu .logo-toggle{
   display: none;
