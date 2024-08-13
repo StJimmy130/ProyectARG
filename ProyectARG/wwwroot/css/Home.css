@@ -63,8 +63,9 @@ footer{
   height: 50vh;
   border-radius: 10px;
   margin: 20px 0 0 0;
-  transition: 0.5s;
+  transition: 0.3s;
   overflow: hidden;
+  box-shadow: 0 0 2px 1px rgba(36, 35, 35, 0.603);
 }
 
 .card:hover {
@@ -135,17 +136,17 @@ p.card-text{
 
 
 .filtros {
-    display: flex;
-    position: sticky;
-    justify-content: start;
-    align-items: start;
-    background-color: var(--container-color);
-    height: 100%;
-    width: 250px;
-    margin-right: 20px;
-    border-radius: 10px;
-    overflow-x: hidden;
-    overflow-y: auto;
+  display: flex;
+  position: sticky;
+  justify-content: start;
+  align-items: start;
+  background-color: var(--container-color);
+  height: 100%;
+  width: 250px;
+  margin-right: 20px;
+  border-radius: 10px;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 .filtros ul{
     padding: 0;
@@ -170,7 +171,7 @@ p.card-text{
     transition: 0.2s;
 }
 .filtros ul li:hover a{
-    color: rgb(190, 182, 182);
+    color: rgb(80, 80, 80);
 }
 
 li span{
@@ -178,7 +179,7 @@ li span{
     width: 65%;
     height: 1px;
     border-radius: 20px;
-    background-color: rgb(141, 132, 132);
+    background-color: rgb(80, 80, 80);
     transition: .5s;
     margin-top: 3px;
   }
@@ -293,11 +294,10 @@ input[type="range"] {
   justify-content: center;
   align-items: center;
   margin-top: 30px;
-  padding: 8px 15px;
+  padding: 7px 14px;
   gap: 15px;
-  background-color: #007ACC;
-  outline: 3px #007ACC solid;
-  outline-offset: -3px;
+  background-color: #0085dd;
+  outline: 3px #0085dd solid;
   border-radius: 5px;
   border: none;
   cursor: pointer;
@@ -312,5 +312,6 @@ input[type="range"] {
 
 .boton-filtrar:hover {
   background-color: transparent;
-  color: #007ACC;
+  color: white;
+  background-color: #004879;
 }
