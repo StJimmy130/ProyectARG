@@ -89,6 +89,7 @@ function actualizarLocalidades() {
 }
 
 function ListadoPublicaciones() {
+    showLoadingScreen();
     let provinciaID = document.getElementById("ProvinciaID").value;
     let localidadID = document.getElementById("LocalidadID").value;
     let precioMinimo = document.getElementById("min-price").value;
@@ -140,6 +141,7 @@ function ListadoPublicaciones() {
 
             
             document.getElementById("publicaciones").innerHTML = contenidoTabla;
+            hideLoadingScreen();
         },
         error: function (xhr, status) {
             console.log('Disculpe, existió un problema al cargar el listado');

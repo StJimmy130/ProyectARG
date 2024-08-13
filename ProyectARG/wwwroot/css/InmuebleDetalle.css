@@ -82,7 +82,7 @@ body.dark {
 }
 
 .image-control button {
-    background-color: rgba(255, 255, 255, 0.656);
+    background-color: rgb(255, 255, 255);
     color: #5b5a5a;
     font-size: 3rem;
     width: 3rem;
@@ -95,6 +95,14 @@ body.dark {
     justify-content: center;
     align-items: center;
     margin: 0 1rem;
+    opacity: 0.5;
+    transition: opacity 0.2s ease, scale 0.2s ease;
+
+}
+
+.image-control button:hover {
+    scale: 1.03;
+    opacity: .8;
 }
 
 .miniaturas {

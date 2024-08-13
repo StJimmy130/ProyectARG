@@ -243,7 +243,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Función para mostrar/ocultar los inputs
   function toggleInputs() {
-    if (tipoInmuebleSelect.value === '4') {
+    if (tipoInmuebleSelect.value === '5') {
       pisoContainer.style.display = 'block';
       departamentoContainer.style.display = 'block';
     } else {

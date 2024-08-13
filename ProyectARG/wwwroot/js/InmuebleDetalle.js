@@ -55,6 +55,7 @@ function setupThumbnailClickHandler() {
 }
 
 function cargarImagenDetallePublicacion() {
+  showLoadingScreen();
   const url = window.location.href; // Obtiene la URL completa
   const partes = url.split("/"); // Divide la URL en partes usando el slash como delimitador
   const inmuebleID = partes[partes.length - 1]; // El ID es la última parte de la URL
@@ -66,6 +67,7 @@ function cargarImagenDetallePublicacion() {
       dataType: "json",
       success: function (data) {
           console.log("Datos recibidos:", data); // Verifica los datos recibidos
+          
 
           if (data.length > 0) {
               let inmueble = data[0]; // Supone que sólo hay un inmueble en la respuesta
@@ -87,6 +89,8 @@ function cargarImagenDetallePublicacion() {
 
               // Llamar a la función para manejar la selección de imágenes
               setupThumbnailClickHandler();
+
+              hideLoadingScreen();
           }
       },
       error: function (xhr, status, error) {
@@ -114,6 +118,7 @@ function cargarDetallePublicacion() {
     dataType: "json",
     success: function (data) {
       console.log("Datos recibidos:", data); // Verifica los datos recibidos
+      
 
       let datosPrincipales = ``;
       $.each(data, function (index, item) {
@@ -129,6 +134,22 @@ function cargarDetallePublicacion() {
 
       let DetallesPublicaciones = ``;
       $.each(data, function (index, item) {
+        if(item.cocheraString)
+          {
+            item.cocheraString = "Si";
+          }
+          else
+          {
+            item.cocheraString = "No";
+          }
+          if(item.amobladoString)
+            {
+              item.amobladoString = "Si";
+            }
+            else
+            {
+              item.amobladoString = "No";
+            }
         DetallesPublicaciones += `
           <h3>Detalles:</h3>
           <p>Superficie total: ${item.superficieTotalString} m²</p>

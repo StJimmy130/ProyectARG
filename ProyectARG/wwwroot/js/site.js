@@ -38,3 +38,13 @@ body.addEventListener("click", (e) => {
         nav.classList.remove("active");
     }
 });
+
+// Función para mostrar la pantalla de carga
+function showLoadingScreen() {
+    document.getElementById('loading-screen').style.display = 'flex';
+}
+
+// Función para ocultar la pantalla de carga
+function hideLoadingScreen() {
+    document.getElementById('loading-screen').style.display = 'none';
+}

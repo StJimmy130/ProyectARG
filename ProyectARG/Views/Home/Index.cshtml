@@ -80,10 +80,10 @@ ViewData["Title"] = "Home Page";
                             <!-- Opciones de rango de precio -->
                             <label for="min-price">Precio mínimo:</label>
                             <div>
-                                $<input type="number" id="min-price-input" name="min-price-input" min="0" max="1000"
+                                $<input type="number" id="min-price-input" name="min-price-input" min="0" max="250000000"
                                     step="10" value="0" oninput="updatePriceRange()">
                             </div>
-                            <input type="range" id="min-price" name="min-price" min="0" max="1000" step="10" value="0"
+                            <input type="range" id="min-price" name="min-price" min="0" max="250000000" step="10" value="0"
                                 oninput="syncInput('min-price')">
 
                             <label for="max-price">Precio máximo:</label>
