@@ -1,15 +1,12 @@
-body{
-    padding-top: 50px;
-}
 
-:root{
+:root {
     --scrollbar-color: #00c763;
     --text-info: #414141;
     --bg-info: #d7d7d7;
     --container-color: #ffffff;
 }
 
-body.dark{
+body.dark {
     --scrollbar-color: #00c763;
     --text-info: #e1e1e1;
     --bg-info: #474747;
@@ -20,31 +17,31 @@ body.dark{
     position: relative;
     height: auto;
     display: flex;
-    background-color: var(--container-color);   
+    background-color: var(--container-color);
     margin-left: 80px;
     margin-right: 80px;
+    margin-top: -30px;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    
 }
 
 @media screen and (max-width: 1600px) {
     .vistaInmueble {
         margin-bottom: 400px;
-        
     }
-    body{
+
+    body {
         padding-top: 80px;
         margin-top: 60px;
     }
 
-    footer{
+    footer {
         margin-top: 100px;
     }
-    
 }
-.contenedor-imagenes{
+
+.contenedor-imagenes {
     background: var(--body-color);
     border-radius: 5px;
     padding: 10px;
@@ -52,9 +49,12 @@ body.dark{
 
 .image-container {
     position: relative;
-    height: 420px; /* Establece una altura fija */
-    width: 100%; /* Toma todo el ancho disponible */
-    max-width: 700px; /* Ajusta según sea necesario */
+    height: 420px;
+    /* Establece una altura fija */
+    width: 100%;
+    /* Toma todo el ancho disponible */
+    max-width: 700px;
+    /* Ajusta según sea necesario */
     margin: 0 auto;
     border-radius: 5px;
     overflow: hidden;
@@ -67,17 +67,18 @@ body.dark{
 .image-container img {
     max-width: 100%;
     max-height: 100%;
-    object-fit: contain; /* Mantiene la relación de aspecto */
+    object-fit: contain;
+    /* Mantiene la relación de aspecto */
 }
 
-.image-control{
+.image-control {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: absolute;
     bottom: 40%;
-    z-index: 99999;
+    z-index: 100;
 }
 
 .image-control button {
@@ -98,10 +99,11 @@ body.dark{
 
 .miniaturas {
     display: flex;
-    justify-content: flex-start; 
+    justify-content: flex-start;
+
     align-items: center;
     border-radius: 5px;
-    margin: 10px 40px 0 40px;
+    margin: 5px 40px 0 40px;
     padding: 10px;
     background-color: var(--bg-info);
     overflow-x: auto;
@@ -149,7 +151,62 @@ body.dark{
     padding: 15px;
     border-radius: 5px;
     background-color: var(--bg-info);
-    overflow-y: auto; 
+    overflow-y: auto;
+}
+
+/* Logos Contacto Vendedor */
+
+.info-vendedor .icons-vendedor {
+    justify-content: left;
+    display: flex;
+    margin: 10px 50px 0 0;
+}
+
+.info-vendedor .icons-vendedor a {
+    height: 40px;
+    width: 40px;
+    margin: 0 4px;
+    border: solid 1px #fff;
+    border-radius: 25%;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 42px;
+    color: #ffffff;
+    font-size: 24px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.info-vendedor .icons-vendedor a:nth-child(1) {
+    color: #4267b2;
+}
+
+.info-vendedor .icons-vendedor a:nth-child(1):hover {
+    background: #fff;
+}
+
+.info-vendedor .icons-vendedor a:nth-child(2) {
+    color: #e1306c;
+}
+
+.info-vendedor .icons-vendedor a:nth-child(2):hover {
+    background: #fff;
+}
+
+.info-vendedor .icons-vendedor a:nth-child(3) {
+    color: #25d366;
+}
+
+.info-vendedor .icons-vendedor a:nth-child(3):hover {
+    background: #fff;
+}
+
+.info-vendedor .icons-vendedor a:nth-child(4) {
+    color: #ff0000;
+}
+
+.info-vendedor .icons-vendedor a:nth-child(4):hover {
+    background: #fff;
 }
 
 .info-container h3 {
@@ -157,7 +214,7 @@ body.dark{
     font-size: 20px;
 }
 
-.info-container .seller-info,
+.info-container .info-vendedor,
 .info-container .property-info {
     margin-bottom: 20px;
 }
@@ -187,11 +244,11 @@ body.dark{
 
 @media screen and (max-width: 768px) {
     .vistaDetalle {
-        margin: 0 5px ;
+        margin: 0 5px;
         padding: 20px 0px 20px 0px;
-}
+    }
 
-main{
-    width: 100vw;
-}
+    main {
+        width: 100vw;
+    }
 }

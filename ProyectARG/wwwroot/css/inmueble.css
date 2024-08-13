@@ -20,7 +20,7 @@ html {
 .contenedor {
   background-color: var(--container-color);
   position: relative;
-  border-radius: 15px;
+  border-radius: 5px;
   width: 70vw;
   min-width: 300px;
   height: auto; /* Ajusta la altura automáticamente */

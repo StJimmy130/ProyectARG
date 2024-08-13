@@ -1,6 +1,6 @@
 .contenedor {
     background-color: var(--container-color);
-    border-radius: 15px;
+    border-radius: 5px;
     width: 100%;
     color: var(--text-color2);
     min-width: 300px;
