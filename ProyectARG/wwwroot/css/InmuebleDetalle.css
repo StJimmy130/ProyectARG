@@ -247,6 +247,11 @@ body.dark {
     margin: 10px 0;
 }
 
+.property-details p i {
+    margin-right: 5px;
+    font-size: 14px;
+}
+
 #Descripcion {
     max-height: 30vh;
     overflow-y: auto;

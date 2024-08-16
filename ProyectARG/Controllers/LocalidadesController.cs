@@ -7,6 +7,7 @@ using ProyectARG.Models;
 
 namespace ProyectARG.Controllers;
 
+[Authorize(Roles = "ADMINISTRADOR")]
 public class LocalidadesController : Controller
 {
     private ApplicationDbContext _context;
