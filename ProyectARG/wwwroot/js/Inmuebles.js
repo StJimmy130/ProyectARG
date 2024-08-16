@@ -1,3 +1,5 @@
+
+
 document.addEventListener('DOMContentLoaded', () => {
   let currentStep = 0;
   const steps = document.querySelectorAll('.step');
@@ -18,8 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById("LocalidadID").value == 0 ||
     document.getElementById("ProvinciaID").value == 0) {
       // Si el formulario no es válido, mostrar un mensaje
-      alert('Por favor, complete todos los campos requeridos.');
-      form.reportValidity(); // Esto resalta los campos que no están completos
+      alert('Por favor, complete todos los campos requeridos');
+      form.c
     }
   });
 
