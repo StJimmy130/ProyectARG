@@ -78,12 +78,12 @@ nav .nav-bar .sidebarOpen{
   gap: 5px;
   text-shadow: 0 0 2px black;
   font-weight: 500;
-  color: var(--text-color);
+  color: white;
   text-decoration: none;
 }
 
 .link-logo:hover{
-  color: var(--text-color);
+  color: white;
 }
 .logo{
   height: 3rem;
@@ -110,10 +110,11 @@ nav .nav-bar .sidebarOpen{
   text-decoration: none;
   padding: 10px;
 }
-.nav-links li a:hover, .dark-light i:hover,
+.nav-links li a:hover, .nav-link li a:focus .dark-light i:hover,
 .searchToggle i:hover{
   color: var(--text-color);
 }
+
 .nav-links li a::before{
   content: '';
   position: absolute;
@@ -129,6 +130,13 @@ nav .nav-bar .sidebarOpen{
 }
 .nav-links li:hover a::before{
   opacity: 1;
+}
+.nav-link.dropdown-toggle:focus,
+.nav-link.dropdown-toggle:active {
+  color: rgb(255, 255, 255); /* O el color que prefieras */
+  background-color: transparent; /* Evita cualquier cambio de fondo */
+  box-shadow: none; /* Elimina el borde azul de enfoque */
+  outline: none; /* Elimina el borde de enfoque predeterminado */
 }
 .nav-bar .darkLight-searchBox{
   display: flex;
