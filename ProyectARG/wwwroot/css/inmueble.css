@@ -34,6 +34,12 @@ html {
 .form-control {
   width: 100%;
 }
+label:has(p){
+  display: flex;
+}
+label > p{
+  color: red;
+}
 
 .column {
   display: flex;

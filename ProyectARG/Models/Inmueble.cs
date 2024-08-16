@@ -26,11 +26,11 @@ public class Inmueble
     public string? NroDepartamento { get; set; }
     public int? UsuarioID { get; set; }
 
-    public virtual Usuario Usuario { get; set; }
+    public virtual Usuario? Usuario { get; set; }
 
-    public virtual ICollection<Imagen> Imagenes { get; set; }
+    public virtual ICollection<Imagen>? Imagenes { get; set; }
 
-    public virtual ICollection<Valoracion> Valoraciones { get; set; }
+    public virtual ICollection<Valoracion>? Valoraciones { get; set; }
 
 }
 
@@ -61,30 +61,30 @@ public enum TipoInmueble
 public class VistaInmueble
 {
     public int InmuebleID { get; set; } 
-    public string TituloString { get; set; } 
-    public string LocalidadString { get; set; } 
-    public string DireccionString { get; set; } 
+    public string? TituloString { get; set; } 
+    public string? LocalidadString { get; set; } 
+    public string? DireccionString { get; set; } 
     public int NroDireccionString { get; set; } 
     public float PrecioString { get; set; } 
-    public string ProvinciaString { get; set; } 
-    public string TipoOperacionString { get; set; } 
-    public string TipoInmuebleString { get; set;} 
-    public string BarrioString { get; set; } 
-    public string SuperficieTotalString { get; set; } 
-    public string SuperficieCubiertaString { get; set; } 
-    public string AmobladoString { get; set; } 
-    public string DormitoriosString { get; set; } 
-    public string BaniosString { get; set; } 
-    public string CantidadAmbientesString { get; set; } 
-    public string CocheraString { get; set; } 
-    public string DescripcionString { get; set; }
+    public string? ProvinciaString { get; set; } 
+    public string? TipoOperacionString { get; set; } 
+    public string? TipoInmuebleString { get; set;} 
+    public string? BarrioString { get; set; } 
+    public string? SuperficieTotalString { get; set; } 
+    public string? SuperficieCubiertaString { get; set; } 
+    public string? AmobladoString { get; set; } 
+    public string? DormitoriosString { get; set; } 
+    public string? BaniosString { get; set; } 
+    public string? CantidadAmbientesString { get; set; } 
+    public string? CocheraString { get; set; } 
+    public string? DescripcionString { get; set; }
     public string? ImagenSrc { get; set; } // Propiedad para una sola imagen
-    public List<ImagenVista> Imagenes { get; set; } 
+    public List<ImagenVista>? Imagenes { get; set; } 
 
 }
 
 public class ImagenVista
 {
     public int ImagenID { get; set; }
-    public string ImagenSrc { get; set; }
+    public string? ImagenSrc { get; set; }
 }

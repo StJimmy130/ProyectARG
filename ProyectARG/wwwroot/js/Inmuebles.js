@@ -8,27 +8,95 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  document.getElementById('boton-next').addEventListener('click', function(event) {
+    form = document.getElementById("form");
+    
+    if (document.getElementById("Titulo").value == "" ||
+    document.getElementById("Precio").value == "" ||
+    document.getElementById("Operacion").value == 0 ||
+    document.getElementById("TipoInmueble").value == 0 ||
+    document.getElementById("LocalidadID").value == 0 ||
+    document.getElementById("ProvinciaID").value == 0) {
+      // Si el formulario no es válido, mostrar un mensaje
+      alert('Por favor, complete todos los campos requeridos.');
+      form.reportValidity(); // Esto resalta los campos que no están completos
+    }
+  });
+
+  const inputs = [
+    document.getElementById("Titulo"),
+    document.getElementById("Precio"),
+    document.getElementById("Operacion"),
+    document.getElementById("TipoInmueble"),
+    document.getElementById("LocalidadID"),
+    document.getElementById("ProvinciaID")
+  ];
+
+  inputs.forEach(input => {
+    input.addEventListener('input', validarInputs); // Para inputs de texto
+    input.addEventListener('change', validarInputs); // Para select y otros inputs
+  });
+
+  function validarInputs() {
+    boton = document.getElementById("boton-next");
+    if(
+      document.getElementById("Titulo").value != "" &&
+      document.getElementById("Precio").value != "" &&
+      document.getElementById("Operacion").value != 0 &&
+      document.getElementById("TipoInmueble").value != 0 &&
+      document.getElementById("LocalidadID").value != 0 &&
+      document.getElementById("ProvinciaID").value != 0
+    ){
+      boton.classList.add("btn-primary", "next-btn");
+      boton.classList.remove("btn-secondary");
+    }
+    else{
+      boton.classList.remove("btn-primary", "next-btn");
+      boton.classList.add("btn-secondary");
+    }
+  
+    refreshBtn();
+  }
+  
   function nextStep() {
+    // Verifica nuevamente que los campos estén completos antes de avanzar
+    if(
+      document.getElementById("Titulo").value == "" ||
+      document.getElementById("Precio").value == "" ||
+      document.getElementById("Operacion").value == 0 ||
+      document.getElementById("TipoInmueble").value == 0 ||
+      document.getElementById("LocalidadID").value == 0 ||
+      document.getElementById("ProvinciaID").value == 0
+    ){
+      alert('Por favor, complete todos los campos requeridos.');
+      return; // No avanza al siguiente paso
+    }
+  
     if (currentStep < steps.length - 1) {
       currentStep++;
       showStep(currentStep);
     }
   }
-
+  
   function prevStep() {
     if (currentStep > 0) {
       currentStep--;
       showStep(currentStep);
     }
   }
-
-  document.querySelectorAll('.next-btn').forEach(button => {
-    button.addEventListener('click', nextStep);
-  });
-
-  document.querySelectorAll('.prev-btn').forEach(button => {
-    button.addEventListener('click', prevStep);
-  });
+  
+  function refreshBtn() {
+    // Reasigna los listeners cada vez que se refresca el estado del botón
+    document.querySelectorAll('.next-btn').forEach(button => {
+      button.removeEventListener('click', nextStep); // Elimina el listener anterior para evitar duplicados
+      button.addEventListener('click', nextStep);
+    });
+  
+    document.querySelectorAll('.prev-btn').forEach(button => {
+      button.removeEventListener('click', prevStep); // Elimina el listener anterior para evitar duplicados
+      button.addEventListener('click', prevStep);
+    });
+  }
 
   showStep(currentStep); // Inicializa mostrando el primer paso
 });
