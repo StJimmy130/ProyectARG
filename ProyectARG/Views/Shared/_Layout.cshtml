@@ -20,6 +20,8 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
     rel="stylesheet">
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
 <body>
@@ -81,7 +83,28 @@
 
   <div class="d-flex justify-content-center align-item-center">
     <main role="main" class="">
-
+      <div class="notifications-container">
+  <div class="success">
+    <div class="flex">
+      <div class="flex-shrink-0" id="alert-icon">
+      </div>
+      <div class="success-prompt-wrap">
+        <p class="success-prompt-heading" id="alert-title">Why did the tomato turn red?</p>
+        <div class="success-prompt-prompt">
+          <p id="alert-description">Because it saw the salad dressing! Get it?</p>
+        </div>
+        <div class="success-button-container">
+          <button type="button" class="success-button-main">
+            Aceptar
+          </button>
+          <button type="button" class="success-button-secondary">
+            Cancelar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
       @RenderBody()
     </main>
   </div>
