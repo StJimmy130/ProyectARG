@@ -86,8 +86,8 @@ nav .nav-bar .sidebarOpen{
   color: var(--text-color);
 }
 .logo{
-  height: 4rem;
-  width: 8rem;
+  height: 3rem;
+  width: auto;
   filter: drop-shadow(0 0 2px black);
 }
 .menu .logo-toggle{
@@ -311,6 +311,9 @@ button.accept-policy {
 }
 
 
+
+
+
 /* FOOTER */
 footer{
   margin-top: 200px;
@@ -331,15 +334,15 @@ footer::before{
   background: #AFAFB6;
 }
 footer .content{
-  max-width: 1250px;
   margin: auto;
-  padding: 30px 40px 40px 40px;
+  padding: 30px 80px 40px 80px;
 }
 footer .content .top{
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 50px;
+  height: 70px;
 }
 .content .top .logo-details{
   color: #fff;

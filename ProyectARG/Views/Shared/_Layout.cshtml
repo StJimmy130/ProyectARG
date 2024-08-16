@@ -5,13 +5,15 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ProyectARG</title>
-  <link rel="icon" type="image/png" href="~/img/Logo2SinFondo.png" />
+  <link rel="icon" type="image/png" href="~/img/Logo.png" />
   <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
   <link rel="stylesheet" href="~/css/layout.css">
 
   <!-- LIBRERIA ICONOS -->
   <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
   <!-- GOOGLE FONTS -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,12 +27,13 @@
     <nav>
       <div class="nav-bar">
         <i class='bx bx-menu sidebarOpen'></i>
-        <span class="navLogo"><a class="link-logo" asp-area="" asp-controller="Home"
-            asp-action="Index"><img src="~/img/Logo.png" class="logo" alt=""> ProyectARG</a></span>
-        <div class="d-flex align-items-center justify-content-between" >
+        <span class="navLogo"><a class="link-logo" asp-area="" asp-controller="Home" asp-action="Index"><img
+              src="~/img/Logo.png" class="logo" alt=""> ProyectARG</a></span>
+        <div class="d-flex align-items-center justify-content-between">
           <div class="menu">
             <div class="logo-toggle">
-              <span class=""><a href="#" class="link-logo"><img src="~/img/Logo.png" class="logo" alt=""> ProyectARG</a></span>
+              <span class=""><a href="#" class="link-logo"><img src="~/img/Logo.png" class="logo" alt="">
+                  ProyectARG</a></span>
               <i class='bx bx-x siderbarClose'></i>
             </div>
             <ul class="nav-links">
@@ -41,10 +44,8 @@
                 <a class="nav-link" asp-area="" asp-controller="Inmuebles" asp-action="Index">Publicar</a>
               </li>
               <li>
-                <a class="nav-link" asp-area="" asp-controller="Localidades" asp-action="Index">Funciones</a>
+                <a class="nav-link" asp-area="" asp-controller="Localidades" asp-action="Index">Administrar</a>
               </li>
-              <li><a class="nav-link">Servicios</a></li>
-              <li><a class="nav-link">Contacto</a></li>
               <partial name="_LoginPartial" />
             </ul>
           </div>
@@ -53,6 +54,7 @@
               <i class='bx bx-moon moon'></i>
               <i class='bx bx-sun sun'></i>
             </div>
+            
             <div class="searchBox">
               <div class="searchToggle">
                 <i class='bx bx-x cancel'></i>
@@ -65,7 +67,7 @@
             </div>
           </div>
         </div>
-        
+
       </div>
     </nav>
   </header>
@@ -79,17 +81,16 @@
 
   <div class="d-flex justify-content-center align-item-center">
     <main role="main" class="">
-      
+
       @RenderBody()
     </main>
   </div>
 
-<footer>
+  <footer>
     <div class="content">
       <div class="top">
         <div class="logo-details">
-          <i class="fab fa-slack"></i>
-          <span class="logo_name">ProyectARG</span>
+          <span class="logo_name"><img src="~/img/Logo.png" class="logo" alt="">ProyectARG</span>
         </div>
         <div class="media-icons">
           <a href="#"><i class='bx bxl-facebook'></i></a>
@@ -101,41 +102,72 @@
       <div class="link-boxes">
         <ul class="box">
           <li class="link_name">Contacto</li>
-          <li><p href="#"><i class="bx bx-map"></i> Maipú 538, Morteros - Cba</p></li>
-          <li><p href="#"><i class="bx bx-phone"></i> +54 9 3562 507446</p></li>
-          <li><p href="#"><i class="bx bxl-gmail"></i> ProyectARG@gmail.com</p></li>
+          <li>
+            <p href="#"><i class="bx bx-map"></i> Maipú 538, Morteros - Cba</p>
+          </li>
+          <li>
+            <p href="#"><i class="bx bx-phone"></i> +54 9 3562 507446</p>
+          </li>
+          <li>
+            <p href="#"><i class="bx bxl-gmail"></i> ProyectARG@gmail.com</p>
+          </li>
         </ul>
         <ul class="box">
           <li class="link_name">Servicios</li>
-          <li><p href="">ASDF</p></li>
-          <li><p href="">Web design</p></li>
-          <li><p href="">Logo design</p></li>
-          <li><p href="">Banner design</p></li>
+          <li>
+            <p href="">ASDF</p>
+          </li>
+          <li>
+            <p href="">Web design</p>
+          </li>
+          <li>
+            <p href="">Logo design</p>
+          </li>
+          <li>
+            <p href="">Banner design</p>
+          </li>
         </ul>
         <ul class="box">
           <li class="link_name">Account</li>
-          <li><p href="#">Profile</p></li>
-          <li><p href="#">My account</p></li>
-          <li><p href="#">Prefrences</p></li>
-          <li><p href="#">Purchase</p></li>
+          <li>
+            <p href="#">Profile</p>
+          </li>
+          <li>
+            <p href="#">My account</p>
+          </li>
+          <li>
+            <p href="#">Prefrences</p>
+          </li>
+          <li>
+            <p href="#">Purchase</p>
+          </li>
         </ul>
         <ul class="box">
           <li class="link_name">Courses</li>
-          <li><p href="#">HTML & CSS</p></li>
-          <li><p href="#">JavaScript</p></li>
-          <li><p href="#">Photography</p></li>
-          <li><p href="#">Photoshop</p></li>
-        </ul> 
+          <li>
+            <p href="#">HTML & CSS</p>
+          </li>
+          <li>
+            <p href="#">JavaScript</p>
+          </li>
+          <li>
+            <p href="#">Photography</p>
+          </li>
+          <li>
+            <p href="#">Photoshop</p>
+          </li>
+        </ul>
         @* <ul class="box input-box">
-          <li class="link_name">Subscribe</li>
-          <li><input type="text" placeholder="Enter your email"></li>
-          <li><input type="button" value="Subscribe"></li>
+        <li class="link_name">Subscribe</li>
+        <li><input type="text" placeholder="Enter your email"></li>
+        <li><input type="button" value="Subscribe"></li>
         </ul> *@
       </div>
     </div>
     <div class="bottom-details">
       <div class="bottom_text">
-        <span class="copyright_text">&copy; 2024 - ProyectARG - <a href="#">ProyectARG</a>Todos los derechos reservados</span>
+        <span class="copyright_text">&copy; 2024 - ProyectARG - <a href="#">ProyectARG</a>Todos los derechos
+          reservados</span>
         <span class="policy_terms">
           <a href="#">Privacy policy</a>
           <a href="#">Terms & condition</a>

@@ -127,7 +127,7 @@ function ListadoPublicaciones() {
                         <div class="card-body">
                             <h5 class="card-title fs-4">${item.tituloString}</h5>
                             <p class="card-text fs-5">$ ${item.precioString} - ${item.tipoOperacionString}</p>
-                            <p>${item.provinciaString}, ${item.localidadString} - ${item.direccionString} ${item.nroDireccionString}</p>
+                            <p class="card-title fs-5">${item.provinciaString}, ${item.localidadString} - ${item.direccionString} ${item.nroDireccionString}</p>
                             <div class="container d-flex justify-content-end">
                             <a href="Inmuebles/Detalle/${item.inmuebleID}" class="btn btn-primary">Ver más</a>
                             </div>

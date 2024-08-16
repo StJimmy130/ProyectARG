@@ -152,15 +152,15 @@ function cargarDetallePublicacion() {
             }
         DetallesPublicaciones += `
           <h3>Detalles:</h3>
-          <p>Superficie total: ${item.superficieTotalString} m²</p>
-          <p>Superficie cubierta: ${item.superficieCubiertaString} m²</p>
-          <p>Habitaciones: ${item.dormitoriosString}</p>
-          <p>Baños: ${item.baniosString}</p>
-          <p>Ambientes: ${item.cantidadAmbientesString}</p>
-          <p>Cochera: ${item.cocheraString}</p>
-          <p>Amoblado: ${item.amobladoString}</p>
-          <p>barrio: ${item.barrioString}</p>
-          <p>Dirección: ${item.direccionString} - ${item.nroDireccionString}</p>
+          <p><i class="fa-solid fa-ruler-combined"></i> Superficie total: ${item.superficieTotalString} m²</p>
+          <p><i class="fa-solid fa-ruler-horizontal"></i> Superficie cubierta: ${item.superficieCubiertaString} m²</p>
+          <p><i class="fa-solid fa-bed"></i> Habitaciones: ${item.dormitoriosString}</p>
+          <p><i class="fa-solid fa-bath"></i> Baños: ${item.baniosString}</p>
+          <p><i class="fa-solid fa-utensils"></i> Ambientes: ${item.cantidadAmbientesString}</p>
+          <p><i class="fa-solid fa-car"></i> Cochera: ${item.cocheraString}</p>
+          <p><i class="fa-solid fa-couch"></i> Amoblado: ${item.amobladoString}</p>
+          <p><i class="fa-solid fa-city"></i> Barrio: ${item.barrioString}</p>
+          <p><i class="fa-solid fa-signs-post"></i> Dirección: ${item.direccionString} - ${item.nroDireccionString}</p>
           `;
       });
 

@@ -51,10 +51,11 @@ label > p{
 form {
   height: auto;
   width: 100%;
+  margin-top: 30px;
 }
 
 form div div div div {
-  padding: 0.4rem;
+  padding: 3px;
 }
 
 @media screen and (max-width: 1366px) {
@@ -76,9 +77,9 @@ form div div div div {
   }
 
   .botonera .btn {
-      width: 3rem;
+      width: 5rem;
       height: 3rem;
-      font-size: 2rem;
+      font-size: 1rem;
       margin: 0.5rem;
   }
 
@@ -100,10 +101,10 @@ form div div div div {
 }
 
 .botonera .btn {
-  width: 4rem;
-  height: 4rem;
-  border-radius: 50%;
-  font-size: 3rem;
+  width: 7rem;
+  height: 3rem;
+  border-radius: 15px;
+  font-size: 1rem;
   margin: 1rem;
   display: flex;
   justify-content: center;
