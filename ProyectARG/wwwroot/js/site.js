@@ -48,3 +48,25 @@ function showLoadingScreen() {
 function hideLoadingScreen() {
     document.getElementById('loading-screen').style.display = 'none';
 }
+const alerta = document.getElementById("alert");
+const icon = document.getElementById("alert-icon");
+const titulo = document.getElementById("alert-title");
+const descripcion = document.getElementById("alert-description");
+const aceptar = document.getElementById("btn-aceptar");
+const cancelar = document.getElementById("btn-cancelar");
+const background = document.getElementById("background");
+function hiddenAlert() {
+    
+    alerta.classList.add("exit-alert");
+    setTimeout(function() {
+        alerta.classList.remove("enter-alert");
+        titulo.innerHTML = ""
+        descripcion.innerHTML = ""
+        aceptar.style.display = "none";
+        cancelar.style.display = "none";
+        icon.classList.remove("success", "denied");
+        icon.innerHTML = ""
+        alerta.classList.remove("exit-alert");
+        background.classList.remove("success", "denied");
+    }, 300);
+}

@@ -83,21 +83,21 @@
 
   <div class="d-flex justify-content-center align-item-center">
     <main role="main" class="">
-      <div class="notifications-container">
-  <div class="success">
+      <div class="notifications-container" id="alert">
+  <div class="success" id="background">
     <div class="flex">
       <div class="flex-shrink-0" id="alert-icon">
       </div>
       <div class="success-prompt-wrap">
-        <p class="success-prompt-heading" id="alert-title">Why did the tomato turn red?</p>
+        <p class="success-prompt-heading" id="alert-title"></p>
         <div class="success-prompt-prompt">
-          <p id="alert-description">Because it saw the salad dressing! Get it?</p>
+          <p id="alert-description"></p>
         </div>
         <div class="success-button-container">
-          <button type="button" class="success-button-main">
+          <button type="button" class="success-button-main" onclick="hiddenAlert()" id="btn-aceptar">
             Aceptar
           </button>
-          <button type="button" class="success-button-secondary">
+          <button type="button" class="success-button-secondary" id="btn-cancelar">
             Cancelar
           </button>
         </div>

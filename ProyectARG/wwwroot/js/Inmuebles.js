@@ -1,5 +1,19 @@
 
 
+window.onload = function() {
+  icon.innerHTML = '<i class="bx bxs-error-circle"></i>';
+  icon.classList.add("succes-svg");
+  titulo.innerHTML = "Atencion!!!"
+  descripcion.innerHTML = `<label>los campos con (<p>*</p>) son obligatorios</label>`
+  aceptar.style.display = "block";
+  background.classList.add("success");
+  alerta.classList.add("enter-alert");
+
+  setTimeout(function() {
+    hiddenAlert()
+  }, 3000);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   let currentStep = 0;
   const steps = document.querySelectorAll('.step');
@@ -20,8 +34,19 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById("LocalidadID").value == 0 ||
     document.getElementById("ProvinciaID").value == 0) {
       // Si el formulario no es válido, mostrar un mensaje
-      alert('Por favor, complete todos los campos requeridos');
-      form.c
+      background.classList.add("denied");
+      icon.classList.add("denied-svg");
+      icon.innerHTML = '<i class="bx bxs-x-circle" ></i>';
+      titulo.innerHTML = "Advertencia"
+      descripcion.innerHTML = "Por favor, complete todos los campos requeridos."
+      aceptar.style.display = "block";
+      alerta.classList.add("enter-alert");
+      form.reportValidity();
+
+      setTimeout(function() {
+        hiddenAlert()
+        
+      }, 3000);
     }
   });
 
@@ -70,7 +95,6 @@ document.addEventListener('DOMContentLoaded', () => {
       document.getElementById("LocalidadID").value == 0 ||
       document.getElementById("ProvinciaID").value == 0
     ){
-      alert('Por favor, complete todos los campos requeridos.');
       return; // No avanza al siguiente paso
     }
   
@@ -191,7 +215,18 @@ function GuardarPublicacion() {
       processData: false,
       success: function (resultado) {
           if (resultado != "") {
-              alert(resultado);
+            icon.classList.add("succes-svg");
+            icon.innerHTML = '<i class="bx bxs-check-circle"></i>'
+            
+            document.getElementById("alert-title").innerHTML = "Felicitaciones!!!"
+            document.getElementById("alert-description").innerHTML = (resultado)
+            aceptar.style.display = "block";
+            background.classList.add("success");
+            alerta.classList.add("enter-alert");
+
+            setTimeout(function() {
+              hiddenAlert();
+            }, 3000);
           }
           ListadoPublicaciones();
       },

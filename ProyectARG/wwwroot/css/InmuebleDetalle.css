@@ -1,269 +1,263 @@
-
 :root {
-    --scrollbar-color: #00c763;
-    --text-info: #414141;
-    --bg-info: #d7d7d7;
-    --container-color: #ffffff;
+  --scrollbar-color: #00c763;
+  --text-info: #414141;
+  --bg-info: #d7d7d7;
+  --container-color: #ffffff;
 }
 
 body.dark {
-    --scrollbar-color: #00c763;
-    --text-info: #e1e1e1;
-    --bg-info: #474747;
-    --container-color: #cfcfcf;
+  --scrollbar-color: #00c763;
+  --text-info: #e1e1e1;
+  --bg-info: #474747;
+  --container-color: #cfcfcf;
 }
 
 .vistaDetalle {
-    position: relative;
-    height: auto;
-    display: flex;
-    background-color: var(--container-color);
-    margin-left: 80px;
-    margin-right: 80px;
-    margin-top: -30px;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  height: auto;
+  display: flex;
+  background-color: var(--container-color);
+  margin-left: 80px;
+  margin-right: 80px;
+  margin-top: -30px;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-@media screen and (max-width: 1600px) {
-    .vistaInmueble {
-        margin-bottom: 400px;
-    }
-
-    body {
-        padding-top: 80px;
-        margin-top: 60px;
-    }
-
-    footer {
-        margin-top: 100px;
-    }
+.vistaInmueble {
+  margin-bottom: 400px;
+}
+body {
+  padding-top: 80px;
+  margin-top: 60px;
+}
+footer {
+  margin-top: 100px;
 }
 
 .contenedor-imagenes {
-    background: var(--body-color);
-    border-radius: 5px;
-    padding: 10px;
+  background: var(--body-color);
+  border-radius: 5px;
+  padding: 10px;
 }
 
 .image-container {
-    position: relative;
-    height: 420px;
-    /* Establece una altura fija */
-    width: 100%;
-    /* Toma todo el ancho disponible */
-    max-width: 700px;
-    /* Ajusta según sea necesario */
-    margin: 0 auto;
-    border-radius: 5px;
-    overflow: hidden;
-    background-color: #fff;
-    display: flex;
-    justify-content: center;
-    vertical-align: middle;
+  position: relative;
+  height: 420px;
+  /* Establece una altura fija */
+  width: 100%;
+  /* Toma todo el ancho disponible */
+  max-width: 700px;
+  /* Ajusta según sea necesario */
+  margin: 0 auto;
+  border-radius: 5px;
+  overflow: hidden;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  vertical-align: middle;
 }
 
 .image-container img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-    /* Mantiene la relación de aspecto */
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  /* Mantiene la relación de aspecto */
 }
 
 .image-control {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: absolute;
-    bottom: 40%;
-    z-index: 100;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  bottom: 40%;
+  z-index: 100;
 }
 
 .image-control button {
-    background-color: rgb(255, 255, 255);
-    color: #5b5a5a;
-    font-size: 3rem;
-    width: 3rem;
-    height: 3rem;
-    padding: 10px;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 1rem;
-    opacity: 0.5;
-    transition: opacity 0.2s ease, scale 0.2s ease;
-
+  background-color: rgb(255, 255, 255);
+  color: #5b5a5a;
+  font-size: 3rem;
+  width: 3rem;
+  height: 3rem;
+  padding: 10px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 1rem;
+  opacity: 0.5;
+  transition: opacity 0.2s ease, scale 0.2s ease;
 }
 
 .image-control button:hover {
-    scale: 1.03;
-    opacity: .8;
+  scale: 1.03;
+  opacity: 0.8;
 }
 
 .miniaturas {
-    display: flex;
-    justify-content: flex-start;
+  display: flex;
+  justify-content: flex-start;
 
-    align-items: center;
-    border-radius: 5px;
-    margin: 5px 40px 0 40px;
-    padding: 10px;
-    background-color: var(--bg-info);
-    overflow-x: auto;
-    white-space: nowrap;
+  align-items: center;
+  border-radius: 5px;
+  margin: 5px 40px 0 40px;
+  padding: 10px;
+  background-color: var(--bg-info);
+  overflow-x: auto;
+  white-space: nowrap;
 }
 
 .miniaturas::-webkit-scrollbar {
-    height: 5px;
-    width: 100%;
+  height: 5px;
+  width: 100%;
 }
 
 .miniaturas::-webkit-scrollbar-track {
-    background-color: var(--bg-info);
-    border-radius: 3px;
+  background-color: var(--bg-info);
+  border-radius: 3px;
 }
 
 .miniaturas::-webkit-scrollbar-thumb {
-    background-color: var(--scrollbar-color);
-    border-radius: 3px;
+  background-color: var(--scrollbar-color);
+  border-radius: 3px;
 }
 
 .miniatura {
-    height: 80px;
-    width: 120px;
-    margin: 0 10px;
-    object-fit: cover;
-    opacity: 0.6;
-    transition: all 0.2s;
-    border-radius: 3px;
-    cursor: pointer;
+  height: 80px;
+  width: 120px;
+  margin: 0 10px;
+  object-fit: cover;
+  opacity: 0.6;
+  transition: all 0.2s;
+  border-radius: 3px;
+  cursor: pointer;
 }
 
-.miniatura:hover{
-    opacity: 1;
+.miniatura:hover {
+  opacity: 1;
 }
 .miniatura.active {
-    opacity: 1;
-    border-top: 7px solid var(--scrollbar-color);
+  opacity: 1;
+  border-top: 7px solid var(--scrollbar-color);
 }
 
 .info-container {
-    display: flex;
-    color: var(--text-info);
-    flex-direction: column;
-    justify-content: space-between;
-    margin-top: 5px;
-    padding: 15px;
-    border-radius: 5px;
-    background-color: var(--bg-info);
-    overflow-y: auto;
+  display: flex;
+  color: var(--text-info);
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 5px;
+  padding: 15px;
+  border-radius: 5px;
+  background-color: var(--bg-info);
+  overflow-y: auto;
 }
 
 /* Logos Contacto Vendedor */
 
 .info-vendedor .icons-vendedor {
-    justify-content: left;
-    display: flex;
-    margin: 10px 50px 0 0;
+  justify-content: left;
+  display: flex;
+  margin: 10px 50px 0 0;
 }
 
 .info-vendedor .icons-vendedor a {
-    height: 40px;
-    width: 40px;
-    margin: 0 4px;
-    border: solid 1px #fff;
-    border-radius: 25%;
-    text-align: center;
-    vertical-align: middle;
-    line-height: 42px;
-    color: #ffffff;
-    font-size: 24px;
-    text-decoration: none;
-    transition: all 0.2s ease;
+  height: 40px;
+  width: 40px;
+  margin: 0 4px;
+  border: solid 1px #fff;
+  border-radius: 25%;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 42px;
+  color: #ffffff;
+  font-size: 24px;
+  text-decoration: none;
+  transition: all 0.2s ease;
 }
 
 .info-vendedor .icons-vendedor a:nth-child(1) {
-    color: #4267b2;
+  color: #4267b2;
 }
 
 .info-vendedor .icons-vendedor a:nth-child(1):hover {
-    background: #fff;
+  background: #fff;
 }
 
 .info-vendedor .icons-vendedor a:nth-child(2) {
-    color: #e1306c;
+  color: #e1306c;
 }
 
 .info-vendedor .icons-vendedor a:nth-child(2):hover {
-    background: #fff;
+  background: #fff;
 }
 
 .info-vendedor .icons-vendedor a:nth-child(3) {
-    color: #25d366;
+  color: #25d366;
 }
 
 .info-vendedor .icons-vendedor a:nth-child(3):hover {
-    background: #fff;
+  background: #fff;
 }
 
 .info-vendedor .icons-vendedor a:nth-child(4) {
-    color: #ff0000;
+  color: #ff0000;
 }
 
 .info-vendedor .icons-vendedor a:nth-child(4):hover {
-    background: #fff;
+  background: #fff;
 }
 
 .info-container h3 {
-    margin: 0;
-    font-size: 20px;
+  margin: 0;
+  font-size: 20px;
 }
 
 .info-container .info-vendedor,
 .info-container .property-info {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .property-details {
-    display: list-item;
-    padding: 15px;
-    margin-top: 15px;
-    border-radius: 5px;
-    align-items: start;
-    color: var(--text-info);
-    background-color: var(--bg-info);
+  display: list-item;
+  padding: 15px;
+  margin-top: 15px;
+  border-radius: 5px;
+  align-items: start;
+  color: var(--text-info);
+  background-color: var(--bg-info);
 }
 
 .property-details h3 {
-    margin-top: 0;
+  margin-top: 0;
 }
 
 .property-details p {
-    margin: 10px 0;
+  margin: 10px 0;
 }
 
 .property-details p i {
-    margin-right: 5px;
-    font-size: 14px;
+  margin-right: 5px;
+  font-size: 14px;
 }
 
 #Descripcion {
-    max-height: 30vh;
-    overflow-y: auto;
+  max-height: 30vh;
+  overflow-y: auto;
 }
 
 @media screen and (max-width: 768px) {
-    .vistaDetalle {
-        margin: 0 5px;
-        padding: 20px 0px 20px 0px;
-    }
+  .vistaDetalle {
+    margin: 0 5px;
+    padding: 20px 0px 20px 0px;
+  }
 
-    main {
-        width: 100vw;
-    }
+  main {
+    width: 100vw;
+  }
 }
