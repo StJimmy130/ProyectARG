@@ -8,10 +8,6 @@ window.onload = function() {
   aceptar.style.display = "block";
   background.classList.add("success");
   alerta.classList.add("enter-alert");
-
-  setTimeout(function() {
-    hiddenAlert()
-  }, 3000);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
