@@ -2,13 +2,21 @@ html {
   min-height: 100vh;
 }
 
+body {
+  padding-top: 4.5rem;
+  max-height: 150vh;
+}
 
-  body{
-    padding-top: 4.5rem;
-    max-height: 150vh;
-  }
-
-
+:root{
+  --text-area: #fff;
+  --text-placeholder: #5c5c5c;
+  --border-color: #006834;
+}
+body.dark{
+  --text-area: #535353;
+  --text-placeholder: #c9c9c9;
+  --border-color: #00ac56;
+}
 
 .step {
   display: none;
@@ -25,20 +33,34 @@ html {
   width: 70vw;
   min-width: 300px;
   height: auto; /* Ajusta la altura automáticamente */
-  margin:  5px;
+  margin: 5px;
   padding: 15px;
   font-size: 1.2rem;
   color: var(--text-color2);
   overflow: hidden; /* Para evitar desbordamientos */
 }
 
-.form-control {
+.input-form {
   width: 100%;
+  border: none; /* Quita todos los bordes */
+  border-bottom: 1px solid var(--border-color); /* Agrega solo el borde inferior */
+  padding: 5px;
+  color: var(--text-placeholder);
+  margin-top: 10px; /* Ajusta el padding si es necesario */
+  outline: none;
+  background-color: transparent;
+  height: 45px;
 }
-label:has(p){
+::placeholder {
+  color: var(--text-placeholder); /* Cambia el color del placeholder */
+  opacity: 1; /* Asegúrate de que la opacidad esté al 100% */
+}
+
+
+label:has(p) {
   display: flex;
 }
-label > p{
+label > p {
   color: red;
 }
 
@@ -51,9 +73,12 @@ label > p{
 
 .formInmueble {
   height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   margin-top: 30px;
-  max-height: 600px; 
+  max-height: 600px;
   overflow-y: auto;
 }
 
@@ -63,32 +88,32 @@ label > p{
 
 @media screen and (max-width: 1366px) {
   .formInmueble div div div div {
-      margin: 0;
+    margin: 0;
   }
 }
 
 @media screen and (max-width: 768px) {
   .contenedor {
-      width: 100%;
-      height: auto;
-      padding: 1rem;
+    width: 100%;
+    height: auto;
+    padding: 1rem;
   }
 
   .botonera {
-      position: relative;
-      height: auto;
+    position: relative;
+    height: auto;
   }
 
   .botonera .btnPrevNext {
-      width: 5rem;
-      height: 3rem;
-      font-size: 1rem;
-      margin: 0.5rem;
+    width: 5rem;
+    height: 3rem;
+    font-size: 1rem;
+    margin: 0.5rem;
   }
 
   .checkbox {
-      width: 100%;
-      justify-content: flex-start;
+    width: 100%;
+    justify-content: flex-start;
   }
 }
 
@@ -129,29 +154,23 @@ label > p{
 /* Ajustes para dispositivos móviles */
 @media screen and (max-width: 480px) {
   .d-flex {
-      flex-direction: column;
+    flex-direction: column;
   }
 
-  .form-control {
-      width: 100%;
+  .input-form {
+    width: 100%;
   }
 
   .checkbox {
-      width: 100%;
-      justify-content: flex-start;
+    width: 100%;
+    justify-content: flex-start;
   }
 
   label[for="Imagen"] {
-      font-size: 2rem;
-      height: 3rem;
-      width: 3rem;
+    font-size: 2rem;
+    height: 3rem;
+    width: 3rem;
   }
-}
-
-
-
-input[type="number"] {
-  appearance: none;
 }
 
 input[type="number"]::-webkit-outer-spin-button,
@@ -164,9 +183,10 @@ input[type="number"]:focus {
   outline: none;
 }
 
-textarea.form-control {
+textarea.input-form {
   min-height: 20vh;
   max-height: 20vh;
+  background-color: var(--text-area);
 }
 
 input[type="file"] {
@@ -184,8 +204,8 @@ label[for="Imagen"] {
   align-items: center;
   background-color: var(--nav-color);
   color: var(--text-color);
-  margin-right: .8rem;
-  transition: text-shadow .2s, box-shadow .2s;
+  margin-right: 0.8rem;
+  transition: text-shadow 0.2s, box-shadow 0.2s;
 }
 
 label[for="Imagen"]:hover {
