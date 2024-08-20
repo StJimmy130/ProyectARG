@@ -139,7 +139,7 @@ nav .nav-bar .sidebarOpen{
   outline: none; /* Elimina el borde de enfoque predeterminado */
 }
 .nav-bar .darkLight-searchBox{
-  display: flex;
+  display: none;
   align-items: center;
 }
 .darkLight-searchBox .dark-light,
