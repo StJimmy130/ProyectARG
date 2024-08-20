@@ -49,7 +49,7 @@ label > p{
   align-items: start;
 }
 
-form {
+.formInmueble {
   height: auto;
   width: 100%;
   margin-top: 30px;
@@ -57,12 +57,12 @@ form {
   overflow-y: auto;
 }
 
-form div div div div {
+.formInmueble div div div div {
   padding: 3px;
 }
 
 @media screen and (max-width: 1366px) {
-  form div div div div {
+  .formInmueble div div div div {
       margin: 0;
   }
 }
@@ -79,7 +79,7 @@ form div div div div {
       height: auto;
   }
 
-  .botonera .btn {
+  .botonera .btnPrevNext {
       width: 5rem;
       height: 3rem;
       font-size: 1rem;
@@ -103,7 +103,7 @@ form div div div div {
   height: 25%;
 }
 
-.botonera .btn {
+.botonera .btnPrevNext {
   width: 7rem;
   height: 3rem;
   border-radius: 15px;
