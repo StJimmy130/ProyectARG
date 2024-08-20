@@ -6,7 +6,7 @@
 }
 
 <h3>@ViewData["Title"]</h3>
-<partial name="_StatusMessage" for="StatusMessage" />
+
 <div class="row">
     <div class="col-md-6">
         <form id="profile-form" method="post">
@@ -23,7 +23,9 @@
             <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">Save</button>
         </form>
     </div>
-</div>
+</div> 
+
+
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
