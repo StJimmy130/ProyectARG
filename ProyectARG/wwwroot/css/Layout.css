@@ -54,14 +54,21 @@ body.dark nav{
 nav .nav-bar{
   position: relative;
   height: 100%;
-  max-width: 1000px;
   width: 100%;
   background-color: var(--nav-color);
   margin: 0 auto;
   padding: 0 30px;
   display: flex;
+  left: 0;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
+}
+
+.menu{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 nav .nav-bar .sidebarOpen{
   color: var(--text-color);
@@ -74,7 +81,7 @@ nav .nav-bar .sidebarOpen{
   font-size: 25px;
   display: flex;
   align-items: center;
-
+  justify-content: center;
   gap: 5px;
   text-shadow: 0 0 2px black;
   font-weight: 500;
@@ -97,6 +104,9 @@ nav .nav-bar .sidebarOpen{
   display: flex;
   align-items: center;
   margin-bottom: 0rem;
+}
+.nav-bar .links-primary{
+  padding-left: 150px;
 }
 .nav-bar .nav-links li{
   margin: 0 5px;
@@ -139,7 +149,6 @@ nav .nav-bar .sidebarOpen{
   outline: none; /* Elimina el borde de enfoque predeterminado */
 }
 .nav-bar .darkLight-searchBox{
-  display: none;
   align-items: center;
 }
 .darkLight-searchBox .dark-light,
@@ -185,6 +194,7 @@ nav .nav-bar .sidebarOpen{
 }
 .searchBox{
   position: relative;
+  display: none;
 }
 .searchBox .search-field{
   position: absolute;
