@@ -66,9 +66,7 @@ nav .nav-bar{
 
 .menu{
   width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  
 }
 nav .nav-bar .sidebarOpen{
   color: var(--text-color);
@@ -106,7 +104,11 @@ nav .nav-bar .sidebarOpen{
   margin-bottom: 0rem;
 }
 .nav-bar .links-primary{
-  padding-left: 150px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
 }
 .nav-bar .nav-links li{
   margin: 0 5px;
@@ -147,6 +149,18 @@ nav .nav-bar .sidebarOpen{
   background-color: transparent; /* Evita cualquier cambio de fondo */
   box-shadow: none; /* Elimina el borde azul de enfoque */
   outline: none; /* Elimina el borde de enfoque predeterminado */
+}
+
+.sidebar-perfil{
+  display: none;
+}
+@media screen and (max-width: 768px){
+  .sidebar-perfil{
+    display: block;
+  }
+  .navbar-perfil{
+    display: none;
+  }
 }
 .nav-bar .darkLight-searchBox{
   align-items: center;
