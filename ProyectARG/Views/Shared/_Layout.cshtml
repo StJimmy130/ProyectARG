@@ -49,6 +49,9 @@
               <li>
                 <a class="nav-link" asp-area="" asp-controller="Inmuebles" asp-action="Index">Publicar</a>
               </li>
+              <li>
+                <a class="nav-link" asp-area="" asp-controller="MisPublicaciones" asp-action="Index">Mis Publicaciones</a>
+              </li>
               @if (SignInManager.IsSignedIn(User))
               {
                 var user = await UserManager.GetUserAsync(User);

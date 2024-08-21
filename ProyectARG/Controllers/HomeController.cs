@@ -130,6 +130,10 @@ public class HomeController : Controller
                 mostrar = false;
             }
 
+            if(precioMaximo == 0 && precioMinimo == 0){
+                mostrar = true;
+            }
+
             if (Operacion != 0 && Operacion != Inmueble.TipoOperacion)
             {
                 mostrar = false;

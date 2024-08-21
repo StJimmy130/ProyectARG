@@ -136,7 +136,6 @@ function ListadoPublicaciones() {
                 </div>
                 
                 `;
-                console.log(item.imagenSrc);
             });
 
             

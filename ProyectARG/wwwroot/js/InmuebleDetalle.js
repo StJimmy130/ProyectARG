@@ -66,7 +66,6 @@ function cargarImagenDetallePublicacion() {
       type: "POST",
       dataType: "json",
       success: function (data) {
-          console.log("Datos recibidos:", data); // Verifica los datos recibidos
           
 
           if (data.length > 0) {
@@ -117,7 +116,6 @@ function cargarDetallePublicacion() {
     type: "POST",
     dataType: "json",
     success: function (data) {
-      console.log("Datos recibidos:", data); // Verifica los datos recibidos
       
 
       let datosPrincipales = ``;
