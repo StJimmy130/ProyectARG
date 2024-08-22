@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProyectARG.Data;
 
@@ -11,9 +12,11 @@ using ProyectARG.Data;
 namespace ProyectARG.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240822005657_migracion3")]
+    partial class migracion3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -386,7 +389,7 @@ namespace ProyectARG.Migrations
                     b.Property<string>("Instagram")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("LocalidadID")
+                    b.Property<int>("LocalidadID")
                         .HasColumnType("int");
 
                     b.HasKey("UsuarioID");
@@ -521,7 +524,9 @@ namespace ProyectARG.Migrations
                 {
                     b.HasOne("ProyectARG.Models.Localidad", "Localidad")
                         .WithMany("Usuarios")
-                        .HasForeignKey("LocalidadID");
+                        .HasForeignKey("LocalidadID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Localidad");
                 });

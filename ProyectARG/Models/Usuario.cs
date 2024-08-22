@@ -8,7 +8,8 @@ public class Usuario
     public int? UsuarioID { get; set; }
     public string? Instagram { get; set; }
     public string? Facebook { get; set; }
-    public int LocalidadID { get; set; }
+    public int? LocalidadID { get; set; }
+    public string? CuentaID { get; set; }
     public virtual Localidad Localidad { get; set; }
     public virtual ICollection<Inmueble> Inmuebles { get; set; }
     public virtual ICollection<Imagen> Imagenes { get; set; }
