@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.TagHelpers;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Security.Claims;
 
 namespace ProyectARG.Controllers;
 // [Authorize]
@@ -18,8 +19,9 @@ public class InmueblesController : Controller
         _context = context;
     }
 
-    public IActionResult Index()
+    public IActionResult Index(int? UsuarioID)
     {
+       
         var selectListItemsOperacion = new List<SelectListItem>
     {
         new SelectListItem { Value = "0", Text = "[Tipo de operación...] *" }
@@ -63,6 +65,15 @@ public class InmueblesController : Controller
 
         ViewBag.Operaciones = selectListItemsOperacion;
         ViewBag.TiposInmueble = selectListItemsTipoInmueble;
+
+         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        
+        UsuarioID = _context.Usuarios
+                .Where(t => t.CuentaID == userId)
+                .Select(t => t.UsuarioID) // Proyecta solo el campo UsuarioID
+                .SingleOrDefault();;
+
+                ViewBag.UsuarioID = UsuarioID;
 
         return View();
     }

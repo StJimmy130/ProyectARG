@@ -178,6 +178,7 @@ function GuardarPublicacion() {
   let nroDepartamento = document.getElementById("NroDepartamento").value;
   let descripcion = document.getElementById("Descripcion").value;
   let imagenes = document.getElementById("Imagen").files; // Nuevo input para archivos de imagen
+  let usuarioID = document.getElementById("UsuarioID").value;
 
   // Crear un objeto FormData para enviar los datos y archivos
   let formData = new FormData();
@@ -201,6 +202,7 @@ function GuardarPublicacion() {
   formData.append("Piso", piso);
   formData.append("NroDepartamento", nroDepartamento);
   formData.append("Descripcion", descripcion);
+  formData.append("UsuarioID", usuarioID);
 
   // Agregar cada imagen al FormData
   for (let i = 0; i < imagenes.length; i++) {
