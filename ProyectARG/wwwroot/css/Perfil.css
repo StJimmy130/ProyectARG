@@ -10,15 +10,76 @@ section{
 :root{
     --tr-odd: #d7d7d7;
     --tr-even: #e9e9e9;
-    --text-color2: #000000;
-    --container-color: #ffffff;
 }
+
+body.dark{
+    --tr-odd: #515050;
+    --tr-even: #595959;
+}
+/* inicio search */
+.search {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+  }
+  
+  .search__input {
+    background-color: #f4f2f2;
+    border: none;
+    color: #494949;
+    padding: 0.7rem 1rem;
+    border-radius: 30px;
+    width: 45vw;
+    transition: all ease-in-out .5s;
+    margin-right: -2rem;
+    margin-bottom: 5px;
+  }
+  
+  .search__input:hover, .search__input:focus {
+    box-shadow: 0 0 1em #00000013;
+  }
+  
+  .search__input:focus {
+    outline: none;
+    background-color: #f0eeee;
+  }
+  
+  .search__input::-webkit-input-placeholder {
+    font-weight: 100;
+    font-size: 1.2rem;
+    color: #777777;
+  }
+  
+  .search__input:focus + .search__button {
+    background-color: #f0eeee;
+  }
+  
+  .search__button {
+    border: none;
+    background-color: #f4f2f2;
+    margin-top: .1em;
+    margin-bottom: 5px;
+  }
+  
+  .search__button:hover {
+    cursor: pointer;
+  }
+  
+  .search__icon {
+    height: 1.3em;
+    width: 1.3em;
+    fill: #b4b4b4;
+  }
+
+  /* fin search */
 
 .table-publiucion{
     width: 100%;
     background-color: var(--container-color);
     border-radius: 15px;
     padding: 15px;
+    background-color: transparent;
 }
 
 .table-publiucion tr:nth-child(even){
@@ -30,11 +91,18 @@ section{
     color: var(--text-color2);
     background-color: var(--tr-odd);
 }
-.table-publiucion thead tr{
+.table-publiucion thead tr th{
     color: var(--text-color2);
     background-color: var(--tr-even);
 }
-.table-publiucion tr:last-child{
+.table-publiucion thead tr th:first-child{
+    border-radius: 15px 0 0 0;
+}
+.table-publiucion thead tr th:last-child{
+    border-radius: 0 15px 0 0;
+}
+
+.table-publiucion tr{
     border-bottom: solid transparent;
 }
 
@@ -48,7 +116,7 @@ section{
 
 .contenedor-panel{
     width: 100%;
-    height: 80vh;
+    height: auto;
     border-radius: 15px;
     display: flex;
     justify-content: center;
@@ -67,14 +135,15 @@ section{
 }
 
 .contenedor-panel h3,
-.contenedor-panel p{
+.contenedor-panel p{    
     width: 100%;
     color: var(--text-color2);
     padding: 0 20px;
 }
 
 .botonera{
-    gap: 10px;
+    gap: 3%;
+    margin: 20px 0;
 }
 .btn{
     color: white;
