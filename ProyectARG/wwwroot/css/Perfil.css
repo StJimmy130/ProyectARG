@@ -74,7 +74,7 @@ body.dark{
 
   /* fin search */
 
-.table-publiucion{
+.table-publicacion{
     width: 100%;
     background-color: var(--container-color);
     border-radius: 15px;
@@ -82,35 +82,35 @@ body.dark{
     background-color: transparent;
 }
 
-.table-publiucion tr:nth-child(even){
+.table-publicacion tr:nth-child(even){
     color: var(--text-color2);
     background-color: var(--tr-even);
 }
 
-.table-publiucion tr:nth-child(odd){
+.table-publicacion tr:nth-child(odd){
     color: var(--text-color2);
     background-color: var(--tr-odd);
 }
-.table-publiucion thead tr th{
+.table-publicacion thead tr th{
     color: var(--text-color2);
     background-color: var(--tr-even);
 }
-.table-publiucion thead tr th:first-child{
+.table-publicacion thead tr th:first-child{
     border-radius: 15px 0 0 0;
 }
-.table-publiucion thead tr th:last-child{
+.table-publicacion thead tr th:last-child{
     border-radius: 0 15px 0 0;
 }
 
-.table-publiucion tr{
+.table-publicacion tr{
     border-bottom: solid transparent;
 }
 
-.table-publiucion tr:last-child td:first-child{
+.table-publicacion tr:last-child td:first-child{
     border-radius: 0 0 0 15px;
 }
 
-.table-publiucion tr:last-child td:last-child{
+.table-publicacion tr:last-child td:last-child{
     border-radius: 0 0 15px 0;
 }
 
@@ -140,17 +140,26 @@ body.dark{
     width: 100%;
     color: var(--text-color2);
     padding: 0 20px;
+    text-overflow: ellipsis;
+    
+}
+
+.contenedor-panel p{
+    display: -webkit-box; /* Necesario para aplicar -webkit-line-clamp */
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4; /* Limita a 4 líneas */
+    overflow: hidden;
 }
 
 .botonera{
     gap: 3%;
     margin: 20px 0;
 }
-.btn{
+.boton{
     color: white;
     opacity: 0.8;
 }
-.btn:hover{
+.boton:hover{
     opacity: 1;
     color: white;
 }
