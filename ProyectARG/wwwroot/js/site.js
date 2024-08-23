@@ -64,9 +64,9 @@ function hiddenAlert() {
         descripcion.innerHTML = ""
         aceptar.style.display = "none";
         cancelar.style.display = "none";
-        icon.classList.remove("success", "denied");
+        icon.classList.remove("alert-svg", "succes-svg", "denied-svg");
         icon.innerHTML = ""
         alerta.classList.remove("exit-alert");
-        background.classList.remove("success", "denied");
+        background.classList.remove("success", "denied", "alert");
     }, 300);
 }
