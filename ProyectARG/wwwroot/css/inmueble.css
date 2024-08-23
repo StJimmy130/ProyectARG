@@ -5,21 +5,25 @@ html {
 body {
   padding-top: 4.5rem;
   max-height: 150vh;
+  
 }
 
 :root{
   --text-area: #fff;
   --text-placeholder: #5c5c5c;
   --border-color: #006834;
+  --fondo-dropdown:  #494949;
+
 }
 body.dark{
   --text-area: #535353;
   --text-placeholder: #c9c9c9;
   --border-color: #00ac56;
+  --fondo-dropdown: #494949;
 }
 
 footer{
-  margin-top: 100px;
+  margin-top: 150px;
 }
 .step {
   display: none;
@@ -29,16 +33,21 @@ footer{
   display: block;
 }
 
+
+
+
+
 .contenedor {
   background-color: var(--container-color);
   position: relative;
   border-radius: 5px;
   width: 70vw;
   min-width: 300px;
+  margin-top: 80px;
   height: auto; /* Ajusta la altura automáticamente */
   margin: 5px;
   padding: 15px;
-  font-size: 1.2rem;
+  font-size: 18px;
   color: var(--text-color2);
   overflow: hidden; /* Para evitar desbordamientos */
 }
@@ -57,8 +66,24 @@ footer{
 ::placeholder {
   color: var(--text-placeholder); /* Cambia el color del placeholder */
   opacity: 1; /* Asegúrate de que la opacidad esté al 100% */
+  font-size: 18px;
+  font-weight: 400;
 }
 
+.checkbox label{
+  font-size: 18px;
+  color: var(--text-placeholder);
+  font-weight: 400;
+}
+
+/* Estilos para la lista desplegable del DropDownList */
+.input-form option {
+  background-color: var(--fondo-dropdown); /* Color de fondo de las opciones */
+  color: white; /* Color del texto de las opciones */
+  font-size: 16px;
+  font-weight: 200;
+
+}
 
 label:has(p) {
   display: flex;

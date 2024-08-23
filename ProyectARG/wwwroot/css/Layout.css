@@ -149,6 +149,48 @@ nav .nav-bar .sidebarOpen{
   background-color: transparent; /* Evita cualquier cambio de fondo */
   box-shadow: none; /* Elimina el borde azul de enfoque */
   outline: none; /* Elimina el borde de enfoque predeterminado */
+  border-radius: 5px;
+}
+
+
+/* Estilos para el menú del dropdown */
+.dropdown-menu {
+  background-color: rgba(255, 255, 255, 0.850); /* Color de fondo del menú del dropdown */
+  border: 1px solid var(--nav-color); /* Agrega un borde al menú del dropdown */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Agrega una sombra al menú del dropdown */
+  padding: 10px 0; /* Añade espacio interno al menú del dropdown */
+  font-size: 16px;
+}
+
+.dropdown-item {
+  color: var(--nav-color); /* Color del texto de los elementos del menú del dropdown */
+  padding: 8px 20px; /* Añade algo de espacio interno a los elementos del menú del dropdown */
+
+}
+.dropdown-form{
+  padding: 8px 20px;
+}
+
+.form-item{
+  color: var(--nav-color);
+}
+.form-item:hover,
+.form-item:focus {
+  color: var(--text-color);
+
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+  background-color: #758170; /* Cambia el color de fondo al pasar el mouse o enfocar un elemento del menú del dropdown */
+  color: var(--text-color); /* Cambia el color del texto al pasar el mouse o enfocar un elemento del menú del dropdown */
+  border-radius: 3px;
+}
+.dropdown-form:hover,
+.dropdown-form:focus {
+  background-color: #758170; /* Cambia el color de fondo al pasar el mouse o enfocar un elemento del menú del dropdown */
+  color: var(--text-color);
+  border-radius: 3px;
 }
 
 .sidebar-perfil{

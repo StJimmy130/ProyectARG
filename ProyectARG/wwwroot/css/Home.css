@@ -10,7 +10,6 @@
 }
 
 
-
 @media screen and (max-width: 1015px) {
   #filterMenu {
     position: absolute;
@@ -41,7 +40,7 @@
 }
 
 
-.row {
+.cardCatalogo {
   height: 100%;
   width: 100%;
   border-radius: 10px;
@@ -62,7 +61,7 @@ footer{
   padding: 0;
   height: 50vh;
   border-radius: 10px;
-  margin: 20px 0 0 0;
+  margin: 15px 0 0 0;
   transition: 0.3s;
   overflow: hidden;
   box-shadow: 0 0 2px 1px rgba(36, 35, 35, 0.603);
