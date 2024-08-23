@@ -25,7 +25,8 @@ public class Inmueble
     public int? Piso { get; set; }
     public string? NroDepartamento { get; set; }
     public int? UsuarioID { get; set; }
-
+    public bool Activo { get; set; }
+    public DateTime FechaAlta { get; set; }
     public virtual Usuario? Usuario { get; set; }
 
     public virtual ICollection<Imagen>? Imagenes { get; set; }
@@ -78,6 +79,8 @@ public class VistaInmueble
     public string? CantidadAmbientesString { get; set; } 
     public string? CocheraString { get; set; } 
     public string? DescripcionString { get; set; }
+    public string? PisoString { get; set; }
+    public string? NroDepartamentoString { get; set; }
     public string? ImagenSrc { get; set; } // Propiedad para una sola imagen
     public List<ImagenVista>? Imagenes { get; set; } 
 
