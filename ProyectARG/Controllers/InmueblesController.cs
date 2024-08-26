@@ -231,7 +231,8 @@ public class InmueblesController : Controller
         var resultado = new
         {
             Titulo = "",
-            Error = ""
+            Error = "",
+            eliminado = false
         };
         var eliminarPublicacion = _context.Inmuebles.Find(InmuebleID);
         if (eliminarPublicacion.UsuarioID == UsuarioID)
@@ -242,7 +243,8 @@ public class InmueblesController : Controller
             resultado = new
         {
             Titulo = "Felicitaciones!!!",
-            Error = "La publicacion a sido eliminada correctamente"
+            Error = "La publicacion a sido eliminada correctamente",
+            eliminado = true
         };
         }
         else
@@ -250,7 +252,8 @@ public class InmueblesController : Controller
             resultado = new
         {
             Titulo = "Hubo un problema",
-            Error = "Usted no es propietario de esta publicacion"
+            Error = "Usted no es propietario de esta publicacion",
+            eliminado = false
         };
         }
 

@@ -92,12 +92,22 @@ function eliminarInmueble(inmuebleID) {
     dataType: "json",
 
     success: function (resultado) {
-    icon.innerHTML = '<i class="bx bxs-error-circle"></i>';
-    icon.classList.add("alert-svg");
+      icon.classList.remove("alert-svg", "succes-svg", "denied-svg");
+      background.classList.remove("alert");
+      if(resultado.eliminado === true){
+        icon.classList.add("succes-svg");
+        icon.innerHTML = '<i class="bx bxs-check-circle"></i>';
+        background.classList.add("success");
+      }
+      else{
+        icon.innerHTML = '<i class="bx bxs-x-circle"></i>';
+        icon.classList.add("denied-svg");
+        background.classList.add("denied");
+      }
+    
     titulo.innerHTML = `${resultado.titulo}`;
     descripcion.innerHTML = `<label>${resultado.error}</label>`;
     aceptar.style.display = "block";
-    background.classList.add("alert");
     aceptar.setAttribute("onclick", `hiddenAlert()`);
     cancelar.style.display = "none";
 
