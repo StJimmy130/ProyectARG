@@ -139,8 +139,8 @@ td p{
 }
 
 .contenedor-panel img{
-    width: 350px;
-    height: 300px;
+    width: 90%;
+    height: 40vh;
     margin: 10px;
     border-radius: 15px;
 }
@@ -168,6 +168,7 @@ td p{
 .boton{
     color: white;
     opacity: 0.8;
+    transition: all ease-in-out .2s;
 }
 .boton:hover{
     opacity: 1;

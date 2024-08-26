@@ -115,7 +115,6 @@ function ListadoPublicaciones() {
         type: 'POST',
         dataType: 'json',
         success: function (Listado) {
-            
             let contenidoTabla = ``;
             $.each(Listado, function (Index, item) {
                 contenidoTabla += `
@@ -134,11 +133,8 @@ function ListadoPublicaciones() {
                         </div>
                     </div>
                 </div>
-                
                 `;
             });
-
-            
             document.getElementById("publicaciones").innerHTML = contenidoTabla;
             hideLoadingScreen();
         },
@@ -147,6 +143,22 @@ function ListadoPublicaciones() {
         }
     });
 }
+
+$(document).ready(function() {
+    // Ejecutar la búsqueda cuando se haga clic en el ícono de búsqueda
+    $('#searchButton').on('click', function() {
+        var searchQuery = $('#buscadorPorTitulo').val().toLowerCase();
+
+        $('#publicaciones .card').filter(function() {
+            // Filtra las tarjetas en base al texto dentro de <h5> con la clase "fs-4"
+            $(this).toggle($(this).find('h5.fs-4').text().toLowerCase().indexOf(searchQuery) > -1);
+        });
+    });
+
+    // Cargar el listado de publicaciones cuando la página esté lista
+    ListadoPublicaciones(); // Asegúrate de que esta función ya esté definida
+});
+
 
 function updatePriceRange() {
     const minPriceInput = document.getElementById('min-price-input');
