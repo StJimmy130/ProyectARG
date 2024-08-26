@@ -206,6 +206,10 @@ nav .nav-bar .sidebarOpen{
 }
 .nav-bar .darkLight-searchBox{
   align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 .darkLight-searchBox .dark-light,
 .darkLight-searchBox .searchToggle{
@@ -248,10 +252,10 @@ nav .nav-bar .sidebarOpen{
   opacity: 0;
   pointer-events: none;
 }
-.searchBox{
+/* .searchBox{
   position: relative;
   display: none;
-}
+} */
 .searchBox .search-field{
   position: absolute;
   bottom: -85px;
