@@ -113,6 +113,16 @@ body.dark{
 .table-publicacion tr:last-child td:last-child{
     border-radius: 0 0 15px 0;
 }
+td{
+    text-align: center;
+}
+td p{
+    text-overflow: ellipsis;
+    display: -webkit-box; /* Necesario para aplicar -webkit-line-clamp */
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; /* Limita a 4 líneas */
+    overflow: hidden;
+}
 
 .contenedor-panel{
     width: 100%;
