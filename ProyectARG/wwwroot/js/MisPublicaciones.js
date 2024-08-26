@@ -76,9 +76,21 @@ function eliminarInmueble(inmuebleID) {
     dataType: "json",
 
     success: function (resultado) {
+    icon.innerHTML = '<i class="bx bxs-error-circle"></i>';
+    icon.classList.add("alert-svg");
+    titulo.innerHTML = `${resultado.titulo}`;
+    descripcion.innerHTML = `<label>${resultado.error}</label>`;
+    aceptar.style.display = "block";
+    background.classList.add("alert");
+    aceptar.setAttribute("onclick", `hiddenAlert()`);
+    cancelar.style.display = "none";
+
 
       getMisPublicaciones();
-      hiddenAlert();
+      setTimeout(function () {
+        hiddenAlert();
+      }, 3000);
+      
     },
 
     error: function (xhr, status) {

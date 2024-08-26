@@ -228,18 +228,30 @@ public class InmueblesController : Controller
 
     public JsonResult EliminarPublicacion(int InmuebleID, int UsuarioID)
     {
-        string resultado;
+        var resultado = new
+        {
+            Titulo = "",
+            Error = ""
+        };
         var eliminarPublicacion = _context.Inmuebles.Find(InmuebleID);
         if (eliminarPublicacion.UsuarioID == UsuarioID)
         {
             _context.Remove(eliminarPublicacion);
             _context.SaveChanges();
 
-            resultado = "Eliminado correctamente";
+            resultado = new
+        {
+            Titulo = "Felicitaciones!!!",
+            Error = "La publicacion a sido eliminada correctamente"
+        };
         }
         else
         {
-            resultado = "No eres el propietario de la publicación";
+            resultado = new
+        {
+            Titulo = "Hubo un problema",
+            Error = "Usted no es propietario de esta publicacion"
+        };
         }
 
         return Json(resultado);
