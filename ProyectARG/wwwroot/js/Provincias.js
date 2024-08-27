@@ -1,24 +1,23 @@
 window.onload = ListadoDeProvincias();
 
 function ListadoDeProvincias() {
-    $.ajax({
-        url: '../../Provincias/ListadoProvincias',
-        data: {},
-        type: 'POST',
-        dataType: 'json',
-        success: function (provincia) {
-            console.log(provincia)
-            $("#ProvinciaModal").modal("hide");
-            LimpiarModals();
+  $.ajax({
+    url: "../../Provincias/ListadoProvincias",
+    data: {},
+    type: "POST",
+    dataType: "json",
+    success: function (provincia) {
+      console.log(provincia);
+      $("#ProvinciaModal").modal("hide");
+      LimpiarModals();
 
-            let tabla = ``;
+      let tabla = ``;
 
-            $.each(provincia, function (index, provincias) {
-
-                tabla += `
+      $.each(provincia, function (index, provincias) {
+        tabla += `
                     <tr>
                         <td class="texto-recortado">${provincias.nombre}</td>
-                        <td class="text-center ">
+                        <td class="text-center">
                             <button type="button" class="btn btn-success" onclick="ModalEditar(${provincias.provinciaID})">
                             Editar
                             </button>
@@ -30,90 +29,101 @@ function ListadoDeProvincias() {
                         </td>
                     </tr>
                 `;
-            });
-            document.getElementById("tbodyProvincias").innerHTML = tabla;
-        },
-        error: function (xhr, status) {
-            console.log('Disculpe, existió un problema al cargar el listado');
-        }
-    });
+      });
+      document.getElementById("tbodyProvincias").innerHTML = tabla;
+    },
+    error: function (xhr, status) {
+      console.log("Disculpe, existió un problema al cargar el listado");
+    },
+  });
 }
 
-function LimpiarModals() {
-    document.getElementById("ProvinciaID").value = 0;
-    document.getElementById("ProvinciaIDAdd").value = 0;
-    document.getElementById("ProvinciaNombre").value = "";
-    document.getElementById("LocalidadID").value = 0;
-    document.getElementById("LocalidadNombre").value = "";
+$(document).ready(function () {
+  // Cargar provincias cuando la página esté lista
+  ListadoDeProvincias();
 
+  // Filtro de búsqueda
+  $("#ProvinciaNombre").on("keyup", function () {
+    var searchQuery = $(this).val().toLowerCase();
+    $("#tbodyProvincias tr").filter(function () {
+      $(this).toggle($(this).text().toLowerCase().indexOf(searchQuery) > -1);
+    });
+  });
+});
+
+function LimpiarModals() {
+  document.getElementById("ProvinciaID").value = 0;
+  document.getElementById("ProvinciaIDAdd").value = 0;
+  document.getElementById("ProvinciaNombre").value = "";
+  document.getElementById("LocalidadID").value = 0;
+  document.getElementById("LocalidadNombre").value = "";
 }
 
 function NuevaProvincia() {
-    $("#TituloModalProvincia").text("Nueva provincia");
+  $("#TituloModalProvincia").text("Nueva provincia");
 }
 
 function GuardarProvincia() {
-    let provinciaID = document.getElementById("ProvinciaIDAdd").value;
-    let nombre = document.getElementById("ProvinciaNombre").value;
+  let provinciaID = document.getElementById("ProvinciaIDAdd").value;
+  let nombre = document.getElementById("ProvinciaNombre").value;
 
-
-    $.ajax({
-        url: '../../Provincias/GuardarProvincia',
-        data: { ProvinciaID: provinciaID, Nombre: nombre, },
-        type: 'POST',
-        dataType: 'json',
-        success: function (resultado) {
-            if (resultado != "") {
-                alert(resultado)
-            }
-            ListadoDeProvincias();
-        },
-        error: function (xhr, status) {
-            console.log('Disculpe, existió un problema al cargar el listado');
-        }
-    });
+  $.ajax({
+    url: "../../Provincias/GuardarProvincia",
+    data: { ProvinciaID: provinciaID, Nombre: nombre },
+    type: "POST",
+    dataType: "json",
+    success: function (resultado) {
+      if (resultado != "") {
+        alert(resultado);
+      }
+      ListadoDeProvincias();
+    },
+    error: function (xhr, status) {
+      console.log("Disculpe, existió un problema al cargar el listado");
+    },
+  });
 }
 
 function ModalEditar(provinciaID) {
-    $.ajax({
-        url: '../../Provincias/ListadoProvincias',
-        data: { ProvinciaID: provinciaID },
-        type: 'POST',
-        dataType: 'json',
-        success: function (provincia) {
-            let provincias = provincia[0];
+  $.ajax({
+    url: "../../Provincias/ListadoProvincias",
+    data: { ProvinciaID: provinciaID },
+    type: "POST",
+    dataType: "json",
+    success: function (provincia) {
+      let provincias = provincia[0];
 
-            document.getElementById("ProvinciaIDAdd").value = provinciaID
-            $("#TituloModalProvincia").text("Editar provinca");
-            document.getElementById("ProvinciaNombre").value = provincias.nombre;
-            $("#ProvinciaModal").modal("show");
-        },
-        error: function (xhr, status) {
-            console.log('Disculpe, existió un problema al cargar el listado');
-        }
-    });
+      document.getElementById("ProvinciaIDAdd").value = provinciaID;
+      $("#TituloModalProvincia").text("Editar provinca");
+      document.getElementById("ProvinciaNombre").value = provincias.nombre;
+      $("#ProvinciaModal").modal("show");
+    },
+    error: function (xhr, status) {
+      console.log("Disculpe, existió un problema al cargar el listado");
+    },
+  });
 }
 
 function ValidarEliminacion(provinciaID) {
-    var elimina = confirm("¿Esta seguro que desea eliminar esta provincia?")
-    if(elimina == true) {
-        EliminarProvincia(provinciaID)
-    }
+  var elimina = confirm("¿Esta seguro que desea eliminar esta provincia?");
+  if (elimina == true) {
+    EliminarProvincia(provinciaID);
+  }
 }
 
 function EliminarProvincia(provinciaID) {
-    $.ajax({
-        url: '../../Provincias/EliminarProvincia',
-        data: { ProvinciaID: provinciaID },
-        type: 'POST',
-        dataType: 'json',
+  $.ajax({
+    url: "../../Provincias/EliminarProvincia",
+    data: { ProvinciaID: provinciaID },
+    type: "POST",
+    dataType: "json",
 
-        success: function (eliminarProvincia) {
-            ListadoDeProvincias();
-        },
+    success: function (eliminarProvincia) {
+      ListadoDeProvincias();
+    },
 
-        error: function (xhr, status) {
-            console.log('Disculpe, existió un problema al cargar el listado');
-        }
-    });
+    error: function (xhr, status) {
+      console.log("Disculpe, existió un problema al cargar el listado");
+    },
+  });
 }

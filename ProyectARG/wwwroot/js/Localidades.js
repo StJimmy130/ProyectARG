@@ -11,16 +11,14 @@ function ListadoDeLocalidades() {
         dataType: 'json',
         success: function (localidad) {
             $("#LocalidadModal").modal("hide");
-            
 
             let tabla = ``;
 
             $.each(localidad, function (index, localidades) {
-
                 tabla += `
                     <tr>
-                        <td class"texto-recortado">${localidades.localidadNombre}</td>
-                        <td class"texto-recortado">${localidades.provinciaNombre}</td>
+                        <td class="texto-recortado">${localidades.localidadNombre}</td>
+                        <td class="texto-recortado">${localidades.provinciaNombre}</td>
                         <td class="text-center">
                             <button type="button" class="btn btn-success" onclick="ModalEditarLocalidad(${localidades.localidadID})">
                             Editar
@@ -41,6 +39,19 @@ function ListadoDeLocalidades() {
         }
     });
 }
+
+$(document).ready(function () {
+    // Cargar localidades cuando la página esté lista
+    ListadoDeLocalidades();
+
+    // Filtro de búsqueda
+    $("#LocalidadNombre").on("keyup", function () {
+        var searchQuery = $(this).val().toLowerCase();
+        $("#tbodyLocalidades tr").filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(searchQuery) > -1);
+        });
+    });
+});
 
 
 function LimpiarModalLocalidad() {
