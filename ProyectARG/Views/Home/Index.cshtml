@@ -151,6 +151,14 @@ ViewData["Title"] = "Home Page";
     </div>
   </div>
 
-
-  <div class="row cardCatalogo" id="publicaciones"></div>
+<div class="flex flex-column justify-content-center align-items-center">
+  <div>
+    <div class="row cardCatalogo" id="publicaciones"></div>
+  </div>
+   <div>
+    <button onclick="cambiarPagina(-1)" class="btn btn-secondary">Anterior</button>
+    <div id="paginacion" style="display:inline-block; margin: 0 10px;"></div>
+    <button onclick="cambiarPagina(1)" class="btn btn-secondary">Siguiente</button>
+  </div>
+  </div>
 </div>

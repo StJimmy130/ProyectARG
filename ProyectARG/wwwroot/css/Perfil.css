@@ -78,7 +78,7 @@ body.dark{
     width: 100%;
     background-color: var(--container-color);
     border-radius: 15px;
-    padding: 15px;
+    padding: 0px;
     background-color: transparent;
 }
 
@@ -113,6 +113,39 @@ body.dark{
 .table-publicacion tr:last-child td:last-child{
     border-radius: 0 0 15px 0;
 }
+td{
+    text-align: center;
+}
+td p{
+    text-overflow: ellipsis;
+    display: -webkit-box; /* Necesario para aplicar -webkit-line-clamp */
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; /* Limita a 4 líneas */
+    overflow: hidden;
+}
+
+.Tbody-class{
+    display: flex;
+    overflow-y: auto;
+    max-height: 70vh;
+    padding: 0;
+    border-radius: 15px;
+
+}
+
+.Tbody-class table {
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+  
+.Tbody-class table thead {
+    background-color: var(--container-color);
+    color: var(--text-color2);
+    position: -webkit-sticky; /* Safari... */
+    position: sticky;
+    top: 0;
+    left: 0;
+  }
 
 .contenedor-panel{
     width: 100%;
@@ -129,8 +162,8 @@ body.dark{
 }
 
 .contenedor-panel img{
-    width: 350px;
-    height: 300px;
+    width: 90%;
+    height: 40vh;
     margin: 10px;
     border-radius: 15px;
 }
@@ -158,6 +191,7 @@ body.dark{
 .boton{
     color: white;
     opacity: 0.8;
+    transition: all ease-in-out .2s;
 }
 .boton:hover{
     opacity: 1;

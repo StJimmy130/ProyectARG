@@ -22,10 +22,10 @@ function renderizarTabla(publicaciones) {
   $.each(publicaciones, function (i, item) {
     tabla += `
           <tr>
-              <td>${item.tituloString}</td>
-              <td>${item.precioString}</td>
-              <td>${item.provinciaString}, ${item.localidadString}-${item.direccionString}</td>
-              <td>${item.tipoOperacionString}</td>
+              <td><p>${item.tituloString}</p></td>
+              <td><p>${item.precioString}</p></td>
+              <td><p>${item.provinciaString}, ${item.localidadString}-${item.direccionString}</p></td>
+              <td><p>${item.tipoOperacionString}</p></td>
               <td><button type="button" class="btn btn-primary" onclick="cargarInformacion(${item.inmuebleID})">Administrar</button></td>
           </tr>
       `;
@@ -92,9 +92,31 @@ function eliminarInmueble(inmuebleID) {
     dataType: "json",
 
     success: function (resultado) {
+      icon.classList.remove("alert-svg", "succes-svg", "denied-svg");
+      background.classList.remove("alert");
+      if(resultado.eliminado === true){
+        icon.classList.add("succes-svg");
+        icon.innerHTML = '<i class="bx bxs-check-circle"></i>';
+        background.classList.add("success");
+      }
+      else{
+        icon.innerHTML = '<i class="bx bxs-x-circle"></i>';
+        icon.classList.add("denied-svg");
+        background.classList.add("denied");
+      }
+    
+    titulo.innerHTML = `${resultado.titulo}`;
+    descripcion.innerHTML = `<label>${resultado.error}</label>`;
+    aceptar.style.display = "block";
+    aceptar.setAttribute("onclick", `hiddenAlert()`);
+    cancelar.style.display = "none";
+
 
       getMisPublicaciones();
-      hiddenAlert();
+      setTimeout(function () {
+        hiddenAlert();
+      }, 3000);
+      
     },
 
     error: function (xhr, status) {
