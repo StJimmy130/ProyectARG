@@ -115,34 +115,93 @@ function ListadoPublicaciones() {
         type: 'POST',
         dataType: 'json',
         success: function (Listado) {
-            let contenidoTabla = ``;
-            $.each(Listado, function (Index, item) {
-                contenidoTabla += `
-                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                    <div class="card">
-                        <div class="image-container">
-                            <img src="${item.imagenSrc}" alt="Imagen del Inmueble">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title fs-4">${item.tituloString}</h5>
-                            <p class="card-text fs-5">$ ${item.precioString} - ${item.tipoOperacionString}</p>
-                            <p class="card-title fs-5">${item.provinciaString}, ${item.localidadString} - ${item.direccionString} ${item.nroDireccionString}</p>
-                            <div class="container d-flex justify-content-end">
-                            <a href="Inmuebles/Detalle/${item.inmuebleID}" class="btn btn-primary">Ver más</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                `;
-            });
-            document.getElementById("publicaciones").innerHTML = contenidoTabla;
-            hideLoadingScreen();
-        },
+            renderizarTabla(Listado);
+},
         error: function (xhr, status) {
             console.log('Disculpe, existió un problema al cargar el listado');
         }
     });
 }
+
+var paginaActual = 0;
+var itemsPorPagina = 12;
+var paginas = [];
+
+function paginarPublicaciones(publicaciones, itemsPorPagina) {
+  var paginas = [];
+  for (var i = 0; i < publicaciones.length; i += itemsPorPagina) {
+    paginas.push(publicaciones.slice(i, i + itemsPorPagina));
+  }
+  return paginas;
+}
+
+function renderizarTabla(publicaciones) {
+  paginas = paginarPublicaciones(publicaciones, itemsPorPagina);
+  mostrarPagina(paginaActual);
+  renderizarPaginacion();
+}
+
+function renderizarPaginacion() {
+    var paginacion = document.getElementById("paginacion");
+    paginacion.innerHTML = '';
+    
+    for (var i = 0; i < paginas.length; i++) {
+      var botonPagina = document.createElement("button");
+      botonPagina.className = "btn btn-link";
+      botonPagina.style.padding = "5px";
+      botonPagina.style.margin = "0 2px";
+      botonPagina.textContent = i + 1;
+      botonPagina.onclick = (function(pagina) {
+        return function() {
+          paginaActual = pagina;
+          mostrarPagina(pagina);
+          renderizarPaginacion();
+        };
+      })(i);
+      
+      if (i === paginaActual) {
+        botonPagina.style.fontWeight = "bold";
+      }
+      
+      paginacion.appendChild(botonPagina);
+    }
+  }
+  
+  function cambiarPagina(delta) {
+    paginaActual += delta;
+    if (paginaActual < 0) paginaActual = 0;
+    if (paginaActual >= paginas.length) paginaActual = paginas.length - 1;
+    mostrarPagina(paginaActual);
+    renderizarPaginacion();
+  }
+
+
+function mostrarPagina(pagina) {
+    let contenidoTabla = ``;
+    $.each(paginas[pagina], function (i, item) {
+        contenidoTabla += `
+        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+            <div class="card">
+                <div class="image-container">
+                    <img src="${item.imagenSrc}" alt="Imagen del Inmueble">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title fs-4">${item.tituloString}</h5>
+                    <p class="card-text fs-5">$ ${item.precioString} - ${item.tipoOperacionString}</p>
+                    <p class="card-title fs-5">${item.provinciaString}, ${item.localidadString} - ${item.direccionString} ${item.nroDireccionString}</p>
+                    <div class="container d-flex justify-content-end">
+                    <a href="Inmuebles/Detalle/${item.inmuebleID}" class="btn btn-primary">Ver más</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        `;
+    });
+    document.getElementById("publicaciones").innerHTML = contenidoTabla;
+    hideLoadingScreen();
+}
+
+
 
 $(document).ready(function() {
     // Ejecutar la búsqueda cuando se haga clic en el ícono de búsqueda

@@ -314,3 +314,7 @@ input[type="range"] {
   color: white;
   background-color: #004879;
 }
+
+.botonera-pagination{
+  position: absolute;
+}

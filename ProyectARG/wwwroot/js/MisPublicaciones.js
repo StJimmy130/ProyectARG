@@ -22,10 +22,10 @@ function renderizarTabla(publicaciones) {
   $.each(publicaciones, function (i, item) {
     tabla += `
           <tr>
-              <td>${item.tituloString}</td>
-              <td>${item.precioString}</td>
-              <td>${item.provinciaString}, ${item.localidadString}-${item.direccionString}</td>
-              <td>${item.tipoOperacionString}</td>
+              <td><p>${item.tituloString}</p></td>
+              <td><p>${item.precioString}</p></td>
+              <td><p>${item.provinciaString}, ${item.localidadString}-${item.direccionString}</p></td>
+              <td><p>${item.tipoOperacionString}</p></td>
               <td><button type="button" class="btn btn-primary" onclick="cargarInformacion(${item.inmuebleID})">Administrar</button></td>
           </tr>
       `;
