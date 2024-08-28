@@ -147,9 +147,7 @@ function renderizarPaginacion() {
     
     for (var i = 0; i < paginas.length; i++) {
       var botonPagina = document.createElement("button");
-      botonPagina.className = "btn btn-link";
-      botonPagina.style.padding = "5px";
-      botonPagina.style.margin = "0 2px";
+      botonPagina.className = "btn btn-link pagination-item";
       botonPagina.textContent = i + 1;
       botonPagina.onclick = (function(pagina) {
         return function() {
@@ -180,7 +178,7 @@ function mostrarPagina(pagina) {
     let contenidoTabla = ``;
     $.each(paginas[pagina], function (i, item) {
         contenidoTabla += `
-        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+        <div class="col-lg-4 col-md-6 col-sm-12 mb-4 activo">
             <div class="card">
                 <div class="image-container">
                     <img src="${item.imagenSrc}" alt="Imagen del Inmueble">
@@ -208,7 +206,7 @@ $(document).ready(function() {
     $('#searchButton').on('click', function() {
         var searchQuery = $('#buscadorPorTitulo').val().toLowerCase();
 
-        $('#publicaciones .card').filter(function() {
+        $('#publicaciones .activo').filter(function() {
             // Filtra las tarjetas en base al texto dentro de <h5> con la clase "fs-4"
             $(this).toggle($(this).find('h5.fs-4').text().toLowerCase().indexOf(searchQuery) > -1);
         });

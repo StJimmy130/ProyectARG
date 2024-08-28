@@ -316,5 +316,21 @@ input[type="range"] {
 }
 
 .botonera-pagination{
-  position: absolute;
+  margin: 5px;
+}
+.pagination-item{
+  height: 2.2rem;
+  width: 2.2rem;
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+  margin: 0 2px;
+  padding: 5px;
+  border-radius: 50%;
+  background-color: #e5e5e5;
+}
+
+.pagination-item:hover{
+  background-color: #fff;
+  color: rgb(33, 32, 32);
 }
