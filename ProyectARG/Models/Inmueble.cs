@@ -91,3 +91,11 @@ public class ImagenVista
     public int ImagenID { get; set; }
     public string? ImagenSrc { get; set; }
 }
+
+public class GetDataInmueble{
+    public int ProvinciaID { get; set; }
+    public int LocalidadID { get; set; }
+    public Operacion TipoOperacion { get; set; }
+    public TipoInmueble TipoInmueble { get; set; }
+
+    }

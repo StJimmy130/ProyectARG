@@ -21,14 +21,59 @@ public class MisPublicacionesController : Controller
 
     public IActionResult Index(int? UsuarioID)
     {
+            var selectListItemsOperacion = new List<SelectListItem>
+    {
+        new SelectListItem { Value = "0", Text = "[Tipo de operación...] *" }
+    };
+
+        var enumValuesOperacion = Enum.GetValues(typeof(Operacion)).Cast<Operacion>();
+
+        foreach (var value in enumValuesOperacion)
+        {
+            selectListItemsOperacion.Add(new SelectListItem
+            {
+                Value = ((int)value).ToString(),
+                Text = SplitCamelCase(value.ToString())
+            });
+        }
+
+        var selectListItemsTipoInmueble = new List<SelectListItem>
+    {
+        new SelectListItem { Value = "0", Text = "[Tipo de inmueble...] *" }
+    };
+
+        var enumValuesTipoInmueble = Enum.GetValues(typeof(TipoInmueble)).Cast<TipoInmueble>();
+
+        foreach (var value in enumValuesTipoInmueble)
+        {
+            selectListItemsTipoInmueble.Add(new SelectListItem
+            {
+                Value = ((int)value).ToString(),
+                Text = SplitCamelCase(value.ToString())
+            });
+        }
+
+        var provincias = _context.Provincias.ToList();
+        var localidades = _context.Localidades.ToList();
+
+        provincias.Add(new Provincia { ProvinciaID = 0, Nombre = "[Provincia...] *" });
+        ViewBag.ProvinciaID = new SelectList(provincias.OrderBy(c => c.Nombre), "ProvinciaID", "Nombre");
+
+        localidades.Add(new Localidad { LocalidadID = 0, Nombre = "[Localidad...] *" });
+        ViewBag.LocalidadID = new SelectList(localidades.OrderBy(c => c.Nombre), "LocalidadID", "Nombre");
+
+        ViewBag.Operaciones = selectListItemsOperacion;
+        ViewBag.TiposInmueble = selectListItemsTipoInmueble;
+
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        
+
         UsuarioID = _context.Usuarios
                 .Where(t => t.CuentaID == userId)
                 .Select(t => t.UsuarioID) // Proyecta solo el campo UsuarioID
-                .SingleOrDefault();;
+                .SingleOrDefault(); ;
 
-                ViewBag.UsuarioID = UsuarioID;
+        ViewBag.UsuarioID = UsuarioID;
+
         return View();
 
     }

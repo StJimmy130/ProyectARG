@@ -153,6 +153,24 @@ public class InmueblesController : Controller
         return Json(inmuebleDetalleMostrar);
     }
 
+    public JsonResult GetDataInmueble(int InmuebleID){
+
+        List<GetDataInmueble> inmuebleMostrar = new List<GetDataInmueble>();
+
+        var inmueble = _context.Inmuebles.Where(t => t.InmuebleID == InmuebleID).SingleOrDefault();
+        var localidad = _context.Localidades.Where(t => t.LocalidadID == inmueble.LocalidadID).SingleOrDefault();
+
+        var vistaDataInmueble = new GetDataInmueble{
+            ProvinciaID = localidad.ProvinciaID,
+            LocalidadID = inmueble.LocalidadID,
+            TipoInmueble = inmueble.TipoInmueble,
+            TipoOperacion = inmueble.TipoOperacion,
+        };
+
+        inmuebleMostrar.Add(vistaDataInmueble);
+        return Json(inmuebleMostrar);
+    }
+
 
 
     public JsonResult GuardarPublicacion(int InmuebleID, int LocalidadID, string? Barrio, string? Titulo,
