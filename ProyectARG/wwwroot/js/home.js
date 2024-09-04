@@ -240,15 +240,47 @@ function updatePriceRange() {
 
   const minPrice = parseInt(minPriceInput.value);
   const maxPriceInput = document.getElementById("max-price-input");
+  const maxPriceRange = document.getElementById("max-price");
   const maxPrice = parseInt(maxPriceInput.value);
 
-  // Asegurarse de que el valor mínimo no sea mayor al máximo
-  if (minPrice >= maxPrice) {
-    minPriceInput.value = maxPrice - minPriceInput.step;
+  // Si el valor del precio máximo es 0, permitimos la edición libre del precio mínimo
+  if (maxPrice === 0) {
+    minPriceInput.removeAttribute("max");
+    minPriceRange.removeAttribute("max");
+
+    // Resetear el mínimo del input de precio máximo para que no tenga restricciones
+    maxPriceInput.min = 0;
+    maxPriceRange.min = 0;
+  } else {
+    // Si el valor máximo no es 0, ajustamos el mínimo del input máximo al valor del mínimo actual
+    maxPriceInput.min = minPrice;
+    maxPriceRange.min = minPrice;
+
+    // Asegurarse de que el valor mínimo no supere al máximo
+    if (minPrice >= maxPrice) {
+      minPriceInput.value = maxPrice - parseInt(minPriceInput.step);
+    }
   }
 
   // Actualizar el valor del input range del precio mínimo
   minPriceRange.value = minPriceInput.value;
+  updateMinPrice()
+  
+}
+
+function updateMinPrice() {
+  const minPriceInput = document.getElementById("min-price-input");
+  const maxPriceInput = document.getElementById("max-price-input");
+  const minPriceRange = document.getElementById("min-price");
+  const maxPriceRange = document.getElementById("max-price");
+
+  const minPrice = parseInt(minPriceInput.value);
+
+  console.log(minPrice);
+
+  maxPriceInput.min = minPrice;
+  maxPriceRange.min = minPrice;
+  minPriceRange.max = minPrice;
 }
 
 function updateMaxPrice() {
