@@ -36,13 +36,16 @@ ViewData["Title"] = "Home Page";
                 <input type="checkbox" value="2" class="ui-checkbox">Casas
               </div>
               <div>
-                <input type="checkbox" value="4" class="ui-checkbox">Departamentos
+                <input type="checkbox" value="5" class="ui-checkbox">Departamentos
               </div>
               <div>
-                <input type="checkbox" value="12" class="ui-checkbox">Lotes
+                <input type="checkbox" value="4" class="ui-checkbox">Cabañas
               </div>
               <div>
-                <input type="checkbox" value="8" class="ui-checkbox">Locales
+                <input type="checkbox" value="13" class="ui-checkbox">Lotes
+              </div>
+              <div>
+                <input type="checkbox" value="9" class="ui-checkbox">Locales
               </div>
               <div>
                 <input type="checkbox" value="1" class="ui-checkbox">Campo
@@ -51,22 +54,22 @@ ViewData["Title"] = "Home Page";
                 <input type="checkbox" value="3" class="ui-checkbox">Cochera
               </div>
               <div>
-                <input type="checkbox" value="5" class="ui-checkbox">Depósito
+                <input type="checkbox" value="6" class="ui-checkbox">Depósito
               </div>
               <div>
-                <input type="checkbox" value="6" class="ui-checkbox">Galpon
+                <input type="checkbox" value="7" class="ui-checkbox">Galpon
               </div>
               <div>
-                <input type="checkbox" value="7" class="ui-checkbox">Fondo de comercio
+                <input type="checkbox" value="8" class="ui-checkbox">Fondo de comercio
               </div>
               <div>
-                <input type="checkbox" value="9" class="ui-checkbox">Oficinas
+                <input type="checkbox" value="10" class="ui-checkbox">Oficinas
               </div>
               <div>
-                <input type="checkbox" value="11" class="ui-checkbox">Qunichos
+                <input type="checkbox" value="12" class="ui-checkbox">Qunichos
               </div>
               <div>
-                <input type="checkbox" value="10" class="ui-checkbox">Otros
+                <input type="checkbox" value="11" class="ui-checkbox">Otros
               </div>
             </div>
           </div>
@@ -82,10 +85,10 @@ ViewData["Title"] = "Home Page";
               <!-- Opciones de rango de precio -->
               <label for="min-price">Precio mínimo:</label>
               <div>
-                $<input type="number" id="min-price-input" name="min-price-input" min="0" max="250000000" step="10"
+                $<input type="number" id="min-price-input" name="min-price-input" min="0" step="10"
                   value="0" oninput="updatePriceRange()">
               </div>
-              <input type="range" id="min-price" name="min-price" min="0" max="250000000" step="10" value="0"
+              <input type="range" id="min-price" name="min-price" min="0" step="10" value="0"
                 oninput="syncInput('min-price')">
 
               <label for="max-price">Precio máximo:</label>
@@ -137,8 +140,8 @@ ViewData["Title"] = "Home Page";
               <select class="form-control" id="OperacionID">
                 <option value="0">Seleccione</option>
                 <option value="1">Alquiler</option>
-                <option value="2">Alquiler temporal</option>
-                <option value="3">Venta</option>
+                <option value="3">Alquiler temporal</option>
+                <option value="2">Venta</option>
               </select>
             </div>
           </div>
