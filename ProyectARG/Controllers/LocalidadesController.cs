@@ -46,7 +46,7 @@ public class LocalidadesController : Controller
             bool mostrar = true;
             var provincia = provincias.Where(t => t.ProvinciaID == localidad.ProvinciaID).Single();
 
-           if ((ProvinciaID ?? 0) != 0 && localidad.ProvinciaID != ProvinciaID)
+            if ((ProvinciaID ?? 0) != 0 && localidad.ProvinciaID != ProvinciaID)
             {
                 mostrar = false;
             }

@@ -208,3 +208,22 @@ td p{
 .eliminar{
     background-color: rgb(212, 7, 7);
 }
+
+/* ESTILOS MODAL EDITAR PUBLICACION */
+
+.modal-content{
+    background-color: var(--container-color);
+    border-radius: 5px;
+    font-size: 18px;
+    border-color: var(--side-nav);
+    color: var(--text-color2);
+}
+.modal-header{
+    text-align: center;
+}
+.titulo-modal{
+    color: var(--text-color2);
+    font-size: 24px;
+    font-weight: 400;
+    text-align: center;
+}

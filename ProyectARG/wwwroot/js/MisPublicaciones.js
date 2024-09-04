@@ -192,6 +192,7 @@ function AbrirModalEditar(inmuebleID) {
 
       
     },
+    
 
     // código a ejecutar si la petición falla;
     // son pasados como argumentos a la función
@@ -216,7 +217,8 @@ function AbrirModalEditar(inmuebleID) {
       document.getElementById("Operacion").value  = publicacion.tipoOperacion;
       document.getElementById("TipoInmueble").value  = publicacion.tipoInmueble;
 
-      $("#ModalTipoEjercicio").modal("show");
+      $("#ModalEditarPublicacion").modal("show");
+      
     },
   });
 }
