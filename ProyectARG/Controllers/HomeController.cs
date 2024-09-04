@@ -120,10 +120,7 @@ public class HomeController : Controller
             var provincia = Provincias.Where(t => t.ProvinciaID == localidad.ProvinciaID).SingleOrDefault();
 
 
-            if (provinciaID != 0 && localidad.ProvinciaID != provinciaID)
-            {
-                mostrar = false;
-            }
+            
 
             if (Inmueble.Precio > precioMaximo || Inmueble.Precio < precioMinimo)
             {
@@ -135,6 +132,11 @@ public class HomeController : Controller
             }
 
             if (Operacion != 0 && Operacion != Inmueble.TipoOperacion)
+            {
+                mostrar = false;
+            }
+
+            if (provinciaID != 0 && provincia.ProvinciaID != provinciaID)
             {
                 mostrar = false;
             }
