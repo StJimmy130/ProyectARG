@@ -1,0 +1,95 @@
+@{
+  ViewData["Title"] = "Provincias";
+}
+<link rel="stylesheet" href="~/css/Funciones.css">
+
+
+
+<div class="container mt-5">
+  <div class="row">
+    <!-- Sección de Provincias -->
+    <div class="col-lg-4 col-md-4 col-sm-12 mb-4">
+      <div class="contenedor">
+      <div class="mb-3">
+        
+        <input type="hidden" value="0" id="ProvinciaIDAdd">
+      </div>
+      <div class="mb-3">
+        <label for="ProvinciaNombre">Nombre de la provincia:</label>
+        <input type="text" id="ProvinciaNombre" class="form-control">
+      </div>
+      <div class="mb-3">
+        <button type="button" class="btn btn-success" onclick="GuardarProvincia()">Guardar Provincia</button>
+        <button class="btn btn-secondary" onclick="ListadoDeProvincias()">Recargar</button>
+      </div>
+      <div class="Tbody-class">
+        <table class="table" id="table1">
+          <thead>
+            <tr>
+              <th scope="col">Nombre</th>
+              <th scope="col">Editar</th>
+              <th scope="col">Eliminar</th>
+            </tr>
+          </thead>
+          <div class="Tbody-class">
+          <tbody class="tabla" id="tbodyProvincias">
+          </tbody>
+          </div>
+        </table>
+      </div>
+      </div>
+    </div>
+
+    <!-- Sección de Localidades -->
+    <div class="col-lg-8 col-md-8 col-sm-12 mb-4">
+      <div class="contenedor">
+      <div class="row mb-3">
+        <div class="col-12">
+          
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-6">
+          <input type="hidden" value="0" id="LocalidadID">
+          <label for="ProvinciaID">Seleccione la Provincia:</label>
+          @Html.DropDownList("ProvinciaID", null, htmlAttributes: new { @class = "form-control" , @onchange = "ListadoDeLocalidades()" })
+        </div>
+        <div class="col-6">
+          <label for="LocalidadNombre">Nombre de la localidad:</label>
+          <input type="text" id="LocalidadNombre" class="form-control">
+        </div>
+      </div>
+      <div class="mb-3">
+        <button type="button" class="btn btn-success" onclick="GuardarLocalidad(), LimpiarModals()">Guardar Localidad</button>
+        <button class="btn btn-secondary" onclick="ListadoDeLocalidades()">Recargar</button>
+      </div>
+      <div class="Tbody-class">
+        <table class="table" id="table2">
+          <thead>
+            <tr>
+              <th scope="col">Nombre</th>
+              <th scope="col">Provincia</th>
+              <th scope="col">Editar</th>
+              <th scope="col">Eliminar</th>
+            </tr>
+          </thead>
+            <tbody id="tbodyLocalidades" class="tabla">
+            </tbody>
+        </table>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+@section Scripts {
+  <script src="~/js/Provincias.js"></script>
+  <script src="~/js/Localidades.js"></script>
+
+}

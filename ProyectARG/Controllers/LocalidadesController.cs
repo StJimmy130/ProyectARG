@@ -17,7 +17,13 @@ public class LocalidadesController : Controller
         _context = context;
     }
 
+
     public IActionResult Index()
+    {
+        return View();
+    }
+
+    public IActionResult Localidades()
     {
         var provincias = _context.Provincias.ToList();
         provincias.Add(new Provincia{ProvinciaID = 0, Nombre = "[SELECCIONE...]"});
