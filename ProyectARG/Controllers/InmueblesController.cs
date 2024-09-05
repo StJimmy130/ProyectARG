@@ -266,20 +266,37 @@ public class InmueblesController : Controller
     }
 
 
-public JsonResult suspenderPublicacion(int InmuebleID){
+public JsonResult SuspenderPublicacion(int InmuebleID){
 
     var inmueble = _context.Inmuebles.Find(InmuebleID);
 
-    string resultado = "";
+
+       var resultado = new
+    {
+        Titulo = "",
+        Error = "",
+        estado = false
+    };
 
     if(inmueble.Activo == true){
         inmueble.Activo = false;
-        resultado = "Publicacion suspendida";
+        resultado = new
+        {
+            Titulo = "Publicacion suspendida",
+            Error = "Publicacion suspendida con exito",
+            estado = true
+        };
     }
     else{
         inmueble.Activo = true;
-        resultado = "Publicacion activada";
+         resultado = new
+        {
+            Titulo = "Publicacion activada",
+            Error = "Publicacion activada con exito",
+            estado = true
+        };
     }
+ 
     _context.SaveChanges();
     return Json(resultado);
 }
@@ -290,7 +307,7 @@ public JsonResult suspenderPublicacion(int InmuebleID){
         {
             Titulo = "",
             Error = "",
-            eliminado = false
+            estado = false
         };
         var eliminarPublicacion = _context.Inmuebles.Find(InmuebleID);
         if (eliminarPublicacion.UsuarioID == UsuarioID)
@@ -302,7 +319,7 @@ public JsonResult suspenderPublicacion(int InmuebleID){
             {
                 Titulo = "Felicitaciones!!!",
                 Error = "La publicacion a sido eliminada correctamente",
-                eliminado = true
+                estado = true
             };
         }
         else
@@ -311,7 +328,7 @@ public JsonResult suspenderPublicacion(int InmuebleID){
             {
                 Titulo = "Hubo un problema",
                 Error = "Usted no es propietario de esta publicacion",
-                eliminado = false
+                estado = false
             };
         }
 

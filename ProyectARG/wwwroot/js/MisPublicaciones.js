@@ -20,6 +20,7 @@ function getMisPublicaciones() {
 function renderizarTabla(publicaciones) {
   var tabla = ``;
   $.each(publicaciones, function (i, item) {
+    if (item.activo == true) {
     tabla += `
           <tr>
               <td><p>${item.tituloString}</p></td>
@@ -29,6 +30,18 @@ function renderizarTabla(publicaciones) {
               <td><button type="button" class="btn btn-primary" onclick="cargarInformacion(${item.inmuebleID})">Administrar</button></td>
           </tr>
       `;
+    }
+    else{
+      tabla += `
+          <tr class="table-danger">
+              <td><p>${item.tituloString}</p></td>
+              <td><p>${item.precioString}</p></td>
+              <td><p>${item.provinciaString}, ${item.localidadString}-${item.direccionString}</p></td>
+              <td><p>${item.tipoOperacionString}</p></td>
+              <td><button type="button" class="btn btn-primary" onclick="cargarInformacion(${item.inmuebleID})">Administrar</button></td>
+          </tr>
+      `
+    }
   });
   document.getElementById("misPublicaciones").innerHTML = tabla;
 }
@@ -52,6 +65,7 @@ function cargarInformacion(inmuebleID) {
     type: "POST",
     dataType: "json",
     success: function (misPublicaciones) {
+      console.log(misPublicaciones);
       $.each(misPublicaciones, function (i, item) {
         console.log(item);
         document.getElementById("main-title").innerHTML = item.tituloString;
@@ -62,9 +76,23 @@ function cargarInformacion(inmuebleID) {
           .getElementById("btn-eliminar")
           .setAttribute(
             "onclick",
-            `ValidarEliminacionInmueble(${item.inmuebleID})`
+            `ValidarEliminacionInmueble(${item.inmuebleID}, 'eliminar')`
           );
+          if(item.activo == true){
         document
+          .getElementById("btn-suspender")
+          .setAttribute("onclick", `ValidarEliminacionInmueble(${item.inmuebleID}, 'suspender')`);
+          document
+          .getElementById("btn-suspender").innerHTML = "suspender";
+          }
+          else{
+            document
+          .getElementById("btn-suspender")
+          .setAttribute("onclick", `ValidarEliminacionInmueble(${item.inmuebleID}, 'suspender')`);
+          document
+          .getElementById("btn-suspender").innerHTML = "activar";
+          }
+          document
           .getElementById("btn-editar")
           .setAttribute("onclick", `AbrirModalEditar(${item.inmuebleID})`);
         document.getElementById("main-img").src = item.imagenes[0].imagenSrc;
@@ -223,17 +251,24 @@ function AbrirModalEditar(inmuebleID) {
   });
 }
 
-function ValidarEliminacionInmueble(inmuebleID) {
+function ValidarEliminacionInmueble(inmuebleID, Operacion) {
   icon.innerHTML = '<i class="bx bxs-error-circle"></i>';
   icon.classList.add("alert-svg");
   titulo.innerHTML = "Atencion!!!";
-  descripcion.innerHTML = `<label>¿Esta seguro que desea eliminar esta publicación? no podran recuperarse sus datos</label>`;
+  descripcion.innerHTML = `<label>¿Esta seguro que desea ${Operacion} esta publicación?</label>`;
   aceptar.style.display = "block";
   background.classList.add("alert");
   alerta.classList.add("enter-alert");
-  aceptar.setAttribute("onclick", `eliminarInmueble(${inmuebleID})`);
   cancelar.setAttribute("onclick", `hiddenAlert()`);
   cancelar.style.display = "block";
+
+  if(Operacion == "eliminar"){
+    aceptar.setAttribute("onclick", `eliminarInmueble(${inmuebleID})`);
+  }
+  else if (Operacion == "suspender"){
+    aceptar.setAttribute("onclick", `suspenderInmueble(${inmuebleID})`);
+  }
+
   alerta.classList.add("enter-alert");
 }
 function eliminarInmueble(inmuebleID) {
@@ -253,6 +288,44 @@ function eliminarInmueble(inmuebleID) {
         background.classList.add("success");
       } else {
         icon.innerHTML = '<i class="bx bxs-x-circle"></i>';
+        icon.classList.add("denied-svg");
+        background.classList.add("denied");
+      }
+
+      titulo.innerHTML = `${resultado.titulo}`;
+      descripcion.innerHTML = `<label>${resultado.error}</label>`;
+      aceptar.style.display = "block";
+      aceptar.setAttribute("onclick", `hiddenAlert()`);
+      cancelar.style.display = "none";
+
+      getMisPublicaciones();
+      setTimeout(function () {
+        hiddenAlert();
+      }, 3000);
+    },
+
+    error: function (xhr, status) {
+      console.log("Disculpe, existió un problema al cargar el listado");
+    },
+  });
+}
+
+function suspenderInmueble(inmuebleID) {
+  $.ajax({
+    url: "/Inmuebles/SuspenderPublicacion",
+    data: { inmuebleID: inmuebleID },
+    type: "POST",
+    dataType: "json",
+
+    success: function (resultado) {
+      icon.classList.remove("alert-svg", "succes-svg", "denied-svg");
+      background.classList.remove("alert");
+      if (resultado.estado === true) {
+        icon.classList.add("succes-svg");
+        icon.innerHTML = "<i class='bx bxs-lock'></i>";
+        background.classList.add("success");
+      } else {
+        icon.innerHTML = '<i class="bx bxs-lock-open"></i>';
         icon.classList.add("denied-svg");
         background.classList.add("denied");
       }
