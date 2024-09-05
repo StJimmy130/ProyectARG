@@ -17,7 +17,13 @@ public class LocalidadesController : Controller
         _context = context;
     }
 
+
     public IActionResult Index()
+    {
+        return View();
+    }
+
+    public IActionResult Localidades()
     {
         var provincias = _context.Provincias.ToList();
         provincias.Add(new Provincia{ProvinciaID = 0, Nombre = "[SELECCIONE...]"});
@@ -46,7 +52,7 @@ public class LocalidadesController : Controller
             bool mostrar = true;
             var provincia = provincias.Where(t => t.ProvinciaID == localidad.ProvinciaID).Single();
 
-           if ((ProvinciaID ?? 0) != 0 && localidad.ProvinciaID != ProvinciaID)
+            if ((ProvinciaID ?? 0) != 0 && localidad.ProvinciaID != ProvinciaID)
             {
                 mostrar = false;
             }

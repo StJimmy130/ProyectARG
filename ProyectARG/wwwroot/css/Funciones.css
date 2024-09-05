@@ -1,21 +1,162 @@
+/* HOME FUNCIONES */
+.conteiner-funciones{
+    min-height: 70vh;
+    padding-top: 100px;
+}
+
+:root{
+    --fondo-card: #ffffff;
+    --color-title: #1198ff;
+    --color-shadow: #000000;
+    --text-body: #505050;
+  }
+  body.dark{
+    --fondo-card: #505050;
+    --color-title: #1f7fc9;
+    --color-shadow: #ffffffff;
+    --text-body: #adadad;
+  }
+
+
+
+.contenedor-card-funcion{
+  justify-content: space-around;
+  margin-left: 30px;
+  margin-right: 30px;  
+}
+.link-card{
+  text-decoration: none;
+}
+.notification {
+    display: flex;
+    flex-direction: column;
+    isolation: isolate;
+    position: relative;
+    width: 18rem;
+    height: 8rem;
+    outline: solid 1px var(--color-title);
+    background-color: var(--fondo-card);
+    border-radius: 15px;
+    overflow: hidden;
+    font-size: 16px;
+    --gradient: linear-gradient(to bottom, #2eadff, #3d83ff, #7e61ff);
+
+  }
+  
+  .notification:before {
+    position: absolute;
+    content: "";
+    margin-right: 5px;
+    inset: 0.0625rem;
+    border-radius: 5px;
+    background: var(--fondo-card);
+    z-index: 2
+  }
+  
+  .notification:after {
+    position: absolute;
+    content: "";
+    width: 5px;
+    margin-right: 5px;
+    inset: 0.65rem auto 0.65rem 0.5rem;
+    border-radius: 5px;
+    background: var(--gradient);
+    transition: transform 300ms ease;
+    z-index: 4;
+  }
+  
+  .notification:hover:after {
+    transform: translateX(0.25rem)
+  }
+  
+  .notititle {
+    color: var(--color-title);
+    padding: 0.65rem 0.25rem 0.4rem 1.25rem;
+    font-weight: 500;
+    font-size: 1.1rem;
+    transition: transform 300ms ease;
+    z-index: 5;
+  }
+  
+  .notification:hover .notititle {
+    transform: translateX(0.15rem)
+  }
+  
+  .notibody {
+    color: var(--text-body);
+    padding: 0 1.25rem;
+    transition: transform 300ms ease;
+    z-index: 5;
+  }
+  
+  .notification:hover .notibody {
+    transform: translateX(0.25rem)
+  }
+  
+  .notiglow,
+  .notiborderglow {
+    position: absolute;
+    width: 20rem;
+    height: 20rem;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle closest-side at center, var(--color-shadow), transparent);
+    opacity: 0;
+    transition: opacity 300ms ease;
+  }
+  
+  .notiglow {
+    z-index: 3;
+  }
+  
+  .notiborderglow {
+    z-index: 1;
+  }
+  
+  .notification:hover .notiglow {
+    opacity: 0.1
+  }
+  
+  .notification:hover .notiborderglow {
+    opacity: 0.1
+  }
+  
+  .note {
+    position: fixed;
+    top: 80%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    font-size: 0.9rem;
+    width: 75%;
+  }
+
+.notiicon{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+
+
+/* PROVINCIAS Y LOCALIDADES */
 .contenedor {
     background-color: var(--container-color);
-    border-radius: 5px;
     width: 100%;
     color: var(--text-color2);
     min-width: 300px;
     height: 100%;
     padding: 15px;
     margin-top: 3rem;
+    border-radius: 8px;
 }
-
-
 .tabla{
     border-radius: 15px;
     color: var(--text-color2);
 }
-
-
 
 .Tbody-class{
     display: block;
