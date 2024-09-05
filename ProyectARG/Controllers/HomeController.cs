@@ -94,7 +94,7 @@ public class HomeController : Controller
     {
         List<VistaInmueble> inmueblesMostrar = new List<VistaInmueble>();
 
-        var Inmuebles = _context.Inmuebles.ToList();
+        var Inmuebles = _context.Inmuebles.Where(i => i.Activo == true).ToList();
         var Imagenes = _context.Imagenes.ToList(); // Traer todas las imágenes
 
 
