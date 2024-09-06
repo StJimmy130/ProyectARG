@@ -55,7 +55,8 @@ footer{
 .input-form {
   width: 100%;
   border: none; /* Quita todos los bordes */
-  border-bottom: 1px solid var(--border-color); /* Agrega solo el borde inferior */
+  border-bottom: 2px solid var(--border-color); /* Agrega solo el borde inferior */
+  border-radius: 5px;
   padding: 5px;
   color: var(--text-placeholder);
   margin-top: 10px; /* Ajusta el padding si es necesario */

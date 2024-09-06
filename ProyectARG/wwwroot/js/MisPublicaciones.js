@@ -33,7 +33,7 @@ function renderizarTabla(publicaciones) {
     }
     else{
       tabla += `
-          <tr class="table-danger">
+          <tr class="item-suspendido">
               <td><p>${item.tituloString}</p></td>
               <td><p>${item.precioString}</p></td>
               <td><p>${item.provinciaString}, ${item.localidadString}-${item.direccionString}</p></td>
@@ -162,12 +162,11 @@ function GuardarPublicacion() {
     contentType: false,
     processData: false,
     success: function (resultado) {
-      if (resultado != "") {
+      if (resultado.estado == true) {
         icon.classList.add("succes-svg");
         icon.innerHTML = '<i class="bx bxs-check-circle"></i>';
-
         document.getElementById("alert-title").innerHTML = "Felicitaciones!!!";
-        document.getElementById("alert-description").innerHTML = resultado;
+        document.getElementById("alert-description").innerHTML = resultado.texto;
         aceptar.style.display = "block";
         background.classList.add("success");
         alerta.classList.add("enter-alert");
@@ -176,7 +175,23 @@ function GuardarPublicacion() {
           hiddenAlert();
         }, 3000);
       }
-      ListadoPublicaciones();
+      else {
+        icon.classList.add("denied-svg");
+        icon.innerHTML = '<i class="bx bxs-x-circle"></i>';
+        document.getElementById("alert-title").innerHTML = "Hay un problema";
+        document.getElementById("alert-description").innerHTML = resultado.texto;
+        aceptar.style.display = "block";
+        background.classList.add("denied");
+        alerta.classList.add("enter-alert");
+
+        setTimeout(function () {
+          hiddenAlert();
+        }, 3000);
+      }
+      setTimeout(function () {
+        ListadoPublicaciones();
+      }, 500);
+      
     },
     error: function (err) {
       console.error(err);
@@ -282,7 +297,7 @@ function eliminarInmueble(inmuebleID) {
     success: function (resultado) {
       icon.classList.remove("alert-svg", "succes-svg", "denied-svg");
       background.classList.remove("alert");
-      if (resultado.eliminado === true) {
+      if (resultado.estado === true) {
         icon.classList.add("succes-svg");
         icon.innerHTML = '<i class="bx bxs-check-circle"></i>';
         background.classList.add("success");

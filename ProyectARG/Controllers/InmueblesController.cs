@@ -181,7 +181,14 @@ public class InmueblesController : Controller
             bool Cochera, string? Direccion, int NroDireccion, string? Descripcion, int? UsuarioID,
             List<IFormFile> Imagenes)
     {
-        string resultado = "";
+
+        var resultado = new
+        {
+
+            texto = "",
+            estado = false
+        };
+
 
         if (InmuebleID != null)
         {
@@ -212,7 +219,12 @@ public class InmueblesController : Controller
 
                     _context.Add(inmueble);
                     _context.SaveChanges();
-                    resultado = " guardado correctamente";
+
+                    resultado = new
+                    {
+                        texto = " Guardado correctamente",
+                        estado = true
+                    };
                 }
                 else if (InmuebleID != 0 && UsuarioID == inmueble.UsuarioID)
                 {
@@ -233,10 +245,20 @@ public class InmueblesController : Controller
                     inmueble.NroDireccion = NroDireccion;
                     inmueble.Descripcion = Descripcion;
                     _context.SaveChanges();
-                    resultado = " editado correctamente";
+                    resultado = new
+                    {
+                        texto = " Editado correctamente",
+                        estado = true
+                    };
                 }
-                else{
-                    resultado = "No tiene permisos para editar esta publicacion";
+                else
+                {
+                    resultado = new
+                    {
+                        texto = "No tiene permisos para editar esta publicacion",
+                        estado = false
+                    };
+                    
                 }
 
                 if (Imagenes != null && Imagenes.Count > 0)
@@ -266,40 +288,43 @@ public class InmueblesController : Controller
     }
 
 
-public JsonResult SuspenderPublicacion(int InmuebleID){
-
-    var inmueble = _context.Inmuebles.Find(InmuebleID);
-
-
-       var resultado = new
+    public JsonResult SuspenderPublicacion(int InmuebleID)
     {
-        Titulo = "",
-        Error = "",
-        estado = false
-    };
 
-    if(inmueble.Activo == true){
-        inmueble.Activo = false;
-        resultado = new
+        var inmueble = _context.Inmuebles.Find(InmuebleID);
+
+
+        var resultado = new
         {
-            Titulo = "Publicacion suspendida",
-            Error = "Publicacion suspendida con exito",
-            estado = true
+            Titulo = "",
+            Error = "",
+            estado = false
         };
-    }
-    else{
-        inmueble.Activo = true;
-         resultado = new
+
+        if (inmueble.Activo == true)
         {
-            Titulo = "Publicacion activada",
-            Error = "Publicacion activada con exito",
-            estado = true
-        };
+            inmueble.Activo = false;
+            resultado = new
+            {
+                Titulo = "Publicacion suspendida",
+                Error = "Publicacion suspendida con exito",
+                estado = true
+            };
+        }
+        else
+        {
+            inmueble.Activo = true;
+            resultado = new
+            {
+                Titulo = "Publicacion activada",
+                Error = "Publicacion activada con exito",
+                estado = true
+            };
+        }
+
+        _context.SaveChanges();
+        return Json(resultado);
     }
- 
-    _context.SaveChanges();
-    return Json(resultado);
-}
 
     public JsonResult EliminarPublicacion(int InmuebleID, int UsuarioID)
     {
