@@ -335,16 +335,21 @@ function suspenderInmueble(inmuebleID) {
     success: function (resultado) {
       icon.classList.remove("alert-svg", "succes-svg", "denied-svg");
       background.classList.remove("alert");
+      if(resultado.titulo != "Hubo un problema"){
       if (resultado.estado === true) {
-        icon.classList.add("succes-svg");
         icon.innerHTML = "<i class='bx bxs-lock'></i>";
-        background.classList.add("success");
       } else {
         icon.innerHTML = '<i class="bx bxs-lock-open"></i>';
+      }
+    }
+      else{
+        icon.innerHTML = '<i class="bx bxs-x-circle"></i>';
         icon.classList.add("denied-svg");
         background.classList.add("denied");
       }
 
+      icon.classList.add("succes-svg");
+      background.classList.add("success");
       titulo.innerHTML = `${resultado.titulo}`;
       descripcion.innerHTML = `<label>${resultado.error}</label>`;
       aceptar.style.display = "block";

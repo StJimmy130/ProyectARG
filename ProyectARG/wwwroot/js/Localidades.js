@@ -80,7 +80,18 @@ function GuardarLocalidad() {
         dataType: 'json',
         success: function (resultado) {
             if (resultado != "") {
-                alert(resultado)
+                icon.classList.add("succes-svg");
+                icon.innerHTML = '<i class="bx bxs-check-circle"></i>';
+        
+                document.getElementById("alert-title").innerHTML = "Felicitaciones!!!";
+                document.getElementById("alert-description").innerHTML = resultado;
+                aceptar.style.display = "block";
+                background.classList.add("success");
+                alerta.classList.add("enter-alert");
+        
+                setTimeout(function () {
+                  hiddenAlert();
+                }, 3000);
             }
             ListadoDeLocalidades();
         },
@@ -113,10 +124,19 @@ function ModalEditarLocalidad(localidadID) {
 }
 
 function ValidarEliminacionLocalidad(localidadID) {
-    var elimina = confirm("¿Esta seguro que desea eliminar esta provincia?")
-    if(elimina == true) {
-        EliminarLocalidad(localidadID)
-    }
+    icon.innerHTML = '<i class="bx bxs-error-circle"></i>';
+    icon.classList.add("alert-svg");
+    titulo.innerHTML = "Atencion!!!";
+    descripcion.innerHTML = `<label>¿Esta seguro que desea eliminar esta localidad?</label>`;
+    aceptar.style.display = "block";
+    background.classList.add("alert");
+    alerta.classList.add("enter-alert");
+    cancelar.setAttribute("onclick", `hiddenAlert()`);
+    cancelar.style.display = "block";
+    aceptar.setAttribute("onclick", `EliminarLocalidad(${localidadID})`);
+  
+  
+    alerta.classList.add("enter-alert");
 }
 
 function EliminarLocalidad(localidadID) {
@@ -127,6 +147,13 @@ function EliminarLocalidad(localidadID) {
         dataType: 'json',
 
         success: function (eliminarLocalidad) {
+            icon.innerHTML = '<i class="bx bxs-check-circle"></i>';
+    icon.classList.add("succes-svg");
+    titulo.innerHTML = "Hecho!";
+    descripcion.innerHTML = `<label>Localidad eliminada con exito</label>`;
+    aceptar.style.display = "block";
+    aceptar.setAttribute("onclick", `hiddenAlert()`);
+    background.classList.add("success");
             ListadoDeLocalidades();
         },
 

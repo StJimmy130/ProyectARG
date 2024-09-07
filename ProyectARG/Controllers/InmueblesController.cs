@@ -292,6 +292,7 @@ public class InmueblesController : Controller
     {
 
         var inmueble = _context.Inmuebles.Find(InmuebleID);
+        var Usuario = User.FindFirst(ClaimTypes.Role)?.Value;
 
 
         var resultado = new
@@ -300,8 +301,28 @@ public class InmueblesController : Controller
             Error = "",
             estado = false
         };
+        if(Usuario == "ADMINISTRADOR" && inmueble.Activo == true)
+        {
+            inmueble.Activo = false;
+            inmueble.Admin = true;
+            resultado = new
+            {
+                Titulo = "Publicacion suspendida",
+                Error = "Publicacion suspendida con exito",
+                estado = true
+            };
+        }else if( Usuario == "ADMINISTRADOR" && inmueble.Activo == false){
+             inmueble.Activo = true;
+             inmueble.Admin = true;
+            resultado = new
+            {
+                Titulo = "Publicacion activada",
+                Error = "Publicacion activada con exito",
+                estado = false
+            };
+        }
 
-        if (inmueble.Activo == true)
+        else if (inmueble.Activo == true && inmueble.Admin == false)
         {
             inmueble.Activo = false;
             resultado = new
@@ -311,13 +332,21 @@ public class InmueblesController : Controller
                 estado = true
             };
         }
-        else
+        else if (inmueble.Activo == false && inmueble.Admin == false)
         {
             inmueble.Activo = true;
             resultado = new
             {
                 Titulo = "Publicacion activada",
                 Error = "Publicacion activada con exito",
+                estado = false
+            };
+        }
+        else{
+            resultado = new
+            {
+                Titulo = "Hubo un problema",
+                Error = "La publicacion fue suspendida por un administrador",
                 estado = true
             };
         }

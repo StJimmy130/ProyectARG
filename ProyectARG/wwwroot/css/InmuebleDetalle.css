@@ -22,6 +22,7 @@ body.dark {
   margin-top: -30px;
   padding: 20px;
   border-radius: 5px;
+  min-width: 80%;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 

@@ -6,6 +6,7 @@ public class Usuario
 {
     [Key]
     public int? UsuarioID { get; set; }
+    public string? Nombre { get; set; }
     public string? Instagram { get; set; }
     public string? Facebook { get; set; }
     public int? LocalidadID { get; set; }

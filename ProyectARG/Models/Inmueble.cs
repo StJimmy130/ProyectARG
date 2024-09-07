@@ -26,6 +26,7 @@ public class Inmueble
     public string? NroDepartamento { get; set; }
     public int? UsuarioID { get; set; }
     public bool Activo { get; set; }
+    public bool Admin { get; set; }
     public DateTime FechaAlta { get; set; }
     public virtual Usuario? Usuario { get; set; }
 
