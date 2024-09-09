@@ -9,6 +9,7 @@ public class Usuario
     public string? Nombre { get; set; }
     public string? Instagram { get; set; }
     public string? Facebook { get; set; }
+    public int? Whatsapp { get; set; }
     public int? LocalidadID { get; set; }
     public string? CuentaID { get; set; }
     public virtual Localidad Localidad { get; set; }

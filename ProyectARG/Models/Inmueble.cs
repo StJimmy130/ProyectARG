@@ -10,6 +10,7 @@ public class Inmueble
     public string? Barrio { get; set; }
     public string? Titulo { get; set; } 
     public float? Precio { get; set; } 
+    public bool Moneda { get; set; }
     public int? SuperficieTotal { get; set; }
     public int? SuperficieCubierta { get; set; }
     public Operacion TipoOperacion { get; set; }
