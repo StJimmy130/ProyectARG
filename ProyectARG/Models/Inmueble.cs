@@ -30,6 +30,7 @@ public class Inmueble
     public bool Admin { get; set; }
     public DateTime FechaAlta { get; set; }
     public virtual Usuario? Usuario { get; set; }
+    public virtual Localidad? Localidad { get; set; }
 
     public virtual ICollection<Imagen>? Imagenes { get; set; }
 
@@ -64,11 +65,13 @@ public enum TipoInmueble
 public class VistaInmueble
 {
     public int InmuebleID { get; set; } 
+    public int? UsuarioID { get; set; }
+    public int LocalidadID { get; set; }
     public string? TituloString { get; set; } 
     public string? LocalidadString { get; set; } 
     public string? DireccionString { get; set; } 
     public int NroDireccionString { get; set; } 
-    public float PrecioString { get; set; } 
+    public string? PrecioString { get; set; } 
     public string? ProvinciaString { get; set; } 
     public string? TipoOperacionString { get; set; } 
     public string? TipoInmuebleString { get; set;} 

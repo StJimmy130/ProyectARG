@@ -165,7 +165,7 @@ public class HomeController : Controller
                     LocalidadString = localidad.Nombre,
                     DireccionString = Inmueble.Direccion,
                     NroDireccionString = Inmueble.NroDireccion,
-                    PrecioString = (float)Inmueble.Precio,
+                    PrecioString = Inmueble.Precio.ToString(),
                     TipoOperacionString = SplitCamelCase(Inmueble.TipoOperacion.ToString()),
                     ImagenSrc = imagenSrc // Añadir URL de la imagen
                 };

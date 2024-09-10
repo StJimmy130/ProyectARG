@@ -142,7 +142,7 @@ public class InmueblesController : Controller
                 CantidadAmbientesString = Inmueble.CantidadAmbientes.ToString(),
                 CocheraString = Inmueble.Cochera.ToString(),
                 DescripcionString = Inmueble.Descripcion,
-                PrecioString = (float)Inmueble.Precio,
+                PrecioString = Inmueble.Precio.ToString(),
                 TipoOperacionString = Inmueble.TipoOperacion.ToString(),
                 TipoInmuebleString = Inmueble.TipoInmueble.ToString(),
                 Imagenes = imagenesBase64 // Usar la lista de ImagenVista

@@ -2,6 +2,7 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using ProyectARG.Data;
 using ProyectARG.Models;
 
@@ -22,6 +23,52 @@ public class LocalidadesController : Controller
     {
         return View();
     }
+
+    public IActionResult InformePublicaciones()
+    {
+        return View();
+    }
+
+    public JsonResult InformePublicacionesPorUsuario(int? id)
+    {
+        List<VistaInmueble> informePublicacionesPorUsuarioMostrar = new List<VistaInmueble>();
+
+        var inmuebles = _context.Inmuebles.ToList();
+
+
+        var usuarios = _context.Usuarios.ToList();
+        var Provincias = _context.Provincias.ToList();
+        var Localidades = _context.Localidades.ToList();
+
+        foreach (var inmueble in inmuebles)
+        {
+
+            var usuario = usuarios.Where(t => t.UsuarioID == inmueble.UsuarioID).Single();
+            var provincia = Provincias.Where(t => t.ProvinciaID == inmueble.Localidad.ProvinciaID).Single();
+            var localidad = Localidades.Where(t => t.LocalidadID == inmueble.LocalidadID).Single();
+
+            var informePublicacionPorUsuarioMostrar = new VistaInmueble
+            {
+                InmuebleID = inmueble.InmuebleID,
+                UsuarioID = inmueble.UsuarioID,
+                LocalidadID = inmueble.LocalidadID,
+                TituloString = inmueble.Titulo,
+                LocalidadString = localidad.Nombre,
+                ProvinciaString = provincia.Nombre,           
+                BarrioString = inmueble.Barrio,
+                PrecioString = inmueble.Precio.ToString(),
+                TipoOperacionString = inmueble.TipoOperacion.ToString(),
+                TipoInmuebleString = inmueble.TipoInmueble.ToString(),
+                DireccionString = inmueble.Direccion,
+                NroDireccionString = inmueble.NroDireccion,
+            };
+            informePublicacionesPorUsuarioMostrar.Add(informePublicacionPorUsuarioMostrar);
+        }
+        informePublicacionesPorUsuarioMostrar = informePublicacionesPorUsuarioMostrar.ToList();
+
+        return Json(informePublicacionesPorUsuarioMostrar);
+    }
+
 
     public IActionResult Localidades()
     {
