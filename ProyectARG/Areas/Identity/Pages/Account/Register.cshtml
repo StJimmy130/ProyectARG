@@ -1,6 +1,7 @@
 ﻿@page
 @model RegisterModel
 
+
 <link rel="stylesheet" href="~/css/Login-Register.css" asp-append-version="true" />
 @{
   ViewData["Title"] = "Register";
@@ -16,6 +17,11 @@
       <div class="topic">Regístrate!</div>
       <div asp-validation-summary="ModelOnly" role="alert"></div>
       <div class="input-box">
+        <input type="text" required asp-for="Input.Nombre" autocomplete="username" aria-required="true">
+        <label asp-for="Input.Nombre">Introduce tu Nombre completo</label>
+        <span asp-validation-for="Input.Nombre" class="text-danger"></span>
+      </div>
+      <div class="input-box">
         <input type="text" required asp-for="Input.Email" autocomplete="username" aria-required="true">
         <label asp-for="Input.Email">Introduce tu email</label>
         <span asp-validation-for="Input.Email" class="text-danger"></span>
@@ -23,6 +29,7 @@
       <div class="input-box">
           <input asp-for="Input.Password" autocomplete="new-password" aria-required="true" type="password" required>
           <label asp-for="Input.Password">Introduce una contraseña</label>
+    using ProyectARG.Models;
           <span asp-validation-for="Input.Password"></span>
       </div>
       <div class="input-box">

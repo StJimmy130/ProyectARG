@@ -82,6 +82,11 @@ namespace ProyectARG.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [Required]
+            [StringLength(100, ErrorMessage = "El {0} debe tener al menos {2} y un máximo de {1} caracteres.", MinimumLength = 2)]
+            [Display(Name = "Nombre")]
+            public string Nombre { get; set; }
+
+            [Required]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
@@ -117,6 +122,7 @@ namespace ProyectARG.Areas.Identity.Pages.Account
         {
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
@@ -133,7 +139,8 @@ namespace ProyectARG.Areas.Identity.Pages.Account
 
                     var Usuario = new Usuario
                     {
-                        CuentaID = userId,
+                        CuentaID = userId,  // Esto vincula tu tabla `Usuario` con `AspNetUsers`
+                        Nombre = Input.Nombre,  // Guardar el nombre en tu tabla `Usuario`
                         Instagram = null,
                         Facebook = null,
                         LocalidadID = null
@@ -161,6 +168,7 @@ namespace ProyectARG.Areas.Identity.Pages.Account
             // If we got this far, something failed, redisplay form
             return Page();
         }
+
 
         private IdentityUser CreateUser()
         {
