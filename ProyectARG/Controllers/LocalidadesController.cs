@@ -24,6 +24,8 @@ public class LocalidadesController : Controller
         return View();
     }
 
+
+    
     public IActionResult InformePublicaciones()
     {
         return View();
