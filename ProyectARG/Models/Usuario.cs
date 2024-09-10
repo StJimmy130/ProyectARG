@@ -16,6 +16,7 @@ public class Usuario
     public virtual ICollection<Inmueble> Inmuebles { get; set; }
     public virtual ICollection<Imagen> Imagenes { get; set; }
     public virtual ICollection<Valoracion> Valoraciones { get; set; }
+    
 
 }
 
@@ -24,3 +25,4 @@ public class VistaUsuarios{
     public string? Email { get; set; }
     public string? RolNombre { get; set; }
 }
+
