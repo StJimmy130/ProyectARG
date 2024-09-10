@@ -66,6 +66,8 @@ public class VistaInmueble
 {
     public int InmuebleID { get; set; } 
     public int? UsuarioID { get; set; }
+    public List<DatosUsuario>? DatosUsuario { get; set; }
+    public string? NombreUsuario { get; set; }
     public int LocalidadID { get; set; }
     public string? TituloString { get; set; } 
     public string? LocalidadString { get; set; } 

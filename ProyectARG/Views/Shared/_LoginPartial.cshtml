@@ -6,7 +6,7 @@
     @{
     var userId = UserManager.GetUserId(User); // Obtener el ID del usuario actual
     var usuario =  _context.Usuarios.FirstOrDefault(u => u.CuentaID == userId);
-    var userName = usuario?.Nombre ?? "Sin Nombre"; // Obtener el nombre o usar un valor por defecto
+    var userName = usuario?.Nombre ?? "Administrador"; // Obtener el nombre o usar un valor por defecto
 }
 
 <ul class="nav-links">
@@ -18,7 +18,7 @@
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                 <li>
-                    <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">@userName</a>
+                    <a class="dropdown-item" asp-area="" asp-controller="Perfiles" asp-action="Index">@userName</a>
                 </li>
                 <li>
                     <form class="dropdown-form" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
@@ -28,7 +28,7 @@
             </ul>
         </li>
         <li class="nav-item d-block d-md-none">
-            <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index">@userName</a>
+            <a class="nav-link" asp-area="" asp-controller="Perfiles" asp-action="Index">@userName</a>
         </li>
         <li class="nav-item d-block d-md-none">
             <a class="nav-link" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">Salir</a>
