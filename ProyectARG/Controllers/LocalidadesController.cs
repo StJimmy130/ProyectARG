@@ -50,6 +50,7 @@ public class LocalidadesController : Controller
             var informePublicacionPorUsuarioMostrar = new VistaInmueble
             {
                 InmuebleID = inmueble.InmuebleID,
+                NombreUsuario = usuario.Nombre,
                 UsuarioID = inmueble.UsuarioID,
                 LocalidadID = inmueble.LocalidadID,
                 TituloString = inmueble.Titulo,

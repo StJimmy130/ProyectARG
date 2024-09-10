@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProyectARG.Data;
 
@@ -11,9 +12,11 @@ using ProyectARG.Data;
 namespace ProyectARG.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240910211552_migracion8")]
+    partial class migracion8
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -407,8 +410,8 @@ namespace ProyectARG.Migrations
                     b.Property<string>("NroTelefono")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Whatsapp")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("Whatsapp")
+                        .HasColumnType("int");
 
                     b.HasKey("UsuarioID");
 

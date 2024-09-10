@@ -1,0 +1,31 @@
+body{
+    padding-top: 80px;
+}
+footer{
+    margin-top: 100px;
+}
+
+.contenedor{
+    width: 50vw;
+}
+
+
+.formulario{
+    height: 50vh;
+    background-color: var(--container-color);
+    border-radius: 15px;
+}
+
+.formulario div{
+    padding: 20px 1rem;
+}
+
+@media screen and (max-width: 768px) {
+    .contenedor{
+        width: 90vw;
+        height: auto;
+    }
+    .formulario{
+        height: auto;
+    }
+}

@@ -117,6 +117,7 @@ public class InmueblesController : Controller
         {
             var localidad = Localidades.Where(t => t.LocalidadID == Inmueble.LocalidadID).SingleOrDefault();
             var provincia = Provincias.Where(t => t.ProvinciaID == localidad.ProvinciaID).SingleOrDefault();
+            var usuario = _context.Usuarios.Where(t => t.UsuarioID == Inmueble.UsuarioID).SingleOrDefault();
 
             var imagenesInmueble = Imagenes.Where(img => img.InmuebleID == Inmueble.InmuebleID).ToList();
             var imagenesBase64 = imagenesInmueble.Select(imagen => new ImagenVista
@@ -129,6 +130,7 @@ public class InmueblesController : Controller
             {
                 InmuebleID = Inmueble.InmuebleID,
                 TituloString = Inmueble.Titulo,
+                DatosUsuario = new List<DatosUsuario>(),
                 ProvinciaString = provincia.Nombre,
                 LocalidadString = localidad.Nombre,
                 BarrioString = Inmueble.Barrio,
@@ -147,6 +149,16 @@ public class InmueblesController : Controller
                 TipoInmuebleString = Inmueble.TipoInmueble.ToString(),
                 Imagenes = imagenesBase64 // Usar la lista de ImagenVista
             };
+            
+            var DatosUsuario = new DatosUsuario{
+                Nombre = usuario.Nombre,
+                Whatsapp = usuario.Whatsapp,
+                Facebook = usuario.Facebook,
+                Instagram = usuario.Instagram,
+                NroTelefono = usuario.NroTelefono
+            };
+
+            vistaInmueble.DatosUsuario.Add(DatosUsuario);
             inmuebleDetalleMostrar.Add(vistaInmueble);
         }
 

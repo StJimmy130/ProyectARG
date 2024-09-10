@@ -11,16 +11,16 @@ function ListadoInformePorLugar() {
 
             $.each(informePublicacionesPorUsuarioMostrar, function (index, usuario) {
                 
-                if (!agrupadoPorUsuario[usuario.usuarioID]) {
-                    agrupadoPorUsuario[usuario.usuarioID] = [];
+                if (!agrupadoPorUsuario[usuario.nombreUsuario]) {
+                    agrupadoPorUsuario[usuario.nombreUsuario] = [];
                 }
-                agrupadoPorUsuario[usuario.usuarioID].push(usuario);
+                agrupadoPorUsuario[usuario.nombreUsuario].push(usuario);
             });
 
-            for (let usuarioID in agrupadoPorUsuario) {
+            for (let nombreUsuario in agrupadoPorUsuario) {
                 contenidoTabla += `
                 <tr>
-                    <td style="text-transform: Uppercase">${usuarioID}</td>
+                    <td style="text-transform: Uppercase">${nombreUsuario}</td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -30,7 +30,7 @@ function ListadoInformePorLugar() {
                 </tr>
                 `;
                 
-                $.each(agrupadoPorUsuario[usuarioID], function (index, usuario) {
+                $.each(agrupadoPorUsuario[nombreUsuario], function (index, usuario) {
                     contenidoTabla += `
                     <tr style="text-transform: Uppercase">
                         <td></td>

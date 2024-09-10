@@ -119,16 +119,37 @@ function cargarDetallePublicacion() {
       
 
       let datosPrincipales = ``;
+      let datosVendedor = ``;
       $.each(data, function (index, item) {
+        console.log(item);
         datosPrincipales += `
               <h2>${item.tituloString}</h2>
               <h3>$ ${item.precioString}</h3>
               <h4>${item.provinciaString} - ${item.localidadString}</h4>
               <h4>${item.tipoInmuebleString} - ${item.tipoOperacionString}</h4>
               `;
+
+              $.each(item.datosUsuario, function (index, usuario) {
+              datosVendedor += `
+              <h2>Vendedor</h2>
+              <p>Nombre: ${usuario.nombre}</p>
+              <p>Teléfono: (123) 456-7890</p>
+              <div class="icons-vendedor">
+                <a href="${usuario.facebook}"><i class='bx bxl-facebook'></i></a>
+                <a href="${usuario.instagram}"><i class="bx bxl-instagram"></i></a>
+                <a href="${usuario.whatsapp}"><i class="bx bxl-whatsapp"></i></a>
+                <a href="#"><i class="bx bxl-gmail"></i></a>
+              </div>
+              `;
+      });
+
       });
 
       document.getElementById("DatosPrincipales").innerHTML = datosPrincipales;
+      document.getElementById("DatosVendedor").innerHTML = datosVendedor;
+
+
+      
 
       let DetallesPublicaciones = ``;
       $.each(data, function (index, item) {
