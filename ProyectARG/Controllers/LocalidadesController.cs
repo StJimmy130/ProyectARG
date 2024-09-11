@@ -26,12 +26,12 @@ public class LocalidadesController : Controller
 
 
     
-    public IActionResult InformePublicaciones()
+    public IActionResult InformePublicacionesPorUsuario()
     {
         return View();
     }
 
-    public JsonResult InformePublicacionesPorUsuario(int? id)
+    public JsonResult GetInformePublicacionesPorUsuario(int? id)
     {
         List<VistaInmueble> informePublicacionesPorUsuarioMostrar = new List<VistaInmueble>();
 
@@ -72,6 +72,53 @@ public class LocalidadesController : Controller
         return Json(informePublicacionesPorUsuarioMostrar);
     }
 
+
+    public IActionResult InformePublicacionesPorProvincia()
+    {
+        return View();
+    }
+
+
+    public JsonResult GetInformePublicacionesPorProvincia(int? id)
+    {
+        List<VistaInmueble> informePublicacionesPorProvinciaMostrar = new List<VistaInmueble>();
+
+        var inmuebles = _context.Inmuebles.ToList();
+
+
+        var usuarios = _context.Usuarios.ToList();
+        var Provincias = _context.Provincias.ToList();
+        var Localidades = _context.Localidades.ToList();
+
+        foreach (var inmueble in inmuebles)
+        {
+
+            var usuario = usuarios.Where(t => t.UsuarioID == inmueble.UsuarioID).Single();
+            var provincia = Provincias.Where(t => t.ProvinciaID == inmueble.Localidad.ProvinciaID).Single();
+            var localidad = Localidades.Where(t => t.LocalidadID == inmueble.LocalidadID).Single();
+
+            var informePublicacionPorProvinciaMostrar = new VistaInmueble
+            {   
+                InmuebleID = inmueble.InmuebleID,
+                LocalidadID = inmueble.LocalidadID,
+                UsuarioID = inmueble.UsuarioID,
+                ProvinciaString = provincia.Nombre,  
+                LocalidadString = localidad.Nombre,  
+                NombreUsuario = usuario.Nombre,
+                TituloString = inmueble.Titulo,
+                PrecioString = inmueble.Precio.ToString(),
+                TipoOperacionString = inmueble.TipoOperacion.ToString(),
+                TipoInmuebleString = inmueble.TipoInmueble.ToString(),
+                BarrioString = inmueble.Barrio,
+                DireccionString = inmueble.Direccion,
+                NroDireccionString = inmueble.NroDireccion,
+            };
+            informePublicacionesPorProvinciaMostrar.Add(informePublicacionPorProvinciaMostrar);
+        }
+        informePublicacionesPorProvinciaMostrar = informePublicacionesPorProvinciaMostrar.ToList();
+
+        return Json(informePublicacionesPorProvinciaMostrar);
+    }
 
     public IActionResult Localidades()
     {

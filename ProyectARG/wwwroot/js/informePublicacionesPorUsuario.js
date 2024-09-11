@@ -1,7 +1,7 @@
 window.onload = ListadoInformePorLugar();
 function ListadoInformePorLugar() {
     $.ajax({
-        url: '../../Localidades/InformePublicacionesPorUsuario',
+        url: '../../Localidades/GetInformePublicacionesPorUsuario',
         data: {},
         type: 'POST',
         dataType: 'json',

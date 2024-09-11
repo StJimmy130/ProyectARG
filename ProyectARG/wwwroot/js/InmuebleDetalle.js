@@ -132,12 +132,12 @@ function cargarDetallePublicacion() {
               $.each(item.datosUsuario, function (index, usuario) {
               datosVendedor += `
               <h2>Vendedor</h2>
-              <p>Nombre: ${usuario.nombre}</p>
-              <p>Teléfono: (123) 456-7890</p>
+              <p>${usuario.nombre}</p>
+              <p>${usuario.nroTelefono}</p>
               <div class="icons-vendedor">
                 <a href="${usuario.facebook}"><i class='bx bxl-facebook'></i></a>
-                <a href="${usuario.instagram}"><i class="bx bxl-instagram"></i></a>
-                <a href="${usuario.whatsapp}"><i class="bx bxl-whatsapp"></i></a>
+                <a href="https://www.instagram.com/${usuario.instagram}/"><i class="bx bxl-instagram"></i></a>
+                <a href="https://wa.me/${usuario.whatsapp}"><i class="bx bxl-whatsapp"></i></a>
                 <a href="#"><i class="bx bxl-gmail"></i></a>
               </div>
               `;
