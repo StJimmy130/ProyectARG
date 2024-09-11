@@ -3,7 +3,7 @@ window.onload = ListadoDeLocalidades();
 function ListadoDeLocalidades() {
     let provinciaID = document.getElementById("ProvinciaID").value;
     $.ajax({
-        url: '../../Localidades/ListadoLocalidades',
+        url: '../../Administracion/ListadoLocalidades',
         data: {
             ProvinciaID: provinciaID
         },
@@ -72,7 +72,7 @@ function GuardarLocalidad() {
 
 
     $.ajax({
-        url: '../../Localidades/GuardarLocalidad',
+        url: '../../Administracion/GuardarLocalidad',
         data: { LocalidadID: localidadID, 
                 ProvinciaID: provinciaID, 
                 Nombre: nombre, },
@@ -103,7 +103,7 @@ function GuardarLocalidad() {
 
 function ModalEditarLocalidad(localidadID) {
     $.ajax({
-        url: '../../Localidades/ListadoLocalidades',
+        url: '../../Administracion/ListadoLocalidades',
         data: { LocalidadID: localidadID },
         type: 'POST',
         dataType: 'json',
@@ -141,7 +141,7 @@ function ValidarEliminacionLocalidad(localidadID) {
 
 function EliminarLocalidad(localidadID) {
     $.ajax({
-        url: '../../Localidades/EliminarLocalidad',
+        url: '../../Administracion/EliminarLocalidad',
         data: { LocalidadID: localidadID },
         type: 'POST',
         dataType: 'json',

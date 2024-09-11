@@ -135,10 +135,10 @@ function cargarDetallePublicacion() {
               <p>${usuario.nombre}</p>
               <p>${usuario.nroTelefono}</p>
               <div class="icons-vendedor">
-                <a href="${usuario.facebook}"><i class='bx bxl-facebook'></i></a>
-                <a href="https://www.instagram.com/${usuario.instagram}/"><i class="bx bxl-instagram"></i></a>
-                <a href="https://wa.me/${usuario.whatsapp}"><i class="bx bxl-whatsapp"></i></a>
-                <a href="#"><i class="bx bxl-gmail"></i></a>
+                <a href="${usuario.facebook}" target="_blank"><i class='bx bxl-facebook'></i></a>
+                <a href="https://www.instagram.com/${usuario.instagram}/" target="_blank"><i class="bx bxl-instagram"></i></a>
+                <a href="https://wa.me/${usuario.whatsapp}" target="_blank"><i class="bx bxl-whatsapp"></i></a>
+                <a href="#" target="_blank"><i class="bx bxl-gmail"></i></a>
               </div>
               `;
       });

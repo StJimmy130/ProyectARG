@@ -20,29 +20,22 @@ public class ProvinciasController : Controller
     {
         return View();
     }
-
-
     public JsonResult ListadoProvincias(int ProvinciaID)
     {
         var provincia = _context.Provincias.OrderBy(c => c.Nombre).ToList();
-
         if (ProvinciaID != 0)
         {
             provincia = _context.Provincias.Where(t => t.ProvinciaID == ProvinciaID).ToList();
         }
-
         return Json(provincia);
     }
-
 
     public JsonResult GuardarProvincia(int ProvinciaID, string Nombre)
     {
         string resultado = "";
-
         if (!String.IsNullOrEmpty(Nombre))
         {
             Nombre = char.ToUpper(Nombre[0]) + Nombre.Substring(1).ToLower();
-            
             if (ProvinciaID == 0)
             {
                 var existeProvincia = _context.Provincias.Where(t => t.Nombre == Nombre).Count();
@@ -94,7 +87,6 @@ public class ProvinciasController : Controller
         var eliminarProvincia = _context.Provincias.Find(ProvinciaID);
         _context.Remove(eliminarProvincia);
         _context.SaveChanges();
-
         return Json(eliminarProvincia);
     }
 }

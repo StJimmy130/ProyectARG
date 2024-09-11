@@ -9,11 +9,11 @@ using ProyectARG.Models;
 namespace ProyectARG.Controllers;
 
 [Authorize(Roles = "ADMINISTRADOR")]
-public class LocalidadesController : Controller
+public class AdministracionController : Controller
 {
     private ApplicationDbContext _context;
 
-    public LocalidadesController(ApplicationDbContext context)
+    public AdministracionController(ApplicationDbContext context)
     {
         _context = context;
     }
