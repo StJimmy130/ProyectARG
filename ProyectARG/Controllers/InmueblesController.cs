@@ -198,7 +198,7 @@ public class InmueblesController : Controller
     float? Precio, int? SuperficieTotal, int? SuperficieCubierta, Operacion TipoOperacion,
     TipoInmueble TipoInmueble, bool Amoblado, int Dormitorios, int Banios, int CantidadAmbientes,
     bool Cochera, string? Direccion, int NroDireccion, string? Descripcion, int? UsuarioID,
-    List<IFormFile> Imagenes)
+    List<IFormFile> Imagenes, bool Moneda)
     {
         var resultado = new
         {
@@ -232,6 +232,7 @@ public class InmueblesController : Controller
                     inmueble.NroDireccion = NroDireccion;
                     inmueble.Descripcion = Descripcion;
                     inmueble.UsuarioID = UsuarioID;
+                    inmueble.Moneda = Moneda;
                     inmueble.Activo = true;
 
                     // Asigna la fecha actual cuando se crea la publicación
@@ -264,6 +265,7 @@ public class InmueblesController : Controller
                     inmueble.Direccion = Direccion;
                     inmueble.NroDireccion = NroDireccion;
                     inmueble.Descripcion = Descripcion;
+                    inmueble.Moneda = Moneda;
 
                     _context.SaveChanges();
 
