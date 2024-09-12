@@ -25,8 +25,7 @@ function ListadoInformePorLugar() {
                 // Fila para la provincia
                 contenidoTabla += `
                 <tr>
-                    <td style="text-transform: Uppercase">${provinciaString}</td>
-                    <td colspan="7"></td>
+                    <td class="text-start" colspan="8" style="text-transform: Uppercase">${provinciaString}</td>
                 </tr>
                 `;
 
@@ -36,8 +35,7 @@ function ListadoInformePorLugar() {
                     contenidoTabla += `
                     <tr style="text-transform: Uppercase">
                         <td></td>
-                        <td>${localidadString}</td>
-                        <td colspan="6"></td>
+                        <td class="text-start" colspan="7">${localidadString}</td>
                     </tr>
                     `;
 
@@ -45,14 +43,13 @@ function ListadoInformePorLugar() {
                     $.each(agrupadoPorProvincia[provinciaString][localidadString], function (index, inmueble) {
                         contenidoTabla += `
                         <tr style="text-transform: Uppercase">
-                            <td></td>
-                            <td></td>
-                            <td>${inmueble.nombreUsuario}</td>
-                            <td>${inmueble.tituloString}</td>
-                            <td>$ ${inmueble.precioString}</td>
-                            <td>${inmueble.tipoInmuebleString} - ${inmueble.tipoOperacionString}</td>
-                            <td>${inmueble.barrioString}</td>
-                            <td>${inmueble.direccionString} - ${inmueble.nroDireccionString}</td>
+                            <td colspan="2"></td>
+                            <td class="text-start">${inmueble.nombreUsuario}</td>
+                            <td class="text-start">${inmueble.tituloString}</td>
+                            <td class="text-end">$ ${inmueble.precioString}</td>
+                            <td class="text-start">${inmueble.tipoInmuebleString} - ${inmueble.tipoOperacionString}</td>
+                            <td class="text-start">${inmueble.barrioString}</td>
+                            <td class="text-start">${inmueble.direccionString} - ${inmueble.nroDireccionString}</td>
                         </tr>
                         `;
                     });

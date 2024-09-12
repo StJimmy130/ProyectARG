@@ -20,13 +20,7 @@ function ListadoInformePorLugar() {
             for (let nombreUsuario in agrupadoPorUsuario) {
                 contenidoTabla += `
                 <tr>
-                    <td style="text-transform: Uppercase">${nombreUsuario}</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td colspan="8" class="text-start" style="text-transform: Uppercase">${nombreUsuario}</td>
                 </tr>
                 `;
                 
@@ -34,12 +28,12 @@ function ListadoInformePorLugar() {
                     contenidoTabla += `
                     <tr style="text-transform: Uppercase">
                         <td></td>
-                        <td>${usuario.tituloString}</td>
-                        <td>$ ${usuario.precioString}</td>
-                        <td>${usuario.tipoInmuebleString} - ${usuario.tipoOperacionString}</td>
-                        <td>${usuario.localidadString} - ${usuario.provinciaString}</td>
-                        <td>${usuario.barrioString}</td>
-                        <td>${usuario.direccionString} - ${usuario.nroDireccionString}</td>
+                        <td class="text-start">${usuario.tituloString}</td>
+                        <td class="text-end">$ ${usuario.precioString}</td>
+                        <td class="text-start">${usuario.tipoInmuebleString} - ${usuario.tipoOperacionString}</td>
+                        <td class="text-start">${usuario.localidadString} - ${usuario.provinciaString}</td>
+                        <td class="text-start">${usuario.barrioString}</td>
+                        <td class="text-start">${usuario.direccionString} - ${usuario.nroDireccionString}</td>
                     </tr>
                     `
                 });
