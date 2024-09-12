@@ -91,92 +91,85 @@ public class HomeController : Controller
     }
 
     public JsonResult ListadoInmuebles(int InmuebleID, int? provinciaID, int? localidadID, List<TipoInmueble> TipoInmueble, int? precioMinimo, int? precioMaximo, Operacion Operacion)
+{
+    List<VistaInmueble> inmueblesMostrar = new List<VistaInmueble>();
+
+    // Obtener solo los inmuebles activos
+    var inmueblesQuery = _context.Inmuebles.Where(i => i.Activo == true).AsQueryable();
+    var imagenes = _context.Imagenes.ToList(); // Traer todas las imágenes
+
+    // Aplicar filtros
+    if (localidadID != 0)
     {
-        List<VistaInmueble> inmueblesMostrar = new List<VistaInmueble>();
-
-        var Inmuebles = _context.Inmuebles.Where(i => i.Activo == true).ToList();
-        var Imagenes = _context.Imagenes.ToList(); // Traer todas las imágenes
-
-
-        if (localidadID != 0)
-        {
-            Inmuebles = Inmuebles.Where(t => t.LocalidadID == localidadID).ToList();
-        }
-
-
-        if (InmuebleID != 0)
-        {
-            Inmuebles = _context.Inmuebles.Where(t => t.InmuebleID == InmuebleID).ToList();
-        }
-
-        var Provincias = _context.Provincias.ToList();
-        var Localidades = _context.Localidades.ToList();
-
-        foreach (var Inmueble in Inmuebles)
-        {
-            bool mostrar = true;
-
-            var localidad = Localidades.Where(t => t.LocalidadID == Inmueble.LocalidadID).SingleOrDefault();
-            var provincia = Provincias.Where(t => t.ProvinciaID == localidad.ProvinciaID).SingleOrDefault();
-
-
-            
-
-            if (Inmueble.Precio > precioMaximo || Inmueble.Precio < precioMinimo)
-            {
-                mostrar = false;
-            }
-
-            if(precioMaximo == 0 && precioMinimo == 0){
-                mostrar = true;
-            }
-
-            if (Operacion != 0 && Operacion != Inmueble.TipoOperacion)
-            {
-                mostrar = false;
-            }
-
-            if (provinciaID != 0 && provincia.ProvinciaID != provinciaID)
-            {
-                mostrar = false;
-            }
-
-
-            if (TipoInmueble != null && TipoInmueble.Count > 0 && !TipoInmueble.Contains(Inmueble.TipoInmueble))
-            {
-                mostrar = false;
-            }
-
-            if (mostrar)
-            {
-
-                // Obtener la imagen asociada al inmueble
-                var imagen = Imagenes.FirstOrDefault(img => img.InmuebleID == Inmueble.InmuebleID);
-                string imagenBase64 = imagen != null ? Convert.ToBase64String(imagen.ImagenByte) : null;
-                string imagenSrc = imagen != null ? $"data:{imagen.ContentType};base64,{imagenBase64}" : "/path/to/default/image.jpg"; // Ruta a una imagen por defecto
-
-
-
-                var localidadMostrar = new VistaInmueble
-                {
-                    InmuebleID = Inmueble.InmuebleID,
-                    TituloString = Inmueble.Titulo,
-                    ProvinciaString = provincia.Nombre,
-                    LocalidadString = localidad.Nombre,
-                    DireccionString = Inmueble.Direccion,
-                    NroDireccionString = Inmueble.NroDireccion,
-                    PrecioString = Inmueble.Precio.ToString(),
-                    TipoOperacionString = SplitCamelCase(Inmueble.TipoOperacion.ToString()),
-                    ImagenSrc = imagenSrc // Añadir URL de la imagen
-                };
-                inmueblesMostrar.Add(localidadMostrar);
-            }
-        }
-
-        return Json(inmueblesMostrar);
+        inmueblesQuery = inmueblesQuery.Where(t => t.LocalidadID == localidadID);
     }
 
+    if (InmuebleID != 0)
+    {
+        inmueblesQuery = inmueblesQuery.Where(t => t.InmuebleID == InmuebleID);
+    }
 
+    // Filtrar por precio
+    if (precioMaximo.HasValue && precioMaximo.Value > 0)
+    {
+        inmueblesQuery = inmueblesQuery.Where(i => i.Precio <= precioMaximo);
+    }
+
+    if (precioMinimo.HasValue && precioMinimo.Value > 0)
+    {
+        inmueblesQuery = inmueblesQuery.Where(i => i.Precio >= precioMinimo);
+    }
+
+    // Filtrar por operación
+    if (Operacion != 0)
+    {
+        inmueblesQuery = inmueblesQuery.Where(i => i.TipoOperacion == Operacion);
+    }
+
+    // Filtrar por provincia
+    if (provinciaID != 0)
+    {
+        inmueblesQuery = inmueblesQuery.Where(i => i.Localidad.ProvinciaID == provinciaID); // Asegúrate de que Localidad esté cargado
+    }
+
+    // Filtrar por tipo de inmueble
+    if (TipoInmueble != null && TipoInmueble.Count > 0)
+    {
+        inmueblesQuery = inmueblesQuery.Where(i => TipoInmueble.Contains(i.TipoInmueble));
+    }
+
+    // Ordenar después de aplicar todos los filtros
+    var inmuebles = inmueblesQuery.OrderByDescending(i => i.FechaAlta).ToList();
+    var provincias = _context.Provincias.ToList();
+    var localidades = _context.Localidades.ToList();
+
+    foreach (var inmueble in inmuebles)
+    {
+        var localidad = localidades.SingleOrDefault(t => t.LocalidadID == inmueble.LocalidadID);
+        var provincia = provincias.SingleOrDefault(t => t.ProvinciaID == localidad?.ProvinciaID);
+
+        // Obtener la imagen asociada al inmueble
+        var imagen = imagenes.FirstOrDefault(img => img.InmuebleID == inmueble.InmuebleID);
+        string imagenBase64 = imagen != null ? Convert.ToBase64String(imagen.ImagenByte) : null;
+        string imagenSrc = imagen != null ? $"data:{imagen.ContentType};base64,{imagenBase64}" : "/path/to/default/image.jpg"; // Ruta a una imagen por defecto
+
+        var localidadMostrar = new VistaInmueble
+        {
+            InmuebleID = inmueble.InmuebleID,
+            TituloString = inmueble.Titulo,
+            ProvinciaString = provincia?.Nombre,
+            LocalidadString = localidad?.Nombre,
+            DireccionString = inmueble.Direccion,
+            NroDireccionString = inmueble.NroDireccion,
+            PrecioString = inmueble.Precio.ToString(),
+            TipoOperacionString = SplitCamelCase(inmueble.TipoOperacion.ToString()),
+            ImagenSrc = imagenSrc // Añadir URL de la imagen
+        };
+        inmueblesMostrar.Add(localidadMostrar);
+    }
+
+    return Json(inmueblesMostrar);
+}
 
 
 public async Task<JsonResult> InicializarPermisosUsuario()

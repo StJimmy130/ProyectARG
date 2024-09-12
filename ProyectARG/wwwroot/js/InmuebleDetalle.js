@@ -71,13 +71,11 @@ function cargarImagenDetallePublicacion() {
           if (data.length > 0) {
               let inmueble = data[0]; // Supone que sólo hay un inmueble en la respuesta
 
-
-
               $("#MainImage").attr("src", inmueble.imagenes[0].imagenSrc);
               // Establecer la descripción inicial
               $("#Descripcion").text(inmueble.descripcionString);
 
-              // Suponiendo que 'Imagenes' es una lista de objetos que contienen las URLs de las imágenes
+              // LLAMA LA LISTA DE "IMAGENES" QUE CONTIENE LAS URLS DE LAS IMAGENES
               let miniaturas = ``;
               $.each(inmueble.imagenes, function (index, imagen) {
                   miniaturas += `
@@ -123,10 +121,12 @@ function cargarDetallePublicacion() {
       $.each(data, function (index, item) {
         console.log(item);
         datosPrincipales += `
+              <p>${item.fechaPublicacionString}</p>
               <h2>${item.tituloString}</h2>
               <h3>$ ${item.precioString}</h3>
               <h4>${item.provinciaString} - ${item.localidadString}</h4>
               <h4>${item.tipoInmuebleString} - ${item.tipoOperacionString}</h4>
+              
               `;
 
               $.each(item.datosUsuario, function (index, usuario) {

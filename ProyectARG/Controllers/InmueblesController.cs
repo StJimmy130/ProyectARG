@@ -7,6 +7,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Security.Claims;
+using System.Globalization;
 
 namespace ProyectARG.Controllers;
 // [Authorize]
@@ -75,6 +76,7 @@ public class InmueblesController : Controller
 
         ViewBag.UsuarioID = UsuarioID;
 
+
         return View();
     }
 
@@ -94,77 +96,82 @@ public class InmueblesController : Controller
     }
 
     public JsonResult GetDetallePublicacion(int InmuebleID, int? localidadID)
+{
+    List<VistaInmueble> inmuebleDetalleMostrar = new List<VistaInmueble>();
+
+    // Aplicar filtros primero
+    var inmueblesQuery = _context.Inmuebles.AsQueryable();
+
+    if (localidadID.HasValue && localidadID.Value != 0)
     {
-        List<VistaInmueble> inmuebleDetalleMostrar = new List<VistaInmueble>();
-
-        var Inmuebles = _context.Inmuebles.ToList();
-        var Imagenes = _context.Imagenes.ToList(); // Traer todas las imágenes
-
-        if (localidadID != 0)
-        {
-            Inmuebles = Inmuebles.Where(t => t.LocalidadID == localidadID).ToList();
-        }
-
-        if (InmuebleID != 0)
-        {
-            Inmuebles = _context.Inmuebles.Where(t => t.InmuebleID == InmuebleID).ToList();
-        }
-
-        var Provincias = _context.Provincias.ToList();
-        var Localidades = _context.Localidades.ToList();
-
-        foreach (var Inmueble in Inmuebles)
-        {
-            var localidad = Localidades.Where(t => t.LocalidadID == Inmueble.LocalidadID).SingleOrDefault();
-            var provincia = Provincias.Where(t => t.ProvinciaID == localidad.ProvinciaID).SingleOrDefault();
-            var usuario = _context.Usuarios.Where(t => t.UsuarioID == Inmueble.UsuarioID).SingleOrDefault();
-
-            var imagenesInmueble = Imagenes.Where(img => img.InmuebleID == Inmueble.InmuebleID).ToList();
-            var imagenesBase64 = imagenesInmueble.Select(imagen => new ImagenVista
-            {
-                ImagenID = imagen.ImagenID,
-                ImagenSrc = $"data:{imagen.ContentType};base64,{Convert.ToBase64String(imagen.ImagenByte)}"
-            }).ToList();
-
-            var vistaInmueble = new VistaInmueble
-            {
-                InmuebleID = Inmueble.InmuebleID,
-                TituloString = Inmueble.Titulo,
-                DatosUsuario = new List<DatosUsuario>(),
-                ProvinciaString = provincia.Nombre,
-                LocalidadString = localidad.Nombre,
-                BarrioString = Inmueble.Barrio,
-                DireccionString = Inmueble.Direccion,
-                NroDireccionString = Inmueble.NroDireccion,
-                SuperficieTotalString = Inmueble.SuperficieTotal.ToString(),
-                SuperficieCubiertaString = Inmueble.SuperficieCubierta.ToString(),
-                AmobladoString = Inmueble.Amoblado.ToString(),
-                DormitoriosString = Inmueble.Dormitorios.ToString(),
-                BaniosString = Inmueble.Banios.ToString(),
-                CantidadAmbientesString = Inmueble.CantidadAmbientes.ToString(),
-                CocheraString = Inmueble.Cochera.ToString(),
-                DescripcionString = Inmueble.Descripcion,
-                PrecioString = Inmueble.Precio.ToString(),
-                TipoOperacionString = Inmueble.TipoOperacion.ToString(),
-                TipoInmuebleString = Inmueble.TipoInmueble.ToString(),
-                Imagenes = imagenesBase64 // Usar la lista de ImagenVista
-            };
-            
-            var DatosUsuario = new DatosUsuario{
-                Nombre = usuario.Nombre,
-                Whatsapp = usuario.Whatsapp,
-                Facebook = usuario.Facebook,
-                Instagram = usuario.Instagram,
-                NroTelefono = usuario.NroTelefono
-            };
-
-            vistaInmueble.DatosUsuario.Add(DatosUsuario);
-            inmuebleDetalleMostrar.Add(vistaInmueble);
-        }
-
-        return Json(inmuebleDetalleMostrar);
+        inmueblesQuery = inmueblesQuery.Where(t => t.LocalidadID == localidadID.Value);
     }
 
+    if (InmuebleID != 0)
+    {
+        inmueblesQuery = inmueblesQuery.Where(t => t.InmuebleID == InmuebleID);
+    }
+
+    // Ordenar después de filtrar
+    var inmuebles = inmueblesQuery.OrderByDescending(t => t.FechaAlta).ToList();
+    var imagenes = _context.Imagenes.ToList(); // Traer todas las imágenes
+
+    var provincias = _context.Provincias.ToList();
+    var localidades = _context.Localidades.ToList();
+
+    foreach (var inmueble in inmuebles)
+    {
+        var localidad = localidades.SingleOrDefault(t => t.LocalidadID == inmueble.LocalidadID);
+        var provincia = provincias.SingleOrDefault(t => t.ProvinciaID == localidad?.ProvinciaID);
+        var usuario = _context.Usuarios.SingleOrDefault(t => t.UsuarioID == inmueble.UsuarioID);
+
+        var imagenesInmueble = imagenes.Where(img => img.InmuebleID == inmueble.InmuebleID).ToList();
+        var imagenesBase64 = imagenesInmueble.Select(imagen => new ImagenVista
+        {
+            ImagenID = imagen.ImagenID,
+            ImagenSrc = $"data:{imagen.ContentType};base64,{Convert.ToBase64String(imagen.ImagenByte)}"
+        }).ToList();
+
+        var vistaInmueble = new VistaInmueble
+        {
+            InmuebleID = inmueble.InmuebleID,
+            TituloString = inmueble.Titulo,
+            DatosUsuario = new List<DatosUsuario>(),
+            ProvinciaString = provincia?.Nombre,
+            LocalidadString = localidad?.Nombre,
+            BarrioString = inmueble.Barrio,
+            DireccionString = inmueble.Direccion,
+            NroDireccionString = inmueble.NroDireccion,
+            SuperficieTotalString = inmueble.SuperficieTotal.ToString(),
+            SuperficieCubiertaString = inmueble.SuperficieCubierta.ToString(),
+            AmobladoString = inmueble.Amoblado.ToString(),
+            DormitoriosString = inmueble.Dormitorios.ToString(),
+            BaniosString = inmueble.Banios.ToString(),
+            CantidadAmbientesString = inmueble.CantidadAmbientes.ToString(),
+            CocheraString = inmueble.Cochera.ToString(),
+            DescripcionString = inmueble.Descripcion,
+            PrecioString = inmueble.Precio.ToString(),
+            TipoOperacionString = inmueble.TipoOperacion.ToString(),
+            TipoInmuebleString = inmueble.TipoInmueble.ToString(),
+            Imagenes = imagenesBase64,
+            FechaPublicacionString = $"{inmueble.FechaAlta:dd} de {inmueble.FechaAlta:MMMM} del {inmueble.FechaAlta:yyyy}"
+        };
+
+        var datosUsuario = new DatosUsuario
+        {
+            Nombre = usuario.Nombre,
+            Whatsapp = usuario.Whatsapp,
+            Facebook = usuario.Facebook,
+            Instagram = usuario.Instagram,
+            NroTelefono = usuario.NroTelefono
+        };
+
+        vistaInmueble.DatosUsuario.Add(datosUsuario);
+        inmuebleDetalleMostrar.Add(vistaInmueble);
+    }
+
+    return Json(inmuebleDetalleMostrar);
+}
     public JsonResult GetDataInmueble(int InmuebleID)
     {
 
@@ -188,27 +195,25 @@ public class InmueblesController : Controller
 
 
     public JsonResult GuardarPublicacion(int InmuebleID, int LocalidadID, string? Barrio, string? Titulo,
-            float? Precio, int? SuperficieTotal, int? SuperficieCubierta, Operacion TipoOperacion,
-            TipoInmueble TipoInmueble, bool Amoblado, int Dormitorios, int Banios, int CantidadAmbientes,
-            bool Cochera, string? Direccion, int NroDireccion, string? Descripcion, int? UsuarioID,
-            List<IFormFile> Imagenes)
+    float? Precio, int? SuperficieTotal, int? SuperficieCubierta, Operacion TipoOperacion,
+    TipoInmueble TipoInmueble, bool Amoblado, int Dormitorios, int Banios, int CantidadAmbientes,
+    bool Cochera, string? Direccion, int NroDireccion, string? Descripcion, int? UsuarioID,
+    List<IFormFile> Imagenes)
     {
-
         var resultado = new
         {
-
             texto = "",
             estado = false
         };
 
-
         if (InmuebleID != null)
         {
+            // Si es nuevo, crea un nuevo inmueble
             Inmueble inmueble = InmuebleID == 0 ? new Inmueble() : _context.Inmuebles.SingleOrDefault(t => t.InmuebleID == InmuebleID);
 
             if (inmueble != null)
             {
-                if (InmuebleID == 0)
+                if (InmuebleID == 0) // Nuevo inmueble
                 {
                     inmueble.LocalidadID = LocalidadID;
                     inmueble.Barrio = Barrio;
@@ -229,6 +234,9 @@ public class InmueblesController : Controller
                     inmueble.UsuarioID = UsuarioID;
                     inmueble.Activo = true;
 
+                    // Asigna la fecha actual cuando se crea la publicación
+                    inmueble.FechaAlta = DateTime.Now;
+
                     _context.Add(inmueble);
                     _context.SaveChanges();
 
@@ -238,7 +246,7 @@ public class InmueblesController : Controller
                         estado = true
                     };
                 }
-                else if (InmuebleID != 0 && UsuarioID == inmueble.UsuarioID)
+                else if (InmuebleID != 0 && UsuarioID == inmueble.UsuarioID) // Edición de inmueble existente
                 {
                     inmueble.LocalidadID = LocalidadID;
                     inmueble.Barrio = Barrio;
@@ -256,7 +264,9 @@ public class InmueblesController : Controller
                     inmueble.Direccion = Direccion;
                     inmueble.NroDireccion = NroDireccion;
                     inmueble.Descripcion = Descripcion;
+
                     _context.SaveChanges();
+
                     resultado = new
                     {
                         texto = " Editado correctamente",
@@ -270,7 +280,6 @@ public class InmueblesController : Controller
                         texto = "No tiene permisos para editar esta publicacion",
                         estado = false
                     };
-                    
                 }
 
                 if (Imagenes != null && Imagenes.Count > 0)
@@ -285,8 +294,7 @@ public class InmueblesController : Controller
                                 ImagenByte = memoryStream.ToArray(),
                                 ContentType = imagen.ContentType,
                                 NombreArchivo = imagen.FileName,
-                                InmuebleID = inmueble.InmuebleID,
-                                // UsuarioID = UsuarioID
+                                InmuebleID = inmueble.InmuebleID
                             };
                             _context.Imagenes.Add(imagenEntity);
                         }
@@ -313,7 +321,7 @@ public class InmueblesController : Controller
             Error = "",
             estado = false
         };
-        if(Usuario == "ADMINISTRADOR" && inmueble.Activo == true)
+        if (Usuario == "ADMINISTRADOR" && inmueble.Activo == true)
         {
             inmueble.Activo = false;
             inmueble.Admin = true;
@@ -323,9 +331,11 @@ public class InmueblesController : Controller
                 Error = "Publicacion suspendida con exito",
                 estado = true
             };
-        }else if( Usuario == "ADMINISTRADOR" && inmueble.Activo == false){
-             inmueble.Activo = true;
-             inmueble.Admin = true;
+        }
+        else if (Usuario == "ADMINISTRADOR" && inmueble.Activo == false)
+        {
+            inmueble.Activo = true;
+            inmueble.Admin = true;
             resultado = new
             {
                 Titulo = "Publicacion activada",
@@ -354,7 +364,8 @@ public class InmueblesController : Controller
                 estado = false
             };
         }
-        else{
+        else
+        {
             resultado = new
             {
                 Titulo = "Hubo un problema",

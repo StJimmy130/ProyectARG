@@ -89,6 +89,7 @@ public class VistaInmueble
     public string? PisoString { get; set; }
     public string? NroDepartamentoString { get; set; }
     public bool activo { get; set; }
+    public string? FechaPublicacionString { get; set; }
     public string? ImagenSrc { get; set; } // Propiedad para una sola imagen
     public List<ImagenVista>? Imagenes { get; set; } 
 
