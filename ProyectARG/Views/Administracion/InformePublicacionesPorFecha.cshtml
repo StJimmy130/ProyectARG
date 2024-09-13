@@ -1,0 +1,23 @@
+@{
+  ViewData["Title"] = "InformePublicacionesPorFecha";
+}
+<link rel="stylesheet" href="~/css/MisPublicaciones.css">
+
+<table class="table table-dark table-hover table-striped table-bordered">
+  <thead class="headTabla">
+    <tr class="text-center">
+      <th>FECHA</th>
+      <th>USUARIO</th>
+      <th>LOCALIDAD</th>
+      <th>TÍTULO</th>
+      <th>PRECIO</th>
+      <th>TIPO</th>
+      <th>DIRECCIÓN</th>
+    </tr>
+  </thead>
+  <tbody class="bodyTabla" id="tbody-publicacionesPorFecha"></tbody>
+</table>
+
+@section Scripts {
+  <script src="~/js/informePublicacionesPorFecha.js"></script>
+}
