@@ -145,27 +145,7 @@ td p{
     overflow: hidden;
 }
 
-.Tbody-class{
-    overflow-y: auto;
-    height: auto;
-    max-height: 65vh;
-    padding: 0;
-    border-radius: 15px;
-}
 
-.Tbody-class table {
-    border-collapse: separate;
-    border-spacing: 0;
-  }
-  
-.Tbody-class table thead {
-    background-color: var(--container-color);
-    color: var(--text-color2);
-    position: -webkit-sticky; /* Safari... */
-    position: sticky;
-    top: 0;
-    left: 0;
-  }
 
 .contenedor-panel{
     width: 100%;

@@ -36,13 +36,34 @@
   
 }
 .navbar-toggler {
-  z-index: 1100; /* Asegura que el botón esté sobre el menú */
+  background-color: var(--body-color);
+  margin: 5px 15px 5px 5px;
+  width: 90%;
+  margin: 10px auto;
+  height: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+.navbar-toggler:hover {
+  background-color: var(--nav-color);
+  box-shadow: none;
+}
+.span-filtros{
+  text-align: left;
+  margin-left: 20px;
+  color: var(--text-color2);
+  display: flex;
+  gap: 7px;
 }
 
 
 .cardCatalogo {
   height: 100%;
   width: 100%;
+  margin: auto;
   border-radius: 10px;
   background-color: var(--container-color);
 }
@@ -333,4 +354,20 @@ input[type="range"] {
 .pagination-item:hover{
   background-color: #fff;
   color: rgb(33, 32, 32);
+}
+
+@media screen and (min-width: 769px) {
+  .container{
+  width: 100%;
+  margin: 0;
+  }
+}
+@media screen and (max-width: 768px) {
+  .container{
+    padding: 0;
+  }
+  .darkLight-searchBox .dark-light,
+  .darkLight-searchBox .searchToggle{
+    margin: 0;
+  }
 }

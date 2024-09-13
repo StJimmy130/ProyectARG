@@ -163,6 +163,7 @@ function GuardarPublicacion() {
   let barrio = document.getElementById("Barrio").value;
   let titulo = document.getElementById("Titulo").value;
   let precio = document.getElementById("Precio").value;
+  let moneda = document.getElementById("Moneda").checked;
   let superficieTotal = document.getElementById("Area").value;
   let superficieCubierta = document.getElementById("AreaCubierta").value;
   let tipoOperacion = document.getElementById("Operacion").value;
@@ -179,6 +180,8 @@ function GuardarPublicacion() {
   let descripcion = document.getElementById("Descripcion").value;
   let imagenes = document.getElementById("Imagen").files; // Nuevo input para archivos de imagen
   let usuarioID = document.getElementById("UsuarioID").value;
+
+  console.log(moneda)
 
   // Crear un objeto FormData para enviar los datos y archivos
   let formData = new FormData();
@@ -203,6 +206,7 @@ function GuardarPublicacion() {
   formData.append("NroDepartamento", nroDepartamento);
   formData.append("Descripcion", descripcion);
   formData.append("UsuarioID", usuarioID);
+  formData.append("Moneda", moneda);
 
   // Agregar cada imagen al FormData
   for (let i = 0; i < imagenes.length; i++) {

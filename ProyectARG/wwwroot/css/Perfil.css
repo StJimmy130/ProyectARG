@@ -11,7 +11,8 @@ footer{
 
 
 .formulario{
-    height: 50vh;
+    min-height: auto;
+    height: 60vh;
     background-color: var(--container-color);
     border-radius: 15px;
 }

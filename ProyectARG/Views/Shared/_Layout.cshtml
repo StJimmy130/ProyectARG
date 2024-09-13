@@ -114,7 +114,36 @@
 
 
 
-
+@if (currentController == "Inmuebles" && currentAction == "Index") {
+  <div class="d-flex justify-content-center align-item-center container">
+    <main role="main" class=" container">
+      <div class="notifications-container" id="alert">
+        <div class="success" id="background">
+          <div class="flex">
+            <div class="flex-shrink-0" id="alert-icon">
+            </div>
+            <div class="success-prompt-wrap">
+              <p class="success-prompt-heading" id="alert-title"></p>
+              <div class="success-prompt-prompt">
+                <p id="alert-description"></p>
+              </div>
+              <div class="success-button-container">
+                <button type="button" class="success-button-main" onclick="hiddenAlert()" id="btn-aceptar">
+                  Aceptar
+                </button>
+                <button type="button" class="success-button-secondary" id="btn-cancelar">
+                  Cancelar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      @RenderBody()
+    </main>
+  </div>
+}
+else{
   <div class="d-flex justify-content-center align-item-center">
     <main role="main" class="">
       <div class="notifications-container" id="alert">
@@ -142,6 +171,7 @@
       @RenderBody()
     </main>
   </div>
+  }
 
   <footer>
     <div class="content">

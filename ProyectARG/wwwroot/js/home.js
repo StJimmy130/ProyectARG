@@ -161,6 +161,7 @@ function renderizarTabla(publicaciones) {
 }
 
 function renderizarPaginacion() {
+  showLoadingScreen()
   var paginacion = document.getElementById("paginacion");
   paginacion.innerHTML = "";
 
@@ -173,6 +174,9 @@ function renderizarPaginacion() {
         paginaActual = pagina;
         mostrarPagina(pagina);
         renderizarPaginacion();
+        window.scrollTo({
+          top: 0,
+      });
       };
     })(i);
 
@@ -182,6 +186,8 @@ function renderizarPaginacion() {
 
     paginacion.appendChild(botonPagina);
   }
+
+  hideLoadingScreen()
 }
 
 function cambiarPagina(delta) {
@@ -193,7 +199,10 @@ function cambiarPagina(delta) {
 }
 
 function mostrarPagina(pagina) {
-  let contenidoTabla = ``;
+  let contenidoTabla = `<button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#filterMenu"
+      aria-controls="filterMenu" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="container span-filtros"><i class='bx bx-menu-alt-left'></i>Filtros</span>
+    </button>`;
   $.each(paginas[pagina], function (i, item) {
     contenidoTabla += `
         <div class="col-lg-4 col-md-6 col-sm-12 mb-4 activo">
@@ -264,8 +273,7 @@ function updatePriceRange() {
 
   // Actualizar el valor del input range del precio mínimo
   minPriceRange.value = minPriceInput.value;
-  updateMinPrice()
-  
+  updateMinPrice();
 }
 
 function updateMinPrice() {
@@ -314,18 +322,4 @@ function syncInput(id) {
 // js code to toggle search box
 searchToggle.addEventListener("click", () => {
   searchToggle.classList.toggle("active");
-});
-// Write your JavaScript code.
-//   js code to toggle sidebar
-sidebarOpen.addEventListener("click", () => {
-  nav.classList.add("active");
-});
-body.addEventListener("click", (e) => {
-  let clickedElm = e.target;
-  if (
-      !clickedElm.classList.contains("sidebarOpen") &&
-      !clickedElm.classList.contains("menu")
-  ) {
-      nav.classList.remove("active");
-  }
 });
