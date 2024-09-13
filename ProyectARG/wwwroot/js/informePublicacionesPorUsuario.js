@@ -19,14 +19,14 @@ function ListadoInformePorLugar() {
 
             for (let nombreUsuario in agrupadoPorUsuario) {
                 contenidoTabla += `
-                <tr>
+                <tr class="text-sm-start">
                     <td colspan="8" class="text-start" style="text-transform: Uppercase">${nombreUsuario}</td>
                 </tr>
                 `;
                 
                 $.each(agrupadoPorUsuario[nombreUsuario], function (index, usuario) {
                     contenidoTabla += `
-                    <tr style="text-transform: Uppercase">
+                    <tr class="text-sm-start" style="text-transform: Uppercase">
                         <td></td>
                         <td class="text-start">${usuario.tituloString}</td>
                         <td class="text-end">$ ${usuario.precioString}</td>

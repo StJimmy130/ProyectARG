@@ -24,7 +24,7 @@ function ListadoInformePorLugar() {
             for (let provinciaString in agrupadoPorProvincia) {
                 // Fila para la provincia
                 contenidoTabla += `
-                <tr>
+                <tr class="text-sm-start">
                     <td class="text-start" colspan="8" style="text-transform: Uppercase">${provinciaString}</td>
                 </tr>
                 `;
@@ -33,7 +33,7 @@ function ListadoInformePorLugar() {
                 for (let localidadString in agrupadoPorProvincia[provinciaString]) {
                     // Fila para la localidad
                     contenidoTabla += `
-                    <tr style="text-transform: Uppercase">
+                    <tr class="text-sm-start" style="text-transform: Uppercase">
                         <td></td>
                         <td class="text-start" colspan="7">${localidadString}</td>
                     </tr>
@@ -42,7 +42,7 @@ function ListadoInformePorLugar() {
                     // Fila para los detalles de cada inmueble
                     $.each(agrupadoPorProvincia[provinciaString][localidadString], function (index, inmueble) {
                         contenidoTabla += `
-                        <tr style="text-transform: Uppercase">
+                        <tr class="text-sm-start" style="text-transform: Uppercase">
                             <td colspan="2"></td>
                             <td class="text-start">${inmueble.nombreUsuario}</td>
                             <td class="text-start">${inmueble.tituloString}</td>
