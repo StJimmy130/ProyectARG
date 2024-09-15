@@ -145,7 +145,9 @@ td p{
     overflow: hidden;
 }
 
-
+#panel{
+    display: none;
+}
 
 .contenedor-panel{
     width: 100%;
@@ -321,4 +323,27 @@ label{
 input{
     margin-top: -10px;
 
+}
+
+@media screen and (max-width: 1200px) {
+    #panel{
+        display: none;
+        position: fixed;
+        top: 11%;
+        width: 95%;
+        height: 95vh;
+        padding: 0;
+        z-index: 1100;
+    }
+    .hide-on-small {
+        display: none;
+    }
+    .contenedor-panel{
+    margin: 0 auto;
+    height: 80vh;
+    }
+    .notifications-container{
+        top: 10%;
+        left: calc(50% - 150px);
+    }
 }

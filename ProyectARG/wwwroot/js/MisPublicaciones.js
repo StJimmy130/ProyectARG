@@ -25,8 +25,8 @@ function renderizarTabla(publicaciones) {
           <tr class="text-sm-start">
               <td class="text-start">${item.tituloString}</td>
               <td class="text-end" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${item.precioString} ${item.moneda ? "U$D" : "AR$"}</td>
-              <td class="text-start" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${item.provinciaString}, ${item.localidadString}-${item.direccionString}</td>
-              <td class="text-start">${item.tipoOperacionString}</td>
+              <td class="text-start hide-on-small" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${item.provinciaString}, ${item.localidadString}-${item.direccionString}</td>
+              <td class="text-start hide-on-small">${item.tipoOperacionString}</td>
               <td><button type="button" class="btn btn-primary" onclick="cargarInformacion(${item.inmuebleID})">Administrar</button></td>
           </tr>
       `;
@@ -36,8 +36,8 @@ function renderizarTabla(publicaciones) {
           <tr class="item-suspendido">
               <td><p>${item.tituloString}</p></td>
               <td><p>${item.precioString}</p></td>
-              <td><p>${item.provinciaString}, ${item.localidadString}-${item.direccionString}</p></td>
-              <td><p>${item.tipoOperacionString}</p></td>
+              <td class="hide-on-small"><p>${item.provinciaString}, ${item.localidadString}-${item.direccionString}</p></td>
+              <td class="hide-on-small"><p>${item.tipoOperacionString}</p></td>
               <td><button type="button" class="btn btn-primary" onclick="cargarInformacion(${item.inmuebleID})">Administrar</button></td>
           </tr>
       `
@@ -99,6 +99,7 @@ function cargarInformacion(inmuebleID) {
       });
     },
   });
+  showPanel();
 }
 
 function GuardarPublicacion() {
@@ -264,6 +265,7 @@ function AbrirModalEditar(inmuebleID) {
       
     },
   });
+  hiddenPanel()
 }
 
 function ValidarEliminacionInmueble(inmuebleID, Operacion) {
@@ -323,6 +325,7 @@ function eliminarInmueble(inmuebleID) {
       console.log("Disculpe, existió un problema al cargar el listado");
     },
   });
+  hiddenPanel();
 }
 
 function suspenderInmueble(inmuebleID) {
@@ -366,4 +369,31 @@ function suspenderInmueble(inmuebleID) {
       console.log("Disculpe, existió un problema al cargar el listado");
     },
   });
+  hiddenPanel();
+}
+let panel = document.getElementById("panel");
+let table = document.getElementById("table");
+function showPanel() {
+  screenWidth = window.innerWidth;
+  if (screenWidth > 1200) {
+  table.classList.remove("col-md-12");
+  table.classList.add("col-md-8");
+  panel.style.display = "block";
+  }
+  else{
+    panel.style.display = "block";
+}
+
+}
+
+function hiddenPanel() {
+  screenWidth = window.innerWidth;
+  if (screenWidth > 1200) {
+  table.classList.remove("col-md-8");
+  table.classList.add("col-md-12");
+  panel.style.display = "none";
+  }
+  else{
+    panel.style.display = "none";
+}
 }
