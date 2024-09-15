@@ -153,6 +153,7 @@ public class InmueblesController : Controller
             PrecioString = inmueble.Precio.ToString(),
             TipoOperacionString = inmueble.TipoOperacion.ToString(),
             TipoInmuebleString = inmueble.TipoInmueble.ToString(),
+            Moneda = inmueble.Moneda,
             Imagenes = imagenesBase64,
             FechaPublicacionString = $"{inmueble.FechaAlta:dd} de {inmueble.FechaAlta:MMMM} del {inmueble.FechaAlta:yyyy}"
         };

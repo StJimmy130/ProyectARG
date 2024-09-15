@@ -2,9 +2,15 @@
 
 <input type="hidden" id="UsuarioID" value="@ViewBag.UsuarioID">
 
+<div class="row container-xl conteiner-funciones">
+  <div class="col-12">
+    <div class="tituloContenedor">
+      <h1 class="titulo"><i class="fa-regular fa-address-card"></i> Administración del Perfil</h1>
+      <hr class="tituloHr">
+    </div>
+  </div>
+</div>
 <div class="container py-4 contenedor">
-  <h1 class="display-4  text-center font-weight-bold mb-4">Administracion de Perfil</h1>
-  <hr>
   <form class=" p-4  shadow-lg  formulario">
     <div class="row">
       <div class="form-group col-md-6 mb-4">
@@ -18,7 +24,7 @@
         />
       </div>
       <div class="form-group col-md-6 mb-4">
-        <label for="phone" class="text-dark">Numero de telefono</label>
+        <label for="phone" class="text-dark">Número de teléfono</label>
         <input
           type="tel"
           id="phone"
@@ -59,7 +65,7 @@
       </div>
       
     </div>
-    <button type="submit" class="btn btn-primary btn-lg w-100 mt-3" onclick="ActualizarInformacion()">Save Changes</button>
+    <button type="submit" class="btn btn-primary btn-lg w-100 mt-3" onclick="ActualizarInformacion()">Guardar cambios</button>
   </form>
 </div>
 

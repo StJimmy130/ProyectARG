@@ -133,6 +133,7 @@ public class MisPublicacionesController : Controller
                 PrecioString = Inmueble.Precio.ToString(),
                 TipoOperacionString = SplitCamelCase(Inmueble.TipoOperacion.ToString()),
                 activo = Inmueble.Activo,
+                Moneda = Inmueble.Moneda,
                 Imagenes = imagenesBase64 // Usar la lista de ImagenVista
             };
             inmueblesMostrar.Add(localidadMostrar);

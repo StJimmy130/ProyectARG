@@ -63,7 +63,7 @@ function ListadoInformePorFecha() {
                             <tr style="text-transform: Uppercase">
                                 <td colspan="3"></td>
                                 <td class="text-start" style="max-width: 80px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${fecha.tituloString}</td>
-                                <td class="text-end" style="max-width: 60px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">$ ${fecha.precioString}</td>
+                                <td class="text-end" style="max-width: 60px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${fecha.precioString} ${fecha.moneda ? "U$D" : "AR$"}</td>
                                 <td class="text-start" style="max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${fecha.tipoInmuebleString} - ${fecha.tipoOperacionString}</td>
                                 <td class="text-start" style="max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${fecha.direccionString} - ${fecha.nroDireccionString}</td>
                                                             

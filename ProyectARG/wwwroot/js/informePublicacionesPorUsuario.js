@@ -29,7 +29,7 @@ function ListadoInformePorLugar() {
                     <tr class="text-sm-start" style="text-transform: Uppercase">
                         <td></td>
                         <td class="text-start">${usuario.tituloString}</td>
-                        <td class="text-end">$ ${usuario.precioString}</td>
+                        <td class="text-end">${usuario.precioString} ${usuario.moneda ? "U$D" : "AR$"}</td>
                         <td class="text-start">${usuario.tipoInmuebleString} - ${usuario.tipoOperacionString}</td>
                         <td class="text-start">${usuario.localidadString} - ${usuario.provinciaString}</td>
                         <td class="text-start">${usuario.barrioString}</td>

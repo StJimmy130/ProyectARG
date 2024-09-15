@@ -46,6 +46,23 @@ main {
   opacity: 1;
   margin: 0;
 }
+@media screen and (max-width: 768px) {
+  /* Cambiar el tamaño de la fuente del título */
+  .titulo {
+    font-size: 30px; /* Ajusta este valor según lo que necesites */
+  }
+  .tituloHr{
+    margin-top: -10px;
+  }
+
+  /* Si necesitas ajustar el contenedor del título también */
+  .tituloContenedor {
+    height: 60px; /* Ajusta la altura si es necesario */
+    margin-top: 10px;
+    margin-bottom: 40px;
+  }
+}
+
 /* FIN ESTILOS TITULO */ 
 
 

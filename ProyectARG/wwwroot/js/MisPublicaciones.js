@@ -24,7 +24,7 @@ function renderizarTabla(publicaciones) {
     tabla += `
           <tr class="text-sm-start">
               <td class="text-start">${item.tituloString}</td>
-              <td class="text-end">$${item.precioString}</td>
+              <td class="text-end" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${item.precioString} ${item.moneda ? "U$D" : "AR$"}</td>
               <td class="text-start" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${item.provinciaString}, ${item.localidadString}-${item.direccionString}</td>
               <td class="text-start">${item.tipoOperacionString}</td>
               <td><button type="button" class="btn btn-primary" onclick="cargarInformacion(${item.inmuebleID})">Administrar</button></td>

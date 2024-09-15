@@ -46,7 +46,7 @@ function ListadoInformePorLugar() {
                             <td colspan="2"></td>
                             <td class="text-start">${inmueble.nombreUsuario}</td>
                             <td class="text-start">${inmueble.tituloString}</td>
-                            <td class="text-end">$ ${inmueble.precioString}</td>
+                            <td class="text-end">${inmueble.precioString} ${inmueble.moneda ? "U$D" : "AR$"}</td>
                             <td class="text-start">${inmueble.tipoInmuebleString} - ${inmueble.tipoOperacionString}</td>
                             <td class="text-start">${inmueble.barrioString}</td>
                             <td class="text-start">${inmueble.direccionString} - ${inmueble.nroDireccionString}</td>

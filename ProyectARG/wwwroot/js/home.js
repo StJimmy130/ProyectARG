@@ -161,7 +161,7 @@ function renderizarTabla(publicaciones) {
 }
 
 function renderizarPaginacion() {
-  showLoadingScreen()
+  showLoadingScreen();
   var paginacion = document.getElementById("paginacion");
   paginacion.innerHTML = "";
 
@@ -174,9 +174,11 @@ function renderizarPaginacion() {
         paginaActual = pagina;
         mostrarPagina(pagina);
         renderizarPaginacion();
-        window.scrollTo({
-          top: 0,
-      });
+        
+        // Usamos un timeout para asegurar que el contenido ya está cargado antes de hacer scroll
+        setTimeout(function() {
+          window.scroll(0, 0); // O prueba con document.documentElement.scrollTop = 0;
+        }, 0);
       };
     })(i);
 
@@ -187,16 +189,31 @@ function renderizarPaginacion() {
     paginacion.appendChild(botonPagina);
   }
 
-  hideLoadingScreen()
+  hideLoadingScreen();
 }
 
+
 function cambiarPagina(delta) {
+  // Ajustamos el índice de la página actual
   paginaActual += delta;
   if (paginaActual < 0) paginaActual = 0;
   if (paginaActual >= paginas.length) paginaActual = paginas.length - 1;
+  
+  // Mostramos el contenido de la nueva página
   mostrarPagina(paginaActual);
+  
+  // Renderizamos la paginación después de mostrar la nueva página
   renderizarPaginacion();
+  
+  requestAnimationFrame(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "auto" // Instantáneo
+    });
+  });
 }
+
 
 function mostrarPagina(pagina) {
   let contenidoTabla = `<button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#filterMenu"
@@ -205,22 +222,24 @@ function mostrarPagina(pagina) {
     </button>`;
   $.each(paginas[pagina], function (i, item) {
     contenidoTabla += `
-        <div class="col-lg-4 col-md-6 col-sm-12 mb-4 activo">
-            <div class="card">
-                <div class="image-container">
-                    <img src="${item.imagenSrc}" alt="Imagen del Inmueble">
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title fs-4">${item.tituloString}</h5>
-                    <p class="card-text fs-5">$ ${item.precioString} - ${item.tipoOperacionString}</p>
-                    <p class="card-title fs-5">${item.provinciaString}, ${item.localidadString} - ${item.direccionString} ${item.nroDireccionString}</p>
-                    <div class="container d-flex justify-content-end">
-                    <a href="Inmuebles/Detalle/${item.inmuebleID}" class="btn btn-primary">Ver más</a>
-                    </div>
+    <div class="col-lg-4 col-md-6 col-sm-12 mb-4 activo">
+        <div class="card">
+            <div class="image-container">
+                <img src="${item.imagenSrc}" alt="Imagen del Inmueble">
+            </div>
+            <div class="card-body">
+                <h5 class="card-title fs-4">${item.tituloString}</h5>
+                <p class="card-text fs-5">${item.moneda ? "U$D" : "AR$"} ${item.precioString} - ${item.tipoOperacionString}</p>
+                <p class="card-title fs-5">${item.provinciaString}, ${item.localidadString} - ${item.direccionString} ${item.nroDireccionString}</p>
+                <div class="container d-flex justify-content-end">
+                    <a href="Inmuebles/Detalle/${
+                      item.inmuebleID
+                    }" class="btn btn-primary">Ver más</a>
                 </div>
             </div>
         </div>
-        `;
+    </div>
+`;
   });
   document.getElementById("publicaciones").innerHTML = contenidoTabla;
   hideLoadingScreen();

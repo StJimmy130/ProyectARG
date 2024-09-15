@@ -123,7 +123,7 @@ function cargarDetallePublicacion() {
         datosPrincipales += `
               <p>${item.fechaPublicacionString}</p>
               <h2>${item.tituloString}</h2>
-              <h3>$ ${item.precioString}</h3>
+              <h3>${item.moneda ? "U$D" : "AR$"} ${item.precioString}</h3>
               <h4>${item.provinciaString} - ${item.localidadString}</h4>
               <h4>${item.tipoInmuebleString} - ${item.tipoOperacionString}</h4>
               
