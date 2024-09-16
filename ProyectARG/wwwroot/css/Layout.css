@@ -196,14 +196,7 @@ nav .nav-bar .sidebarOpen{
 .sidebar-perfil{
   display: none;
 }
-@media screen and (max-width: 768px){
-  .sidebar-perfil{
-    display: block;
-  }
-  .navbar-perfil{
-    display: none;
-  }
-}
+
 .nav-bar .darkLight-searchBox{
   align-items: center;
   display: flex;
@@ -313,9 +306,15 @@ body.dark .search-field input{
 body.dark .search-field i{
   color: var(--text-color);
 }
-@media (max-width: 790px) {
+@media (max-width: 950px) {
   nav .nav-bar .sidebarOpen{
       display: block;
+  }
+  .sidebar-perfil{
+    display: block;
+  }
+  .navbar-perfil{
+    display: none;
   }
   .menu{
       position: fixed;

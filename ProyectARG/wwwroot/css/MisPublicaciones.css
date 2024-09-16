@@ -339,6 +339,9 @@ input{
     order: 1; /* La tabla va después por defecto */
 }
 
+
+
+
 @media screen and (max-width: 1200px) {
     #panel {
         display: none; /* Inicialmente oculto */
@@ -346,7 +349,7 @@ input{
         width: 95%;
         height: 85vh;
         padding: 0;
-        margin-top: -50px;
+        margin-top: 20px;
         margin-bottom: -50px;
     }
     
