@@ -17,6 +17,14 @@ footer{
     border-radius: 15px;
 }
 
+.formulario label{
+    color: var(--text-color2);
+}
+
+.formulario input{
+    color: var(--text-color2);
+}
+
 .formulario div{
     padding: 20px 1rem;
 }

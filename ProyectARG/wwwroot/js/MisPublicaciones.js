@@ -275,7 +275,6 @@ function AbrirModalEditar(inmuebleID) {
       $("#ModalEditarPublicacion").modal("show");
     },
   });
-  hiddenPanel();
 }
 
 function ValidarEliminacionInmueble(inmuebleID, Operacion) {
