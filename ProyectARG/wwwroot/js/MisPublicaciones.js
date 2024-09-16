@@ -21,17 +21,24 @@ function renderizarTabla(publicaciones) {
   var tabla = ``;
   $.each(publicaciones, function (i, item) {
     if (item.activo == true) {
-    tabla += `
+      tabla += `
           <tr class="text-sm-start">
               <td class="text-start">${item.tituloString}</td>
-              <td class="text-end" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${item.precioString} ${item.moneda ? "U$D" : "AR$"}</td>
-              <td class="text-start hide-on-small" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${item.provinciaString}, ${item.localidadString}-${item.direccionString}</td>
-              <td class="text-start hide-on-small">${item.tipoOperacionString}</td>
-              <td><button type="button" class="btn btn-primary" onclick="cargarInformacion(${item.inmuebleID})">Administrar</button></td>
+              <td class="text-end" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${
+                item.precioString
+              } ${item.moneda ? "U$D" : "AR$"}</td>
+              <td class="text-start hide-on-small" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${
+                item.provinciaString
+              }, ${item.localidadString}-${item.direccionString}</td>
+              <td class="text-start hide-on-small">${
+                item.tipoOperacionString
+              }</td>
+              <td><button type="button" class="btn btn-primary" onclick="cargarInformacion(${
+                item.inmuebleID
+              })">Administrar</button></td>
           </tr>
       `;
-    }
-    else{
+    } else {
       tabla += `
           <tr class="item-suspendido">
               <td><p>${item.tituloString}</p></td>
@@ -40,7 +47,7 @@ function renderizarTabla(publicaciones) {
               <td class="hide-on-small"><p>${item.tipoOperacionString}</p></td>
               <td><button type="button" class="btn btn-primary" onclick="cargarInformacion(${item.inmuebleID})">Administrar</button></td>
           </tr>
-      `
+      `;
     }
   });
   document.getElementById("misPublicaciones").innerHTML = tabla;
@@ -78,21 +85,24 @@ function cargarInformacion(inmuebleID) {
             "onclick",
             `ValidarEliminacionInmueble(${item.inmuebleID}, 'eliminar')`
           );
-          if(item.activo == true){
+        if (item.activo == true) {
+          document
+            .getElementById("btn-suspender")
+            .setAttribute(
+              "onclick",
+              `ValidarEliminacionInmueble(${item.inmuebleID}, 'suspender')`
+            );
+          document.getElementById("btn-suspender").innerHTML = "suspender";
+        } else {
+          document
+            .getElementById("btn-suspender")
+            .setAttribute(
+              "onclick",
+              `ValidarEliminacionInmueble(${item.inmuebleID}, 'suspender')`
+            );
+          document.getElementById("btn-suspender").innerHTML = "activar";
+        }
         document
-          .getElementById("btn-suspender")
-          .setAttribute("onclick", `ValidarEliminacionInmueble(${item.inmuebleID}, 'suspender')`);
-          document
-          .getElementById("btn-suspender").innerHTML = "suspender";
-          }
-          else{
-            document
-          .getElementById("btn-suspender")
-          .setAttribute("onclick", `ValidarEliminacionInmueble(${item.inmuebleID}, 'suspender')`);
-          document
-          .getElementById("btn-suspender").innerHTML = "activar";
-          }
-          document
           .getElementById("btn-editar")
           .setAttribute("onclick", `AbrirModalEditar(${item.inmuebleID})`);
         document.getElementById("main-img").src = item.imagenes[0].imagenSrc;
@@ -167,7 +177,8 @@ function GuardarPublicacion() {
         icon.classList.add("succes-svg");
         icon.innerHTML = '<i class="bx bxs-check-circle"></i>';
         document.getElementById("alert-title").innerHTML = "Felicitaciones!!!";
-        document.getElementById("alert-description").innerHTML = resultado.texto;
+        document.getElementById("alert-description").innerHTML =
+          resultado.texto;
         aceptar.style.display = "block";
         background.classList.add("success");
         alerta.classList.add("enter-alert");
@@ -175,12 +186,12 @@ function GuardarPublicacion() {
         setTimeout(function () {
           hiddenAlert();
         }, 3000);
-      }
-      else {
+      } else {
         icon.classList.add("denied-svg");
         icon.innerHTML = '<i class="bx bxs-x-circle"></i>';
         document.getElementById("alert-title").innerHTML = "Hay un problema";
-        document.getElementById("alert-description").innerHTML = resultado.texto;
+        document.getElementById("alert-description").innerHTML =
+          resultado.texto;
         aceptar.style.display = "block";
         background.classList.add("denied");
         alerta.classList.add("enter-alert");
@@ -192,14 +203,12 @@ function GuardarPublicacion() {
       setTimeout(function () {
         ListadoPublicaciones();
       }, 500);
-      
     },
     error: function (err) {
       console.error(err);
     },
   });
 }
-
 
 function AbrirModalEditar(inmuebleID) {
   $.ajax({
@@ -219,24 +228,26 @@ function AbrirModalEditar(inmuebleID) {
       let Inmueble = Inmuebles[0];
       document.getElementById("InmuebleID").value = inmuebleID;
       document.getElementById("Barrio").value = Inmueble.barrioString;
-      document.getElementById("Titulo").value  = Inmueble.tituloString;
-      document.getElementById("Precio").value  = Inmueble.precioString;
-      document.getElementById("Area").value  = Inmueble.superficieTotalString;
-      document.getElementById("AreaCubierta").value  = Inmueble.superficieCubiertaString;
-      document.getElementById("Amoblado").checked  = Inmueble.amobladoString;
-      document.getElementById("Habitaciones").value  = Inmueble.dormitoriosString;
-      document.getElementById("Banios").value  = Inmueble.baniosString;
-      document.getElementById("Ambientes").value  = Inmueble.cantidadAmbientesString;
-      document.getElementById("Estacionamiento").checked  = Inmueble.cocheraString;;
-      document.getElementById("Direccion").value  = Inmueble.direccionString;
-      document.getElementById("NroDireccion").value  = Inmueble.nroDireccionString;
-      document.getElementById("Piso").value  = Inmueble.tipoInmueble;
-      document.getElementById("NroDepartamento").value  = Inmueble.tipoInmueble;;
-      document.getElementById("Descripcion").value  = Inmueble.descripcionString;
-
-      
+      document.getElementById("Titulo").value = Inmueble.tituloString;
+      document.getElementById("Precio").value = Inmueble.precioString;
+      document.getElementById("Area").value = Inmueble.superficieTotalString;
+      document.getElementById("AreaCubierta").value =
+        Inmueble.superficieCubiertaString;
+      document.getElementById("Amoblado").checked = Inmueble.amobladoString;
+      document.getElementById("Habitaciones").value =
+        Inmueble.dormitoriosString;
+      document.getElementById("Banios").value = Inmueble.baniosString;
+      document.getElementById("Ambientes").value =
+        Inmueble.cantidadAmbientesString;
+      document.getElementById("Estacionamiento").checked =
+        Inmueble.cocheraString;
+      document.getElementById("Direccion").value = Inmueble.direccionString;
+      document.getElementById("NroDireccion").value =
+        Inmueble.nroDireccionString;
+      document.getElementById("Piso").value = Inmueble.tipoInmueble;
+      document.getElementById("NroDepartamento").value = Inmueble.tipoInmueble;
+      document.getElementById("Descripcion").value = Inmueble.descripcionString;
     },
-    
 
     // código a ejecutar si la petición falla;
     // son pasados como argumentos a la función
@@ -258,31 +269,29 @@ function AbrirModalEditar(inmuebleID) {
       let publicacion = data[0];
       document.getElementById("LocalidadID").value = publicacion.localidadID;
       document.getElementById("ProvinciaID").value = publicacion.provinciaID;
-      document.getElementById("Operacion").value  = publicacion.tipoOperacion;
-      document.getElementById("TipoInmueble").value  = publicacion.tipoInmueble;
+      document.getElementById("Operacion").value = publicacion.tipoOperacion;
+      document.getElementById("TipoInmueble").value = publicacion.tipoInmueble;
 
       $("#ModalEditarPublicacion").modal("show");
-      
     },
   });
-  hiddenPanel()
+  hiddenPanel();
 }
 
 function ValidarEliminacionInmueble(inmuebleID, Operacion) {
   icon.innerHTML = '<i class="bx bxs-error-circle"></i>';
   icon.classList.add("alert-svg");
-  titulo.innerHTML = "Atencion!!!";
-  descripcion.innerHTML = `<label>¿Esta seguro que desea ${Operacion} esta publicación?</label>`;
+  titulo.innerHTML = "Atencion!";
+  descripcion.innerHTML = `<label>¿Está seguro de que desea ${Operacion} esta publicación?</label>`;
   aceptar.style.display = "block";
   background.classList.add("alert");
   alerta.classList.add("enter-alert");
   cancelar.setAttribute("onclick", `hiddenAlert()`);
   cancelar.style.display = "block";
 
-  if(Operacion == "eliminar"){
+  if (Operacion == "eliminar") {
     aceptar.setAttribute("onclick", `eliminarInmueble(${inmuebleID})`);
-  }
-  else if (Operacion == "suspender"){
+  } else if (Operacion == "suspender") {
     aceptar.setAttribute("onclick", `suspenderInmueble(${inmuebleID})`);
   }
 
@@ -338,14 +347,13 @@ function suspenderInmueble(inmuebleID) {
     success: function (resultado) {
       icon.classList.remove("alert-svg", "succes-svg", "denied-svg");
       background.classList.remove("alert");
-      if(resultado.titulo != "Hubo un problema"){
-      if (resultado.estado === true) {
-        icon.innerHTML = "<i class='bx bxs-lock'></i>";
+      if (resultado.titulo != "Hubo un problema") {
+        if (resultado.estado === true) {
+          icon.innerHTML = "<i class='bx bxs-lock'></i>";
+        } else {
+          icon.innerHTML = '<i class="bx bxs-lock-open"></i>';
+        }
       } else {
-        icon.innerHTML = '<i class="bx bxs-lock-open"></i>';
-      }
-    }
-      else{
         icon.innerHTML = '<i class="bx bxs-x-circle"></i>';
         icon.classList.add("denied-svg");
         background.classList.add("denied");
@@ -374,26 +382,27 @@ function suspenderInmueble(inmuebleID) {
 let panel = document.getElementById("panel");
 let table = document.getElementById("table");
 function showPanel() {
-  screenWidth = window.innerWidth;
+  const screenWidth = window.innerWidth;
+  const table = document.getElementById("table"); // Asegúrate de tener el ID correcto de tu elemento
+  const panel = document.getElementById("panel"); // Asegúrate de que 'panel' es el ID correcto
+
   if (screenWidth > 1200) {
-  table.classList.remove("col-md-12");
-  table.classList.add("col-md-8");
-  panel.style.display = "block";
+    table.classList.remove("col-md-12");
+    table.classList.add("col-md-8");
+    panel.style.display = "flex"; // Cambia a flex para centrar el contenido
+  } else {
+    panel.style.display = "flex"; // Cambia a flex en lugar de block para mantener el centrado
   }
-  else{
-    panel.style.display = "block";
 }
 
-}
 
 function hiddenPanel() {
   screenWidth = window.innerWidth;
   if (screenWidth > 1200) {
-  table.classList.remove("col-md-8");
-  table.classList.add("col-md-12");
-  panel.style.display = "none";
-  }
-  else{
+    table.classList.remove("col-md-8");
+    table.classList.add("col-md-12");
     panel.style.display = "none";
-}
+  } else {
+    panel.style.display = "none";
+  }
 }

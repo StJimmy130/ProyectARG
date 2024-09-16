@@ -325,25 +325,55 @@ input{
 
 }
 
+#contenedorMisPublicaciones{
+    display: flex;
+    flex-direction: row; /* Muestra los divs uno al lado del otro en pantallas grandes */
+    justify-content: space-between; /* Espacio entre los divs */
+}
+
+#panel {
+    order: 2; /* El panel va primero por defecto */
+}
+
+#table {
+    order: 1; /* La tabla va después por defecto */
+}
+
 @media screen and (max-width: 1200px) {
-    #panel{
-        display: none;
-        position: fixed;
-        top: 11%;
+    #panel {
+        display: none; /* Inicialmente oculto */
+        position: relative;
         width: 95%;
-        height: 95vh;
+        height: 85vh;
         padding: 0;
-        z-index: 1100;
+        margin-top: -50px;
+        margin-bottom: -50px;
     }
+    
+    
     .hide-on-small {
         display: none;
     }
     .contenedor-panel{
     margin: 0 auto;
-    height: 80vh;
+    height: 70vh;
     }
     .notifications-container{
         top: 10%;
         left: calc(50% - 150px);
     }
+    #contenedorMisPublicaciones {
+        flex-direction: column; /* Apila los divs en pantalla pequeña */
+    }
+
+    #panel {
+        order: 1; /* El panel va después de la tabla en pantallas pequeñas */
+    }
+
+    #table {
+        order: 2; /* La tabla va primero en pantallas pequeñas */
+    }
 }
+
+
+
