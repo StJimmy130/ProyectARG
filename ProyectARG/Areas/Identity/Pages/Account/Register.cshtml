@@ -19,24 +19,24 @@
       <div class="input-box">
         <input type="text" required asp-for="Input.Nombre" autocomplete="username" aria-required="true">
         <label asp-for="Input.Nombre">Introduce tu Nombre completo</label>
-        <span asp-validation-for="Input.Nombre" class="text-danger"></span>
+        <span asp-validation-for="Input.Nombre" class="text-danger" id="span-nombre"></span>
       </div>
       <div class="input-box">
         <input type="text" required asp-for="Input.Email" autocomplete="username" aria-required="true">
         <label asp-for="Input.Email">Introduce tu email</label>
-        <span asp-validation-for="Input.Email" class="text-danger"></span>
+        <span asp-validation-for="Input.Email" class="text-danger" id="span-email"></span>
       </div>
       <div class="input-box">
           <input asp-for="Input.Password" autocomplete="new-password" aria-required="true" type="password" required>
           <label asp-for="Input.Password">Introduce una contraseña</label>
     using ProyectARG.Models;
-          <span asp-validation-for="Input.Password"></span>
+          <span asp-validation-for="Input.Password" id="span-password"></span>
       </div>
       <div class="input-box">
         <input asp-for="Input.ConfirmPassword" autocomplete="new-password" aria-required="true" type="password"
         required>
         <label asp-for="Input.ConfirmPassword">Confirmar contraseña</label>
-        <span asp-validation-for="Input.ConfirmPassword"></span>
+        <span asp-validation-for="Input.ConfirmPassword" id="span-confirm-password"></span>
       </div>
       <div class="input-box">
         <input id="registerSubmit" type="submit" value="Registrarse">
@@ -50,6 +50,6 @@
 
 
 @section Scripts {
-  <partial name="_ValidationScriptsPartial" />
+
   <script src="~/js/validacionesForm/register.js"></script>
 }
