@@ -265,11 +265,15 @@ else{
 
 
 
-
+  <script src="~/js/jspdf/jspdf.min.js"></script>
+  <script src="~/js/jspdf/jspdf.debug.js"></script>
+  <script src="~/js/jspdf/jspdf.plugin.autotable.js"></script>
   <script src="~/lib/jquery/dist/jquery.min.js"></script>
   <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="~/js/site.js" asp-append-version="true"></script>
   @await RenderSectionAsync("Scripts", required: false)
+
+  
 </body>
 
 </html>
