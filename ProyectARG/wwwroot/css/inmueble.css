@@ -162,6 +162,12 @@ label > p {
     height: 3rem;
     width: 3rem;
   }
+  .list-container {
+    display: none !important;
+  }
+  #preview-container{
+    min-height: 450px;
+  }
 }
 
 .botonera {

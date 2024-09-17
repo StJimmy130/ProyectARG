@@ -85,30 +85,15 @@ function Imprimir() {
   doc.autoTable(res.columns, res.data, {
     addPageContent: pageContent,
     theme: "grid",
+    styles: { fillColor: [0, 143, 81], halign: "center" },
     columnStyles: {
-      0: { halign: "center", fontSize: 7 }, // Columna de FECHA, centrada
-      1: { halign: "left", fontSize: 7 }, // Columna de USUARIO, alineada a la izquierda
-      2: { halign: "left", fontSize: 7 }, // Columna de LOCALIDAD, alineada a la izquierda
-      3: {
-        halign: "left",
-        fontSize: 7,
-        cellWidth: 80, // max-width: 80px, 
-      },
-      4: {
-        halign: "right",
-        fontSize: 7,
-        cellWidth: 60,
-      },
-      5: {
-        halign: "left",
-        fontSize: 7,
-        cellWidth: 100,
-      },
-      6: {
-        halign: "left",
-        fontSize: 7,
-        cellWidth: 100,
-      },
+      0: { halign: "center", fillColor: [255, 255, 255], fontSize: 7 },
+      1: { halign: "left", fillColor: [255, 255, 255], fontSize: 7 }, 
+      2: { halign: "left", fillColor: [255, 255, 255], fontSize: 7 }, 
+      3: { halign: "left", fillColor: [255, 255, 255], fontSize: 7, cellWidth: 80 },
+      4: { halign: "right", fillColor: [255, 255, 255], fontSize: 7, cellWidth: 60 },
+      5: { halign: "left", fillColor: [255, 255, 255], fontSize: 7, cellWidth: 100 },
+      6: { halign: "left", fillColor: [255, 255, 255], fontSize: 7, cellWidth: 100 },
     }, // Celdas de la primera columna centradas y verdes
     margin: { top: 10 },
   });
