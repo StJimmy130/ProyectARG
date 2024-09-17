@@ -62,7 +62,7 @@ body {
   .content .input-box{
     height: 50px;
     width: 100%;
-    margin: 16px 0;
+    margin: 26px 0;
     position: relative;
   }
   .content .input-box input{
@@ -131,6 +131,13 @@ body {
   }
   .content .input-box input[type="submit"]:hover{
     background-color: var(--nav-color2);
+  }
+
+  .content .input-box span{
+    position: absolute;
+    color: red;
+    width: 100%;
+    top: -30px;
   }
   @media (max-width:1000px) {
     .content .image-box{

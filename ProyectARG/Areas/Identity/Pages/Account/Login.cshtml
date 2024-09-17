@@ -18,12 +18,12 @@
       <div class="input-box">
         <input type="text" required asp-for="Input.Email" autocomplete="username" aria-required="true">
         <label asp-for="Input.Email">Introduce tu email</label>
-        <span asp-validation-for="Input.Email" class="text-danger"></span>
+        <span asp-validation-for="Input.Email" class="text-danger" id="span-email"></span>
       </div>
       <div class="input-box">
         <input asp-for="Input.Password" autocomplete="current-password" aria-required="true" type="password" required>
         <label asp-for="Input.Password">Introduce tu contraseña</label>
-        <span asp-validation-for="Input.Password"></span>
+        <span asp-validation-for="Input.Password" id="span-password"></span>
       </div>
       <div>
         <a id="forgot-password" asp-page="./ForgotPassword"><i class='bx bxs-key bx-rotate-270'></i> Olvidaste tu
@@ -43,7 +43,7 @@
 
 <script src="~/js/validacionesForm/login.js"></script>
 @section Scripts {
-  <partial name="_ValidationScriptsPartial" />
+  
 
   
 }

@@ -1,10 +1,10 @@
-document.addEventListener('DOMContentLoaded', function () {
+
     // Elementos del formulario de Login
     const loginEmailInput = document.querySelector('#account input[name="Input.Email"]');
     const loginPasswordInput = document.querySelector('#account input[name="Input.Password"]');
 
-    const loginEmailError = document.querySelector('#account span[asp-validation-for="Input.Email"]');
-    const loginPasswordError = document.querySelector('#account span[asp-validation-for="Input.Password"]');
+    const loginEmailError = document.getElementById('span-email');
+    const loginPasswordError = document.getElementById('span-password');
 
     console.log('Script cargado correctamente');
 
@@ -38,4 +38,4 @@ document.addEventListener('DOMContentLoaded', function () {
             loginPasswordError.style.display = 'none';  // Ocultamos el error si está bien
         }
     });
-});
+

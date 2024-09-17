@@ -6,10 +6,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const registerPasswordInput = document.querySelector('#registerForm input[name="Input.Password"]');
     const registerConfirmPasswordInput = document.querySelector('#registerForm input[name="Input.ConfirmPassword"]');
 
-    const registerNameError = document.querySelector('#registerForm span[asp-validation-for="Input.Nombre"]');
-    const registerEmailError = document.querySelector('#registerForm span[asp-validation-for="Input.Email"]');
-    const registerPasswordError = document.querySelector('#registerForm span[asp-validation-for="Input.Password"]');
-    const registerConfirmPasswordError = document.querySelector('#registerForm span[asp-validation-for="Input.ConfirmPassword"]');
+    const registerNameError = document.getElementById('span-nombre');
+    const registerEmailError = document.getElementById('span-email');
+    const registerPasswordError = document.getElementById('span-password');
+    const registerConfirmPasswordError = document.getElementById('span-confirm-password');
 
     // Verificamos que todos los elementos existan antes de seguir
     if (!registerNameInput || !registerEmailInput || !registerPasswordInput || !registerConfirmPasswordInput ||
@@ -50,8 +50,11 @@ document.addEventListener('DOMContentLoaded', function () {
     // Validación de la contraseña en tiempo real
     registerPasswordInput.addEventListener('input', function () {
         const passwordValue = registerPasswordInput.value;
-
-        if (passwordValue.length < 8) {
+        if (passwordValue.trim() === '') {
+            registerPasswordError.textContent = 'La contraseña no puede estar vacía';
+            registerPasswordError.style.display = 'block';
+        }
+        else if (passwordValue.length < 8) {
             registerPasswordError.textContent = 'La contraseña debe tener al menos 8 caracteres';
             registerPasswordError.style.display = 'block';
         } else {
