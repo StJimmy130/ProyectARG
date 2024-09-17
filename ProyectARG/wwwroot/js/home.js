@@ -222,7 +222,9 @@ function mostrarPagina(pagina) {
     </button>`;
   $.each(paginas[pagina], function (i, item) {
     contenidoTabla += `
+    
     <div class="col-lg-4 col-md-6 col-sm-12 mb-4 activo">
+    <a href="Inmuebles/Detalle/${item.inmuebleID}">
         <div class="card">
             <div class="image-container">
                 <img src="${item.imagenSrc}" alt="Imagen del Inmueble">
@@ -231,14 +233,11 @@ function mostrarPagina(pagina) {
                 <h5 class="card-title fs-4">${item.tituloString}</h5>
                 <p class="card-text fs-5">${item.precioString} ${item.moneda ? "U$D" : "AR$"} - ${item.tipoOperacionString}</p>
                 <p class="card-title fs-5">${item.provinciaString}, ${item.localidadString} - ${item.direccionString} ${item.nroDireccionString}</p>
-                <div class="container d-flex justify-content-end">
-                    <a href="Inmuebles/Detalle/${
-                      item.inmuebleID
-                    }" class="btn btn-primary">Ver más</a>
-                </div>
             </div>
         </div>
+        </a>
     </div>
+    
 `;
   });
   document.getElementById("publicaciones").innerHTML = contenidoTabla;
