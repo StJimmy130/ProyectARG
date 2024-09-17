@@ -158,7 +158,7 @@ public class AdministracionController : Controller
                 InmuebleID = inmueble.InmuebleID,
                 LocalidadID = inmueble.LocalidadID,
                 UsuarioID = inmueble.UsuarioID,
-                FechaPublicacionString = $"{inmueble.FechaAlta:dd} de {inmueble.FechaAlta:MMMM} del {inmueble.FechaAlta:yyyy}",
+                FechaPublicacionString = inmueble.FechaAlta.ToString("ddd. d MMM. yyyy"),
                 ProvinciaString = provincia.Nombre,
                 LocalidadString = localidad.Nombre,
                 NombreUsuario = usuario.Nombre,
