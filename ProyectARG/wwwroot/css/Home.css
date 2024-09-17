@@ -146,7 +146,7 @@ p.card-text{
 .card-body:hover {
   opacity: 1;
   visibility: visible;
-  height: 50%;
+  height: 40%;
 }
 @media screen and (max-width: 1366px) {
   .card-body:hover {
