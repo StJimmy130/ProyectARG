@@ -25,11 +25,17 @@ public class AdministracionController : Controller
     }
 
 
-    
+
     public IActionResult InformePublicacionesPorUsuario()
     {
         return View();
     }
+
+    private string SplitCamelCase(string input)
+    {
+        return System.Text.RegularExpressions.Regex.Replace(input, "(\\B[A-Z])", " $1");
+    }
+
 
     public JsonResult GetInformePublicacionesPorUsuario(int? id)
     {
@@ -57,12 +63,12 @@ public class AdministracionController : Controller
                 LocalidadID = inmueble.LocalidadID,
                 TituloString = inmueble.Titulo,
                 LocalidadString = localidad.Nombre,
-                ProvinciaString = provincia.Nombre,           
+                ProvinciaString = provincia.Nombre,
                 BarrioString = inmueble.Barrio,
                 Moneda = inmueble.Moneda,
                 PrecioString = inmueble.Precio.ToString(),
-                TipoOperacionString = inmueble.TipoOperacion.ToString(),
-                TipoInmuebleString = inmueble.TipoInmueble.ToString(),
+                TipoOperacionString = SplitCamelCase(inmueble.TipoOperacion.ToString()),
+                TipoInmuebleString = SplitCamelCase(inmueble.TipoInmueble.ToString()),
                 DireccionString = inmueble.Direccion,
                 NroDireccionString = inmueble.NroDireccion,
             };
@@ -99,18 +105,18 @@ public class AdministracionController : Controller
             var localidad = Localidades.Where(t => t.LocalidadID == inmueble.LocalidadID).Single();
 
             var informePublicacionPorProvinciaMostrar = new VistaInmueble
-            {   
+            {
                 InmuebleID = inmueble.InmuebleID,
                 LocalidadID = inmueble.LocalidadID,
                 UsuarioID = inmueble.UsuarioID,
-                ProvinciaString = provincia.Nombre,  
-                LocalidadString = localidad.Nombre,  
+                ProvinciaString = provincia.Nombre,
+                LocalidadString = localidad.Nombre,
                 NombreUsuario = usuario.Nombre,
                 TituloString = inmueble.Titulo,
                 Moneda = inmueble.Moneda,
                 PrecioString = inmueble.Precio.ToString(),
-                TipoOperacionString = inmueble.TipoOperacion.ToString(),
-                TipoInmuebleString = inmueble.TipoInmueble.ToString(),
+                TipoOperacionString = SplitCamelCase(inmueble.TipoOperacion.ToString()),
+                TipoInmuebleString = SplitCamelCase(inmueble.TipoInmueble.ToString()),
                 BarrioString = inmueble.Barrio,
                 DireccionString = inmueble.Direccion,
                 NroDireccionString = inmueble.NroDireccion,
@@ -128,7 +134,7 @@ public class AdministracionController : Controller
         return View();
     }
 
-    
+
     public JsonResult GetInformePublicacionesPorFecha(int? id)
     {
         List<VistaInmueble> informePublicacionesPorFechaMostrar = new List<VistaInmueble>();
@@ -148,19 +154,19 @@ public class AdministracionController : Controller
             var localidad = Localidades.Where(t => t.LocalidadID == inmueble.LocalidadID).Single();
 
             var informePublicacionPorFechaMostrar = new VistaInmueble
-            {   
+            {
                 InmuebleID = inmueble.InmuebleID,
                 LocalidadID = inmueble.LocalidadID,
                 UsuarioID = inmueble.UsuarioID,
                 FechaPublicacionString = $"{inmueble.FechaAlta:dd} de {inmueble.FechaAlta:MMMM} del {inmueble.FechaAlta:yyyy}",
-                ProvinciaString = provincia.Nombre,  
-                LocalidadString = localidad.Nombre,  
+                ProvinciaString = provincia.Nombre,
+                LocalidadString = localidad.Nombre,
                 NombreUsuario = usuario.Nombre,
                 TituloString = inmueble.Titulo,
                 Moneda = inmueble.Moneda,
                 PrecioString = inmueble.Precio.ToString(),
-                TipoOperacionString = inmueble.TipoOperacion.ToString(),
-                TipoInmuebleString = inmueble.TipoInmueble.ToString(),
+                TipoOperacionString = SplitCamelCase(inmueble.TipoOperacion.ToString()),
+                TipoInmuebleString = SplitCamelCase(inmueble.TipoInmueble.ToString()),
                 BarrioString = inmueble.Barrio,
                 DireccionString = inmueble.Direccion,
                 NroDireccionString = inmueble.NroDireccion,
@@ -175,7 +181,7 @@ public class AdministracionController : Controller
     public IActionResult Localidades()
     {
         var provincias = _context.Provincias.ToList();
-        provincias.Add(new Provincia{ProvinciaID = 0, Nombre = "[SELECCIONE...]"});
+        provincias.Add(new Provincia { ProvinciaID = 0, Nombre = "[SELECCIONE...]" });
         ViewBag.ProvinciaID = new SelectList(provincias.OrderBy(c => c.Nombre), "ProvinciaID", "Nombre");
         ViewBag.ProvinciaIDEdit = new SelectList(provincias.OrderBy(c => c.Nombre), "ProvinciaID", "Nombre");
 
@@ -205,32 +211,33 @@ public class AdministracionController : Controller
             {
                 mostrar = false;
             }
-            
-            if(mostrar)
+
+            if (mostrar)
             {
-                var localidadMostrar = new VistaLocalidad{
-                LocalidadID = localidad.LocalidadID,
-                LocalidadNombre = localidad.Nombre,
-                ProvinciaID = localidad.ProvinciaID,
-                ProvinciaNombre = provincia.Nombre
+                var localidadMostrar = new VistaLocalidad
+                {
+                    LocalidadID = localidad.LocalidadID,
+                    LocalidadNombre = localidad.Nombre,
+                    ProvinciaID = localidad.ProvinciaID,
+                    ProvinciaNombre = provincia.Nombre
                 };
                 localidadesMostrar.Add(localidadMostrar);
             }
-            
+
         }
 
         return Json(localidadesMostrar);
     }
 
 
-    public JsonResult GuardarLocalidad(int LocalidadID,int ProvinciaID, string Nombre)
+    public JsonResult GuardarLocalidad(int LocalidadID, int ProvinciaID, string Nombre)
     {
         string resultado = "";
 
         if (!String.IsNullOrEmpty(Nombre))
         {
             Nombre = char.ToUpper(Nombre[0]) + Nombre.Substring(1).ToLower();
-            
+
             if (LocalidadID == 0)
             {
                 var existeLocalidad = _context.Localidades.Where(t => t.Nombre == Nombre).Count();
@@ -253,18 +260,19 @@ public class AdministracionController : Controller
             else
             {
                 var localidadEditar = _context.Localidades.Where(t => t.LocalidadID == LocalidadID).SingleOrDefault();
-                if(localidadEditar != null)
+                if (localidadEditar != null)
                 {
                     var existeLocalidad = _context.Localidades.Where(t => t.Nombre == Nombre && t.LocalidadID != LocalidadID).Count();
-                    if(existeLocalidad == 0)
+                    if (existeLocalidad == 0)
                     {
                         //QUIERE DECIR QUE EL ELEMENTO Y ES CORRECTO, ENTONCES CONTINUAMOS CON EL EDITAR
                         localidadEditar.Nombre = Nombre;
                         localidadEditar.ProvinciaID = ProvinciaID;
                         _context.SaveChanges();
                     }
-                    else{
-                    resultado = "ESTA LOCALIDAD YA EXISTE";
+                    else
+                    {
+                        resultado = "ESTA LOCALIDAD YA EXISTE";
                     }
                 }
                 else
