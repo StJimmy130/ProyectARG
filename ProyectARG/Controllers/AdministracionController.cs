@@ -25,7 +25,7 @@ public class AdministracionController : Controller
     }
 
 
-    
+
     public IActionResult InformePublicacionesPorUsuario()
     {
         return View();
@@ -57,7 +57,7 @@ public class AdministracionController : Controller
                 LocalidadID = inmueble.LocalidadID,
                 TituloString = inmueble.Titulo,
                 LocalidadString = localidad.Nombre,
-                ProvinciaString = provincia.Nombre,           
+                ProvinciaString = provincia.Nombre,
                 BarrioString = inmueble.Barrio,
                 Moneda = inmueble.Moneda,
                 PrecioString = inmueble.Precio.ToString(),
@@ -99,12 +99,12 @@ public class AdministracionController : Controller
             var localidad = Localidades.Where(t => t.LocalidadID == inmueble.LocalidadID).Single();
 
             var informePublicacionPorProvinciaMostrar = new VistaInmueble
-            {   
+            {
                 InmuebleID = inmueble.InmuebleID,
                 LocalidadID = inmueble.LocalidadID,
                 UsuarioID = inmueble.UsuarioID,
-                ProvinciaString = provincia.Nombre,  
-                LocalidadString = localidad.Nombre,  
+                ProvinciaString = provincia.Nombre,
+                LocalidadString = localidad.Nombre,
                 NombreUsuario = usuario.Nombre,
                 TituloString = inmueble.Titulo,
                 Moneda = inmueble.Moneda,
@@ -128,7 +128,7 @@ public class AdministracionController : Controller
         return View();
     }
 
-    
+
     public JsonResult GetInformePublicacionesPorFecha(int? id)
     {
         List<VistaInmueble> informePublicacionesPorFechaMostrar = new List<VistaInmueble>();
@@ -148,13 +148,13 @@ public class AdministracionController : Controller
             var localidad = Localidades.Where(t => t.LocalidadID == inmueble.LocalidadID).Single();
 
             var informePublicacionPorFechaMostrar = new VistaInmueble
-            {   
+            {
                 InmuebleID = inmueble.InmuebleID,
                 LocalidadID = inmueble.LocalidadID,
                 UsuarioID = inmueble.UsuarioID,
                 FechaPublicacionString = $"{inmueble.FechaAlta:dd} de {inmueble.FechaAlta:MMMM} del {inmueble.FechaAlta:yyyy}",
-                ProvinciaString = provincia.Nombre,  
-                LocalidadString = localidad.Nombre,  
+                ProvinciaString = provincia.Nombre,
+                LocalidadString = localidad.Nombre,
                 NombreUsuario = usuario.Nombre,
                 TituloString = inmueble.Titulo,
                 Moneda = inmueble.Moneda,
@@ -175,7 +175,7 @@ public class AdministracionController : Controller
     public IActionResult Localidades()
     {
         var provincias = _context.Provincias.ToList();
-        provincias.Add(new Provincia{ProvinciaID = 0, Nombre = "[SELECCIONE...]"});
+        provincias.Add(new Provincia { ProvinciaID = 0, Nombre = "[SELECCIONE...]" });
         ViewBag.ProvinciaID = new SelectList(provincias.OrderBy(c => c.Nombre), "ProvinciaID", "Nombre");
         ViewBag.ProvinciaIDEdit = new SelectList(provincias.OrderBy(c => c.Nombre), "ProvinciaID", "Nombre");
 
@@ -205,32 +205,38 @@ public class AdministracionController : Controller
             {
                 mostrar = false;
             }
-            
-            if(mostrar)
+
+            if (mostrar)
             {
-                var localidadMostrar = new VistaLocalidad{
-                LocalidadID = localidad.LocalidadID,
-                LocalidadNombre = localidad.Nombre,
-                ProvinciaID = localidad.ProvinciaID,
-                ProvinciaNombre = provincia.Nombre
+                var localidadMostrar = new VistaLocalidad
+                {
+                    LocalidadID = localidad.LocalidadID,
+                    LocalidadNombre = localidad.Nombre,
+                    ProvinciaID = localidad.ProvinciaID,
+                    ProvinciaNombre = provincia.Nombre
                 };
                 localidadesMostrar.Add(localidadMostrar);
             }
-            
+
         }
 
         return Json(localidadesMostrar);
     }
 
 
-    public JsonResult GuardarLocalidad(int LocalidadID,int ProvinciaID, string Nombre)
+    public JsonResult GuardarLocalidad(int LocalidadID, int ProvinciaID, string Nombre)
     {
-        string resultado = "";
+        var resultado = new
+        {
+            titulo = "",
+            texto = "",
+            error = false
+        };
 
         if (!String.IsNullOrEmpty(Nombre))
         {
             Nombre = char.ToUpper(Nombre[0]) + Nombre.Substring(1).ToLower();
-            
+
             if (LocalidadID == 0)
             {
                 var existeLocalidad = _context.Localidades.Where(t => t.Nombre == Nombre).Count();
@@ -244,48 +250,107 @@ public class AdministracionController : Controller
                     };
                     _context.Add(Localidad);
                     _context.SaveChanges();
+                    resultado = new
+                    {
+                        titulo = "LOCALIDAD CREADA",
+                        texto = "La localidad se ha creado correctamente",
+                        error = false
+                    };
                 }
                 else
                 {
-                    resultado = "ESTA LOCALIDAD YA EXISTE";
+                    resultado = new
+                    {
+                        titulo = "ESTA LOCALIDAD YA EXISTE",
+                        texto = "No se puede crear otra localidad con el mismo nombre",
+                        error = true
+                    };
                 }
             }
             else
             {
                 var localidadEditar = _context.Localidades.Where(t => t.LocalidadID == LocalidadID).SingleOrDefault();
-                if(localidadEditar != null)
+                if (localidadEditar != null)
                 {
                     var existeLocalidad = _context.Localidades.Where(t => t.Nombre == Nombre && t.LocalidadID != LocalidadID).Count();
-                    if(existeLocalidad == 0)
+                    if (existeLocalidad == 0)
                     {
                         //QUIERE DECIR QUE EL ELEMENTO Y ES CORRECTO, ENTONCES CONTINUAMOS CON EL EDITAR
                         localidadEditar.Nombre = Nombre;
                         localidadEditar.ProvinciaID = ProvinciaID;
                         _context.SaveChanges();
+                        resultado = new
+                        {
+                            titulo = "LOCALIDAD EDITADA",
+                            texto = "La localidad se ha editado correctamente",
+                            error = false
+                        };
                     }
-                    else{
-                    resultado = "ESTA LOCALIDAD YA EXISTE";
+                    else
+                    {
+                        resultado = new
+                        {
+                            titulo = "ESTA LOCALIDAD YA EXISTE",
+                            texto = "No se puede crear otra localidad con el mismo nombre",
+                            error = true
+                        };
                     }
                 }
                 else
                 {
-                    resultado = "ESTA LOCALIDAD YA EXISTE";
+                    resultado = new
+                    {
+                        titulo = "ESTA LOCALIDAD YA EXISTE",
+                        texto = "No se puede crear otra localidad con el mismo nombre",
+                        error = true
+                    };
                 }
             }
         }
         else
         {
-            resultado = "DEBE INGRESAR UN NOMBRE DE LOCALIDAD";
+            resultado = new
+            {
+                titulo = "Advertencia",
+                texto = "El nombre de la localidad no puede ser vacío",
+                error = true
+            };
         }
         return Json(resultado);
     }
 
     public JsonResult EliminarLocalidad(int LocalidadID)
     {
-        var eliminarLocalidad = _context.Localidades.Find(LocalidadID);
-        _context.Remove(eliminarLocalidad);
-        _context.SaveChanges();
+        var relacion = _context.Inmuebles.Where(t => t.LocalidadID == LocalidadID).Count();
+        var resultado = new
+        {
+            titulo = "",
+            texto = "",
+            error = false
+        };
+        if (relacion == 0)
+        {
+            var eliminarLocalidad = _context.Localidades.Find(LocalidadID);
+            _context.Remove(eliminarLocalidad);
+            _context.SaveChanges();
 
-        return Json(eliminarLocalidad);
+            resultado = new
+            {
+                titulo = "Localidad eliminada",
+                texto = "La localidad se ha eliminado correctamente",
+                error = false
+            };
+        }
+        else
+        {
+            resultado = new
+            {
+                titulo = "Hay un problema",
+                texto = "La localidad no puede ser eliminada porque tiene inmuebles relacionados",
+                error = true
+            };
+        }
+
+        return Json(resultado);
     }
 }

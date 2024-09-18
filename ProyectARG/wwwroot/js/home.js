@@ -1,5 +1,6 @@
 window.onload = function () {
   ListadoPublicaciones();
+  checkSocialMedia();
 };
 
 $(document).ready(function () {
@@ -341,3 +342,37 @@ function syncInput(id) {
 searchToggle.addEventListener("click", () => {
   searchToggle.classList.toggle("active");
 });
+
+
+function checkSocialMedia() {
+  let UsuarioID = document.getElementById("UsuarioID").value;
+
+  $.ajax({
+    url: "../../Home/CheckSocialMedia",
+    data: {
+      UsuarioID: UsuarioID
+    },
+    type: "POST",
+    dataType: "json",
+    success: function (resultado) {
+      if (resultado != "") {
+        icon.innerHTML = '<i class="bx bxs-error-circle"></i>';
+        icon.classList.add("succes-svg");
+        background.classList.add("success");
+
+      titulo.innerHTML = "Atencion";
+      descripcion.innerHTML = `<label>${resultado}</label>`;
+      aceptar.style.display = "block";
+      aceptar.setAttribute("onclick", `hiddenAlert()`);
+      alerta.classList.add("enter-alert");
+
+      setTimeout(function () {
+        hiddenAlert();
+      }, 5000);
+    }
+    },
+    error: function (xhr, status) {
+      console.log("Disculpe, existió un problema al cargar el listado");
+    },
+  });
+}

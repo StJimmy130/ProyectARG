@@ -73,9 +73,21 @@ function GuardarProvincia() {
     type: "POST",
     dataType: "json",
     success: function (resultado) {
-      if (resultado != "") {
-        alert(resultado);
+      if (resultado.error === true) {
+        icon.innerHTML = '<i class="bx bxs-x-circle"></i>';
+        icon.classList.add("denied-svg");
+        background.classList.add("denied");
+      } else {
+        icon.innerHTML = '<i class="bx bxs-check-circle"></i>';
+        icon.classList.add("succes-svg");
+        background.classList.add("success");
       }
+
+      titulo.innerHTML = resultado.titulo;
+      descripcion.innerHTML = `<label>${resultado.texto}</label>`;
+      aceptar.style.display = "block";
+      aceptar.setAttribute("onclick", `hiddenAlert()`);
+      alerta.classList.add("enter-alert");
       ListadoDeProvincias();
     },
     error: function (xhr, status) {
@@ -105,10 +117,18 @@ function ModalEditar(provinciaID) {
 }
 
 function ValidarEliminacion(provinciaID) {
-  var elimina = confirm("¿Esta seguro que desea eliminar esta provincia?");
-  if (elimina == true) {
-    EliminarProvincia(provinciaID);
-  }
+  icon.innerHTML = '<i class="bx bxs-error-circle"></i>';
+  icon.classList.add("alert-svg");
+  titulo.innerHTML = "Atencion!!!";
+  descripcion.innerHTML = `<label>¿Esta seguro que desea eliminar esta provincia?</label>`;
+  aceptar.style.display = "block";
+  background.classList.add("alert");
+  alerta.classList.add("enter-alert");
+  cancelar.setAttribute("onclick", `hiddenAlert()`);
+  cancelar.style.display = "block";
+  aceptar.setAttribute("onclick", `EliminarProvincia(${provinciaID})`);
+
+  alerta.classList.add("enter-alert");
 }
 
 function EliminarProvincia(provinciaID) {
@@ -118,7 +138,21 @@ function EliminarProvincia(provinciaID) {
     type: "POST",
     dataType: "json",
 
-    success: function (eliminarProvincia) {
+    success: function (resultado) {
+      if (resultado.error === true) {
+        icon.innerHTML = '<i class="bx bxs-x-circle"></i>';
+        icon.classList.add("denied-svg");
+        background.classList.add("denied");
+      } else {
+        icon.innerHTML = '<i class="bx bxs-check-circle"></i>';
+        icon.classList.add("succes-svg");
+        background.classList.add("success");
+      }
+
+      titulo.innerHTML = resultado.titulo;
+      descripcion.innerHTML = `<label>${resultado.texto}</label>`;
+      aceptar.style.display = "block";
+      aceptar.setAttribute("onclick", `hiddenAlert()`);
       ListadoDeProvincias();
     },
 

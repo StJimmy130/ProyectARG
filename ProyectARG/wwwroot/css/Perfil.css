@@ -12,9 +12,15 @@ footer{
 
 .formulario{
     min-height: auto;
-    height: 60vh;
+    
+    height: 50vh;
     background-color: var(--container-color);
     border-radius: 15px;
+    position: relative;
+}
+
+.form-group{
+    position: relative;
 }
 
 .formulario label{
@@ -27,6 +33,19 @@ footer{
 
 .formulario div{
     padding: 20px 1rem;
+}
+.formulario span{
+    width: 100%;
+    height: 20px;
+    color: red;
+    position: absolute;
+    
+}
+.btn-safe{
+    width: 80%;
+    position: absolute;
+    bottom: 50px;
+    left: calc(50% - 40%);
 }
 
 @media screen and (max-width: 768px) {

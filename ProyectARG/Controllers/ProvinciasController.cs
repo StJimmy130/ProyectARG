@@ -32,7 +32,12 @@ public class ProvinciasController : Controller
 
     public JsonResult GuardarProvincia(int ProvinciaID, string Nombre)
     {
-        string resultado = "";
+        var resultado = new
+        {
+            titulo = "",
+            texto = "",
+            error = false
+        };
         if (!String.IsNullOrEmpty(Nombre))
         {
             Nombre = char.ToUpper(Nombre[0]) + Nombre.Substring(1).ToLower();
@@ -47,46 +52,104 @@ public class ProvinciasController : Controller
                     };
                     _context.Add(provincia);
                     _context.SaveChanges();
+                    resultado = new
+                    {
+                        titulo = "Provincia creada",
+                        texto = "La provincia se ha creado correctamente",
+                        error = false
+                    };
                 }
                 else
                 {
-                    resultado = "ESTA PROVINCIA YA EXISTE";
+                    resultado = new
+                    {
+                        titulo = "Provincia existente",
+                        texto = "La provincia ya existe",
+                        error = true
+                    };
                 }
             }
             else
             {
                 var provinciaEditar = _context.Provincias.Where(t => t.ProvinciaID == ProvinciaID).SingleOrDefault();
-                if(provinciaEditar != null)
+                if (provinciaEditar != null)
                 {
                     var existeProvincia = _context.Provincias.Where(t => t.Nombre == Nombre && t.ProvinciaID != ProvinciaID).Count();
-                    if(existeProvincia == 0)
+                    if (existeProvincia == 0)
                     {
                         //QUIERE DECIR QUE EL ELEMENTO Y ES CORRECTO, ENTONCES CONTINUAMOS CON EL EDITAR
                         provinciaEditar.Nombre = Nombre;
                         _context.SaveChanges();
+                        resultado = new
+                        {
+                            titulo = "Provincia editada",
+                            texto = "La provincia se ha editado correctamente",
+                            error = false
+                        };
                     }
-                    else{
-                    resultado = "ESTA PROVINCIA YA EXISTE";
+                    else
+                    {
+                        resultado = new
+                        {
+                            titulo = "Provincia existente",
+                            texto = "La provincia ya existe",
+                            error = true
+                        };
                     }
                 }
                 else
                 {
-                    resultado = "ESTA PROVINCIA YA EXISTE";
+                    resultado = new
+                    {
+                        titulo = "Provincia existente",
+                        texto = "La provincia ya existe",
+                        error = true
+                    };
                 }
             }
         }
         else
         {
-            resultado = "DEBE INGRESAR UN NOMBRE DE PROVINCIA";
+            resultado = new
+            {
+                titulo = "Advertencia",
+                texto = "El nombre de la provincia no puede ser vacío",
+                error = true
+            };
         }
         return Json(resultado);
     }
 
     public JsonResult EliminarProvincia(int ProvinciaID)
     {
-        var eliminarProvincia = _context.Provincias.Find(ProvinciaID);
-        _context.Remove(eliminarProvincia);
-        _context.SaveChanges();
-        return Json(eliminarProvincia);
+        var relacion = _context.Localidades.Where(t => t.ProvinciaID == ProvinciaID).Count();
+        var resultado = new
+        {
+            titulo = "",
+            texto = "",
+            error = false
+        };
+        if (relacion == 0)
+        {
+            var eliminarProvincia = _context.Provincias.Find(ProvinciaID);
+            _context.Remove(eliminarProvincia);
+            _context.SaveChanges();
+            resultado = new
+            {
+                titulo = "Provincia eliminada",
+                texto = "La provincia se ha eliminado correctamente",
+                error = false
+            };
+        }
+        else
+        {
+            resultado = new
+            {
+                titulo = "Hay un problema",
+                texto = "La provincia no puede ser eliminada porque tiene localidades relacionadas",
+                error = true
+            };
+        }
+        return Json(resultado);
     }
 }

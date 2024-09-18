@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace ProyectARG.Controllers;
 
@@ -27,7 +28,7 @@ public class HomeController : Controller
     }
 
 
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(int? UsuarioID)
     {
         var localidades = _context.Localidades.ToList();
         var provincias = _context.Provincias.ToList();
@@ -59,6 +60,15 @@ public class HomeController : Controller
             
         
         await InicializarPermisosUsuario();
+
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+        UsuarioID = _context.Usuarios
+                .Where(t => t.CuentaID == userId)
+                .Select(t => t.UsuarioID) // Proyecta solo el campo UsuarioID
+                .SingleOrDefault(); ;
+
+        ViewBag.UsuarioID = UsuarioID;
 
         return View();
     }
@@ -222,6 +232,17 @@ public async Task<JsonResult> InicializarPermisosUsuario()
     return Json(creado);
 }
 
+    public JsonResult CheckSocialMedia(int? UsuarioID)
+    {
+        var socialMedia = _context.Usuarios.Where(t => t.UsuarioID == UsuarioID).SingleOrDefault();
+        string resultado = "";
+
+        if (socialMedia.Instagram == null && socialMedia.Facebook == null && socialMedia.Whatsapp == null){
+            resultado = "Para poder publicar recuerda que debes agregar al menos una de tus redes sociales";
+        }
+
+        return Json(resultado);
+    }
 
 
     [Authorize(Roles = "ADMINISTRADOR")]
