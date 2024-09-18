@@ -123,9 +123,9 @@ label > p {
 
 @media screen and (max-width: 768px) {
   .contenedor {
-    width: 100%;
+    width: 90vw;
     height: auto;
-    padding: 5px;
+    margin-top: 15px;
   }
 
   .botonera {
@@ -143,6 +143,30 @@ label > p {
   .checkbox {
     width: 100%;
     justify-content: flex-start;
+  }
+  .d-flex {
+    flex-direction: column;
+  }
+
+  .input-form {
+    width: 100%;
+  }
+
+  .checkbox {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  label[for="Imagen"] {
+    font-size: 2rem;
+    height: 3rem;
+    width: 3rem;
+  }
+  .list-container {
+    display: none !important;
+  }
+  #preview-container{
+    min-height: 450px;
   }
 }
 
@@ -180,27 +204,7 @@ label > p {
   margin: 0.5rem;
 }
 
-/* Ajustes para dispositivos móviles */
-@media screen and (max-width: 480px) {
-  .d-flex {
-    flex-direction: column;
-  }
 
-  .input-form {
-    width: 100%;
-  }
-
-  .checkbox {
-    width: 100%;
-    justify-content: flex-start;
-  }
-
-  label[for="Imagen"] {
-    font-size: 2rem;
-    height: 3rem;
-    width: 3rem;
-  }
-}
 
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
@@ -317,7 +321,7 @@ img.active {
   /* switch */
   --switch-width: 46px;
   --switch-height: 24px;
-  --switch-bg: rgb(131, 131, 131);
+  --switch-bg: rgb(0, 218, 80);
   --switch-checked-bg: rgb(0, 218, 80);
   --switch-offset: calc((var(--switch-height) - var(--circle-diameter)) / 2);
   --switch-transition: all .2s cubic-bezier(0.27, 0.2, 0.25, 1.51);

@@ -31,6 +31,12 @@ public class AdministracionController : Controller
         return View();
     }
 
+    private string SplitCamelCase(string input)
+    {
+        return System.Text.RegularExpressions.Regex.Replace(input, "(\\B[A-Z])", " $1");
+    }
+
+
     public JsonResult GetInformePublicacionesPorUsuario(int? id)
     {
         List<VistaInmueble> informePublicacionesPorUsuarioMostrar = new List<VistaInmueble>();
@@ -61,8 +67,8 @@ public class AdministracionController : Controller
                 BarrioString = inmueble.Barrio,
                 Moneda = inmueble.Moneda,
                 PrecioString = inmueble.Precio.ToString(),
-                TipoOperacionString = inmueble.TipoOperacion.ToString(),
-                TipoInmuebleString = inmueble.TipoInmueble.ToString(),
+                TipoOperacionString = SplitCamelCase(inmueble.TipoOperacion.ToString()),
+                TipoInmuebleString = SplitCamelCase(inmueble.TipoInmueble.ToString()),
                 DireccionString = inmueble.Direccion,
                 NroDireccionString = inmueble.NroDireccion,
             };
@@ -109,8 +115,8 @@ public class AdministracionController : Controller
                 TituloString = inmueble.Titulo,
                 Moneda = inmueble.Moneda,
                 PrecioString = inmueble.Precio.ToString(),
-                TipoOperacionString = inmueble.TipoOperacion.ToString(),
-                TipoInmuebleString = inmueble.TipoInmueble.ToString(),
+                TipoOperacionString = SplitCamelCase(inmueble.TipoOperacion.ToString()),
+                TipoInmuebleString = SplitCamelCase(inmueble.TipoInmueble.ToString()),
                 BarrioString = inmueble.Barrio,
                 DireccionString = inmueble.Direccion,
                 NroDireccionString = inmueble.NroDireccion,
@@ -153,14 +159,14 @@ public class AdministracionController : Controller
                 LocalidadID = inmueble.LocalidadID,
                 UsuarioID = inmueble.UsuarioID,
                 FechaPublicacionString = $"{inmueble.FechaAlta:dd} de {inmueble.FechaAlta:MMMM} del {inmueble.FechaAlta:yyyy}",
-                ProvinciaString = provincia.Nombre,
-                LocalidadString = localidad.Nombre,
+                ProvinciaString = provincia.Nombre,  
+                LocalidadString = localidad.Nombre,  
                 NombreUsuario = usuario.Nombre,
                 TituloString = inmueble.Titulo,
                 Moneda = inmueble.Moneda,
                 PrecioString = inmueble.Precio.ToString(),
-                TipoOperacionString = inmueble.TipoOperacion.ToString(),
-                TipoInmuebleString = inmueble.TipoInmueble.ToString(),
+                TipoOperacionString = SplitCamelCase(inmueble.TipoOperacion.ToString()),
+                TipoInmuebleString = SplitCamelCase(inmueble.TipoInmueble.ToString()),
                 BarrioString = inmueble.Barrio,
                 DireccionString = inmueble.Direccion,
                 NroDireccionString = inmueble.NroDireccion,
