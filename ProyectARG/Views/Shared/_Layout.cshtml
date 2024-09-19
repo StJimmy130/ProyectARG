@@ -1,6 +1,9 @@
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
+  @{
+    var user = await UserManager.GetUserAsync(User);
+  }
 
 <!DOCTYPE html>
 <html lang="en">
@@ -34,9 +37,15 @@
     <nav>
       <div class="nav-bar">
         <i class='bx bx-menu sidebarOpen'></i>
+        @if (user != null && await UserManager.IsInRoleAsync(user, "Administrador"))
+        {
+        <span class="navLogo"><a class="link-logo" asp-area="" asp-controller="Administracion" asp-action="Index">
+            <img src="~/img/Logo.png" class="logo" alt=""> ProyectARG</a></span>
+        }
+        else{
         <span class="navLogo"><a class="link-logo" asp-area="" asp-controller="Home" asp-action="Index">
             <img src="~/img/Logo.png" class="logo" alt=""> ProyectARG</a></span>
-
+        }
         <div class="d-flex">
           <div class="menu">
             <div class="logo-toggle">
@@ -47,16 +56,12 @@
             <ul class="nav-links links-primary">
               @if (SignInManager.IsSignedIn(User))
               {
-                var user = await UserManager.GetUserAsync(User);
                 if (user != null)
                 {
                   // Si el usuario es administrador, solo mostramos la pestaña "Administrar"
                   if (await UserManager.IsInRoleAsync(user, "Administrador"))
                   {
-                    <li>
-                      <a class="nav-link" asp-area="" asp-controller="Administracion" asp-action="Index">Administrar</a>
-                    </li>
-                    <!-- Aquí podés agregar más pestañas específicas del administrador en el futuro -->
+                    
                   }
                   else
                   {
