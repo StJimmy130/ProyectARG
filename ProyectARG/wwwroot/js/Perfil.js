@@ -8,20 +8,20 @@ function getInfo() {
     type: "POST",
     dataType: "json",
     success: function (data) {
-        if (
-            data.instagram == null ||
-            data.facebook == null ||
-            data.whatsapp == null ||
-            data.nroTelefono == null
-          ) {
-            icon.classList.add("alert-svg");
-            icon.innerHTML = '<i class="bx bxs-error-circle"></i>';
-            document.getElementById("alert-title").innerHTML = "Consejo";
-            document.getElementById("alert-description").innerHTML = "Le recomendamos que complete todos los campos";
-            aceptar.style.display = "block";
-            background.classList.add("alert");
-            alerta.classList.add("enter-alert");
-          }
+        // if (
+        //     data.instagram == null ||
+        //     data.facebook == null ||
+        //     data.whatsapp == null ||
+        //     data.nroTelefono == null
+        //   ) {
+        //     icon.classList.add("alert-svg");
+        //     icon.innerHTML = '<i class="bx bxs-error-circle"></i>';
+        //     document.getElementById("alert-title").innerHTML = "Consejo";
+        //     document.getElementById("alert-description").innerHTML = "Le recomendamos que complete todos los campos";
+        //     aceptar.style.display = "block";
+        //     background.classList.add("alert");
+        //     alerta.classList.add("enter-alert");
+        //   }
 
       $("#nombre").val(data.nombre);
       $("#phone").val(data.nroTelefono);
@@ -29,7 +29,7 @@ function getInfo() {
       $("#facebook").val(data.facebook);
       $("#whatsapp").val(data.whatsapp);
 
-     
+
     },
     error: function (xhr, status) {
       console.log("Disculpe, existió un problema al cargar el listado");
@@ -80,3 +80,28 @@ nombre.addEventListener("input", function () {
     nombreError.style.display = "none";
   }
 });
+
+
+
+// DAR FORMATO A NUMERO DE TELEFONO
+function formatearTelefono(input) {
+  // Eliminar todo lo que no sea un número
+  const numeroSolo = input.value.replace(/\D/g, '');
+
+  // Aplicar el formato (XXXX) XX-XXXX
+  const formatoTelefono = numeroSolo.replace(/^(\d{4})(\d{2})(\d{0,4})/, function(match, p1, p2, p3) {
+      if (p3) {
+          return `(${p1}) ${p2}-${p3}`;
+      } else if (p2) {
+          return `(${p1}) ${p2}`;
+      } else if (p1) {
+          return `(${p1}`;
+      }
+      return '';
+  });
+
+  // Establecer el valor formateado en el input
+  input.value = formatoTelefono;
+}
+
+

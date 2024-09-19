@@ -26,13 +26,8 @@
       </div>
       <div class="form-group col-md-6 mb-4">
         <label for="phone">Número de teléfono</label>
-        <input
-          type="tel"
-          id="phone"
-          name="phone"
-          class="form-control"
-          placeholder="Tu numero de telefono"
-        />
+        <input class="form-control" type="text" id="phone" maxlength="14" oninput="formatearTelefono(this)" placeholder="(1234) 56-7890">
+
       </div>
       <div class="form-group col-md-4 mb-4">
         <label for="instagram" >Instagram</label>
@@ -61,7 +56,7 @@
           id="whatsapp"
           name="whatsapp"
           class="form-control"
-          placeholder="Número de WhatsApp"
+          maxlength="14" oninput="formatearTelefono(this)" placeholder="(1234) 56-7890"
         />
       </div>
       

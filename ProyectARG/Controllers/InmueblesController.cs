@@ -10,7 +10,7 @@ using System.Security.Claims;
 using System.Globalization;
 
 namespace ProyectARG.Controllers;
-// [Authorize]
+[Authorize]
 public class InmueblesController : Controller
 {
     private ApplicationDbContext _context;
