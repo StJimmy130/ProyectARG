@@ -34,9 +34,10 @@
     <nav>
       <div class="nav-bar">
         <i class='bx bx-menu sidebarOpen'></i>
-        <span class="navLogo"><a class="link-logo" asp-area="" asp-controller="Home" asp-action="Index"><img
-              src="~/img/Logo.png" class="logo" alt=""> ProyectARG</a></span>
-        <div class="d-flex ">
+        <span class="navLogo"><a class="link-logo" asp-area="" asp-controller="Home" asp-action="Index">
+            <img src="~/img/Logo.png" class="logo" alt=""> ProyectARG</a></span>
+
+        <div class="d-flex">
           <div class="menu">
             <div class="logo-toggle">
               <span class=""><a href="#" class="link-logo"><img src="~/img/Logo.png" class="logo" alt="">
@@ -44,39 +45,61 @@
               <i class='bx bx-x siderbarClose'></i>
             </div>
             <ul class="nav-links links-primary">
-              <li>
-                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-              </li>
-              <li>
-                <a class="nav-link" asp-area="" asp-controller="Inmuebles" asp-action="Index">Publicar</a>
-              </li>
-              <li>
-                <a class="nav-link" asp-area="" asp-controller="MisPublicaciones" asp-action="Index">Mis
-                  Publicaciones</a>
-              </li>
               @if (SignInManager.IsSignedIn(User))
               {
                 var user = await UserManager.GetUserAsync(User);
-                if (user != null && await UserManager.IsInRoleAsync(user, "Administrador"))
+                if (user != null)
                 {
-                  <li>
-                    <a class="nav-link" asp-area="" asp-controller="Administracion" asp-action="Index">Administrar</a>
-                  </li>
+                  // Si el usuario es administrador, solo mostramos la pestaña "Administrar"
+                  if (await UserManager.IsInRoleAsync(user, "Administrador"))
+                  {
+                    <li>
+                      <a class="nav-link" asp-area="" asp-controller="Administracion" asp-action="Index">Administrar</a>
+                    </li>
+                    <!-- Aquí podés agregar más pestañas específicas del administrador en el futuro -->
+                  }
+                  else
+                  {
+                    // Si el usuario está logueado pero no es administrador, mostramos las pestañas normales
+                    <li>
+                      <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    <li>
+                      <a class="nav-link" asp-area="" asp-controller="Inmuebles" asp-action="Index">Publicar</a>
+                    </li>
+                    <li>
+                      <a class="nav-link" asp-area="" asp-controller="MisPublicaciones" asp-action="Index">Mis
+                        Publicaciones</a>
+                    </li>
+                  }
                 }
               }
+              else
+              {
+                // Para usuarios no registrados, mostramos las pestañas normales
+                <li>
+                  <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                </li>
+                <li>
+                  <a class="nav-link" asp-area="" asp-controller="Inmuebles" asp-action="Index">Publicar</a>
+                </li>
+                <li>
+                  <a class="nav-link" asp-area="" asp-controller="MisPublicaciones" asp-action="Index">Mis
+                    Publicaciones</a>
+                </li>
+              }
+
               <div class="sidebar-perfil">
                 <partial name="_LoginPartial" />
               </div>
             </ul>
-
           </div>
-
         </div>
+
         <div class="d-flex">
           <div class="navbar-perfil">
             <partial name="_LoginPartial" />
           </div>
-
         </div>
 
         @{
@@ -90,7 +113,7 @@
             <i class='bx bx-sun sun'></i>
           </div>
 
-          @if (currentController == "Home" && currentAction == "Index") 
+          @if (currentController == "Home" && currentAction == "Index")
           {
             <div class="searchBox">
               <div class="searchToggle">
@@ -114,63 +137,65 @@
 
 
 
-@if (currentController == "Inmuebles" && currentAction == "Index") {
-  <div class="d-flex justify-content-center align-item-center container">
-    <main role="main" class=" container">
-      <div class="notifications-container" id="alert">
-        <div class="success" id="background">
-          <div class="flex">
-            <div class="flex-shrink-0" id="alert-icon">
-            </div>
-            <div class="success-prompt-wrap">
-              <p class="success-prompt-heading" id="alert-title"></p>
-              <div class="success-prompt-prompt">
-                <p id="alert-description"></p>
+  @if (currentController == "Inmuebles" && currentAction == "Index")
+  {
+    <div class="d-flex justify-content-center align-item-center container">
+      <main role="main" class=" container">
+        <div class="notifications-container" id="alert">
+          <div class="success" id="background">
+            <div class="flex">
+              <div class="flex-shrink-0" id="alert-icon">
               </div>
-              <div class="success-button-container">
-                <button type="button" class="success-button-main" onclick="hiddenAlert()" id="btn-aceptar">
-                  Aceptar
-                </button>
-                <button type="button" class="success-button-secondary" id="btn-cancelar">
-                  Cancelar
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      @RenderBody()
-    </main>
-  </div>
-}
-else{
-  <div class="d-flex justify-content-center align-item-center">
-    <main role="main" class="">
-      <div class="notifications-container" id="alert">
-        <div class="success" id="background">
-          <div class="flex">
-            <div class="flex-shrink-0" id="alert-icon">
-            </div>
-            <div class="success-prompt-wrap">
-              <p class="success-prompt-heading" id="alert-title"></p>
-              <div class="success-prompt-prompt">
-                <p id="alert-description"></p>
-              </div>
-              <div class="success-button-container">
-                <button type="button" class="success-button-main" onclick="hiddenAlert()" id="btn-aceptar">
-                  Aceptar
-                </button>
-                <button type="button" class="success-button-secondary" id="btn-cancelar">
-                  Cancelar
-                </button>
+              <div class="success-prompt-wrap">
+                <p class="success-prompt-heading" id="alert-title"></p>
+                <div class="success-prompt-prompt">
+                  <p id="alert-description"></p>
+                </div>
+                <div class="success-button-container">
+                  <button type="button" class="success-button-main" onclick="hiddenAlert()" id="btn-aceptar">
+                    Aceptar
+                  </button>
+                  <button type="button" class="success-button-secondary" id="btn-cancelar">
+                    Cancelar
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      @RenderBody()
-    </main>
-  </div>
+        @RenderBody()
+      </main>
+    </div>
+  }
+  else
+  {
+    <div class="d-flex justify-content-center align-item-center">
+      <main role="main" class="">
+        <div class="notifications-container" id="alert">
+          <div class="success" id="background">
+            <div class="flex">
+              <div class="flex-shrink-0" id="alert-icon">
+              </div>
+              <div class="success-prompt-wrap">
+                <p class="success-prompt-heading" id="alert-title"></p>
+                <div class="success-prompt-prompt">
+                  <p id="alert-description"></p>
+                </div>
+                <div class="success-button-container">
+                  <button type="button" class="success-button-main" onclick="hiddenAlert()" id="btn-aceptar">
+                    Aceptar
+                  </button>
+                  <button type="button" class="success-button-secondary" id="btn-cancelar">
+                    Cancelar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        @RenderBody()
+      </main>
+    </div>
   }
 
   <footer>
@@ -273,7 +298,7 @@ else{
   <script src="~/js/site.js" asp-append-version="true"></script>
   @await RenderSectionAsync("Scripts", required: false)
 
-  
+
 </body>
 
 </html>

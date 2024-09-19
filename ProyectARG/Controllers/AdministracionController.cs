@@ -51,9 +51,9 @@ public class AdministracionController : Controller
         foreach (var inmueble in inmuebles)
         {
 
-            var usuario = usuarios.Where(t => t.UsuarioID == inmueble.UsuarioID).Single();
-            var provincia = Provincias.Where(t => t.ProvinciaID == inmueble.Localidad.ProvinciaID).Single();
-            var localidad = Localidades.Where(t => t.LocalidadID == inmueble.LocalidadID).Single();
+            var usuario = usuarios.Where(t => t.UsuarioID == inmueble.UsuarioID).SingleOrDefault();
+            var provincia = Provincias.Where(t => t.ProvinciaID == inmueble.Localidad.ProvinciaID).SingleOrDefault();
+            var localidad = Localidades.Where(t => t.LocalidadID == inmueble.LocalidadID).SingleOrDefault();
 
             var informePublicacionPorUsuarioMostrar = new VistaInmueble
             {
@@ -100,9 +100,9 @@ public class AdministracionController : Controller
         foreach (var inmueble in inmuebles)
         {
 
-            var usuario = usuarios.Where(t => t.UsuarioID == inmueble.UsuarioID).Single();
-            var provincia = Provincias.Where(t => t.ProvinciaID == inmueble.Localidad.ProvinciaID).Single();
-            var localidad = Localidades.Where(t => t.LocalidadID == inmueble.LocalidadID).Single();
+            var usuario = usuarios.Where(t => t.UsuarioID == inmueble.UsuarioID).SingleOrDefault();
+            var provincia = Provincias.Where(t => t.ProvinciaID == inmueble.Localidad.ProvinciaID).SingleOrDefault();
+            var localidad = Localidades.Where(t => t.LocalidadID == inmueble.LocalidadID).SingleOrDefault();
 
             var informePublicacionPorProvinciaMostrar = new VistaInmueble
             {
@@ -149,9 +149,9 @@ public class AdministracionController : Controller
         foreach (var inmueble in inmuebles)
         {
 
-            var usuario = usuarios.Where(t => t.UsuarioID == inmueble.UsuarioID).Single();
-            var provincia = Provincias.Where(t => t.ProvinciaID == inmueble.Localidad.ProvinciaID).Single();
-            var localidad = Localidades.Where(t => t.LocalidadID == inmueble.LocalidadID).Single();
+            var usuario = usuarios.Where(t => t.UsuarioID == inmueble.UsuarioID).SingleOrDefault();
+            var provincia = Provincias.Where(t => t.ProvinciaID == inmueble.Localidad.ProvinciaID).SingleOrDefault();
+            var localidad = Localidades.Where(t => t.LocalidadID == inmueble.LocalidadID).SingleOrDefault();
 
             var informePublicacionPorFechaMostrar = new VistaInmueble
             {

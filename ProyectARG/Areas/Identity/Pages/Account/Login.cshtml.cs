@@ -20,11 +20,13 @@ namespace ProyectARG.Areas.Identity.Pages.Account
     public class LoginModel : PageModel
     {
         private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<LoginModel> _logger;
 
-        public LoginModel(SignInManager<IdentityUser> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager, ILogger<LoginModel> logger)
         {
             _signInManager = signInManager;
+            _userManager = userManager;
             _logger = logger;
         }
 
@@ -109,13 +111,32 @@ namespace ProyectARG.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-                // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    return LocalRedirect(returnUrl);
+
+                    // Obtener el usuario
+                    var user = await _userManager.FindByEmailAsync(Input.Email);
+                    if (user == null)
+                    {
+                        ModelState.AddModelError(string.Empty, "User not found.");
+                        return Page();
+                    }
+
+                    // Obtener el rol del usuario
+                    var roles = await _userManager.GetRolesAsync(user);
+                    var role = roles.FirstOrDefault();
+
+                    // Redirigir según el rol
+                    if (role == "ADMINISTRADOR")
+                    {
+                        return LocalRedirect("/Administracion/Index"); // Redirige al Admin
+                    }
+                    else
+                    {
+                        return LocalRedirect(returnUrl); // Redirige a la URL de retorno predeterminada
+                    }
                 }
                 if (result.RequiresTwoFactor)
                 {
@@ -133,7 +154,7 @@ namespace ProyectARG.Areas.Identity.Pages.Account
                 }
             }
 
-            // If we got this far, something failed, redisplay form
+            // Si llegamos aquí, algo falló, volvemos a mostrar el formulario
             return Page();
         }
     }
