@@ -62,6 +62,12 @@ function Imprimir() {
     var pageWidth =
       doc.internal.pageSize.width || doc.internal.pageSize.getWidth();
 
+    // // HEADER
+    // doc.setFontSize(14);
+    // doc.setFont("helvetica", "bold");
+    // doc.text("Informe de publicaciones por fecha", 15, 10);
+
+
     // FOOTER
     var str = "Pagina " + data.pageCount;
     // Total page number plugin only available in jspdf v1.0+

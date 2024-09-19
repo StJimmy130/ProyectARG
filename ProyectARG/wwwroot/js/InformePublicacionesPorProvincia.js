@@ -60,6 +60,13 @@ function Imprimir() {
         doc.internal.pageSize.height || doc.internal.pageSize.getHeight();
       var pageWidth =
         doc.internal.pageSize.width || doc.internal.pageSize.getWidth();
+
+      
+      // // HEADER
+      // doc.setFontSize(14);
+      // doc.setFont("helvetica", "bold");
+      // doc.text("Informe de publicaciones por provincia", 15, 10);
+
   
       // FOOTER
       var str = "Pagina " + data.pageCount;

@@ -224,6 +224,9 @@ li span{
     margin: 1rem 0;
     
 }
+.botonCerrarMenu {
+  color: var(--text-color2) !important;
+}
 li:first-child .menu-desplegable{
     padding: 20px;
 }
