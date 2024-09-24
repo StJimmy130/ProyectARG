@@ -10,7 +10,7 @@ using System.Security.Claims;
 using System.Globalization;
 
 namespace ProyectARG.Controllers;
-// [Authorize]
+
 public class InmueblesController : Controller
 {
     private ApplicationDbContext _context;
@@ -20,6 +20,7 @@ public class InmueblesController : Controller
         _context = context;
     }
 
+    [Authorize]
     public IActionResult Index(int? UsuarioID)
     {
 
@@ -233,7 +234,7 @@ public JsonResult GetDetallePublicacion(int InmuebleID, int? localidadID)
     }
 
 
-
+    [Authorize]
     public JsonResult GuardarPublicacion(int InmuebleID, int LocalidadID, string? Barrio, string? Titulo,
     float? Precio, int? SuperficieTotal, int? SuperficieCubierta, Operacion TipoOperacion,
     TipoInmueble TipoInmueble, bool Amoblado, int Dormitorios, int Banios, int CantidadAmbientes,

@@ -146,6 +146,7 @@ function ListadoPublicaciones() {
 var paginaActual = 0;
 var itemsPorPagina = 12;
 var paginas = [];
+var publicacionesFiltradas = []; // Para mantener las publicaciones filtradas
 
 function paginarPublicaciones(publicaciones, itemsPorPagina) {
   var paginas = [];
@@ -156,7 +157,14 @@ function paginarPublicaciones(publicaciones, itemsPorPagina) {
 }
 
 function renderizarTabla(publicaciones) {
-  paginas = paginarPublicaciones(publicaciones, itemsPorPagina);
+  publicacionesFiltradas = publicaciones; // Mantener el estado de las publicaciones filtradas
+  paginas = paginarPublicaciones(publicacionesFiltradas, itemsPorPagina);
+  
+  // Si la página actual es mayor que el total de páginas disponibles, resetear a la primera página
+  if (paginaActual >= paginas.length) {
+    paginaActual = 0;
+  }
+
   mostrarPagina(paginaActual);
   renderizarPaginacion();
 }
@@ -166,33 +174,35 @@ function renderizarPaginacion() {
   var paginacion = document.getElementById("paginacion");
   paginacion.innerHTML = "";
 
-  for (var i = 0; i < paginas.length; i++) {
-    var botonPagina = document.createElement("button");
-    botonPagina.className = "btn btn-link pagination-item";
-    botonPagina.textContent = i + 1;
-    botonPagina.onclick = (function (pagina) {
-      return function () {
-        paginaActual = pagina;
-        mostrarPagina(pagina);
-        renderizarPaginacion();
-        
-        // Usamos un timeout para asegurar que el contenido ya está cargado antes de hacer scroll
-        setTimeout(function() {
-          window.scroll(0, 0); // O prueba con document.documentElement.scrollTop = 0;
-        }, 0);
-      };
-    })(i);
+  // Solo renderizar la paginación si hay más de una página
+  if (paginas.length > 1) {
+    for (var i = 0; i < paginas.length; i++) {
+      var botonPagina = document.createElement("button");
+      botonPagina.className = "btn btn-link pagination-item";
+      botonPagina.textContent = i + 1;
+      botonPagina.onclick = (function (pagina) {
+        return function () {
+          paginaActual = pagina;
+          mostrarPagina(pagina);
+          renderizarPaginacion();
+          
+          // Scroll a la parte superior
+          setTimeout(function() {
+            window.scroll(0, 0);
+          }, 0);
+        };
+      })(i);
 
-    if (i === paginaActual) {
-      botonPagina.style.fontWeight = "bold";
+      if (i === paginaActual) {
+        botonPagina.style.fontWeight = "bold";
+      }
+
+      paginacion.appendChild(botonPagina);
     }
-
-    paginacion.appendChild(botonPagina);
   }
 
   hideLoadingScreen();
 }
-
 
 function cambiarPagina(delta) {
   // Ajustamos el índice de la página actual
@@ -210,11 +220,10 @@ function cambiarPagina(delta) {
     window.scrollTo({
       top: 0,
       left: 0,
-      behavior: "auto" // Instantáneo
+      behavior: "auto"
     });
   });
 }
-
 
 function mostrarPagina(pagina) {
   let contenidoTabla = `<button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#filterMenu"
@@ -223,39 +232,41 @@ function mostrarPagina(pagina) {
     </button>`;
   $.each(paginas[pagina], function (i, item) {
     contenidoTabla += `
-    
     <div class="col-lg-4 col-md-6 col-sm-12 mb-4 activo">
-    <a href="Inmuebles/Detalle/${item.inmuebleID}">
-        <div class="card">
-            <div class="image-container">
-                <img src="${item.imagenSrc}" alt="Imagen del Inmueble">
-            </div>
-            <div class="card-body">
-                <h5 class="card-title fs-4">${item.tituloString}</h5>
-                <p class="card-text fs-5">${item.precioString} ${item.moneda ? "U$D" : "AR$"} - ${item.tipoOperacionString}</p>
-                <p class="card-title fs-5">${item.provinciaString}, ${item.localidadString} - ${item.direccionString} ${item.nroDireccionString}</p>
-            </div>
-        </div>
-        </a>
-    </div>
-    
-`;
+      <a href="Inmuebles/Detalle/${item.inmuebleID}">
+          <div class="card">
+              <div class="image-container">
+                  <img src="${item.imagenSrc}" alt="Imagen del Inmueble">
+              </div>
+              <div class="card-body">
+                  <h5 class="card-title fs-4">${item.tituloString}</h5>
+                  <p class="card-text fs-5">${item.precioString} ${item.moneda ? "U$D" : "AR$"} - ${item.tipoOperacionString}</p>
+                  <p class="card-title fs-5">${item.provinciaString}, ${item.localidadString} - ${item.direccionString} ${item.nroDireccionString}</p>
+              </div>
+          </div>
+      </a>
+    </div>`;
   });
   document.getElementById("publicaciones").innerHTML = contenidoTabla;
   hideLoadingScreen();
 }
 
+// Función de búsqueda
 $(document).ready(function () {
-  // Ejecutar la búsqueda cuando se haga clic en el ícono de búsqueda
   $("#searchButton").on("click", function () {
     var searchQuery = $("#buscadorPorTitulo").val().toLowerCase();
 
-    $("#publicaciones .activo").filter(function () {
-      // Filtra las tarjetas en base al texto dentro de <h5> con la clase "fs-4"
-      $(this).toggle(
-        $(this).find("h5.fs-4").text().toLowerCase().indexOf(searchQuery) > -1
-      );
+    // Filtramos las publicaciones originales en lugar de modificar las existentes
+    var resultadosFiltrados = publicacionesFiltradas.filter(function (publicacion) {
+      return publicacion.tituloString.toLowerCase().indexOf(searchQuery) > -1;
     });
+
+    // Si no hay resultados, mostrar un mensaje o manejarlo adecuadamente
+    if (resultadosFiltrados.length === 0) {
+      document.getElementById("publicaciones").innerHTML = "<p>No se encontraron resultados</p>";
+    } else {
+      renderizarTabla(resultadosFiltrados); // Actualizamos la tabla con las publicaciones filtradas
+    }
   });
 
   // Cargar el listado de publicaciones cuando la página esté lista

@@ -159,8 +159,8 @@ public class AdministracionController : Controller
                 LocalidadID = inmueble.LocalidadID,
                 UsuarioID = inmueble.UsuarioID,
                 FechaPublicacionString = $"{inmueble.FechaAlta:dd} de {inmueble.FechaAlta:MMMM} del {inmueble.FechaAlta:yyyy}",
-                ProvinciaString = provincia.Nombre,  
-                LocalidadString = localidad.Nombre,  
+                ProvinciaString = provincia.Nombre,
+                LocalidadString = localidad.Nombre,
                 NombreUsuario = usuario.Nombre,
                 TituloString = inmueble.Titulo,
                 Moneda = inmueble.Moneda,
@@ -359,4 +359,8 @@ public class AdministracionController : Controller
 
         return Json(resultado);
     }
+
+
+
+    
 }
