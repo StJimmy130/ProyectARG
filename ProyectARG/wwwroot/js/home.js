@@ -153,7 +153,7 @@ function ListadoPublicaciones() {
 }
 
 var paginaActual = 0;
-var itemsPorPagina = 6;
+var itemsPorPagina = 12;
 var paginas = [];
 var publicacionesFiltradas = []; // Para mantener las publicaciones filtradas
 var publicacionesOriginales = []; // Para mantener las publicaciones originales
