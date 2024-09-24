@@ -105,6 +105,7 @@ function changeImage(element) {
 }
 
 function cargarDetallePublicacion() {
+  
   const url = window.location.href; // Obtiene la URL completa
   const partes = url.split("/"); // Divide la URL en partes usando el slash como delimitador
   const inmuebleID = partes[partes.length - 1]; // El ID es la última parte de la URL

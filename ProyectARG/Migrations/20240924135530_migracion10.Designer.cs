@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProyectARG.Data;
 
@@ -11,9 +12,11 @@ using ProyectARG.Data;
 namespace ProyectARG.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240924135530_migracion10")]
+    partial class migracion10
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -451,26 +454,26 @@ namespace ProyectARG.Migrations
 
             modelBuilder.Entity("ProyectARG.Models.Vista", b =>
                 {
-                    b.Property<int>("VistaID")
+                    b.Property<int>("vistaID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("VistaID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("vistaID"));
 
                     b.Property<int>("InmuebleID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UsuarioID")
+                    b.Property<int>("usuarioID")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("VistaFecha")
+                    b.Property<DateTime>("vistaFecha")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("VistaID");
+                    b.HasKey("vistaID");
 
                     b.HasIndex("InmuebleID");
 
-                    b.HasIndex("UsuarioID");
+                    b.HasIndex("usuarioID");
 
                     b.ToTable("Vistas");
                 });
@@ -601,7 +604,9 @@ namespace ProyectARG.Migrations
 
                     b.HasOne("ProyectARG.Models.Usuario", "Usuarios")
                         .WithMany()
-                        .HasForeignKey("UsuarioID");
+                        .HasForeignKey("usuarioID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Inmuebles");
 

@@ -95,11 +95,52 @@ public class InmueblesController : Controller
         return Json(localidades);
     }
 
-    public JsonResult GetDetallePublicacion(int InmuebleID, int? localidadID)
+public JsonResult GetDetallePublicacion(int InmuebleID, int? localidadID)
 {
+    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+    var UsuarioID = _context.Usuarios
+            .Where(t => t.CuentaID == userId)
+            .Select(t => t.UsuarioID)
+            .SingleOrDefault();
+
+    var visitaExistente = _context.Vistas
+        .Where(t => t.InmuebleID == InmuebleID && t.UsuarioID == UsuarioID)
+        .OrderByDescending(v => v.VistaFecha)
+        .FirstOrDefault();  // Obtenemos solo la última visita, si existe
+
+    bool crearNuevaVisita = false;
+
+    if (visitaExistente != null)
+    {
+        var diferenciaHorario = DateTime.Now - visitaExistente.VistaFecha;
+        if (diferenciaHorario.TotalHours > 24)
+        {
+            crearNuevaVisita = true;
+        }
+    }
+    else
+    {
+        crearNuevaVisita = true;
+    }
+
+    if (crearNuevaVisita)
+    {
+        var nuevaVisita = new Vista
+        {
+            InmuebleID = InmuebleID,
+            UsuarioID = UsuarioID,
+            VistaFecha = DateTime.Now
+        };
+
+        _context.Vistas.Add(nuevaVisita);
+        _context.SaveChanges();
+    }
+
+    // Lógica para obtener y retornar los detalles de la publicación...
     List<VistaInmueble> inmuebleDetalleMostrar = new List<VistaInmueble>();
 
-    // Aplicar filtros primero
+    // Aplicar filtros y obtener los inmuebles
     var inmueblesQuery = _context.Inmuebles.AsQueryable();
 
     if (localidadID.HasValue && localidadID.Value != 0)
@@ -112,10 +153,8 @@ public class InmueblesController : Controller
         inmueblesQuery = inmueblesQuery.Where(t => t.InmuebleID == InmuebleID);
     }
 
-    // Ordenar después de filtrar
     var inmuebles = inmueblesQuery.OrderByDescending(t => t.FechaAlta).ToList();
-    var imagenes = _context.Imagenes.ToList(); // Traer todas las imágenes
-
+    var imagenes = _context.Imagenes.ToList(); 
     var provincias = _context.Provincias.ToList();
     var localidades = _context.Localidades.ToList();
 
@@ -418,8 +457,16 @@ public class InmueblesController : Controller
 
 
 
-    public IActionResult Detalle(int InmuebleID)
+    public IActionResult Detalle(int InmuebleID, int? UsuarioID)
     {
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+        UsuarioID = _context.Usuarios
+                .Where(t => t.CuentaID == userId)
+                .Select(t => t.UsuarioID) // Proyecta solo el campo UsuarioID
+                .SingleOrDefault();
+
+        ViewBag.UsuarioID = UsuarioID;
 
         return View();
     }

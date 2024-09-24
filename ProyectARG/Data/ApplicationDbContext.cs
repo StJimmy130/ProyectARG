@@ -17,4 +17,6 @@ public class ApplicationDbContext : IdentityDbContext
     public DbSet<Localidad> Localidades { get; set; }
     public DbSet<Imagen> Imagenes { get; set; }    
     public DbSet<Provincia> Provincias { get; set; }
+    public DbSet<Vista> Vistas { get; set; }
+
 }

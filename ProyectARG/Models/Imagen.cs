@@ -12,5 +12,6 @@ public class Imagen
     public string? NombreArchivo { get; set; }
     public int InmuebleID { get; set; }
     public int? UsuarioID { get; set; }
+    public int? Posicion { get; set; }
     public virtual Inmueble Inmuebles { get; set; }
 }
