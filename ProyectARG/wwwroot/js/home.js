@@ -106,6 +106,7 @@ function actualizarLocalidades() {
 
 function ListadoPublicaciones() {
   showLoadingScreen();
+  
   let provinciaID = document.getElementById("ProvinciaID").value;
   let localidadID = document.getElementById("LocalidadID").value;
   let precioMinimo = document.getElementById("min-price").value;
@@ -122,6 +123,7 @@ function ListadoPublicaciones() {
 
   console.log(provinciaID);
 
+  // Llamada AJAX para obtener las publicaciones
   $.ajax({
     url: "../../Home/ListadoInmuebles",
     data: {
@@ -135,18 +137,26 @@ function ListadoPublicaciones() {
     type: "POST",
     dataType: "json",
     success: function (Listado) {
-      renderizarTabla(Listado);
+      if (Listado && Listado.length > 0) {
+        publicacionesOriginales = Listado; // Asigna las publicaciones originales
+        renderizarTabla(publicacionesOriginales); // Renderiza la tabla con las publicaciones
+      } else {
+        document.getElementById("publicaciones").innerHTML = "<p>No se encontraron publicaciones</p>";
+      }
+      hideLoadingScreen(); // Ocultar pantalla de carga después de la respuesta
     },
-    error: function (xhr, status) {
+    error: function () {
       console.log("Disculpe, existió un problema al cargar el listado");
+      hideLoadingScreen(); // Ocultar pantalla de carga en caso de error
     },
   });
 }
 
 var paginaActual = 0;
-var itemsPorPagina = 12;
+var itemsPorPagina = 6;
 var paginas = [];
 var publicacionesFiltradas = []; // Para mantener las publicaciones filtradas
+var publicacionesOriginales = []; // Para mantener las publicaciones originales
 
 function paginarPublicaciones(publicaciones, itemsPorPagina) {
   var paginas = [];
@@ -165,17 +175,23 @@ function renderizarTabla(publicaciones) {
     paginaActual = 0;
   }
 
-  mostrarPagina(paginaActual);
-  renderizarPaginacion();
+  // Si no hay publicaciones, mostrar mensaje
+  if (publicaciones.length === 0) {
+    document.getElementById("publicaciones").innerHTML = "<p>No se encontraron resultados</p>";
+  } else {
+    mostrarPagina(paginaActual); // Mostrar publicaciones si hay resultados
+  }
+
+  renderizarPaginacion(); // Renderizar la paginación
 }
 
+
 function renderizarPaginacion() {
-  showLoadingScreen();
   var paginacion = document.getElementById("paginacion");
   paginacion.innerHTML = "";
 
-  // Solo renderizar la paginación si hay más de una página
-  if (paginas.length > 1) {
+  // Solo renderizar la paginación si hay más de una página y publicaciones filtradas no está vacía
+  if (paginas.length > 1 && publicacionesFiltradas.length > 0) {
     for (var i = 0; i < paginas.length; i++) {
       var botonPagina = document.createElement("button");
       botonPagina.className = "btn btn-link pagination-item";
@@ -200,8 +216,6 @@ function renderizarPaginacion() {
       paginacion.appendChild(botonPagina);
     }
   }
-
-  hideLoadingScreen();
 }
 
 function cambiarPagina(delta) {
@@ -226,6 +240,8 @@ function cambiarPagina(delta) {
 }
 
 function mostrarPagina(pagina) {
+  showLoadingScreen(); // Mostrar pantalla de carga al renderizar una nueva página
+
   let contenidoTabla = `<button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#filterMenu"
       aria-controls="filterMenu" aria-expanded="false" aria-label="Toggle navigation">
       <span class="container span-filtros"><i class='bx bx-menu-alt-left'></i>Filtros</span>
@@ -247,26 +263,26 @@ function mostrarPagina(pagina) {
       </a>
     </div>`;
   });
+
   document.getElementById("publicaciones").innerHTML = contenidoTabla;
-  hideLoadingScreen();
+  hideLoadingScreen(); // Ocultar pantalla de carga después de mostrar la página
 }
 
 // Función de búsqueda
 $(document).ready(function () {
   $("#searchButton").on("click", function () {
+    showLoadingScreen(); // Mostrar pantalla de carga durante la búsqueda
     var searchQuery = $("#buscadorPorTitulo").val().toLowerCase();
 
-    // Filtramos las publicaciones originales en lugar de modificar las existentes
-    var resultadosFiltrados = publicacionesFiltradas.filter(function (publicacion) {
+    // Filtramos las publicaciones originales en lugar de modificar las filtradas
+    var resultadosFiltrados = publicacionesOriginales.filter(function (publicacion) {
       return publicacion.tituloString.toLowerCase().indexOf(searchQuery) > -1;
     });
 
-    // Si no hay resultados, mostrar un mensaje o manejarlo adecuadamente
-    if (resultadosFiltrados.length === 0) {
-      document.getElementById("publicaciones").innerHTML = "<p>No se encontraron resultados</p>";
-    } else {
-      renderizarTabla(resultadosFiltrados); // Actualizamos la tabla con las publicaciones filtradas
-    }
+    // Renderizamos la tabla con los resultados filtrados
+    renderizarTabla(resultadosFiltrados);
+
+    hideLoadingScreen(); // Ocultar pantalla de carga después de la búsqueda
   });
 
   // Cargar el listado de publicaciones cuando la página esté lista

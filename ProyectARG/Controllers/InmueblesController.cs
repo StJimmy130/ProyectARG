@@ -462,11 +462,8 @@ public JsonResult GetDetallePublicacion(int InmuebleID, int? localidadID)
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-        UsuarioID = _context.Usuarios
-                .Where(t => t.CuentaID == userId)
-                .Select(t => t.UsuarioID) // Proyecta solo el campo UsuarioID
-                .SingleOrDefault();
-
+        UsuarioID = _context.Usuarios.Where(t => t.CuentaID == userId).Select(t => t.UsuarioID).SingleOrDefault();  // Proyecta solo el campo UsuarioID
+        
         ViewBag.UsuarioID = UsuarioID;
 
         return View();
