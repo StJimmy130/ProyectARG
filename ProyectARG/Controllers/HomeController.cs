@@ -159,7 +159,7 @@ public class HomeController : Controller
         var provincia = provincias.SingleOrDefault(t => t.ProvinciaID == localidad?.ProvinciaID);
 
         // Obtener la imagen asociada al inmueble
-        var imagen = imagenes.FirstOrDefault(img => img.InmuebleID == inmueble.InmuebleID);
+        var imagen = imagenes.OrderBy(img => img.Posicion).FirstOrDefault(img => img.InmuebleID == inmueble.InmuebleID);
         string imagenBase64 = imagen != null ? Convert.ToBase64String(imagen.ImagenByte) : null;
         string imagenSrc = imagen != null ? $"data:{imagen.ContentType};base64,{imagenBase64}" : "/path/to/default/image.jpg"; // Ruta a una imagen por defecto
 

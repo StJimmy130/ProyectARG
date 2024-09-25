@@ -178,10 +178,8 @@ function GuardarPublicacion() {
   let piso = document.getElementById("Piso").value;
   let nroDepartamento = document.getElementById("NroDepartamento").value;
   let descripcion = document.getElementById("Descripcion").value;
-  let imagenes = document.getElementById("Imagen").files; // Nuevo input para archivos de imagen
+  let imagenes = document.getElementById("Imagen").files;
   let usuarioID = document.getElementById("UsuarioID").value;
-
-  console.log(moneda)
 
   // Crear un objeto FormData para enviar los datos y archivos
   let formData = new FormData();
@@ -208,11 +206,15 @@ function GuardarPublicacion() {
   formData.append("UsuarioID", usuarioID);
   formData.append("Moneda", moneda);
 
-  // Agregar cada imagen al FormData
-  for (let i = 0; i < imagenes.length; i++) {
-    formData.append("Imagenes", imagenes[i]);
-  }
+  // Obtener el orden actual de las imágenes en el list-container
+  let orderedImages = document.querySelectorAll("#list-container img.miniatura");
 
+  orderedImages.forEach((img, index) => {
+    const originalIndex = img.dataset.index; 
+    const file = imagenes[originalIndex]; 
+    formData.append("Imagenes", file); 
+});
+console.log(imagenes);
   $.ajax({
     url: "/Inmuebles/GuardarPublicacion",
     data: formData,
@@ -235,7 +237,6 @@ function GuardarPublicacion() {
           hiddenAlert();
         }, 3000);
       }
-      ListadoPublicaciones();
     },
     error: function (err) {
       console.error(err);
@@ -270,6 +271,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const listContainer = document.getElementById("list-container");
   const previewContainer = document.getElementById("preview-container");
 
+  let draggedItem = null;
+
   fileInput.addEventListener("change", (event) => {
     listContainer.innerHTML = ""; // Limpiar el contenedor de lista
     previewContainer.innerHTML = ""; // Limpiar el contenedor de vista previa
@@ -286,24 +289,61 @@ document.addEventListener("DOMContentLoaded", function () {
         const img = document.createElement("img");
         img.src = e.target.result;
         img.classList.add("miniatura");
+        img.setAttribute("draggable", true); // Hacer que la imagen sea arrastrable
+        img.dataset.index = i; // Almacenar el índice de la imagen
+
+        // Evento Drag Start
+        img.addEventListener("dragstart", (event) => {
+          draggedItem = img;
+          setTimeout(() => {
+            img.style.display = "none"; // Ocultar el elemento mientras se arrastra
+          }, 0);
+        });
+
+        // Evento Drag End
+        img.addEventListener("dragend", (event) => {
+          setTimeout(() => {
+            draggedItem.style.display = "block"; // Mostrar el elemento cuando se suelta
+            draggedItem = null;
+          }, 0);
+        });
+
+        // Permitir arrastrar y soltar entre las imágenes
+        img.addEventListener("dragover", (event) => {
+          event.preventDefault();
+        });
+
+        img.addEventListener("drop", (event) => {
+          event.preventDefault();
+          if (draggedItem !== img) {
+            let allImages = Array.from(listContainer.querySelectorAll("img.miniatura"));
+            let draggedIndex = allImages.indexOf(draggedItem);
+            let targetIndex = allImages.indexOf(img);
+
+            if (draggedIndex > targetIndex) {
+              listContainer.insertBefore(draggedItem, img);
+            } else {
+              listContainer.insertBefore(draggedItem, img.nextSibling);
+            }
+            updateImageOrder(); // Actualizar el orden después de reordenar
+          }
+        });
+
         listContainer.appendChild(img);
 
         // Si es la primera imagen, también agregarla al preview-container
         if (i === 0) {
-          // Cambié de i === 1 a i === 0
           const previewImg = document.createElement("img");
           previewImg.src = e.target.result;
           previewImg.id = "mainImage";
           previewContainer.appendChild(previewImg);
         }
 
-        // Actualizar los eventos de clic para las miniaturas
         updateThumbnailEvents();
       };
       fileReader.readAsDataURL(file);
     }
 
-    // Mostrar contador si hay más de diez imágenes
     if (files.length > maxPreview) {
       const imageCounter = document.createElement("div");
       imageCounter.id = "image-counter";
@@ -314,27 +354,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function updateThumbnailEvents() {
     const thumbnails = listContainer.querySelectorAll("img.miniatura");
-
-    // Agregar evento de clic a cada miniatura
     thumbnails.forEach(function (thumbnail) {
       thumbnail.addEventListener("click", function () {
-        // Obtener el elemento de la imagen principal
         const mainImage = document.getElementById("mainImage");
-
-        // Obtener la URL de la imagen del elemento del thumbnail clickeado
         const newImageSrc = this.getAttribute("src");
-
-        // Actualizar la fuente de la imagen principal
         mainImage.src = newImageSrc;
 
-        // Remover la clase "active" de todos los thumbnails
         thumbnails.forEach(function (thumb) {
           thumb.classList.remove("active");
         });
 
-        // Agregar la clase "active" al thumbnail clickeado
         this.classList.add("active");
       });
+    });
+  }
+
+  function updateImageOrder() {
+    const images = listContainer.querySelectorAll("img.miniatura");
+    images.forEach((img, index) => {
+      img.dataset.index = index + 1; // Actualizar el índice o posición en el dataset
     });
   }
 });

@@ -324,6 +324,7 @@ public class InmueblesController : Controller
                         estado = false
                     };
                 }
+
                 if (Imagenes != null && Imagenes.Count > 0)
                 {
                     int posicion = 1; // Iniciar el contador de posición
