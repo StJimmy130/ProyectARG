@@ -164,6 +164,7 @@ public class InmueblesController : Controller
             var localidad = localidades.SingleOrDefault(t => t.LocalidadID == inmueble.LocalidadID);
             var provincia = provincias.SingleOrDefault(t => t.ProvinciaID == localidad?.ProvinciaID);
             var usuario = _context.Usuarios.SingleOrDefault(t => t.UsuarioID == inmueble.UsuarioID);
+            var cantidadVistas = _context.Vistas.Count(v => v.InmuebleID == inmueble.InmuebleID);
 
             var imagenesInmueble = imagenes.Where(img => img.InmuebleID == inmueble.InmuebleID).ToList();
             var imagenesBase64 = imagenesInmueble.Select(imagen => new ImagenVista
@@ -195,7 +196,8 @@ public class InmueblesController : Controller
                 TipoInmuebleString = inmueble.TipoInmueble.ToString(),
                 Moneda = inmueble.Moneda,
                 Imagenes = imagenesBase64,
-                FechaPublicacionString = $"{inmueble.FechaAlta:dd} de {inmueble.FechaAlta:MMMM} del {inmueble.FechaAlta:yyyy}"
+                FechaPublicacionString = $"{inmueble.FechaAlta:dd} de {inmueble.FechaAlta:MMMM} del {inmueble.FechaAlta:yyyy}",
+                CantidadVistas = cantidadVistas,
             };
 
             var datosUsuario = new DatosUsuario
