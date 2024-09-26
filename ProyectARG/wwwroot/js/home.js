@@ -249,7 +249,7 @@ function mostrarPagina(pagina) {
   $.each(paginas[pagina], function (i, item) {
     contenidoTabla += `
     <div class="col-lg-4 col-md-6 col-sm-12 mb-4 activo">
-      <a href="Inmuebles/Detalle/${item.inmuebleID}">
+      <a href="../Inmuebles/Detalle/${item.inmuebleID}">
           <div class="card">
               <div class="image-container">
                   <img src="${item.imagenSrc}" alt="Imagen del Inmueble">
@@ -270,9 +270,9 @@ function mostrarPagina(pagina) {
 
 // Función de búsqueda
 $(document).ready(function () {
-  $("#searchButton").on("click", function () {
+  $("#SearchButton").on("click", function () {
     showLoadingScreen(); // Mostrar pantalla de carga durante la búsqueda
-    var searchQuery = $("#buscadorPorTitulo").val().toLowerCase();
+    var searchQuery = $("#BuscadorPorTitulo").val().toLowerCase();
 
     // Filtramos las publicaciones originales en lugar de modificar las filtradas
     var resultadosFiltrados = publicacionesOriginales.filter(function (publicacion) {

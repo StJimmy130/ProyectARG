@@ -23,7 +23,7 @@ function ListadoInformePorFecha() {
       for (let fechaPublicacionString in agrupadoPorFecha) {
         contenidoTabla += `
                 <tr>
-                    <td colspan="7" class="text-start" style="text-transform: Uppercase">${fechaPublicacionString}</td>
+                    <td colspan="8" class="text-start" style="text-transform: Uppercase">${fechaPublicacionString}</td>
                 </tr>
                 `;
 
@@ -32,6 +32,7 @@ function ListadoInformePorFecha() {
           contenidoTabla += `
                 <tr style="text-transform: Uppercase">
                     <td></td>
+                    <td class="text-end" style="max-width: 30px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${fecha.cantidadVistas}</td>
                     <td class="text-start" style="max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${fecha.nombreUsuario}</td>
                     <td class="text-start" style="max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${fecha.localidadString} - ${fecha.provinciaString}</td>
                     <td class="text-start" style="max-width: 80px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${fecha.tituloString}</td>                   
@@ -100,6 +101,7 @@ function Imprimir() {
       4: { halign: "right", fillColor: [255, 255, 255], fontSize: 7, cellWidth: 60 },
       5: { halign: "left", fillColor: [255, 255, 255], fontSize: 7, cellWidth: 100 },
       6: { halign: "left", fillColor: [255, 255, 255], fontSize: 7, cellWidth: 100 },
+      7: { halign: "left", fillColor: [255, 255, 255], fontSize: 7, cellWidth: 100 },
     }, // Celdas de la primera columna centradas y verdes
     margin: { top: 10 },
   });

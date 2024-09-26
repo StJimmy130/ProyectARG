@@ -230,6 +230,7 @@ function GuardarPublicacion() {
 
         setTimeout(function () {
           hiddenAlert();
+          window.location.href = '../../Home/Index';
         }, 3000);
       }
     },

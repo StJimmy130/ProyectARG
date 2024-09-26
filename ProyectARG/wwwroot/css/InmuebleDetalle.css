@@ -103,7 +103,6 @@ footer {
 .miniaturas {
   display: flex;
   justify-content: flex-start;
-
   align-items: center;
   border-radius: 5px;
   margin: 5px 40px 0 40px;
@@ -182,37 +181,25 @@ footer {
   transition: all 0.2s ease;
 }
 
-.info-vendedor .icons-vendedor a:nth-child(1) {
+.info-vendedor .icons-vendedor .facebook {
   color: #4267b2;
 }
-
-.info-vendedor .icons-vendedor a:nth-child(1):hover {
-  background: #fff;
-}
-
-.info-vendedor .icons-vendedor a:nth-child(2) {
+.info-vendedor .icons-vendedor .instagram {
   color: #e1306c;
 }
-
-.info-vendedor .icons-vendedor a:nth-child(2):hover {
-  background: #fff;
-}
-
-.info-vendedor .icons-vendedor a:nth-child(3) {
+.info-vendedor .icons-vendedor .whatsapp {
   color: #25d366;
 }
-
-.info-vendedor .icons-vendedor a:nth-child(3):hover {
-  background: #fff;
-}
-
-.info-vendedor .icons-vendedor a:nth-child(4) {
+.info-vendedor .icons-vendedor .gmail {
   color: #ff0000;
 }
 
-.info-vendedor .icons-vendedor a:nth-child(4):hover {
+.info-vendedor .icons-vendedor .facebook:hover, .instagram:hover, .whatsapp:hover, .gmail:hover {
   background: #fff;
 }
+
+
+
 
 .info-container h3 {
   margin: 0;
@@ -248,7 +235,7 @@ footer {
 }
 
 #Descripcion {
-  max-height: 30vh;
+  max-height: 25vh;
   overflow-y: auto;
 }
 
