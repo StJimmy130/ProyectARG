@@ -27,9 +27,7 @@ function renderizarTabla(publicaciones) {
               <td class="text-end" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${
                 item.precioString
               } ${item.moneda ? "U$D" : "AR$"}</td>
-              <td class="text-start hide-on-small" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${
-                item.provinciaString
-              }, ${item.localidadString}-${item.direccionString}</td>
+              <td class="text-start hide-on-small" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${item.localidadString}, ${item.provinciaString} - ${item.direccionString} ${item.nroDireccionString}</td>
               <td class="text-start hide-on-small">${
                 item.tipoOperacionString
               }</td>
@@ -43,7 +41,7 @@ function renderizarTabla(publicaciones) {
           <tr class="item-suspendido">
               <td><p>${item.tituloString}</p></td>
               <td><p>${item.precioString}</p></td>
-              <td class="hide-on-small"><p>${item.provinciaString}, ${item.localidadString}-${item.direccionString}</p></td>
+              <td class="hide-on-small"><p>${item.provinciaString}, ${item.localidadString} - ${item.direccionString} ${item.nroDireccionString}</p></td>
               <td class="hide-on-small"><p>${item.tipoOperacionString}</p></td>
               <td><button type="button" class="btn btn-primary" onclick="cargarInformacion(${item.inmuebleID})">Administrar</button></td>
           </tr>

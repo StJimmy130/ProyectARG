@@ -152,13 +152,15 @@ public class AdministracionController : Controller
             var usuario = usuarios.Where(t => t.UsuarioID == inmueble.UsuarioID).SingleOrDefault();
             var provincia = Provincias.Where(t => t.ProvinciaID == inmueble.Localidad.ProvinciaID).SingleOrDefault();
             var localidad = Localidades.Where(t => t.LocalidadID == inmueble.LocalidadID).SingleOrDefault();
+            var cantidadVistas = _context.Vistas.Count(v => v.InmuebleID == inmueble.InmuebleID);
 
             var informePublicacionPorFechaMostrar = new VistaInmueble
             {
                 InmuebleID = inmueble.InmuebleID,
                 LocalidadID = inmueble.LocalidadID,
+                CantidadVistas = cantidadVistas,
                 UsuarioID = inmueble.UsuarioID,
-                FechaPublicacionString = $"{inmueble.FechaAlta:dd} de {inmueble.FechaAlta:MMMM} del {inmueble.FechaAlta:yyyy}",
+                FechaPublicacionString = inmueble.FechaAlta.ToString("ddd dd 'de' MMM yyyy"),
                 ProvinciaString = provincia.Nombre,
                 LocalidadString = localidad.Nombre,
                 NombreUsuario = usuario.Nombre,

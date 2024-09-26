@@ -4,9 +4,9 @@ function toggleMiniaturasVisibility() {
   const miniaturasContainer = document.getElementById("Miniaturas-container");
 
   if (window.innerWidth < 768) {
-      miniaturasContainer.style.display = "none";
+    miniaturasContainer.style.display = "none";
   } else {
-      miniaturasContainer.style.display = "block";
+    miniaturasContainer.style.display = "block";
   }
 }
 
@@ -43,72 +43,79 @@ function setupThumbnailClickHandler() {
   });
 
   // Manejar los botones de navegación
-  document.querySelector(".bx-chevron-right").addEventListener("click", function () {
-    currentImageIndex = (currentImageIndex + 1) % thumbnails.length;
-    updateMainImage(currentImageIndex);
-  });
+  document
+    .querySelector(".bx-chevron-right")
+    .addEventListener("click", function () {
+      currentImageIndex = (currentImageIndex + 1) % thumbnails.length;
+      updateMainImage(currentImageIndex);
+    });
 
-  document.querySelector(".bx-chevron-left").addEventListener("click", function () {
-    currentImageIndex = (currentImageIndex - 1 + thumbnails.length) % thumbnails.length;
-    updateMainImage(currentImageIndex);
-  });
+  document
+    .querySelector(".bx-chevron-left")
+    .addEventListener("click", function () {
+      currentImageIndex =
+        (currentImageIndex - 1 + thumbnails.length) % thumbnails.length;
+      updateMainImage(currentImageIndex);
+    });
 }
 
 function changeImage(element) {
   $("#MainImage").attr("src", $(element).attr("src"));
 }
 
-
 function CargarDatosPublicacion() {
-  showLoadingScreen(); // Mostrar pantalla de carga mientras se procesan los datos
+  showLoadingScreen();
 
-  const url = window.location.href; // Obtiene la URL completa
-  const partes = url.split("/"); // Divide la URL en partes usando el slash como delimitador
-  const inmuebleID = partes[partes.length - 1]; // El ID es la última parte de la URL
+  const url = window.location.href;
+  const partes = url.split("/");
+  const inmuebleID = partes[partes.length - 1];
 
   $.ajax({
     url: "../../Inmuebles/GetDetallePublicacion",
-    data: { InmuebleID: inmuebleID }, // Asegúrate de que el parámetro coincida con el esperado por el servidor
+    data: { InmuebleID: inmuebleID },
     type: "POST",
     dataType: "json",
     success: function (data) {
       let datosPrincipales = ``;
       let datosVendedor = ``;
-      let DetallesPublicaciones = ``;
+      let detallesPublicaciones = ``;
 
       if (data.length > 0) {
-        let inmueble = data[0]; // Asumiendo que el primer elemento contiene los datos principales del inmueble
+        let inmueble = data[0];
 
-        // ------------------ Datos Principales ------------------ //
+        // Datos Principales
         datosPrincipales += `
-              <p>${inmueble.fechaPublicacionString} - ${inmueble.cantidadVistas} <i class="fa-solid fa-eye"></i></p>
-              <h2>${inmueble.tituloString}</h2>
-              <h3>${inmueble.moneda ? "U$D" : "AR$"} ${inmueble.precioString}</h3>
-              <h4>${inmueble.provinciaString} - ${inmueble.localidadString}</h4>
-              <h4>${inmueble.tipoInmuebleString} - ${inmueble.tipoOperacionString}</h4>
-              `;
+          <p class="text-muted text-sm">${inmueble.fechaPublicacionString} - ${
+          inmueble.cantidadVistas
+        } <i class="fa-solid fa-eye"></i></p>
+          <h2>${inmueble.tituloString}</h2>
+          <h3>${inmueble.moneda ? "U$D" : "AR$"} ${inmueble.precioString}</h3>
+          <h4>${inmueble.provinciaString} - ${inmueble.localidadString}</h4>
+          <h4>${inmueble.tipoInmuebleString} - ${
+          inmueble.tipoOperacionString
+        }</h4>
+        `;
 
-        // ------------------ Datos Vendedor ------------------ //
-        $.each(inmueble.datosUsuario, function (index, usuario) {
+        // Datos Vendedor
+        datosVendedor += `<h2>Vendedor</h2>`;
+        inmueble.datosUsuario.forEach((usuario) => {
           datosVendedor += `
-              <h2>Vendedor</h2>
-              <p>${usuario.nombre}</p>
-              <p>${usuario.nroTelefono}</p>
-              <div class="icons-vendedor">
-                <a href="${usuario.facebook}" target="_blank"><i class='bx bxl-facebook'></i></a>
-                <a href="https://www.instagram.com/${usuario.instagram}/" target="_blank"><i class="bx bxl-instagram"></i></a>
-                <a href="https://wa.me/${usuario.whatsapp}" target="_blank"><i class="bx bxl-whatsapp"></i></a>
-                <a href="#" target="_blank"><i class="bx bxl-gmail"></i></a>
-              </div>
-              `;
+            <p>${usuario.nombre || ''}</p>
+            <p>${usuario.nroTelefono || ''}</p>
+            <div class="icons-vendedor">
+              ${usuario.facebook ? `<a class="facebook" href="${usuario.facebook}" target="_blank"><i class='bx bxl-facebook'></i></a>` : ''}
+              ${usuario.instagram ? `<a class="instagram" href="https://www.instagram.com/${usuario.instagram}/" target="_blank"><i class="bx bxl-instagram"></i></a>` : ''}
+              ${usuario.whatsapp ? `<a class="whatsapp" href="https://wa.me/${usuario.whatsapp}" target="_blank"><i class="bx bxl-whatsapp"></i></a>` : ''}
+              ${usuario.gmail ? `<a class="gmail" href="mailto:${usuario.gmail}" target="_blank"><i class="bx bxl-gmail"></i></a>` : ''}
+            </div>
+          `;
         });
 
-        // ------------------ Detalles Publicaciones ------------------ //
+        // Detalles Publicaciones
         inmueble.cocheraString = inmueble.cocheraString ? "Si" : "No";
         inmueble.amobladoString = inmueble.amobladoString ? "Si" : "No";
 
-
-        DetallesPublicaciones += `
+        detallesPublicaciones += `
           <h3>Detalles:</h3>
           <p><i class="fa-solid fa-ruler-combined"></i> Superficie total: ${inmueble.superficieTotalString} m²</p>
           <p><i class="fa-solid fa-ruler-horizontal"></i> Superficie cubierta: ${inmueble.superficieCubiertaString} m²</p>
@@ -119,34 +126,43 @@ function CargarDatosPublicacion() {
           <p><i class="fa-solid fa-couch"></i> Amoblado: ${inmueble.amobladoString}</p>
           <p><i class="fa-solid fa-city"></i> Barrio: ${inmueble.barrioString}</p>
           <p><i class="fa-solid fa-signs-post"></i> Dirección: ${inmueble.direccionString} - ${inmueble.nroDireccionString}</p>
-          `;
+        `;
 
-        // ------------------ Imágenes ------------------ //
+        // Imágenes
         $("#MainImage").attr("src", inmueble.imagenes[0].imagenSrc);
-        $("#Descripcion").text(inmueble.descripcionString);
+        let descripcionConSaltos = inmueble.descripcionString.replace(
+          /\n/g,
+          "<br>"
+        );
+        $("#Descripcion").html(descripcionConSaltos);
+        let miniaturas = inmueble.imagenes
+          .map(
+            (imagen, index) => `
+          <img src="${imagen.imagenSrc}" alt="Miniatura ${
+              index + 1
+            }" class="miniatura ${index === 0 ? "active" : ""}">
+        `
+          )
+          .join("");
 
-        let miniaturas = ``;
-        $.each(inmueble.imagenes, function (index, imagen) {
-          miniaturas += `
-              <img src="${imagen.imagenSrc}" alt="Miniatura ${index + 1}" class="miniatura ${index === 0 ? "active" : ""}">
-          `;
-        });
         $("#Miniaturas-container").html(miniaturas);
-
-        // Llamar a la función para manejar la selección de imágenes
         setupThumbnailClickHandler();
 
-        // Actualizar el DOM con los datos obtenidos
-        document.getElementById("DatosPrincipales").innerHTML = datosPrincipales;
-        document.getElementById("DatosVendedor").innerHTML = datosVendedor;
-        document.getElementById("DetallesPublicaciones").innerHTML = DetallesPublicaciones;
+        // Actualizar el DOM
+        $("#DatosPrincipales").html(datosPrincipales);
+        $("#DatosVendedor").html(datosVendedor);
+        $("#DetallesPublicaciones").html(detallesPublicaciones);
 
-        hideLoadingScreen(); // Ocultar la pantalla de carga
+        hideLoadingScreen();
       }
     },
     error: function (xhr, status, error) {
-      console.log("Disculpe, existió un problema al cargar los detalles del inmueble", status, error);
-      hideLoadingScreen(); // Ocultar la pantalla de carga en caso de error
+      console.log(
+        "Disculpe, existió un problema al cargar los detalles del inmueble",
+        status,
+        error
+      );
+      hideLoadingScreen();
     },
   });
 }

@@ -235,6 +235,7 @@ console.log(imagenes);
 
         setTimeout(function () {
           hiddenAlert();
+          window.location.href = '../../Home/Index';
         }, 3000);
       }
     },

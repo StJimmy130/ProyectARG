@@ -173,6 +173,18 @@ public class InmueblesController : Controller
                 ImagenSrc = $"data:{imagen.ContentType};base64,{Convert.ToBase64String(imagen.ImagenByte)}"
             }).ToList();
 
+            // Cálculo de "Hace 'x tiempo'"
+           TimeSpan diferencia = DateTime.Now - inmueble.FechaAlta;
+
+            string FechaPublicacionString = diferencia.TotalDays >= 365 ? $"Hace {(int)(diferencia.TotalDays / 365)} año{((int)(diferencia.TotalDays / 365) == 1 ? "" : "s")}" :
+                                diferencia.TotalDays >= 30 ? $"Hace {(int)(diferencia.TotalDays / 30)} mes{((int)(diferencia.TotalDays / 30) == 1 ? "" : "es")}" :
+                                diferencia.TotalDays >= 1 ? $"Hace {(int)diferencia.TotalDays} día{((int)diferencia.TotalDays == 1 ? "" : "s")}" :
+                                diferencia.TotalHours >= 1 ? $"Hace {(int)diferencia.TotalHours} hora{((int)diferencia.TotalHours == 1 ? "" : "s")}" :
+                                diferencia.TotalMinutes >= 1 ? $"Hace {(int)diferencia.TotalMinutes} minuto{((int)diferencia.TotalMinutes == 1 ? "" : "s")}" :
+                                "Hace unos segundos";
+
+
+
             var vistaInmueble = new VistaInmueble
             {
                 InmuebleID = inmueble.InmuebleID,
@@ -196,7 +208,7 @@ public class InmueblesController : Controller
                 TipoInmuebleString = inmueble.TipoInmueble.ToString(),
                 Moneda = inmueble.Moneda,
                 Imagenes = imagenesBase64,
-                FechaPublicacionString = $"{inmueble.FechaAlta:dd} de {inmueble.FechaAlta:MMMM} del {inmueble.FechaAlta:yyyy}",
+                FechaPublicacionString = FechaPublicacionString, // Asignación de la fecha con "Hace 'x tiempo'"
                 CantidadVistas = cantidadVistas,
             };
 
