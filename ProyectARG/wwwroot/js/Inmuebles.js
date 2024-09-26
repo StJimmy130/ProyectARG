@@ -12,8 +12,6 @@ window.onload = function () {
   }, 4000);
 };
 
-
-
 document.addEventListener("DOMContentLoaded", () => {
   let currentStep = 0;
   const steps = document.querySelectorAll(".step");
@@ -178,7 +176,6 @@ function GuardarPublicacion() {
   let piso = document.getElementById("Piso").value;
   let nroDepartamento = document.getElementById("NroDepartamento").value;
   let descripcion = document.getElementById("Descripcion").value;
-  let imagenes = document.getElementById("Imagen").files;
   let usuarioID = document.getElementById("UsuarioID").value;
 
   // Crear un objeto FormData para enviar los datos y archivos
@@ -207,14 +204,12 @@ function GuardarPublicacion() {
   formData.append("Moneda", moneda);
 
   // Obtener el orden actual de las imágenes en el list-container
-  let orderedImages = document.querySelectorAll("#list-container img.miniatura");
+  let imagenes = getOrderedFiles();
 
-  orderedImages.forEach((img, index) => {
-    const originalIndex = img.dataset.index; 
-    const file = imagenes[originalIndex]; 
-    formData.append("Imagenes", file); 
-});
-console.log(imagenes);
+  for (let i = 0; i < imagenes.length; i++) {
+    formData.append("Imagenes", imagenes[i]);
+  }
+  console.log(imagenes);
   $.ajax({
     url: "/Inmuebles/GuardarPublicacion",
     data: formData,
@@ -266,6 +261,12 @@ function EliminarPublicacion(inmuebleID) {
   });
 }
 
+let orderedFiles = []; // Lista interna de archivos
+// Nueva función para obtener los archivos en el orden reordenado
+function getOrderedFiles() {
+  return orderedFiles;
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   const fileInput = document.getElementById("Imagen");
   const listContainer = document.getElementById("list-container");
@@ -277,6 +278,8 @@ document.addEventListener("DOMContentLoaded", function () {
     listContainer.innerHTML = ""; // Limpiar el contenedor de lista
     previewContainer.innerHTML = ""; // Limpiar el contenedor de vista previa
     const files = event.target.files;
+
+    orderedFiles = Array.from(files); // Inicializar la lista interna con los archivos en su orden original
 
     // Mostrar hasta diez imágenes en list-container
     const maxPreview = 100;
@@ -316,9 +319,26 @@ document.addEventListener("DOMContentLoaded", function () {
         img.addEventListener("drop", (event) => {
           event.preventDefault();
           if (draggedItem !== img) {
-            let allImages = Array.from(listContainer.querySelectorAll("img.miniatura"));
+            let allImages = Array.from(
+              listContainer.querySelectorAll("img.miniatura")
+            );
             let draggedIndex = allImages.indexOf(draggedItem);
             let targetIndex = allImages.indexOf(img);
+
+            // Reordenar los archivos en la lista interna
+            if (draggedIndex > targetIndex) {
+              orderedFiles.splice(
+                targetIndex,
+                0,
+                orderedFiles.splice(draggedIndex, 1)[0]
+              );
+            } else {
+              orderedFiles.splice(
+                targetIndex + 1,
+                0,
+                orderedFiles.splice(draggedIndex, 1)[0]
+              );
+            }
 
             if (draggedIndex > targetIndex) {
               listContainer.insertBefore(draggedItem, img);
