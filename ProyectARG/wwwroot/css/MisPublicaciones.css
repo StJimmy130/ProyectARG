@@ -391,5 +391,49 @@ input{
     }
 }
 
+input[type="file"] {
+    display: none;
+  }
+  
+  label[for="Imagen"] {
+    cursor: pointer;
+    font-size: 3rem;
+    height: 4rem;
+    width: 4rem;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--nav-color);
+    color: var(--text-color);
+    margin-right: 0.8rem;
+    transition: text-shadow 0.2s, box-shadow 0.2s;
+  }
+  
+  label[for="Imagen"]:hover {
+    box-shadow: 0 0 20px var(--text-color);
+    text-shadow: 0 0 10px var(--text-color);
+  }
 
+.list-container{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-radius: 5px;
+    margin: 5px 40px 0 40px;
+    padding: 10px;
+    background-color: rgb(197, 196, 194);
+    overflow-x: auto;
+    white-space: nowrap;
+    gap: 5px;
+  }
 
+  .list-container img {
+    max-width: 150px;
+    max-height: 150px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    opacity: 0.5;
+    object-fit: cover;
+    transition: opacity 0.2s, border 0.2s;
+  }

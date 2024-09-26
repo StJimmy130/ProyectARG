@@ -103,7 +103,6 @@ footer {
 .miniaturas {
   display: flex;
   justify-content: flex-start;
-
   align-items: center;
   border-radius: 5px;
   margin: 5px 40px 0 40px;

@@ -245,6 +245,17 @@ function AbrirModalEditar(inmuebleID) {
       document.getElementById("Piso").value = Inmueble.tipoInmueble;
       document.getElementById("NroDepartamento").value = Inmueble.tipoInmueble;
       document.getElementById("Descripcion").value = Inmueble.descripcionString;
+      let miniaturas = Inmueble.imagenes
+          .map(
+            (imagen, index) => `
+          <img src="${imagen.imagenSrc}" alt="Miniatura ${
+              index + 1
+            }" class="miniatura ${index === 0 ? "active" : ""}">
+        `
+          )
+          .join("");
+
+        $("#list-container").html(miniaturas);
     },
 
     // código a ejecutar si la petición falla;
@@ -403,3 +414,99 @@ function hiddenPanel() {
     panel.style.display = "none";
   }
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  const fileInput = document.getElementById("Imagen");
+  const listContainer = document.getElementById("list-container");
+  
+  let draggedItem = null;
+
+  fileInput.addEventListener("change", (event) => {
+    listContainer.innerHTML = ""; // Limpiar el contenedor de lista
+    const files = event.target.files;
+
+    // Mostrar hasta diez imágenes en list-container
+    const maxPreview = 100;
+    for (let i = 0; i < Math.min(files.length, maxPreview); i++) {
+      const file = files[i];
+
+      // Crear una URL para la imagen
+      const fileReader = new FileReader();
+      fileReader.onload = function (e) {
+        const img = document.createElement("img");
+        img.src = e.target.result;
+        img.classList.add("miniatura");
+        img.setAttribute("draggable", true); // Hacer que la imagen sea arrastrable
+        img.dataset.index = i; // Almacenar el índice de la imagen
+
+        // Evento Drag Start
+        img.addEventListener("dragstart", (event) => {
+          draggedItem = img;
+          setTimeout(() => {
+            img.style.display = "none"; // Ocultar el elemento mientras se arrastra
+          }, 0);
+        });
+
+        // Evento Drag End
+        img.addEventListener("dragend", (event) => {
+          setTimeout(() => {
+            draggedItem.style.display = "block"; // Mostrar el elemento cuando se suelta
+            draggedItem = null;
+          }, 0);
+        });
+
+        // Permitir arrastrar y soltar entre las imágenes
+        img.addEventListener("dragover", (event) => {
+          event.preventDefault();
+        });
+
+        img.addEventListener("drop", (event) => {
+          event.preventDefault();
+          if (draggedItem !== img) {
+            let allImages = Array.from(listContainer.querySelectorAll("img.miniatura"));
+            let draggedIndex = allImages.indexOf(draggedItem);
+            let targetIndex = allImages.indexOf(img);
+
+            if (draggedIndex > targetIndex) {
+              listContainer.insertBefore(draggedItem, img);
+            } else {
+              listContainer.insertBefore(draggedItem, img.nextSibling);
+            }
+            updateImageOrder(); // Actualizar el orden después de reordenar
+          }
+        });
+
+        listContainer.appendChild(img);
+
+        updateThumbnailEvents();
+      };
+      fileReader.readAsDataURL(file);
+    }
+
+    if (files.length > maxPreview) {
+      const imageCounter = document.createElement("div");
+      imageCounter.id = "image-counter";
+      imageCounter.innerText = `+${files.length - maxPreview}`;
+      listContainer.appendChild(imageCounter);
+    }
+  });
+
+  function updateThumbnailEvents() {
+    const thumbnails = listContainer.querySelectorAll("img.miniatura");
+    thumbnails.forEach(function (thumbnail) {
+      thumbnail.addEventListener("click", function () {
+        thumbnails.forEach(function (thumb) {
+          thumb.classList.remove("active");
+        });
+        this.classList.add("active");
+      });
+    });
+  }
+
+  function updateImageOrder() {
+    const images = listContainer.querySelectorAll("img.miniatura");
+    images.forEach((img, index) => {
+      img.dataset.index = index + 1; // Actualizar el índice o posición en el dataset
+    });
+  }
+});
