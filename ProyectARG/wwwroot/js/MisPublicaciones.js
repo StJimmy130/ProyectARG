@@ -23,7 +23,7 @@ function renderizarTabla(publicaciones) {
     if (item.activo == true) {
       tabla += `
           <tr class="text-sm-start">
-              <td class="text-start">${item.tituloString}</td>
+              <td class="text-start" style="text-overflow: ellipsis;">${item.tituloString}</td>
               <td class="text-end" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${
                 item.precioString
               } ${item.moneda ? "U$D" : "AR$"}</td>
@@ -174,7 +174,7 @@ function GuardarPublicacion() {
       if (resultado.estado == true) {
         icon.classList.add("succes-svg");
         icon.innerHTML = '<i class="bx bxs-check-circle"></i>';
-        document.getElementById("alert-title").innerHTML = "Felicitaciones!!!";
+        document.getElementById("alert-title").innerHTML = "Felicitaciones!";
         document.getElementById("alert-description").innerHTML =
           resultado.texto;
         aceptar.style.display = "block";
@@ -242,8 +242,8 @@ function AbrirModalEditar(inmuebleID) {
       document.getElementById("Direccion").value = Inmueble.direccionString;
       document.getElementById("NroDireccion").value =
         Inmueble.nroDireccionString;
-      document.getElementById("Piso").value = Inmueble.tipoInmueble;
-      document.getElementById("NroDepartamento").value = Inmueble.tipoInmueble;
+      document.getElementById("Piso").value = Inmueble.pisoString;
+      document.getElementById("NroDepartamento").value = Inmueble.nroDepartamentoString;
       document.getElementById("Descripcion").value = Inmueble.descripcionString;
       let miniaturas = Inmueble.imagenes
           .map(
