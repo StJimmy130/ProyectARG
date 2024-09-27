@@ -206,6 +206,8 @@ public class InmueblesController : Controller
                 PrecioString = inmueble.Precio.ToString(),
                 TipoOperacionString = inmueble.TipoOperacion.ToString(),
                 TipoInmuebleString = inmueble.TipoInmueble.ToString(),
+                PisoString = inmueble.Piso.ToString(),
+                NroDepartamentoString = inmueble.NroDepartamento,
                 Moneda = inmueble.Moneda,
                 Imagenes = imagenesBase64,
                 FechaPublicacionString = FechaPublicacionString, // Asignación de la fecha con "Hace 'x tiempo'"
