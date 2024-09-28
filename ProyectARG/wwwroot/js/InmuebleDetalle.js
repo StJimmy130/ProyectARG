@@ -126,6 +126,8 @@ function CargarDatosPublicacion() {
           <p><i class="fa-solid fa-couch"></i> Amoblado: ${inmueble.amobladoString}</p>
           <p><i class="fa-solid fa-city"></i> Barrio: ${inmueble.barrioString}</p>
           <p><i class="fa-solid fa-signs-post"></i> Dirección: ${inmueble.direccionString} - ${inmueble.nroDireccionString}</p>
+          ${inmueble.pisoString && inmueble.nroDepartamentoString ? `<p><i class="fa-solid fa-building"></i> Piso: ${inmueble.pisoString} - Departamento: ${inmueble.nroDepartamentoString}</p>` : ''}
+
         `;
 
         // Imágenes

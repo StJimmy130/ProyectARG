@@ -206,6 +206,8 @@ public class InmueblesController : Controller
                 PrecioString = inmueble.Precio.ToString(),
                 TipoOperacionString = inmueble.TipoOperacion.ToString(),
                 TipoInmuebleString = inmueble.TipoInmueble.ToString(),
+                PisoString = inmueble.Piso.ToString(),
+                NroDepartamentoString = inmueble.NroDepartamento,
                 Moneda = inmueble.Moneda,
                 Imagenes = imagenesBase64,
                 FechaPublicacionString = FechaPublicacionString, // Asignación de la fecha con "Hace 'x tiempo'"
@@ -253,7 +255,7 @@ public class InmueblesController : Controller
     float? Precio, int? SuperficieTotal, int? SuperficieCubierta, Operacion TipoOperacion,
     TipoInmueble TipoInmueble, bool Amoblado, int Dormitorios, int Banios, int CantidadAmbientes,
     bool Cochera, string? Direccion, int NroDireccion, string? Descripcion, int? UsuarioID,
-    List<IFormFile> Imagenes, bool Moneda)
+    List<IFormFile> Imagenes, bool Moneda, int Piso, string? NroDepartamento)
     {
         var resultado = new
         {
@@ -287,6 +289,8 @@ public class InmueblesController : Controller
                     inmueble.Direccion = Direccion;
                     inmueble.NroDireccion = NroDireccion;
                     inmueble.Descripcion = Descripcion;
+                    inmueble.Piso = Piso;
+                    inmueble.NroDepartamento = NroDepartamento;
                     inmueble.UsuarioID = UsuarioID;
                     inmueble.Moneda = Moneda;
                     inmueble.Activo = true;
@@ -321,6 +325,8 @@ public class InmueblesController : Controller
                     inmueble.Direccion = Direccion;
                     inmueble.NroDireccion = NroDireccion;
                     inmueble.Descripcion = Descripcion;
+                    inmueble.Piso = Piso;
+                    inmueble.NroDepartamento = NroDepartamento;
                     inmueble.Moneda = Moneda;
 
                     _context.SaveChanges();
@@ -459,8 +465,8 @@ public class InmueblesController : Controller
 
             resultado = new
             {
-                Titulo = "Felicitaciones!!!",
-                Error = "La publicacion a sido eliminada correctamente",
+                Titulo = "Felicitaciones!",
+                Error = "La publicacion ha sido eliminada correctamente",
                 estado = true
             };
         }
