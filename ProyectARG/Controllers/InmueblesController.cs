@@ -265,6 +265,7 @@ public class InmueblesController : Controller
         {
             // Si es nuevo, crea un nuevo inmueble
             Inmueble inmueble = InmuebleID == 0 ? new Inmueble() : _context.Inmuebles.SingleOrDefault(t => t.InmuebleID == InmuebleID);
+            var imagenes = _context.Imagenes.ToList();
 
             if (inmueble != null)
             {

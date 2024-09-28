@@ -27,7 +27,11 @@ function renderizarTabla(publicaciones) {
               <td class="text-end" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${
                 item.precioString
               } ${item.moneda ? "U$D" : "AR$"}</td>
-              <td class="text-start hide-on-small" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${item.localidadString}, ${item.provinciaString} - ${item.direccionString} ${item.nroDireccionString}</td>
+              <td class="text-start hide-on-small" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${
+                item.localidadString
+              }, ${item.provinciaString} - ${item.direccionString} ${
+        item.nroDireccionString
+      }</td>
               <td class="text-start hide-on-small">${
                 item.tipoOperacionString
               }</td>
@@ -117,6 +121,7 @@ function GuardarPublicacion() {
   let barrio = document.getElementById("Barrio").value;
   let titulo = document.getElementById("Titulo").value;
   let precio = document.getElementById("Precio").value;
+  // let moneda = document.getElementById("Moneda").checked;
   let superficieTotal = document.getElementById("Area").value;
   let superficieCubierta = document.getElementById("AreaCubierta").value;
   let tipoOperacion = document.getElementById("Operacion").value;
@@ -131,7 +136,6 @@ function GuardarPublicacion() {
   let piso = document.getElementById("Piso").value;
   let nroDepartamento = document.getElementById("NroDepartamento").value;
   let descripcion = document.getElementById("Descripcion").value;
-  let imagenes = document.getElementById("Imagen").files; // Nuevo input para archivos de imagen
   let usuarioID = document.getElementById("UsuarioID").value;
 
   // Crear un objeto FormData para enviar los datos y archivos
@@ -157,12 +161,15 @@ function GuardarPublicacion() {
   formData.append("NroDepartamento", nroDepartamento);
   formData.append("Descripcion", descripcion);
   formData.append("UsuarioID", usuarioID);
+  // formData.append("Moneda", moneda);
 
-  // Agregar cada imagen al FormData
+  // Obtener el orden actual de las imágenes en el list-container
+  let imagenes = getOrderedFiles();
+
   for (let i = 0; i < imagenes.length; i++) {
     formData.append("Imagenes", imagenes[i]);
   }
-
+  console.log(imagenes);
   $.ajax({
     url: "/Inmuebles/GuardarPublicacion",
     data: formData,
@@ -196,11 +203,9 @@ function GuardarPublicacion() {
 
         setTimeout(function () {
           hiddenAlert();
+          window.location.href = "../../Home/Index";
         }, 3000);
       }
-      setTimeout(function () {
-        ListadoPublicaciones();
-      }, 500);
     },
     error: function (err) {
       console.error(err);
@@ -245,17 +250,20 @@ function AbrirModalEditar(inmuebleID) {
       document.getElementById("Piso").value = Inmueble.tipoInmueble;
       document.getElementById("NroDepartamento").value = Inmueble.tipoInmueble;
       document.getElementById("Descripcion").value = Inmueble.descripcionString;
+      // Al cargar la información desde el back
       let miniaturas = Inmueble.imagenes
-          .map(
-            (imagen, index) => `
-          <img src="${imagen.imagenSrc}" alt="Miniatura ${
-              index + 1
-            }" class="miniatura ${index === 0 ? "active" : ""}">
-        `
-          )
-          .join("");
+        .map(
+          (imagen, index) => `
+  <img src="${imagen.imagenSrc}" draggable="true" alt="Miniatura ${
+            index + 1
+          }" class="miniatura ${index === 0 ? "active" : ""}">
+`
+        )
+        .join("");
 
-        $("#list-container").html(miniaturas);
+      $("#list-container").html(miniaturas);
+
+      orderedFiles = Inmueble.imagenes;
     },
 
     // código a ejecutar si la petición falla;
@@ -403,7 +411,6 @@ function showPanel() {
   }
 }
 
-
 function hiddenPanel() {
   screenWidth = window.innerWidth;
   if (screenWidth > 1200) {
@@ -415,98 +422,115 @@ function hiddenPanel() {
   }
 }
 
+let orderedFiles = []; // Lista interna de archivos
+function getOrderedFiles() {
+  return orderedFiles;
+}
+
 document.addEventListener("DOMContentLoaded", function () {
-  const fileInput = document.getElementById("Imagen");
   const listContainer = document.getElementById("list-container");
-  
   let draggedItem = null;
+  let inputFile = document.getElementById("Imagen");
+  let orderedFiles = []; // Aseguramos que existe
 
-  fileInput.addEventListener("change", (event) => {
-    listContainer.innerHTML = ""; // Limpiar el contenedor de lista
+  inputFile.addEventListener("change", function (event) {
     const files = event.target.files;
-
-    // Mostrar hasta diez imágenes en list-container
-    const maxPreview = 100;
-    for (let i = 0; i < Math.min(files.length, maxPreview); i++) {
-      const file = files[i];
-
-      // Crear una URL para la imagen
-      const fileReader = new FileReader();
-      fileReader.onload = function (e) {
-        const img = document.createElement("img");
-        img.src = e.target.result;
-        img.classList.add("miniatura");
-        img.setAttribute("draggable", true); // Hacer que la imagen sea arrastrable
-        img.dataset.index = i; // Almacenar el índice de la imagen
-
-        // Evento Drag Start
-        img.addEventListener("dragstart", (event) => {
-          draggedItem = img;
-          setTimeout(() => {
-            img.style.display = "none"; // Ocultar el elemento mientras se arrastra
-          }, 0);
-        });
-
-        // Evento Drag End
-        img.addEventListener("dragend", (event) => {
-          setTimeout(() => {
-            draggedItem.style.display = "block"; // Mostrar el elemento cuando se suelta
-            draggedItem = null;
-          }, 0);
-        });
-
-        // Permitir arrastrar y soltar entre las imágenes
-        img.addEventListener("dragover", (event) => {
-          event.preventDefault();
-        });
-
-        img.addEventListener("drop", (event) => {
-          event.preventDefault();
-          if (draggedItem !== img) {
-            let allImages = Array.from(listContainer.querySelectorAll("img.miniatura"));
-            let draggedIndex = allImages.indexOf(draggedItem);
-            let targetIndex = allImages.indexOf(img);
-
-            if (draggedIndex > targetIndex) {
-              listContainer.insertBefore(draggedItem, img);
-            } else {
-              listContainer.insertBefore(draggedItem, img.nextSibling);
-            }
-            updateImageOrder(); // Actualizar el orden después de reordenar
-          }
-        });
-
-        listContainer.appendChild(img);
-
-        updateThumbnailEvents();
-      };
-      fileReader.readAsDataURL(file);
-    }
-
-    if (files.length > maxPreview) {
-      const imageCounter = document.createElement("div");
-      imageCounter.id = "image-counter";
-      imageCounter.innerText = `+${files.length - maxPreview}`;
-      listContainer.appendChild(imageCounter);
-    }
+    orderedFiles = Array.from(files); // Actualizar la lista con los archivos nuevos
+    cargarImagenes(); // Llamar a la función para cargar las imágenes
   });
 
-  function updateThumbnailEvents() {
-    const thumbnails = listContainer.querySelectorAll("img.miniatura");
-    thumbnails.forEach(function (thumbnail) {
-      thumbnail.addEventListener("click", function () {
-        thumbnails.forEach(function (thumb) {
-          thumb.classList.remove("active");
-        });
-        this.classList.add("active");
-      });
+  // Esta función puede ser llamada tanto para imágenes del backend como para las del input
+  function cargarImagenes() {
+    listContainer.innerHTML = "";
+    const maxPreview = 100;
+
+    for (let i = 0; i < Math.min(orderedFiles.length, maxPreview); i++) {
+      const file = orderedFiles[i];
+
+      // Crear la imagen
+      let img = document.createElement("img");
+      img.classList.add("miniatura");
+      img.setAttribute("draggable", true); // Hacer que la imagen sea arrastrable
+      img.dataset.index = i; // Almacenar el índice de la imagen
+
+      if (file instanceof File) {
+        // Si es un archivo, usar FileReader
+        const fileReader = new FileReader();
+        fileReader.onload = function (e) {
+          img.src = e.target.result;
+        };
+        fileReader.readAsDataURL(file);
+      } else if (file.imagenSrc) {
+        // Si es base64 desde el backend
+        img.src = file.imagenSrc;
+      }
+
+      // Asignar eventos de drag and drop
+      asignarEventosDeArrastre(img);
+
+      // Añadir la imagen al contenedor
+      listContainer.appendChild(img);
+    }
+  }
+
+  function asignarEventosDeArrastre(img) {
+    img.addEventListener("dragstart", (event) => {
+      draggedItem = img;
+      setTimeout(() => {
+        img.style.display = "none"; // Ocultar el elemento mientras se arrastra
+      }, 0);
+    });
+
+    img.addEventListener("dragend", (event) => {
+      setTimeout(() => {
+        draggedItem.style.display = "block"; // Mostrar el elemento cuando se suelta
+        draggedItem = null;
+      }, 0);
+    });
+
+    img.addEventListener("dragover", (event) => {
+      event.preventDefault();
+    });
+
+    img.addEventListener("drop", (event) => {
+      event.preventDefault();
+      if (draggedItem !== img) {
+        let allImages = Array.from(
+          listContainer.querySelectorAll("img.miniatura")
+        );
+        let draggedIndex = allImages.indexOf(draggedItem);
+        let targetIndex = allImages.indexOf(img);
+
+        // Reordenar los archivos en la lista interna
+        if (draggedIndex > targetIndex) {
+          orderedFiles.splice(
+            targetIndex,
+            0,
+            orderedFiles.splice(draggedIndex, 1)[0]
+          );
+        } else {
+          orderedFiles.splice(
+            targetIndex + 1,
+            0,
+            orderedFiles.splice(draggedIndex, 1)[0]
+          );
+        }
+
+        if (draggedIndex > targetIndex) {
+          listContainer.insertBefore(draggedItem, img);
+        } else {
+          listContainer.insertBefore(draggedItem, img.nextSibling);
+        }
+        updateImageOrder(); // Actualizar el orden después de reordenar
+      }
     });
   }
+
 
   function updateImageOrder() {
     const images = listContainer.querySelectorAll("img.miniatura");
     images.forEach((img, index) => {
-      img.dataset.index = index + 1; // Actualizar el índice o posición en el dataset
+      img.dataset.index = index + 1;
     });
   }
 });
