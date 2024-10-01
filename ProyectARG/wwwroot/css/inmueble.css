@@ -472,3 +472,45 @@ img.active {
   align-items: center;
   gap: 5px;
 }
+
+#list-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.miniatura {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border: 2px solid #ccc;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+
+.miniatura:active {
+  transform: scale(1.1); /* Para dar la sensación de que está seleccionada */
+}
+
+.miniatura[draggable="true"] {
+  cursor: grab;
+}
+
+.miniatura:dragging {
+  opacity: 0.5;
+}
+
+.miniatura:hover {
+  border-color: #007bff;
+}
+
+#image-counter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 100px;
+  background-color: rgba(0, 0, 0, 0.1);
+  font-size: 24px;
+  color: #000;
+}
