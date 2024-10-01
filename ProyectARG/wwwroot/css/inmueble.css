@@ -221,6 +221,12 @@ textarea.input-form {
   max-height: 20vh;
   background-color: var(--text-area);
 }
+#Contador{
+  font-size: 13px;
+  margin-top: -15px;
+  margin-right: 10px;
+  justify-content: end;
+}
 
 input[type="file"] {
   display: none;
