@@ -154,6 +154,20 @@ function actualizarLocalidades() {
   });
 }
 
+
+// -------------------------------- FUNCIÓN PARA CONTAR LOS CARACTEREOS DEL INPUT DESCRIPCIÓN -------------------------------- //
+function actualizarContador() {
+  const textarea = document.getElementById('Descripcion');
+  const contador = document.getElementById('Contador');
+  const maxLength = textarea.getAttribute('maxlength');
+  const currentLength = textarea.value.length;
+
+  contador.textContent = `${currentLength}/${maxLength} caracteres`;
+}
+
+
+
+
 function GuardarPublicacion() {
   let inmuebleID = document.getElementById("InmuebleID").value;
   let localidadID = document.getElementById("LocalidadID").value;

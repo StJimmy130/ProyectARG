@@ -26,15 +26,16 @@
                 required>
             </div>
             <div class="container flex">
-              <input type="number" class="input-form" style="display: block;" id="Precio" placeholder="Precio: *" name="Precio" required>
+              <input type="number" class="input-form" style="display: block;" id="Precio" placeholder="Precio: *"
+                name="Precio" required>
               <div class="divisor-switchcase"> AR$<label class="switch" for="Moneda">
-                <input checked="" type="checkbox" id="Moneda">
-                <div class="slider">
-                  <div class="circle">
+                  <input checked="" type="checkbox" id="Moneda">
+                  <div class="slider">
+                    <div class="circle">
+                    </div>
                   </div>
-                </div>
-              </label>U$D</div>
-              
+                </label>U$D</div>
+
 
             </div>
           </div>
@@ -165,9 +166,9 @@
             </div>
           </div>
           <div class="col-md-12 col-lg-12 mb-3 mx-6">
-
-            <textarea name="Descripcion" id="Descripcion" placeholder="Descripción:" class="input-form"></textarea>
+            <textarea name="Descripcion" id="Descripcion" placeholder="Descripción:" class="input-form" maxlength="600"oninput="actualizarContador()"></textarea>
           </div>
+          <p id="Contador" class="text-muted d-flex">0/600 caracteres</p>
           <div class="botonera">
             <button type="button" class="btnPrevNext btn btn-primary prev-btn"><i class='bx bx-left-arrow-alt'></i>
               Anterior</button>
