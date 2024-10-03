@@ -223,10 +223,13 @@ function guardarComentario() {
       valoracion: valoracion,
     },
     success: function (response) {
-      console.log(response);
+      
+      getComentarios()
+      $("#ModalComentarios").modal("hidden");
     },
     error: function (xhr, status, error) {
       console.log("Disculpe, existió un problema al guardar el comentario", status, error);
     },
   })
+  getComentarios()
 }
