@@ -213,6 +213,7 @@ footer {
 
 .property-details {
   display: list-item;
+  position: relative;;
   padding: 15px;
   margin-top: 15px;
   border-radius: 5px;
@@ -238,6 +239,88 @@ footer {
   max-height: 25vh;
   overflow-y: auto;
 }
+
+
+/* Comentarios */
+.modal-dialog{
+  height: 100%;
+  position: relative;
+}
+.modal-content{
+  background-color: var(--container-color);
+  position: absolute;
+  top: 20%;
+  padding: 0 20px;
+}
+
+.container-comments button{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: none;
+  background-color: var(--nav-color);
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  color: white;
+  font-size: 1.8rem;
+  cursor: pointer;
+  
+}
+
+.comment{
+  background-color: var(--container-color);
+  border-radius: 5px;
+  height: auto;
+  width: 100%;
+  padding: 10px;
+  margin-top: 20px;
+}
+
+.comment p{
+  padding: 0 5px;
+  color: #414141;
+}
+
+.comment h6{
+  color: #414141;
+}
+
+.rating {
+  display: inline-block;
+  width: 50%;
+  margin-bottom: 10px;
+}
+
+.rating input {
+  display: none;
+}
+
+.rating label {
+  float: right;
+  cursor: pointer;
+  color: #838383;
+  transition: color 0.3s;
+}
+
+.rating label:before {
+  content: '\2605';
+  font-size: 40px;
+}
+
+.rating input:checked ~ label,
+.rating label:hover,
+.rating label:hover ~ label {
+  color: var(--scrollbar-color);
+  transition: color 0.3s;
+}
+
+textarea.form-control {
+  min-height: 20vh;
+  max-height: 20vh;
+  background-color: var(--text-area);
+}
+
 
 @media screen and (max-width: 768px) {
   .vistaDetalle {

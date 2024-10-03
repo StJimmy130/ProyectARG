@@ -5,8 +5,8 @@
 <body>
   <input type="hidden" id="UsuarioID" value="@ViewBag.UsuarioID">
   <div class="load-screen" id="loading-screen">
-        <div class="loader"></div>
-      </div>
+    <div class="loader"></div>
+  </div>
   <section class="vistaDetalle">
     <div class="container">
       <div class="row">
@@ -31,6 +31,16 @@
                 <p id="Descripcion"></p>
               </div>
             </div>
+
+            <div class="col-lg-12 col-md-12 col-sm-12 ">
+              <div class="property-details container-comments">
+                <h4>Comentarios:</h4>
+                <button onclick="modalComentarios()">+</button>
+                <div id="Comentarios">
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
         <!-- Columna secundaria con la información del vendedor -->
@@ -40,7 +50,7 @@
               <!-- Los datos principales se generarán dinámicamente -->
             </div>
             <div class="info-vendedor" id="DatosVendedor">
-              
+
             </div>
           </div>
           <div class="row">
@@ -54,6 +64,39 @@
       </div>
     </div>
   </section>
+
+  <div class="modal" tabindex="-1" id="ModalComentarios">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Que le parecio el inmueble?</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        
+        <div class="modal-body row">
+          <label for="rating">Calificación:</label>
+          <div class="rating col-4" id="Valoracion">
+            <input value="5" name="rating" id="star5" type="radio">
+            <label for="star5"></label>
+            <input value="4" name="rating" id="star4" type="radio">
+            <label for="star4"></label>
+            <input value="3" name="rating" id="star3" type="radio">
+            <label for="star3"></label>
+            <input value="2" name="rating" id="star2" type="radio">
+            <label for="star2"></label>
+            <input value="1" name="rating" id="star1" type="radio">
+            <label for="star1"></label>
+          </div>
+          <label for="Comentario">Comentario:</label>
+          <textarea name="Comentario" id="Comentario" class="form-control"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" onclick="guardarComentario()">Enviar</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 
 

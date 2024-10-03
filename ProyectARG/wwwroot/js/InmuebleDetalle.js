@@ -154,6 +154,7 @@ function CargarDatosPublicacion() {
         $("#DatosPrincipales").html(datosPrincipales);
         $("#DatosVendedor").html(datosVendedor);
         $("#DetallesPublicaciones").html(detallesPublicaciones);
+        getComentarios();
 
         hideLoadingScreen();
       }
@@ -167,4 +168,65 @@ function CargarDatosPublicacion() {
       hideLoadingScreen();
     },
   });
+}
+
+function getComentarios() {
+  const url = window.location.href;
+  const partes = url.split("/");
+  const inmuebleID = partes[partes.length - 1];
+  $.ajax({
+    url: "../../Comentarios/GetComentarios",
+    type: "POST",
+    data: {
+      inmuebleID: inmuebleID,
+    },
+    success: function (data) {
+      console.log(data);
+      let listaComentarios = "";
+      $.each(data, function (index, comentario) {
+        listaComentarios +=`
+      <div class="comment">
+        <h6>${comentario.nombreUsuario}</h6>
+        <p>${comentario.mensaje}</p>
+      </div>
+      `
+
+      $("#Comentarios").html(listaComentarios);
+      })
+      
+    },
+    error: function (xhr, status, error) {
+      console.log("Disculpe, existió un problema al cargar los comentarios", status, error);
+    },
+  });
+}
+
+function modalComentarios() {
+  $("#ModalComentarios").modal("show");
+}
+
+function guardarComentario() {
+  const url = window.location.href;
+  const partes = url.split("/");
+  const inmuebleID = partes[partes.length - 1];
+
+  let usuarioID = document.getElementById("UsuarioID").value;
+  let mensaje = document.getElementById("Comentario").value;
+  let valoracion = document.querySelector('input[name="rating"]:checked').value;
+  $.ajax({
+    url: "../../Comentarios/PostComentario",
+    type: "POST",
+    data: {
+      inmuebleID: inmuebleID,
+      usuarioID: usuarioID,
+      mensaje: mensaje,
+      valoracion: valoracion,
+    },
+    success: function (response) {
+      console.log(response);
+    },
+    error: function (xhr, status, error) {
+      console.log("Disculpe, existió un problema al guardar el comentario", status, error);
+    },
+  })
 }

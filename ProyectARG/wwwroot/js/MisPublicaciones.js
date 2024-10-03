@@ -436,6 +436,7 @@ document.addEventListener("DOMContentLoaded", function () {
   inputFile.addEventListener("change", function (event) {
     const files = event.target.files;
     orderedFiles = Array.from(files); // Actualizar la lista con los archivos nuevos
+    console.log(orderedFiles);
     cargarImagenes(); // Llamar a la función para cargar las imágenes
   });
 

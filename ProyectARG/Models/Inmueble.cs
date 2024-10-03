@@ -34,7 +34,8 @@ public class Inmueble
     public virtual ICollection<Vista>? Vistas { get; set; }
     public virtual ICollection<Imagen>? Imagenes { get; set; }
 
-    public virtual ICollection<Valoracion>? Valoraciones { get; set; }
+    public virtual ICollection<Valoracion> Valoraciones { get; set; }
+    public virtual ICollection<Comentario> Comentarios { get; set; }
 
 }
 

@@ -15,8 +15,8 @@ public class Usuario
     public string? CuentaID { get; set; }
     public virtual Localidad Localidad { get; set; }
     public virtual ICollection<Inmueble> Inmuebles { get; set; }
-    public virtual ICollection<Imagen> Imagenes { get; set; }
     public virtual ICollection<Valoracion> Valoraciones { get; set; }
+    public virtual ICollection<Comentario> Comentarios { get; set; }
 }
 public class DatosUsuario{
     public string? Nombre { get; set; }
