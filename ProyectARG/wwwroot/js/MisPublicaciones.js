@@ -259,7 +259,7 @@ function AbrirModalEditar(inmuebleID) {
           (
             imagen,
             index
-          ) => `<div class="draggable" draggable="true" id="img${imagen.imagenID}">
+          ) => `<div class="draggable back" draggable="true" id="img${imagen.imagenID}">
                                 <img src="${imagen.imagenSrc}">
                               </div>`
         )
@@ -429,6 +429,7 @@ function hiddenPanel() {
 }
 
 let orderedFiles = []; // Lista interna de archivos
+let backFiles = []; // Lista interna de archivos
 function getOrderedFiles() {
   return orderedFiles;
 }
@@ -450,6 +451,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     for (let i = 0; i < Math.min(orderedFiles.length, maxPreview); i++) {
       const file = orderedFiles[i];
+      file.position = i;
 
       // CREAR EL DIV
       var div = document.createElement("div");
@@ -460,23 +462,22 @@ document.addEventListener("DOMContentLoaded", function () {
       let img = document.createElement("img");
       img.dataset.index = i; // Almacenar el índice de la imagen
 
-      if (file instanceof File) {
+      
+        div.classList.add("file");
         // Si es un archivo, usar FileReader
         const fileReader = new FileReader();
         fileReader.onload = function (e) {
           img.src = e.target.result;
         };
         fileReader.readAsDataURL(file);
-      } else if (file.imagenSrc) {
-        // Si es base64 desde el backend
-        img.src = file.imagenSrc;
-      }
+      
 
       // Insertar la imagen dentro del div
       div.appendChild(img);
       document.getElementById("list-container").appendChild(div);
     }
 
+    
     IniciarTouch(); // Iniciar arrastrar y soltar después de cargar las imágenes
   }
 });
@@ -509,19 +510,13 @@ function IniciarTouch() {
         let draggedIndex = allImages.indexOf(draggedElement);
         let targetIndex = allImages.indexOf(draggable);
 
+        if (draggable.classList.contains("file")) {
         // Reordenar los archivos en la lista interna de orderedFiles
-        if (draggedIndex > targetIndex) {
-          orderedFiles.splice(
-            targetIndex,
-            0,
-            orderedFiles.splice(draggedIndex, 1)[0]
-          );
-        } else {
-          orderedFiles.splice(
-            targetIndex + 1,
-            0,
-            orderedFiles.splice(draggedIndex, 1)[0]
-          );
+        if (draggedIndex != targetIndex) {
+          orderedFiles.position = targetIndex + 1;
+        } 
+        } else{
+          backFiles.position = targetIndex + 1;
         }
 
         // Verificar que draggedElement y draggable son nodos válidos
@@ -581,4 +576,5 @@ function updateImageOrder() {
   });
   console.log(images);
   console.log("Ordered Files: ", orderedFiles); // Verificar si se reordenan correctamente
+  console.log("Back Files: ", backFiles);
 }
