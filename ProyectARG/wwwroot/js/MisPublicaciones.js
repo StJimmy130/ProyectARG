@@ -8,7 +8,7 @@ function getMisPublicaciones() {
     type: "POST",
     dataType: "json",
     success: function (misPublicaciones) {
-      console.log(misPublicaciones);
+      
       renderizarTabla(misPublicaciones);
     },
     error: function (xhr, status) {
@@ -23,7 +23,9 @@ function renderizarTabla(publicaciones) {
     if (item.activo == true) {
       tabla += `
           <tr class="text-sm-start">
-              <td class="text-start" style="text-overflow: ellipsis;">${item.tituloString}</td>
+              <td class="text-start" style="text-overflow: ellipsis;">${
+                item.tituloString
+              }</td>
               <td class="text-end" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${
                 item.precioString
               } ${item.moneda ? "U$D" : "AR$"}</td>
@@ -74,13 +76,13 @@ function cargarInformacion(inmuebleID) {
     type: "POST",
     dataType: "json",
     success: function (misPublicaciones) {
-      console.log(misPublicaciones);
+      
       $.each(misPublicaciones, function (i, item) {
-        console.log(item);
+        
         document.getElementById("main-title").innerHTML = item.tituloString;
         document.getElementById("main-description").innerHTML =
           item.descripcionString;
-        console.log(item.imagenes);
+        
         document
           .getElementById("btn-eliminar")
           .setAttribute(
@@ -227,7 +229,7 @@ function AbrirModalEditar(inmuebleID) {
     // código a ejecutar si la petición es satisfactoria;
     // la respuesta es pasada como argumento a la función
     success: function (Inmuebles) {
-      console.log(Inmuebles);
+      
       let Inmueble = Inmuebles[0];
       document.getElementById("InmuebleID").value = inmuebleID;
       document.getElementById("Barrio").value = Inmueble.barrioString;
@@ -248,22 +250,26 @@ function AbrirModalEditar(inmuebleID) {
       document.getElementById("NroDireccion").value =
         Inmueble.nroDireccionString;
       document.getElementById("Piso").value = Inmueble.pisoString;
-      document.getElementById("NroDepartamento").value = Inmueble.nroDepartamentoString;
+      document.getElementById("NroDepartamento").value =
+        Inmueble.nroDepartamentoString;
       document.getElementById("Descripcion").value = Inmueble.descripcionString;
       // Al cargar la información desde el back
       let miniaturas = Inmueble.imagenes
         .map(
-          (imagen, index) => `
-  <img src="${imagen.imagenSrc}" draggable="true" alt="Miniatura ${
-            index + 1
-          }" class="miniatura ${index === 0 ? "active" : ""}">
-`
+          (
+            imagen,
+            index
+          ) => `<div class="draggable" draggable="true" id="img${imagen.imagenID}">
+                                <img src="${imagen.imagenSrc}">
+                              </div>`
         )
         .join("");
 
       $("#list-container").html(miniaturas);
 
-      orderedFiles = Inmueble.imagenes;
+      setTimeout("IniciarTouch()", 500);
+
+      backFiles = Inmueble.imagenes;
     },
 
     // código a ejecutar si la petición falla;
@@ -282,7 +288,7 @@ function AbrirModalEditar(inmuebleID) {
     type: "POST",
     dataType: "json",
     success: function (data) {
-      console.log(data);
+      
       let publicacion = data[0];
       document.getElementById("LocalidadID").value = publicacion.localidadID;
       document.getElementById("ProvinciaID").value = publicacion.provinciaID;
@@ -427,31 +433,31 @@ function getOrderedFiles() {
   return orderedFiles;
 }
 
+const listContainer = document.getElementById("list-container");
+
 document.addEventListener("DOMContentLoaded", function () {
-  const listContainer = document.getElementById("list-container");
-  let draggedItem = null;
   let inputFile = document.getElementById("Imagen");
-  let orderedFiles = []; // Aseguramos que existe
 
   inputFile.addEventListener("change", function (event) {
     const files = event.target.files;
     orderedFiles = Array.from(files); // Actualizar la lista con los archivos nuevos
-    console.log(orderedFiles);
     cargarImagenes(); // Llamar a la función para cargar las imágenes
   });
 
-  // Esta función puede ser llamada tanto para imágenes del backend como para las del input
   function cargarImagenes() {
-    listContainer.innerHTML = "";
+    
     const maxPreview = 100;
 
     for (let i = 0; i < Math.min(orderedFiles.length, maxPreview); i++) {
       const file = orderedFiles[i];
 
+      // CREAR EL DIV
+      var div = document.createElement("div");
+      div.classList.add("draggable");
+      div.setAttribute("draggable", true); // Hacer que la imagen sea arrastrable
+
       // Crear la imagen
       let img = document.createElement("img");
-      img.classList.add("miniatura");
-      img.setAttribute("draggable", true); // Hacer que la imagen sea arrastrable
       img.dataset.index = i; // Almacenar el índice de la imagen
 
       if (file instanceof File) {
@@ -466,43 +472,44 @@ document.addEventListener("DOMContentLoaded", function () {
         img.src = file.imagenSrc;
       }
 
-      // Asignar eventos de drag and drop
-      asignarEventosDeArrastre(img);
-
-      // Añadir la imagen al contenedor
-      listContainer.appendChild(img);
+      // Insertar la imagen dentro del div
+      div.appendChild(img);
+      document.getElementById("list-container").appendChild(div);
     }
+
+    IniciarTouch(); // Iniciar arrastrar y soltar después de cargar las imágenes
   }
+});
 
-  function asignarEventosDeArrastre(img) {
-    img.addEventListener("dragstart", (event) => {
-      draggedItem = img;
+function IniciarTouch() {
+  const draggables = document.querySelectorAll(".draggable");
+  const container = document.getElementById("list-container");
+
+  let draggedElement = null;
+
+  draggables.forEach((draggable) => {
+    draggable.addEventListener("dragstart", function () {
+      draggedElement = this;
+      setTimeout(() => (this.style.opacity = "0.4"), 0);
+    });
+
+    draggable.addEventListener("dragend", function () {
       setTimeout(() => {
-        img.style.display = "none"; // Ocultar el elemento mientras se arrastra
+        this.style.opacity = "1";
+        draggedElement = null;
       }, 0);
     });
 
-    img.addEventListener("dragend", (event) => {
-      setTimeout(() => {
-        draggedItem.style.display = "block"; // Mostrar el elemento cuando se suelta
-        draggedItem = null;
-      }, 0);
-    });
-
-    img.addEventListener("dragover", (event) => {
+    draggable.addEventListener("drop", (event) => {
       event.preventDefault();
-    });
-
-    img.addEventListener("drop", (event) => {
-      event.preventDefault();
-      if (draggedItem !== img) {
+      if (draggedElement !== draggable) {
         let allImages = Array.from(
-          listContainer.querySelectorAll("img.miniatura")
+          listContainer.querySelectorAll("div.draggable")
         );
-        let draggedIndex = allImages.indexOf(draggedItem);
-        let targetIndex = allImages.indexOf(img);
+        let draggedIndex = allImages.indexOf(draggedElement);
+        let targetIndex = allImages.indexOf(draggable);
 
-        // Reordenar los archivos en la lista interna
+        // Reordenar los archivos en la lista interna de orderedFiles
         if (draggedIndex > targetIndex) {
           orderedFiles.splice(
             targetIndex,
@@ -517,21 +524,61 @@ document.addEventListener("DOMContentLoaded", function () {
           );
         }
 
-        if (draggedIndex > targetIndex) {
-          listContainer.insertBefore(draggedItem, img);
+        // Verificar que draggedElement y draggable son nodos válidos
+        if (draggedElement && draggedElement.nodeType === 1) {
+          if (draggedIndex > targetIndex) {
+            listContainer.insertBefore(draggedElement, draggable);
+          } else {
+            listContainer.insertBefore(draggedElement, draggable.nextSibling);
+          }
+          updateImageOrder(); // Actualizar el orden después de reordenar
         } else {
-          listContainer.insertBefore(draggedItem, img.nextSibling);
+          console.error("Elemento arrastrado no válido:", draggedElement);
         }
-        updateImageOrder(); // Actualizar el orden después de reordenar
       }
     });
-  }
+  });
 
+  container.addEventListener("dragover", function (e) {
+    e.preventDefault();
+    const afterElement = getDragAfterElement(container, e.clientX);
+    const draggable = draggedElement;
 
-  function updateImageOrder() {
-    const images = listContainer.querySelectorAll("img.miniatura");
-    images.forEach((img, index) => {
-      img.dataset.index = index + 1;
-    });
+    // Asegurarse de que el draggedElement es válido antes de insertarlo
+    if (draggable && draggable.nodeType === 1) {
+      if (afterElement == null) {
+        container.appendChild(draggable);
+      } else {
+        container.insertBefore(draggable, afterElement);
+      }
+    }
+  });
+
+  function getDragAfterElement(container, x) {
+    const draggableElements = [
+      ...container.querySelectorAll(".draggable:not(.dragging)"),
+    ];
+
+    return draggableElements.reduce(
+      (closest, child) => {
+        const box = child.getBoundingClientRect();
+        const offset = x - box.left - box.width / 2;
+        if (offset < 0 && offset > closest.offset) {
+          return { offset: offset, element: child };
+        } else {
+          return closest;
+        }
+      },
+      { offset: Number.NEGATIVE_INFINITY }
+    ).element;
   }
-});
+}
+
+function updateImageOrder() {
+  const images = listContainer.querySelectorAll("div.draggable");
+  images.forEach((div, index) => {
+    div.dataset.index = index + 1;
+  });
+  console.log(images);
+  console.log("Ordered Files: ", orderedFiles); // Verificar si se reordenan correctamente
+}
