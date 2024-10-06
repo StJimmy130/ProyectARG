@@ -19,5 +19,6 @@ public class ApplicationDbContext : IdentityDbContext
     public DbSet<Provincia> Provincias { get; set; }
     public DbSet<Vista> Vistas { get; set; }
     public DbSet<Comentario> Comentarios { get; set; }
+    public DbSet<Favorito> Favoritos { get; set; }
 
 }

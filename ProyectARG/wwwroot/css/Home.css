@@ -89,6 +89,27 @@ footer{
   box-shadow: 0 0 2px 1px rgba(36, 35, 35, 0.603);
 }
 
+/* BOTÓN FAVORITOS */
+.favorite-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 10000;
+}
+
+.favorite-btn:hover {
+  scale: 1.1;
+}
+
+.favorite-btn i.fas {
+  color: red; /* Corazón lleno */
+}
+
+.favorite-btn i.far {
+  color: var(--nav-color); /* Corazón vacío */
+}
+
 
 .card img {
   width: 100%;

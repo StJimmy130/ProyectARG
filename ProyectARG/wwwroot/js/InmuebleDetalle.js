@@ -85,9 +85,7 @@ function CargarDatosPublicacion() {
 
         // Datos Principales
         datosPrincipales += `
-          <p class="text-muted text-sm">${inmueble.fechaPublicacionString} - ${
-          inmueble.cantidadVistas
-        } <i class="fa-solid fa-eye"></i></p>
+          <p class="text-muted text-sm">${inmueble.fechaPublicacionString} - ${inmueble.cantidadVistas} <i class="fa-solid fa-eye"></i></p>
           <h2>${inmueble.tituloString}</h2>
           <h3>${inmueble.moneda ? "U$D" : "AR$"} ${inmueble.precioString}</h3>
           <h4>${inmueble.provinciaString} - ${inmueble.localidadString}</h4>
