@@ -29,7 +29,7 @@ public class FavoritosController : Controller
     {
         if (usuarioId == 0)
         {
-            return Json(new { success = false, message = "Usuario no autorizado" });
+            return Json(new { message = "Usuario no autorizado" });
         }
         
 
@@ -46,17 +46,22 @@ public class FavoritosController : Controller
                 FechaAgregado = DateTime.Now
             };
             _context.Favoritos.Add(favorito);
+            _context.SaveChanges();
+            return Json(new { success = true, message = "Favorito agregado", isFavorito = true });
+            
         }
         else
         {
             // Si existe, lo eliminamos
             _context.Favoritos.Remove(favorito);
+            _context.SaveChanges();
+            return Json(new { success = true, message = "Favorito eliminado", isFavorito = false });
             
         }
 
-        _context.SaveChanges();
+        
 
-        return Json(new { success = true, message = "Favorito agregado" });
+        
     }
 }
 

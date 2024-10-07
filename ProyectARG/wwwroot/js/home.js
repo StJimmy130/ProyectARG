@@ -84,21 +84,21 @@ document.addEventListener("DOMContentLoaded", function () {
 function ToggleFavorito(inmuebleId, button) {
     let icon = $(button).find('i');
     let usuarioId = document.getElementById("UsuarioID").value;
+    console.log('ID del usuario:', usuarioId);
+    console.log('ID del inmueble:', inmuebleId);
     
     $.ajax({
         url: `../../Favoritos/ToggleFavorito`,
         type: 'POST',
-        headers: { },
         data: { inmuebleId: inmuebleId, usuarioId: usuarioId },
-        contentType: 'application/json; charset=utf-8',
         success: function (response) {
             console.log('Respuesta del servidor:', response);
             if (response.success) {
                 icon.toggleClass('fas far');
                 // Actualizar el estado visual del botón
-                if (response.isFavorito) {
+                if (response.isFavorito === true) {
                     icon.removeClass('far').addClass('fas');
-                } else {
+                } else if (response.isFavorito === false){
                     icon.removeClass('fas').addClass('far');
                 }
             } else {
@@ -155,6 +155,7 @@ function ListadoPublicaciones() {
   let precioMinimo = document.getElementById("min-price").value;
   let precioMaximo = document.getElementById("max-price").value;
   let operacion = document.getElementById("OperacionID").value;
+  let usuarioId = document.getElementById("UsuarioID").value;
   let selectedValues = [];
 
   // Obtener valores seleccionados de los checkboxes
@@ -176,6 +177,7 @@ function ListadoPublicaciones() {
       Operacion: operacion,
       PrecioMinimo: precioMinimo,
       PrecioMaximo: precioMaximo,
+      UsuarioID: usuarioId
     },
     type: "POST",
     dataType: "json",
@@ -284,6 +286,7 @@ function cambiarPagina(delta) {
 
 function mostrarPagina(pagina) {
   showLoadingScreen(); // Mostrar pantalla de carga al renderizar una nueva página
+  
 
   let contenidoTabla = `<button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#filterMenu"
       aria-controls="filterMenu" aria-expanded="false" aria-label="Toggle navigation">
@@ -308,6 +311,7 @@ function mostrarPagina(pagina) {
         </div>
       </a>
     </div>`;
+    console.log('id:',item.inmuebleID, 'esFavorito:',item.isFavorito);
   });
 
   document.getElementById("publicaciones").innerHTML = contenidoTabla;

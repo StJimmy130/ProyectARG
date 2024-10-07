@@ -162,6 +162,7 @@ public class HomeController : Controller
         {
             var localidad = localidades.SingleOrDefault(t => t.LocalidadID == inmueble.LocalidadID);
             var provincia = provincias.SingleOrDefault(t => t.ProvinciaID == localidad?.ProvinciaID);
+            var favorito = _context.Favoritos.Where(f => f.InmuebleID == inmueble.InmuebleID && f.UsuarioID == usuarioID).ToList().Count > 0;
 
             // Obtener la imagen asociada al inmueble
             var imagen = imagenes.OrderBy(img => img.Posicion).FirstOrDefault(img => img.InmuebleID == inmueble.InmuebleID);
@@ -180,7 +181,7 @@ public class HomeController : Controller
                 TipoOperacionString = SplitCamelCase(inmueble.TipoOperacion.ToString()),
                 Moneda = inmueble.Moneda,
                 ImagenSrc = imagenSrc,
-                EsFavorito = favoritos.Contains(inmueble.InmuebleID) // Asignar si es favorito
+                EsFavorito = favorito // Asignar si es favorito
             };
             inmueblesMostrar.Add(localidadMostrar);
         }
