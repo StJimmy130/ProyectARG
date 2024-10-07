@@ -8,7 +8,6 @@ function getMisPublicaciones() {
     type: "POST",
     dataType: "json",
     success: function (misPublicaciones) {
-      
       renderizarTabla(misPublicaciones);
     },
     error: function (xhr, status) {
@@ -76,13 +75,11 @@ function cargarInformacion(inmuebleID) {
     type: "POST",
     dataType: "json",
     success: function (misPublicaciones) {
-      
       $.each(misPublicaciones, function (i, item) {
-        
         document.getElementById("main-title").innerHTML = item.tituloString;
         document.getElementById("main-description").innerHTML =
           item.descripcionString;
-        
+
         document
           .getElementById("btn-eliminar")
           .setAttribute(
@@ -229,7 +226,6 @@ function AbrirModalEditar(inmuebleID) {
     // código a ejecutar si la petición es satisfactoria;
     // la respuesta es pasada como argumento a la función
     success: function (Inmuebles) {
-      
       let Inmueble = Inmuebles[0];
       document.getElementById("InmuebleID").value = inmuebleID;
       document.getElementById("Barrio").value = Inmueble.barrioString;
@@ -253,23 +249,21 @@ function AbrirModalEditar(inmuebleID) {
       document.getElementById("NroDepartamento").value =
         Inmueble.nroDepartamentoString;
       document.getElementById("Descripcion").value = Inmueble.descripcionString;
+      backFiles = Inmueble.imagenes;
       // Al cargar la información desde el back
-      let miniaturas = Inmueble.imagenes
-        .map(
-          (
-            imagen,
-            index
-          ) => `<div class="draggable back" draggable="true" id="img${imagen.imagenID}">
-                                <img src="${imagen.imagenSrc}">
-                              </div>`
-        )
-        .join("");
+      let miniaturas = "";
 
+      backFiles.forEach((imagen, index) => {
+        miniaturas += `<div class="draggable back" draggable="true" id="img${imagen.imagenID}">
+                            <img src="${imagen.imagenSrc}">
+                        </div>`;
+                        imagen.position = index + 1;
+      });
+ console.log(backFiles);
+ actualizarDataIndex();
       $("#list-container").html(miniaturas);
 
       setTimeout("IniciarTouch()", 500);
-
-      backFiles = Inmueble.imagenes;
     },
 
     // código a ejecutar si la petición falla;
@@ -288,7 +282,6 @@ function AbrirModalEditar(inmuebleID) {
     type: "POST",
     dataType: "json",
     success: function (data) {
-      
       let publicacion = data[0];
       document.getElementById("LocalidadID").value = publicacion.localidadID;
       document.getElementById("ProvinciaID").value = publicacion.provinciaID;
@@ -446,47 +439,49 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   function cargarImagenes() {
-    
     const maxPreview = 100;
 
     for (let i = 0; i < Math.min(orderedFiles.length, maxPreview); i++) {
       const file = orderedFiles[i];
-      file.position = i;
+      
 
       // CREAR EL DIV
       var div = document.createElement("div");
       div.classList.add("draggable");
       div.setAttribute("draggable", true); // Hacer que la imagen sea arrastrable
+      
 
       // Crear la imagen
       let img = document.createElement("img");
       img.dataset.index = i; // Almacenar el índice de la imagen
 
-      
-        div.classList.add("file");
-        // Si es un archivo, usar FileReader
-        const fileReader = new FileReader();
-        fileReader.onload = function (e) {
-          img.src = e.target.result;
-        };
-        fileReader.readAsDataURL(file);
-      
+      div.classList.add("file");
+      // Si es un archivo, usar FileReader
+      const fileReader = new FileReader();
+      fileReader.onload = function (e) {
+        img.src = e.target.result;
+      };
+      fileReader.readAsDataURL(file);
 
       // Insertar la imagen dentro del div
       div.appendChild(img);
       document.getElementById("list-container").appendChild(div);
+      file.position = div.getAttribute('data-index');
     }
-
-    
+    actualizarDataIndex()
     IniciarTouch(); // Iniciar arrastrar y soltar después de cargar las imágenes
   }
+  
 });
 
 function IniciarTouch() {
   const draggables = document.querySelectorAll(".draggable");
   const container = document.getElementById("list-container");
-
   let draggedElement = null;
+
+  // Asegúrate de que estas variables estén definidas
+  const orderedFiles = []; // Define orderedFiles
+  const backFiles = []; // Define backFiles
 
   draggables.forEach((draggable) => {
     draggable.addEventListener("dragstart", function () {
@@ -503,39 +498,56 @@ function IniciarTouch() {
 
     draggable.addEventListener("drop", (event) => {
       event.preventDefault();
+    
       if (draggedElement !== draggable) {
-        let allImages = Array.from(
-          listContainer.querySelectorAll("div.draggable")
-        );
+        // Obtener todos los divs actuales con clase 'draggable'
+        let allImages = Array.from(container.querySelectorAll("div.draggable"));
+        
+        console.log('allImages:', allImages); // Verificar que estén todos los elementos
+        
         let draggedIndex = allImages.indexOf(draggedElement);
         let targetIndex = allImages.indexOf(draggable);
-
-        if (draggable.classList.contains("file")) {
-        // Reordenar los archivos en la lista interna de orderedFiles
+        
+        console.log('draggedIndex:', draggedIndex); // Verificar que no sea -1
+        console.log('targetIndex:', targetIndex); // Verificar que no sea -1
+        
+        // Obtener los arrays de imágenes, pueden ser backFiles o orderedFiles
+        let currentArray = draggable.classList.contains("file")
+          ? orderedFiles
+          : backFiles;
+        
+        console.log('orderedFiles:', orderedFiles); // Verificar que esté definido
+        console.log('backFiles:', backFiles); // Verificar que esté definido
+        console.log('currentArray:', currentArray); // Verificar que esté definido
+        
+        // Verificar si la imagen fue movida de posición
         if (draggedIndex != targetIndex) {
-          orderedFiles.position = targetIndex + 1;
-        } 
-        } else{
-          backFiles.position = targetIndex + 1;
-        }
-
-        // Verificar que draggedElement y draggable son nodos válidos
-        if (draggedElement && draggedElement.nodeType === 1) {
-          if (draggedIndex > targetIndex) {
-            listContainer.insertBefore(draggedElement, draggable);
+          // Actualizar la posición del objeto que estás arrastrando
+          if (currentArray && draggedIndex !== -1) {
+            currentArray[draggedIndex].position = parseInt(draggable.getAttribute('data-index'));
           } else {
-            listContainer.insertBefore(draggedElement, draggable.nextSibling);
+            console.error("Error al actualizar posición");
           }
-          updateImageOrder(); // Actualizar el orden después de reordenar
-        } else {
-          console.error("Elemento arrastrado no válido:", draggedElement);
+    
+          // Mover el elemento en el DOM
+          if (draggedElement && draggedElement.nodeType === 1) {
+            if (draggedIndex > targetIndex) {
+              container.insertBefore(draggedElement, draggable);
+            } else {
+              container.insertBefore(draggedElement, draggable.nextSibling);
+            }
+          } else {
+            console.error("Elemento arrastrado no válido:", draggedElement);
+          }
         }
       }
+      updateImageOrder(); // Llamar a tu función para actualizar el orden visual
     });
   });
 
   container.addEventListener("dragover", function (e) {
     e.preventDefault();
+    actualizarDataIndex();
     const afterElement = getDragAfterElement(container, e.clientX);
     const draggable = draggedElement;
 
@@ -548,6 +560,7 @@ function IniciarTouch() {
       }
     }
   });
+
 
   function getDragAfterElement(container, x) {
     const draggableElements = [
@@ -567,6 +580,18 @@ function IniciarTouch() {
       { offset: Number.NEGATIVE_INFINITY }
     ).element;
   }
+
+  
+}
+
+function actualizarDataIndex() {
+  // Obtener todos los divs dentro del listContainer
+  let allDivs = listContainer.querySelectorAll('div.draggable');
+
+  // Recorrer todos los divs y asignar un data-index consecutivo
+  allDivs.forEach((div, index) => {
+    div.setAttribute('data-index', index + 1); // Asignar el data-index (comienza en 1)
+  });
 }
 
 function updateImageOrder() {
