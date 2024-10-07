@@ -17,6 +17,7 @@ public class Usuario
     public virtual ICollection<Inmueble> Inmuebles { get; set; }
     public virtual ICollection<Valoracion> Valoraciones { get; set; }
     public virtual ICollection<Comentario> Comentarios { get; set; }
+    public virtual ICollection<Favorito> Favoritos { get; set; }
 }
 public class DatosUsuario{
     public string? Nombre { get; set; }

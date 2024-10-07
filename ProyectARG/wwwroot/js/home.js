@@ -78,6 +78,49 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+
+
+// FUNCIÓN PARA VERIFICAR SI ES FAVORITO 
+function ToggleFavorito(inmuebleId, button) {
+    let icon = $(button).find('i');
+    let usuarioId = document.getElementById("UsuarioID").value;
+    
+    $.ajax({
+        url: `../../Favoritos/ToggleFavorito`,
+        type: 'POST',
+        headers: { },
+        data: { inmuebleId: inmuebleId, usuarioId: usuarioId },
+        contentType: 'application/json; charset=utf-8',
+        success: function (response) {
+            console.log('Respuesta del servidor:', response);
+            if (response.success) {
+                icon.toggleClass('fas far');
+                // Actualizar el estado visual del botón
+                if (response.isFavorito) {
+                    icon.removeClass('far').addClass('fas');
+                } else {
+                    icon.removeClass('fas').addClass('far');
+                }
+            } else {
+                console.error('Error al actualizar el favorito: ' + response.message);
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error('Error al actualizar el favorito: ' + error);
+        }
+    });
+}
+
+// Asegúrate de que este código se ejecute cuando la página se carga
+$(document).ready(function() {
+    // Prevenir la navegación al hacer clic en el botón de favorito
+    $('.favorite-btn').on('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    });
+});
+
+
 function actualizarLocalidades() {
   var provinciaID = document.getElementById("ProvinciaID").value;
 
@@ -250,16 +293,19 @@ function mostrarPagina(pagina) {
     contenidoTabla += `
     <div class="col-lg-4 col-md-6 col-sm-12 mb-4 activo">
       <a href="../Inmuebles/Detalle/${item.inmuebleID}">
-          <div class="card">
-              <div class="image-container">
-                  <img src="${item.imagenSrc}" alt="Imagen del Inmueble">
-              </div>
-              <div class="card-body">
-                  <h5 class="card-title fs-4">${item.tituloString}</h5>
-                  <p class="card-text fs-5">${item.precioString} ${item.moneda ? "U$D" : "AR$"} - ${item.tipoOperacionString}</p>
-                  <p class="card-title fs-5">${item.provinciaString}, ${item.localidadString} - ${item.direccionString} ${item.nroDireccionString}</p>
-              </div>
+        <div class="card">
+          <div class="image-container">
+            <img src="${item.imagenSrc}" alt="Imagen del Inmueble">
+            <button class="favorite-btn position-absolute top-0 end-0 m-2" onclick="ToggleFavorito(${item.inmuebleID}, this); return false;">
+              <i id="fav-icon-${item.inmuebleID}" class="${item.esFavorito ? 'fas fa-heart' : 'far fa-heart'}"></i>
+            </button>
           </div>
+          <div class="card-body">
+            <h5 class="card-title fs-4">${item.tituloString}</h5>
+              <p class="card-text fs-5">${item.precioString} ${item.moneda ? "U$D" : "AR$"} - ${item.tipoOperacionString}</p>
+              <p class="card-title fs-5">${item.provinciaString}, ${item.localidadString} - ${item.direccionString} ${item.nroDireccionString}</p>
+          </div>
+        </div>
       </a>
     </div>`;
   });

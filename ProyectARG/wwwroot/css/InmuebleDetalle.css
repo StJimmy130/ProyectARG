@@ -37,6 +37,10 @@ footer {
   margin-top: 100px;
 }
 
+
+
+/* IMAGENES DEL INMUEBLE */
+
 .contenedor-imagenes {
   background: var(--body-color);
   border-radius: 5px;

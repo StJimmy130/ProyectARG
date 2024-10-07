@@ -33,9 +33,9 @@ public class Inmueble
     public virtual Localidad? Localidad { get; set; }
     public virtual ICollection<Vista>? Vistas { get; set; }
     public virtual ICollection<Imagen>? Imagenes { get; set; }
-
     public virtual ICollection<Valoracion> Valoraciones { get; set; }
     public virtual ICollection<Comentario> Comentarios { get; set; }
+    public virtual ICollection<Favorito> Favoritos { get; set; }
 
 }
 
@@ -95,6 +95,7 @@ public class VistaInmueble
     public int CantidadVistas { get; set; }
     public string? ImagenSrc { get; set; } // Propiedad para una sola imagen
     public List<ImagenVista>? Imagenes { get; set; } 
+    public bool EsFavorito { get; set; }
 
 }
 
