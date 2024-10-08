@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Security.Claims;
 using System.Globalization;
+using Newtonsoft.Json;
 
 namespace ProyectARG.Controllers;
 
@@ -166,7 +167,7 @@ public class InmueblesController : Controller
             var usuario = _context.Usuarios.SingleOrDefault(t => t.UsuarioID == inmueble.UsuarioID);
             var cantidadVistas = _context.Vistas.Count(v => v.InmuebleID == inmueble.InmuebleID);
 
-            var imagenesInmueble = imagenes.Where(img => img.InmuebleID == inmueble.InmuebleID).ToList();
+            var imagenesInmueble = imagenes.Where(img => img.InmuebleID == inmueble.InmuebleID).OrderBy(imagen => imagen.Posicion).ToList();
             var imagenesBase64 = imagenesInmueble.Select(imagen => new ImagenVista
             {
                 ImagenID = imagen.ImagenID,
@@ -174,7 +175,7 @@ public class InmueblesController : Controller
             }).ToList();
 
             // Cálculo de "Hace 'x tiempo'"
-           TimeSpan diferencia = DateTime.Now - inmueble.FechaAlta;
+            TimeSpan diferencia = DateTime.Now - inmueble.FechaAlta;
 
             string FechaPublicacionString = diferencia.TotalDays >= 365 ? $"Hace {(int)(diferencia.TotalDays / 365)} año{((int)(diferencia.TotalDays / 365) == 1 ? "" : "s")}" :
                                 diferencia.TotalDays >= 30 ? $"Hace {(int)(diferencia.TotalDays / 30)} mes{((int)(diferencia.TotalDays / 30) == 1 ? "" : "es")}" :
@@ -255,7 +256,7 @@ public class InmueblesController : Controller
     float? Precio, int? SuperficieTotal, int? SuperficieCubierta, Operacion TipoOperacion,
     TipoInmueble TipoInmueble, bool Amoblado, int Dormitorios, int Banios, int CantidadAmbientes,
     bool Cochera, string? Direccion, int NroDireccion, string? Descripcion, int? UsuarioID,
-    List<IFormFile> Imagenes, bool Moneda, int Piso, string? NroDepartamento)
+    List<IFormFile> Imagenes, bool Moneda, int Piso, string? NroDepartamento, List<string>? ImagenesBack)
     {
         var resultado = new
         {
@@ -346,7 +347,7 @@ public class InmueblesController : Controller
                     };
                 }
 
-                if (Imagenes != null && Imagenes.Count > 0)
+                if (Imagenes != null && Imagenes.Count > 0 && Imagenes.All(i => i.GetType().GetProperty("position") == null))
                 {
                     int posicion = 1; // Iniciar el contador de posición
 
@@ -370,8 +371,44 @@ public class InmueblesController : Controller
                         posicion++; // Incrementar la posición para la siguiente imagen
                     }
 
-                    _context.SaveChanges();
+
                 }
+                else
+                {
+                    foreach (var imagen in Imagenes)
+                    {
+                        using (var memoryStream = new System.IO.MemoryStream())
+                        {
+                            imagen.CopyTo(memoryStream);
+                            var imagenEntity = new Imagen
+                            {
+                                ImagenByte = memoryStream.ToArray(),
+                                ContentType = imagen.ContentType,
+                                NombreArchivo = imagen.FileName,
+                                InmuebleID = inmueble.InmuebleID,
+                                // Posicion = imagen.position
+                            };
+
+                            _context.Imagenes.Add(imagenEntity);
+                        }
+                    }
+
+                }
+                if (ImagenesBack != null && ImagenesBack.Count > 0)
+                {
+                    var listaImagenes = new List<ImagenBack>();
+                    foreach (var imagenJson in ImagenesBack)
+                    {
+                        var imagen = JsonConvert.DeserializeObject<ImagenBack>(imagenJson);
+                        listaImagenes.Add(imagen);
+                    }
+                    foreach (var imagen in listaImagenes)
+                    {
+                        var ImagenExistente = _context.Imagenes.Where(i => i.ImagenID == imagen.ImagenID).SingleOrDefault();
+                        ImagenExistente.Posicion = imagen.Position;
+                    }
+                }
+                _context.SaveChanges();
             }
         }
 

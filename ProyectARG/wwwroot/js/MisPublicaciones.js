@@ -164,11 +164,18 @@ function GuardarPublicacion() {
 
   // Obtener el orden actual de las imágenes en el list-container
   let imagenes = getOrderedFiles();
+  let imagenesBack = getBackFiles();
+
+  console.log(imagenesBack);
 
   for (let i = 0; i < imagenes.length; i++) {
     formData.append("Imagenes", imagenes[i]);
   }
-  console.log(imagenes);
+
+  for (let i = 0; i < imagenesBack.length; i++) {
+    formData.append(`ImagenesBack[${i}]`, JSON.stringify(imagenesBack[i]));
+  }
+  console.log(formData);
   $.ajax({
     url: "/Inmuebles/GuardarPublicacion",
     data: formData,
@@ -254,7 +261,7 @@ function AbrirModalEditar(inmuebleID) {
       let miniaturas = "";
 
       backFiles.forEach((imagen, index) => {
-        miniaturas += `<div class="draggable back" draggable="true" id="img${imagen.imagenID}">
+        miniaturas += `<div class="draggable back" draggable="true" id="${imagen.imagenID}">
                             <img src="${imagen.imagenSrc}">
                         </div>`;
                         imagen.position = index + 1;
@@ -289,8 +296,17 @@ function AbrirModalEditar(inmuebleID) {
       document.getElementById("TipoInmueble").value = publicacion.tipoInmueble;
 
       $("#ModalEditarPublicacion").modal("show");
+      setTimeout(() => {
+        updateDropArea();
+      }, 500);
+      
     },
   });
+}
+
+function updateDropArea() {
+  const height = container.clientHeight;
+  container.style.height = `${height}px`; // Esto fuerza la actualización del área visible
 }
 
 function ValidarEliminacionInmueble(inmuebleID, Operacion) {
@@ -427,6 +443,10 @@ function getOrderedFiles() {
   return orderedFiles;
 }
 
+function getBackFiles() {
+  return backFiles;
+}
+
 const listContainer = document.getElementById("list-container");
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -473,62 +493,92 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   
 });
-
+const container = document.getElementById("list-container");
 function IniciarTouch() {
   const draggables = document.querySelectorAll(".draggable");
-  const container = document.getElementById("list-container");
+  
   let draggedElement = null;
 
   // Asegúrate de que estas variables estén definidas
-  const orderedFiles = []; // Define orderedFiles
-  const backFiles = []; // Define backFiles
+  
 
   draggables.forEach((draggable) => {
+    draggable.addEventListener("click", function () {
+      draggedElement = this;
+      console.log(draggedElement);
+    });
+  
     draggable.addEventListener("dragstart", function () {
       draggedElement = this;
-      setTimeout(() => (this.style.opacity = "0.4"), 0);
+      setTimeout(() => {
+        this.style.opacity = "0.4";
+      }, 0);
     });
-
+  
     draggable.addEventListener("dragend", function () {
       setTimeout(() => {
         this.style.opacity = "1";
         draggedElement = null;
       }, 0);
     });
-
+  
     draggable.addEventListener("drop", (event) => {
       event.preventDefault();
-    
-      if (draggedElement !== draggable) {
-        // Obtener todos los divs actuales con clase 'draggable'
+  
+      if (draggedElement === draggable) {
         let allImages = Array.from(container.querySelectorAll("div.draggable"));
-        
-        console.log('allImages:', allImages); // Verificar que estén todos los elementos
         
         let draggedIndex = allImages.indexOf(draggedElement);
         let targetIndex = allImages.indexOf(draggable);
-        
+  
         console.log('draggedIndex:', draggedIndex); // Verificar que no sea -1
         console.log('targetIndex:', targetIndex); // Verificar que no sea -1
-        
+  
         // Obtener los arrays de imágenes, pueden ser backFiles o orderedFiles
-        let currentArray = draggable.classList.contains("file")
-          ? orderedFiles
-          : backFiles;
-        
-        console.log('orderedFiles:', orderedFiles); // Verificar que esté definido
-        console.log('backFiles:', backFiles); // Verificar que esté definido
+        let currentArray = [];
+        if (draggable.classList.contains("back")) {
+          currentArray = backFiles;
+        } else {
+          currentArray = orderedFiles;
+        }
+  
         console.log('currentArray:', currentArray); // Verificar que esté definido
         
+        // Obtener el atributo 'value' del draggedElement para buscar en el array
+        const draggedValue = draggedElement.getAttribute('id'); 
+  
+        // Buscar el objeto con ese ID en el currentArray
+        let div1 = currentArray.find(obj => obj.imagenID == draggedValue);
+  
+        console.log('objeto:', div1); // Verificar que esté definido
+  
         // Verificar si la imagen fue movida de posición
-        if (draggedIndex != targetIndex) {
+        if (draggedIndex == targetIndex) {
           // Actualizar la posición del objeto que estás arrastrando
           if (currentArray && draggedIndex !== -1) {
-            currentArray[draggedIndex].position = parseInt(draggable.getAttribute('data-index'));
+            actualizarDataIndex();
+            if (div1) {
+              let lastPosition = div1.position;
+
+              div1.position = parseInt(draggable.getAttribute('data-index')); 
+
+              if (div1.position > lastPosition) {
+                for (let i = lastPosition + 1 ; i <= div1.position; i++) {
+                  let div = currentArray.find(obj => obj.position == i && obj.imagenID != div1.imagenID);
+                  div.position = i - 1;
+                }
+              }
+              else if (div1.position < lastPosition) {
+                for (let i = lastPosition - 1 ; i >= div1.position; i--) {
+                  let div = currentArray.find(obj => obj.position == i && obj.imagenID != div1.imagenID);
+                  div.position = i + 1;
+                }
+              }
+            }
           } else {
             console.error("Error al actualizar posición");
           }
-    
+  
           // Mover el elemento en el DOM
           if (draggedElement && draggedElement.nodeType === 1) {
             if (draggedIndex > targetIndex) {
@@ -544,13 +594,14 @@ function IniciarTouch() {
       updateImageOrder(); // Llamar a tu función para actualizar el orden visual
     });
   });
-
+  
   container.addEventListener("dragover", function (e) {
     e.preventDefault();
-    actualizarDataIndex();
+    updateDropArea();
+    
     const afterElement = getDragAfterElement(container, e.clientX);
     const draggable = draggedElement;
-
+  
     // Asegurarse de que el draggedElement es válido antes de insertarlo
     if (draggable && draggable.nodeType === 1) {
       if (afterElement == null) {
@@ -599,7 +650,7 @@ function updateImageOrder() {
   images.forEach((div, index) => {
     div.dataset.index = index + 1;
   });
-  console.log(images);
+  
   console.log("Ordered Files: ", orderedFiles); // Verificar si se reordenan correctamente
   console.log("Back Files: ", backFiles);
 }

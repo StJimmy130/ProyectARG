@@ -416,17 +416,18 @@ input[type="file"] {
   }
 
 .list-container{
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    border-radius: 5px;
-    margin: 5px 40px 0 40px;
-    padding: 10px;
-    background-color: rgb(197, 196, 194);
-    overflow-x: auto;
-    white-space: nowrap;
-    gap: 5px;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* O 'flex-start' para que empiece desde arriba */
+  border-radius: 5px;
+  margin: 5px 40px 0 40px;
+  padding: 10px;
+  background-color: rgb(197, 196, 194);
+  overflow-x: auto;
+  gap: 5px;
+  flex-wrap: wrap; /* Esto permite que las imágenes se acomoden en varias filas */
+  height: auto; /* Asegura que la altura se ajuste automáticamente */
+}
 
   .list-container img {
     max-width: 150px;

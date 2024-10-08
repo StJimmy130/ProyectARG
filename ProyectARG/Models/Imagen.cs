@@ -15,3 +15,10 @@ public class Imagen
     public int? Posicion { get; set; }
     public virtual Inmueble Inmuebles { get; set; }
 }
+
+public class ImagenBack
+{
+    public int ImagenID { get; set; }
+    public string ImagenSrc { get; set; }
+    public int Position { get; set; }
+}
