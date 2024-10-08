@@ -460,36 +460,44 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function cargarImagenes() {
     const maxPreview = 100;
+    let contentList = document.getElementById("list-container");
+    let divCount = contentList.querySelectorAll("div").length;
 
-    for (let i = 0; i < Math.min(orderedFiles.length, maxPreview); i++) {
-      const file = orderedFiles[i];
+    for (let i = divCount; i < Math.min(orderedFiles.length + divCount, maxPreview); i++ ) {
+      let nroFile = 0
+      const file = orderedFiles[nroFile];
       
 
       // CREAR EL DIV
       var div = document.createElement("div");
       div.classList.add("draggable");
       div.setAttribute("draggable", true); // Hacer que la imagen sea arrastrable
+      div.setAttribute("id" , nroFile);
+      div.setAttribute('data-index', i)
       
 
       // Crear la imagen
       let img = document.createElement("img");
-      img.dataset.index = i; // Almacenar el índice de la imagen
 
       div.classList.add("file");
       // Si es un archivo, usar FileReader
+      // Insertar la imagen dentro del div
+      div.appendChild(img);
+      document.getElementById("list-container").appendChild(div);
+      file.position = i;
+
+      actualizarDataIndex()
+    IniciarTouch(); // Iniciar arrastrar y soltar después de cargar las imágenes
+
       const fileReader = new FileReader();
       fileReader.onload = function (e) {
         img.src = e.target.result;
       };
       fileReader.readAsDataURL(file);
 
-      // Insertar la imagen dentro del div
-      div.appendChild(img);
-      document.getElementById("list-container").appendChild(div);
-      file.position = div.getAttribute('data-index');
+      nroFile++
     }
-    actualizarDataIndex()
-    IniciarTouch(); // Iniciar arrastrar y soltar después de cargar las imágenes
+    
   }
   
 });
@@ -546,9 +554,16 @@ function IniciarTouch() {
         
         // Obtener el atributo 'value' del draggedElement para buscar en el array
         const draggedValue = draggedElement.getAttribute('id'); 
+        let div1 
   
+        if (currentArray === backFiles){
         // Buscar el objeto con ese ID en el currentArray
-        let div1 = currentArray.find(obj => obj.imagenID == draggedValue);
+         div1 = currentArray.find(obj => obj.imagenID == draggedValue);
+      }
+        else if (currentArray === orderedFiles){
+        // Buscar el objeto con ese ID en el currentArray
+         div1 = currentArray[draggedValue];
+      }
   
         console.log('objeto:', div1); // Verificar que esté definido
   
