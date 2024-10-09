@@ -43,17 +43,17 @@ $(document).ready(function() {
 
 function ListadoFavoritos() {
     showLoadingScreen();
+    let usuarioId = document.getElementById("UsuarioID").value;
     // Llamada AJAX para obtener las publicaciones
     $.ajax({
         url: "../../Favoritos/ListadoFavoritos",
         type: "POST",
+        data: { usuarioId: usuarioId },
         dataType: "json",
         success: function (Listado) {
-            if (Listado && Listado.length > 0) {
+            if (Listado.length > 0) {
                 publicacionesOriginales = Listado;
                 renderizarTabla(publicacionesOriginales);
-            } else {
-                document.getElementById("publicaciones").innerHTML = "<p>No se encontraron publicaciones</p>";
             }
             hideLoadingScreen();
         },

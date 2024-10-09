@@ -112,7 +112,7 @@ public class MisPublicacionesController : Controller
 
 
 
-            var imagenesInmueble = Imagenes.Where(img => img.InmuebleID == Inmueble.InmuebleID).ToList();
+            var imagenesInmueble = Imagenes.Where(img => img.InmuebleID == Inmueble.InmuebleID).OrderBy(img => img.Posicion).ToList();
         var imagenesBase64 = imagenesInmueble.Select(imagen => new ImagenVista
         {
             ImagenID = imagen.ImagenID,
