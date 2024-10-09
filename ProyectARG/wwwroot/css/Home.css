@@ -103,11 +103,13 @@ footer{
 }
 
 .favorite-btn i.fas {
-  color: red; /* Corazón lleno */
+  color: red;
+
+  /* Corazón lleno */
 }
 
 .favorite-btn i.far {
-  color: var(--nav-color); /* Corazón vacío */
+  color: white; /* Corazón vacío */
 }
 
 
@@ -394,5 +396,8 @@ input[type="range"] {
   }
   .catalogo {
     margin-top: 6rem;
+  }
+  .card-body{
+    height: 28%;
   }
 }
