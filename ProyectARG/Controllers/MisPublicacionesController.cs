@@ -142,9 +142,46 @@ public class MisPublicacionesController : Controller
         return Json(inmueblesMostrar);
     }
 
+    public JsonResult GuardarImagenes(List<IFormFile> Imagenes, int InmuebleID){
+
+        if (Imagenes != null && Imagenes.Count > 0)
+                {
+                    var cantidadImagenes = _context.Imagenes.Where(i => i.InmuebleID == InmuebleID).Count();
+                    int posicion = cantidadImagenes + 1; // Iniciar el contador de posición
+
+                    foreach (var imagen in Imagenes)
+                    {
+                        using (var memoryStream = new System.IO.MemoryStream())
+                        {
+                            imagen.CopyTo(memoryStream);
+                            var imagenEntity = new Imagen
+                            {
+                                ImagenByte = memoryStream.ToArray(),
+                                ContentType = imagen.ContentType,
+                                NombreArchivo = imagen.FileName,
+                                InmuebleID = InmuebleID,
+                                Posicion = posicion // Asignar la posición actual
+                            };
+                            _context.Imagenes.Add(imagenEntity);
+                        }
+                        posicion++; // Incrementar la posición para la siguiente imagen
+                    }
+                    _context.SaveChanges();
+                }
+
+        return Json(true);
+    }
 
 
+    public JsonResult EliminarImagen(int ImagenID){
+        var imagen = _context.Imagenes.Where(t => t.ImagenID == ImagenID).SingleOrDefault();
+        if (imagen != null) {
+            _context.Imagenes.Remove(imagen);
+            _context.SaveChanges();
+        }
 
+        return Json(true);
+    }
 
 
 }

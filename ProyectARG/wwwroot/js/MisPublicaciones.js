@@ -163,14 +163,11 @@ function GuardarPublicacion() {
   // formData.append("Moneda", moneda);
 
   // Obtener el orden actual de las imágenes en el list-container
-  let imagenes = getOrderedFiles();
   let imagenesBack = getBackFiles();
 
   console.log(imagenesBack);
 
-  for (let i = 0; i < imagenes.length; i++) {
-    formData.append("Imagenes", imagenes[i]);
-  }
+
 
   for (let i = 0; i < imagenesBack.length; i++) {
     formData.append(`ImagenesBack[${i}]`, JSON.stringify(imagenesBack[i]));
@@ -263,11 +260,13 @@ function AbrirModalEditar(inmuebleID) {
       backFiles.forEach((imagen, index) => {
         miniaturas += `<div class="draggable back" draggable="true" id="${imagen.imagenID}">
                             <img src="${imagen.imagenSrc}">
+                            <button class="btn-delete" onclick="deleteImage(${imagen.imagenID})"><i class="bx bx-trash"></i></button>
                         </div>`;
                         imagen.position = index + 1;
       });
  console.log(backFiles);
  actualizarDataIndex();
+
       $("#list-container").html(miniaturas);
 
       setTimeout("IniciarTouch()", 500);
@@ -460,7 +459,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function cargarImagenes() {
     const maxPreview = 100;
-    let contentList = document.getElementById("list-container");
+    let contentList = document.getElementById("input-container");
     let divCount = contentList.querySelectorAll("div").length;
 
     for (let i = divCount; i < Math.min(orderedFiles.length + divCount, maxPreview); i++ ) {
@@ -483,8 +482,7 @@ document.addEventListener("DOMContentLoaded", function () {
       // Si es un archivo, usar FileReader
       // Insertar la imagen dentro del div
       div.appendChild(img);
-      document.getElementById("list-container").appendChild(div);
-      file.position = i;
+      contentList.appendChild(div);
 
       actualizarDataIndex()
     IniciarTouch(); // Iniciar arrastrar y soltar después de cargar las imágenes
@@ -668,4 +666,58 @@ function updateImageOrder() {
   
   console.log("Ordered Files: ", orderedFiles); // Verificar si se reordenan correctamente
   console.log("Back Files: ", backFiles);
+}
+
+
+function guardarImagenes() {
+  let inmuebleID = document.getElementById("InmuebleID").value;
+  const formData = new FormData();
+  imagenes = getOrderedFiles();
+  for (let i = 0; i < imagenes.length; i++) {
+    formData.append("Imagenes", imagenes[i]);
+  }
+  formData.append("InmuebleID", inmuebleID);
+
+  $.ajax({
+    url: "../../MisPublicaciones/GuardarImagenes",
+    type: "POST",
+    data: formData,
+    processData: false,
+    contentType: false,
+    success: function (response) {
+      if (response === true) {
+        console.log("Imagenes guardadas exitosamente");
+        AbrirModalEditar(inmuebleID);
+        document.getElementById("Imagen").value = "";
+        document.getElementById("input-container").innerHTML = "";
+        updateDropArea();
+      } else {
+        console.error("Error al guardar las imagenes:", response.message);
+      }
+    },
+    error: function (xhr, status, error) {
+      console.error("Error:", error);
+    },
+  });
+}
+
+function deleteImage(imagenID) {
+  let inmuebleID = document.getElementById("InmuebleID").value;
+  $.ajax({
+    url: "../../MisPublicaciones/EliminarImagen",
+    type: "POST",
+    data: { imagenID: imagenID },
+    success: function (response) {
+      if (response === true) {
+        console.log("Imagen eliminada exitosamente");
+        updateDropArea();
+        AbrirModalEditar(inmuebleID);
+      } else {
+        console.error("Error al eliminar la imagen:", response.message);
+      }
+    },
+    error: function (xhr, status, error) {
+      console.error("Error:", error);
+    },
+  });
 }

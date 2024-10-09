@@ -229,10 +229,17 @@
               <div class="d-flex">
                 <div class="container">
                   <div class="row">
-                    <label for="Imagen" class="col-2"><i class='bx bx-photo-album'></i></label>
-                    <input type="file" id="Imagen" name="Imagen" accept="image/*" multiple>
-                    <div class="list-container col-10" id="list-container"></div>
+                    <div class="list-container col-11" id="list-container"></div>
+                    <div class="mt-4 col-12 row">
+                      <label for="Imagen" class="col-2"><i class='bx bx-photo-album'></i></label>
+                      <input type="file" id="Imagen" name="Imagen" accept="image/*" multiple>
+                      <div class="list-container col-10" id="input-container"></div>
+                      <div class="col-12 flex justify-content-center align-items-center">
+                        <button class="btn btn-primary mt-4 mx-auto" onclick="guardarImagenes()">Guardar imagenes</button>
+                      </div>
+                    </div>
                   </div>
+
                 </div>
               </div>
             </div>
@@ -255,19 +262,7 @@
 
 </div>
 
-<style>
 
-        .draggable {
-            margin: 10px;
-            cursor: move;
-        }
-
-        .draggable img {
-            width: 150px;
-            height: 150px;
-            object-fit: cover;
-        }
-    </style>
 
 
 
