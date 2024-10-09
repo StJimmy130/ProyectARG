@@ -169,7 +169,7 @@ public class HomeController : Controller
             string imagenBase64 = imagen != null ? Convert.ToBase64String(imagen.ImagenByte) : null;
             string imagenSrc = imagen != null ? $"data:{imagen.ContentType};base64,{imagenBase64}" : "/path/to/default/image.jpg"; // Ruta a una imagen por defecto
 
-            var localidadMostrar = new VistaInmueble
+            var inmuebleMostrar = new VistaInmueble
             {
                 InmuebleID = inmueble.InmuebleID,
                 TituloString = inmueble.Titulo,
@@ -183,7 +183,7 @@ public class HomeController : Controller
                 ImagenSrc = imagenSrc,
                 EsFavorito = favorito // Asignar si es favorito
             };
-            inmueblesMostrar.Add(localidadMostrar);
+            inmueblesMostrar.Add(inmuebleMostrar);
         }
 
         return Json(inmueblesMostrar);

@@ -1,0 +1,15 @@
+body{
+    padding-top: 80px;
+}
+footer{
+    margin-top: 100px;
+}
+.seccion-favoritos{
+    margin-top: -70px;
+}
+
+@media screen and (max-width: 768px) {
+    .seccion-favoritos{
+        margin-top: -120px;
+    }
+}

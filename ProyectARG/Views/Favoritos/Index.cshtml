@@ -1,0 +1,32 @@
+<link rel="stylesheet" href="~/css/Home.css">
+<link rel="stylesheet" href="~/css/Favoritos.css">
+
+<div class="row container-xxl">
+  <div class="col-12">
+    <div class="tituloContenedor">
+      <h1 class="titulo"><i class="fas fa-heart"></i> Favoritos</h1>
+      <hr class="tituloHr">
+    </div>
+  </div>
+</div>
+
+<section class="seccion-favoritos">
+  <div class="load-screen" id="loading-screen">
+    <div class="loader"></div>
+  </div>
+  <input type="hidden" id="UsuarioID" value="@ViewBag.UsuarioID">
+  <div class="catalogo">
+    <div class="flex flex-column justify-content-center align-items-center" style="width: 100%;">
+      <div style="width: 100%;">
+        <div class="row cardCatalogo" id="publicaciones"></div>
+      </div>
+    </div>
+  </div>
+
+
+</section>
+
+@section Scripts {
+  <script src="~/js/Favoritos.js"></script>
+  @* <script src="~/js/home.js"></script> *@
+}

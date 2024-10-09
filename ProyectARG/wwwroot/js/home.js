@@ -311,7 +311,7 @@ function mostrarPagina(pagina) {
         </div>
       </a>
     </div>`;
-    console.log('id:',item.inmuebleID, 'esFavorito:',item.isFavorito);
+    console.log('id:',item.inmuebleID, 'esFavorito:',item.esFavorito);
   });
 
   document.getElementById("publicaciones").innerHTML = contenidoTabla;
