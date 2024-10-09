@@ -537,38 +537,21 @@ function IniciarTouch() {
         let draggedIndex = allImages.indexOf(draggedElement);
         let targetIndex = allImages.indexOf(draggable);
   
-        console.log('draggedIndex:', draggedIndex); // Verificar que no sea -1
-        console.log('targetIndex:', targetIndex); // Verificar que no sea -1
-  
-        // Obtener los arrays de imágenes, pueden ser backFiles o orderedFiles
-        let currentArray = [];
-        if (draggable.classList.contains("back")) {
-          currentArray = backFiles;
-        } else {
-          currentArray = orderedFiles;
-        }
-  
-        console.log('currentArray:', currentArray); // Verificar que esté definido
+     
         
         // Obtener el atributo 'value' del draggedElement para buscar en el array
         const draggedValue = draggedElement.getAttribute('id'); 
         let div1 
   
-        if (currentArray === backFiles){
-        // Buscar el objeto con ese ID en el currentArray
-         div1 = currentArray.find(obj => obj.imagenID == draggedValue);
-      }
-        else if (currentArray === orderedFiles){
-        // Buscar el objeto con ese ID en el currentArray
-         div1 = currentArray[draggedValue];
-      }
+        
+         div1 = backFiles.find(obj => obj.imagenID == draggedValue);
+
   
-        console.log('objeto:', div1); // Verificar que esté definido
   
         // Verificar si la imagen fue movida de posición
         if (draggedIndex == targetIndex) {
           // Actualizar la posición del objeto que estás arrastrando
-          if (currentArray && draggedIndex !== -1) {
+          if (backFiles && draggedIndex !== -1) {
             actualizarDataIndex();
             if (div1) {
               let lastPosition = div1.position;
@@ -577,13 +560,13 @@ function IniciarTouch() {
 
               if (div1.position > lastPosition) {
                 for (let i = lastPosition + 1 ; i <= div1.position; i++) {
-                  let div = currentArray.find(obj => obj.position == i && obj.imagenID != div1.imagenID);
+                  let div = backFiles.find(obj => obj.position == i && obj.imagenID != div1.imagenID);
                   div.position = i - 1;
                 }
               }
               else if (div1.position < lastPosition) {
                 for (let i = lastPosition - 1 ; i >= div1.position; i--) {
-                  let div = currentArray.find(obj => obj.position == i && obj.imagenID != div1.imagenID);
+                  let div = backFiles.find(obj => obj.position == i && obj.imagenID != div1.imagenID);
                   div.position = i + 1;
                 }
               }
