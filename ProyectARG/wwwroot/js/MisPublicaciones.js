@@ -210,6 +210,7 @@ function GuardarPublicacion() {
         }, 3000);
       }
     },
+
     error: function (err) {
       console.error(err);
     },
@@ -595,7 +596,7 @@ function IniciarTouch() {
     e.preventDefault();
     updateDropArea();
     
-    const afterElement = getDragAfterElement(container, e.clientX);
+    const afterElement = getDragAfterElement(container, e.clientX, e.clientY);
     const draggable = draggedElement;
   
     // Asegurarse de que el draggedElement es válido antes de insertarlo
@@ -609,24 +610,44 @@ function IniciarTouch() {
   });
 
 
-  function getDragAfterElement(container, x) {
-    const draggableElements = [
-      ...container.querySelectorAll(".draggable:not(.dragging)"),
-    ];
+function getDragAfterElement(container, x, y) {
+  const draggableElements = [
+    ...container.querySelectorAll(".draggable:not(.dragging)"),
+  ];
 
-    return draggableElements.reduce(
-      (closest, child) => {
-        const box = child.getBoundingClientRect();
-        const offset = x - box.left - box.width / 2;
-        if (offset < 0 && offset > closest.offset) {
-          return { offset: offset, element: child };
-        } else {
-          return closest;
-        }
-      },
-      { offset: Number.NEGATIVE_INFINITY }
-    ).element;
+  return draggableElements.reduce(
+    (closest, child) => {
+      const box = child.getBoundingClientRect();
+      
+      // Cálculo de offset tanto en el eje X como Y
+      const offsetX = x - (box.left + box.width / 2);
+      const offsetY = y - (box.top + box.height / 2);
+
+      // Determinamos qué tan cerca está del centro del elemento
+      const distance = Math.sqrt(offsetX * offsetX + offsetY * offsetY);
+
+      if (distance < closest.distance) {
+        return { distance: distance, element: child };
+      } else {
+        return closest;
+      }
+    },
+    { distance: Number.POSITIVE_INFINITY }
+  ).element || getLastElement(container, y);
+}
+
+// Función para obtener el último elemento cuando se suelta fuera de los límites
+function getLastElement(container, y) {
+  const lastElement = container.querySelector(".draggable:last-of-type");
+  const box = lastElement.getBoundingClientRect();
+
+  // Si estás por debajo del último elemento, lo colocás al final
+  if (y > box.bottom) {
+    return lastElement;
   }
+
+  return null;
+}
 
   
 }

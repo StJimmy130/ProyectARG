@@ -232,19 +232,32 @@ function GuardarPublicacion() {
     contentType: false,
     processData: false,
     success: function (resultado) {
-      if (resultado != "") {
+      if (resultado.estado == true) {
         icon.classList.add("succes-svg");
         icon.innerHTML = '<i class="bx bxs-check-circle"></i>';
-
-        document.getElementById("alert-title").innerHTML = "Felicitaciones!!!";
-        document.getElementById("alert-description").innerHTML = resultado;
+        document.getElementById("alert-title").innerHTML = "Felicitaciones!";
+        document.getElementById("alert-description").innerHTML =
+          resultado.texto;
         aceptar.style.display = "block";
         background.classList.add("success");
         alerta.classList.add("enter-alert");
 
         setTimeout(function () {
           hiddenAlert();
-          window.location.href = '../../Home/Index';
+        }, 3000);
+      } else {
+        icon.classList.add("denied-svg");
+        icon.innerHTML = '<i class="bx bxs-x-circle"></i>';
+        document.getElementById("alert-title").innerHTML = "Hay un problema";
+        document.getElementById("alert-description").innerHTML =
+          resultado.texto;
+        aceptar.style.display = "block";
+        background.classList.add("denied");
+        alerta.classList.add("enter-alert");
+
+        setTimeout(function () {
+          hiddenAlert();
+          window.location.href = "../../Home/Index";
         }, 3000);
       }
     },
