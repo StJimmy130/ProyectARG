@@ -261,6 +261,9 @@ footer {
   top: 20%;
   padding: 0 20px;
 }
+.container-comments{
+  display: none;
+}
 
 .container-comments button{
   position: absolute;
@@ -296,9 +299,36 @@ footer {
 }
 
 .rating {
-  display: inline-block;
-  width: 50%;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: left;
+  gap: 2px;
+  position: relative;
+  width: 53.5%;
   margin-bottom: 10px;
+}
+.rating:before{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('../img/star.rating.png');
+  background-size: cover;
+  background-position: center;
+  mix-blend-mode: multiply;
+  z-index: 1;
+}
+
+.rating-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: yellow; /* Color de relleno */
+  mix-blend-mode: multiply; /* Mezcla los colores para que solo se vea dentro */
+  z-index: 1;
 }
 
 .rating input {
@@ -306,15 +336,17 @@ footer {
 }
 
 .rating label {
+  position: relative;
   float: right;
   cursor: pointer;
   color: #838383;
+  font-size: 40px;
   transition: color 0.3s;
+  z-index: 2; /* Para estar encima del div de relleno */
 }
 
 .rating label:before {
   content: '\2605';
-  font-size: 40px;
 }
 
 .rating input:checked ~ label,

@@ -95,6 +95,22 @@ function CargarDatosPublicacion() {
         `;
 
         // Datos Vendedor
+        if (inmueble.tipoOperacionString === "AlquilerTemporal") {
+        datosVendedor += `
+          <div class="rating" id="Valoracion">
+    <div class="rating-fill" style="width: 50%"></div>
+    <input value="5" name="rating" id="star5" type="radio">
+    <label for="star5" class="label"></label>
+    <input value="4" name="rating" id="star4" type="radio">
+    <label for="star4" class="label"></label>
+    <input value="3" name="rating" id="star3" type="radio">
+    <label for="star3" class="label"></label>
+    <input value="2" name="rating" id="star2" type="radio">
+    <label for="star2" class="label"></label>
+    <input value="1" name="rating" id="star1" type="radio">
+    <label for="star1" class="label"></label>
+</div>`;
+        };
         datosVendedor += `<h2>Vendedor</h2>`;
         inmueble.datosUsuario.forEach((usuario) => {
           datosVendedor += `
@@ -130,10 +146,11 @@ function CargarDatosPublicacion() {
 
         // Imágenes
         $("#MainImage").attr("src", inmueble.imagenes[0].imagenSrc);
-        let descripcionConSaltos = inmueble.descripcionString.replace(
-          /\n/g,
-          "<br>"
-        );
+        let descripcionConSaltos
+        if(inmueble.descripcionString != null){
+          descripcionConSaltos = inmueble.descripcionString.replace(/\n/g,"<br>");
+        }
+        
         $("#Descripcion").html(descripcionConSaltos);
         let miniaturas = inmueble.imagenes
           .map(
@@ -152,7 +169,11 @@ function CargarDatosPublicacion() {
         $("#DatosPrincipales").html(datosPrincipales);
         $("#DatosVendedor").html(datosVendedor);
         $("#DetallesPublicaciones").html(detallesPublicaciones);
-        getComentarios();
+        if(inmueble.tipoOperacionString == "AlquilerTemporal"){
+          document.getElementById("ComentariosContainer").style.display = "block";
+          getComentarios();
+          
+        }
 
         hideLoadingScreen();
       }
@@ -224,6 +245,9 @@ function guardarComentario() {
       
       getComentarios()
       $("#ModalComentarios").modal("hidden");
+      document.getElementById("UsuarioID").value = 0;
+      document.getElementById("Comentario").value = "";
+      document.querySelector('input[name="rating"]:checked').value = false;
     },
     error: function (xhr, status, error) {
       console.log("Disculpe, existió un problema al guardar el comentario", status, error);
