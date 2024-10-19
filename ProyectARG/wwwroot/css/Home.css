@@ -104,12 +104,13 @@ footer{
 
 .favorite-btn i.fas {
   color: red;
-
-  /* Corazón lleno */
+  transform: rotateY(180deg);
+  transition: 0.3s;
 }
 
 .favorite-btn i.far {
   color: white; /* Corazón vacío */
+  transition: 0.3s;
 }
 
 
