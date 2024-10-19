@@ -249,6 +249,7 @@ public class HomeController : Controller
         {
             resultado = "Para poder publicar recuerda que debes agregar al menos una de tus redes sociales";
         }
+        
 
         return Json(resultado);
     }

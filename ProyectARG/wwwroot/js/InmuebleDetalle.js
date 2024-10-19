@@ -96,20 +96,24 @@ function CargarDatosPublicacion() {
 
         // Datos Vendedor
         if (inmueble.tipoOperacionString === "AlquilerTemporal") {
-        datosVendedor += `
+        datosVendedor += `<div class="d-flex align-items-end">
+          <p id="promedio" class="info-vlaoracion"></p>
           <div class="rating" id="Valoracion">
-    <div class="rating-fill" style="width: 50%"></div>
-    <input value="5" name="rating" id="star5" type="radio">
+    <div class="rating-fill" id="avgValoracion">★★★★★</div>
+    <input value="5" name="rating" id="star5" type="radio" onclick="valoracion()">
     <label for="star5" class="label"></label>
-    <input value="4" name="rating" id="star4" type="radio">
+    <input value="4" name="rating" id="star4" type="radio" onclick="valoracion()">
     <label for="star4" class="label"></label>
-    <input value="3" name="rating" id="star3" type="radio">
+    <input value="3" name="rating" id="star3" type="radio" onclick="valoracion()">
     <label for="star3" class="label"></label>
-    <input value="2" name="rating" id="star2" type="radio">
+    <input value="2" name="rating" id="star2" type="radio" onclick="valoracion()">
     <label for="star2" class="label"></label>
-    <input value="1" name="rating" id="star1" type="radio">
+    <input value="1" name="rating" id="star1" type="radio" onclick="valoracion()">
     <label for="star1" class="label"></label>
-</div>`;
+</div>
+<p id="valoracion" class="info-vlaoracion"></p>
+</div>
+ `;
         };
         datosVendedor += `<h2>Vendedor</h2>`;
         inmueble.datosUsuario.forEach((usuario) => {
@@ -172,7 +176,7 @@ function CargarDatosPublicacion() {
         if(inmueble.tipoOperacionString == "AlquilerTemporal"){
           document.getElementById("ComentariosContainer").style.display = "block";
           getComentarios();
-          
+          avgValoraciones()
         }
 
         hideLoadingScreen();
@@ -225,13 +229,11 @@ function modalComentarios() {
 }
 
 function guardarComentario() {
-  const url = window.location.href;
-  const partes = url.split("/");
-  const inmuebleID = partes[partes.length - 1];
+  
 
   let usuarioID = document.getElementById("UsuarioID").value;
   let mensaje = document.getElementById("Comentario").value;
-  let valoracion = document.querySelector('input[name="rating"]:checked').value;
+  
   $.ajax({
     url: "../../Comentarios/PostComentario",
     type: "POST",
@@ -239,7 +241,6 @@ function guardarComentario() {
       inmuebleID: inmuebleID,
       usuarioID: usuarioID,
       mensaje: mensaje,
-      valoracion: valoracion,
     },
     success: function (response) {
       
@@ -255,3 +256,61 @@ function guardarComentario() {
   })
   getComentarios()
 }
+
+function avgValoraciones(){
+
+  $.ajax({
+    url: "../../Comentarios/AvgValoracion",
+    type: "POST",
+    data: {
+      inmuebleID: inmuebleID,
+    },
+    success: function (data) {
+      console.log(data);
+
+      document.getElementById("avgValoracion").style = "width: " + data.porcentaje + "%";  
+      document.getElementById("promedio").innerHTML = data.puntuacion.toFixed(1);  
+      document.getElementById("valoracion").innerHTML = "(" + data.count + ")";
+      
+
+    },
+    error: function (xhr, status, error) {
+      console.log("Disculpe, existió un problema al cargar los comentarios", status, error);
+    }
+}
+
+)
+}
+
+function valoracion() {
+  let puntuacion = document.querySelector('input[name="rating"]:checked').value;
+  let usuarioID = document.getElementById("UsuarioID").value;
+
+  $.ajax({
+    url: "../../Comentarios/PostValoracion",
+    type: "POST",
+    data: {
+      inmuebleID: inmuebleID,
+      usuarioID: usuarioID,
+      puntuacion: puntuacion,
+    },
+    success: function (response) {
+      icon.innerHTML = '<i class="bx bxs-error-circle"></i>';
+      icon.classList.add("alert-svg");
+      titulo.innerHTML = "Muchas gracias";
+      descripcion.innerHTML = `<label>su valoración ha sido recibida</label>`;
+      aceptar.style.display = "block";
+      background.classList.add("sucess");
+      alerta.classList.add("enter-success");
+    },
+    error: function (xhr, status, error) {
+      console.log("Disculpe, existió un problema al guardar el comentario", status, error);
+    },
+  })
+  getComentarios()
+}
+
+
+const url = window.location.href;
+  const partes = url.split("/");
+  const inmuebleID = partes[partes.length - 1];
