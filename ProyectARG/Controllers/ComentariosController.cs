@@ -41,6 +41,33 @@ public class ComentariosController : Controller
         return Json(ComentariosList);
     }
 
+    public JsonResult AvgValoracion(int InmuebleID)
+    {
+        var valoraciones = _context.Valoraciones.Where(t => t.InmuebleID == InmuebleID).ToList();
+        float i = 0;
+        var resultado = new
+        {
+            Puntuacion = 0f,
+            count = valoraciones.Count,
+            porcentaje = 0f
+        };
+        foreach (var valoracion in valoraciones)
+        {
+            i += valoracion.Puntuacion;
+        };
+        i = i / valoraciones.Count;
+        
+         float x = (i * 100) / 5;
+
+        resultado = new
+        {
+            Puntuacion = i,
+            count = valoraciones.Count,
+            porcentaje = x
+        };
+        return Json(resultado);
+    }
+
     public JsonResult PostComentario(int ComentarioID, int InmuebleID, int UsuarioID, string Mensaje)
     {
         string Result = "";
@@ -66,11 +93,11 @@ public class ComentariosController : Controller
         return Json(Result);
     }
 
-    public JsonResult PostValoracion(int ComentarioID, int InmuebleID, int UsuarioID, int Puntuacion)
+    public JsonResult PostValoracion(int InmuebleID, int UsuarioID, int Puntuacion)
     {
-        string Result = "";
+        bool Result = false;
         var valoracion = _context.Valoraciones.Where(t => t.InmuebleID == InmuebleID && t.UsuarioID == UsuarioID).FirstOrDefault();
-        if (valoracion != null)
+        if (valoracion == null)
         {
             var Valoracion = new Valoracion
             {
@@ -80,14 +107,13 @@ public class ComentariosController : Controller
             };
             _context.Add(Valoracion);
             _context.SaveChanges();
-            Result = "Valoracion hecha";
+            Result = true;
         }
         else
         {
-
             valoracion.Puntuacion = Puntuacion;
             _context.SaveChanges();
-            Result = "Valoracion actualizada";
+            Result = true;
         }
         return Json(Result);
     }
