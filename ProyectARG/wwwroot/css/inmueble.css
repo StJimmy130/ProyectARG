@@ -11,14 +11,14 @@ body {
 :root{
   --text-area: #fff;
   --text-placeholder: #5c5c5c;
-  --border-color: #006834;
+  --border-color: #0099ff;
   --fondo-dropdown:  #494949;
 
 }
 body.dark{
   --text-area: #535353;
   --text-placeholder: #c9c9c9;
-  --border-color: #00ac56;
+  --border-color: #0065a8;
   --fondo-dropdown: #494949;
 }
 
@@ -38,7 +38,7 @@ footer{
 
 
 .contenedor {
-  background-color: var(--container-color);
+  background-color: var(--body-filter);
   position: relative;
   border-radius: 5px;
   width: 70vw;

@@ -1,29 +1,16 @@
-:root {
-  --scrollbar-color: #00c763;
-  --text-info: #414141;
-  --bg-info: #d7d7d7;
-  --container-color: #ffffff;
-}
 
-body.dark {
-  --scrollbar-color: #00c763;
-  --text-info: #e1e1e1;
-  --bg-info: #474747;
-  --container-color: #cfcfcf;
-}
 
 .vistaDetalle {
   position: relative;
   height: auto;
   display: flex;
-  background-color: var(--container-color);
+  background-color: var(--body-filter);
   margin-left: 80px;
   margin-right: 80px;
   margin-top: -30px;
   padding: 20px;
   border-radius: 5px;
   min-width: 80%;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .vistaInmueble {
@@ -47,7 +34,7 @@ footer {
 /* IMAGENES DEL INMUEBLE */
 
 .contenedor-imagenes {
-  background: var(--body-color);
+  background: var(--body-filter);
   border-radius: 5px;
   padding: 10px;
 }
@@ -63,7 +50,7 @@ footer {
   margin: 0 auto;
   border-radius: 5px;
   overflow: hidden;
-  background-color: #fff;
+  background-color: transparent;
   display: flex;
   justify-content: center;
   vertical-align: middle;
@@ -116,7 +103,7 @@ footer {
   border-radius: 5px;
   margin: 5px 40px 0 40px;
   padding: 10px;
-  background-color: var(--bg-info);
+  background-color: transparent;
   overflow-x: auto;
   white-space: nowrap;
 }
@@ -127,7 +114,7 @@ footer {
 }
 
 .miniaturas::-webkit-scrollbar-track {
-  background-color: var(--bg-info);
+  background-color: var(--body-filter);
   border-radius: 3px;
 }
 
@@ -163,7 +150,7 @@ footer {
   margin-top: 5px;
   padding: 15px;
   border-radius: 5px;
-  background-color: var(--bg-info);
+  background-color: var(--body-filter);
   overflow-y: auto;
 }
 
@@ -228,7 +215,7 @@ footer {
   border-radius: 5px;
   align-items: start;
   color: var(--text-info);
-  background-color: var(--bg-info);
+  background-color: var(--body-filter);
 }
 
 .property-details h3 {
@@ -264,7 +251,8 @@ footer {
 .container-comments{
   display: none;
   overflow-y: scroll;
-  max-height: 100px;
+  min-height: 250px;
+  max-height: 20px;
 }
 
 .container-comments button{
@@ -273,17 +261,19 @@ footer {
   right: 10px;
   border: none;
   background-color: var(--nav-color);
-  width: 3rem;
-  height: 3rem;
-  border-radius: 50%;
+  border-radius: 10px;
+  width: 95px;
+  height: 40px;
   color: white;
-  font-size: 1.8rem;
+  font-size: 16px;
   cursor: pointer;
-  
+}
+.container-comments button:hover{
+  background-color: var(--nav-color2);
 }
 
 .comment{
-  background-color: var(--container-color);
+  background-color: var(--body-filter);
   border-radius: 5px;
   height: auto;
   width: 100%;
@@ -293,19 +283,21 @@ footer {
 
 .comment p{
   padding: 0 5px;
-  color: #414141;
+  color: var(--text-color2);
 }
 
 .comment h6{
-  color: #414141;
+  color: var(--text-color2);
 }
-p.info-vlaoracion:first-child{
-  font-size: 1.5rem;
-  margin: 0 20px 18px 0;
-}
-p.info-vlaoracion:nth-child(3){
-  font-size: 1.5rem;
-  margin: 0 0px 18px 20px;
+.info-valoracion{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 .rating {
   display: inline-block;
@@ -318,7 +310,7 @@ p.info-vlaoracion:nth-child(3){
 .rating-fill{
   pointer-events: none;
   position: absolute;
-  font-size: 40px;
+  font-size: 28px;
   top: 0;
   left: 0;
   width: 0%;
@@ -326,7 +318,6 @@ p.info-vlaoracion:nth-child(3){
   -webkit-background-clip: text;
   overflow-y: hidden;
   background-color: #fad400;
-  text-shadow: 0 0 5px #fad400;
   color: transparent;
   z-index: 3;
 }
@@ -340,7 +331,7 @@ p.info-vlaoracion:nth-child(3){
   float: right;
   cursor: pointer;
   color: #838383;
-  font-size: 40px;
+  font-size: 28px;
   transition: all 0.3s;
   z-index: 2; /* Para estar encima del div de relleno */
 }
@@ -353,7 +344,6 @@ p.info-vlaoracion:nth-child(3){
 .rating label:hover,
 .rating label:hover ~ label {
   color: var(--scrollbar-color);
-  text-shadow: var(--scrollbar-color) 0 0 5px;
   z-index: 4;
 }
 

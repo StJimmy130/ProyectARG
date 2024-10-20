@@ -73,7 +73,7 @@ main {
   height: 40px;
   border: none;
 
-  border-bottom: solid 2px rgb(49, 151, 92);
+  border-bottom: solid 2px #0099ff;
   margin-top: 5px;
   background-color: transparent;
 }

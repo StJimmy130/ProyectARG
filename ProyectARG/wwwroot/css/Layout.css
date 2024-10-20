@@ -13,30 +13,48 @@ for details on configuring this project to bundle and minify static web assets. 
 
 /* ===== Colours ===== */
 :root {
-  --body-color: #d3d3d3;
-  --nav-color: #00c763;
-  --nav-color2: #008f51;
+  --body-color: linear-gradient(
+    335deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(151, 214, 255, 0.661) 100%
+  );
+  --nav-color: #0099ff;
+  --nav-color2: #0065a8;
   --side-nav: #010718;
   --text-color: #e6e0e0;
-  --text-color2: #181818;
+  --text-color2: #3f3f3f;
   --search-bar: #f2f2f2;
   --search-text: #010718;
   --container-color: #eae6e5;
   --overlay-login: #0000003b;
+  --body-filter: #afafaf2c;
+  --scrollbar-color: #009bff;
+  --text-info: #414141;
+  --bg-info: #d7d7d7;
+  --container-color: #ffffff;
 }
 body {
-  background-color: var(--body-color);
+  background: var(--body-color);
 }
 body.dark {
-  --body-color: #363738;
+  --body-color: linear-gradient(
+    335deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
   --nav-color: #242526;
-  --nav-color2: #000000;
+  --nav-color2: #161616;
   --side-nav: #242526;
-  --text-color: #ccc;
+  --text-color: #7a7a7a;
   --text-color2: #ccc;
   --search-bar: #242526;
   --container-color: #5a5a5a;
   --overlay-login: #0000008a;
+  --body-filter: #00000062;
+  --scrollbar-color: #0065a8;
+  --text-info: #e1e1e1;
+  --bg-info: #474747;
+  --container-color: #cfcfcf;
 }
 nav {
   top: 0;
@@ -154,12 +172,7 @@ nav .nav-bar .sidebarOpen {
 
 /* Estilos para el menú del dropdown */
 .dropdown-menu {
-  background-color: rgba(
-    255,
-    255,
-    255,
-    0.85
-  ); /* Color de fondo del menú del dropdown */
+  background-color: rgba(255, 255, 255, 0.85); /* Color de fondo del menú del dropdown */
   border: 1px solid var(--nav-color); /* Agrega un borde al menú del dropdown */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Agrega una sombra al menú del dropdown */
   padding: 10px 0; /* Añade espacio interno al menú del dropdown */
@@ -167,35 +180,34 @@ nav .nav-bar .sidebarOpen {
 }
 
 .dropdown-item {
-  color: var(
-    --nav-color
-  ); /* Color del texto de los elementos del menú del dropdown */
-  padding: 8px 20px; /* Añade algo de espacio interno a los elementos del menú del dropdown */
+  color: var(--nav-color); /* Color del texto de los elementos del menú del dropdown */
+  padding: 8px 18px; /* Añade algo de espacio interno a los elementos del menú del dropdown */
 }
 .dropdown-form {
-  padding: 8px 20px;
+  padding: 8px 18px;
 }
 
 .form-item {
   color: var(--nav-color);
 }
+
 .form-item:hover,
 .form-item:focus {
-  color: var(--text-color);
+  background-color: transparent; /* Cambia el color de fondo al pasar el mouse o enfocar un elemento del menú del dropdown */
+  color: var(--text-color2); /* Cambia el color del texto al pasar el mouse o enfocar un elemento del menú del dropdown */
+  border-radius: 3px;
 }
 
 .dropdown-item:hover,
 .dropdown-item:focus {
-  background-color: #758170; /* Cambia el color de fondo al pasar el mouse o enfocar un elemento del menú del dropdown */
-  color: var(
-    --text-color
-  ); /* Cambia el color del texto al pasar el mouse o enfocar un elemento del menú del dropdown */
+  background-color: transparent; /* Cambia el color de fondo al pasar el mouse o enfocar un elemento del menú del dropdown */
+  color: var(--text-color2); /* Cambia el color del texto al pasar el mouse o enfocar un elemento del menú del dropdown */
   border-radius: 3px;
 }
 .dropdown-form:hover,
 .dropdown-form:focus {
-  background-color: #758170; /* Cambia el color de fondo al pasar el mouse o enfocar un elemento del menú del dropdown */
-  color: var(--text-color);
+  background-color: transparent; /* Cambia el color de fondo al pasar el mouse o enfocar un elemento del menú del dropdown */
+  color: var(--text-color2);
   border-radius: 3px;
 }
 
@@ -314,7 +326,7 @@ body.dark .search-field i {
 }
 @media (max-width: 950px) {
   .dropdown-form:hover,
-  .dropdown-form:focus{
+  .dropdown-form:focus {
     background-color: transparent; /* Cambia el color de fondo al pasar el mouse o enfocar un elemento del menú del dropdown */
     color: var(--text-color);
     border-radius: 3px;
@@ -583,7 +595,7 @@ footer .bottom-details .bottom_text {
     margin-top: 16px;
   }
   footer .content .link-boxes .box {
-    width: calc(100% / 2 );
+    width: calc(100% / 2);
   }
   footer .content .link-boxes .input-box {
     width: 100%;

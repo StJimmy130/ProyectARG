@@ -4,9 +4,9 @@
   display: flex;
   justify-content: left;
   align-items: start;
-  background-color: var(--body-color);
+  background-color: transparent;
   border-radius: 5px;
-  margin-top: 5rem;
+  margin-top: 5.5rem;
 }
 
 
@@ -37,10 +37,10 @@
   
 }
 .navbar-toggler {
-  background-color: var(--body-color);
+  background-color: transparent;
   margin: 5px 15px 5px 5px;
   width: 90%;
-  margin: 10px auto;
+  margin: 20px;
   height: 2.5rem;
   display: flex;
   justify-content: center;
@@ -66,7 +66,7 @@
   width: 100%;
   margin: auto;
   border-radius: 10px;
-  background-color: var(--container-color);
+  background-color: var(--body-filter);
 }
 
 footer{
@@ -82,7 +82,7 @@ footer{
   position: relative;
   padding: 0;
   height: 50vh;
-  border-radius: 10px;
+  border-radius: 8px;
   margin: 15px 0 0 0;
   transition: 0.3s;
   overflow: hidden;
@@ -118,8 +118,8 @@ footer{
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 10px;
-  transition: 0.5s;
+  border-radius: 8px;
+  transition: 0.3s;
 }
 
 .card-title {
@@ -140,7 +140,6 @@ p.card-text{
   left: 0;
   right: 0;
   height: 25%;
-  background: linear-gradient(180deg, rgba(0,255,127,0) 0%, rgba(0,0,0,1) 100%);
   color: #fff;
   text-shadow: 0 0 5px black;
   overflow: hidden;
@@ -184,10 +183,11 @@ p.card-text{
   position: sticky;
   justify-content: start;
   align-items: start;
-  background-color: var(--container-color);
+  background-color: var(--body-filter);
   height: 100%;
   width: 250px;
   margin-right: 20px;
+  
   border-radius: 10px;
   overflow-x: hidden;
   overflow-y: auto;
@@ -215,7 +215,7 @@ p.card-text{
     transition: 0.2s;
 }
 .filtros ul li:hover a{
-    color: rgb(80, 80, 80);
+    color: var(--scrollbar-color);
 }
 
 li span{
@@ -230,7 +230,7 @@ li span{
   
   li:hover span{
     width: 85%;
-    
+    background-color: var(--scrollbar-color)!important;
   }
 
 
@@ -342,11 +342,11 @@ input[type="range"] {
   padding: 7px 14px;
   gap: 15px;
   background-color: #0085dd;
-  outline: 3px #0085dd solid;
+
   border-radius: 5px;
   border: none;
   cursor: pointer;
-  transition: 400ms;
+  transition: 100ms;
   color: white;
 }
 
@@ -358,7 +358,8 @@ input[type="range"] {
 .boton-filtrar:hover {
   background-color: transparent;
   color: white;
-  background-color: #004879;
+  background-color: #0063a5;
+  outline: 1px #ffffff solid;
 }
 
 .botonera-pagination{

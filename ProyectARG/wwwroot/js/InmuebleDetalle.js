@@ -85,36 +85,37 @@ function CargarDatosPublicacion() {
 
         // Datos Principales
         datosPrincipales += `
+        <div class="d-flex align-items-center justify-content-between">
           <p class="text-muted text-sm">${inmueble.fechaPublicacionString} - ${inmueble.cantidadVistas} <i class="fa-solid fa-eye"></i></p>
-          <h2>${inmueble.tituloString}</h2>
-          <h3>${inmueble.moneda ? "U$D" : "AR$"} ${inmueble.precioString}</h3>
-          <h4>${inmueble.provinciaString} - ${inmueble.localidadString}</h4>
-          <h4>${inmueble.tipoInmuebleString} - ${
-          inmueble.tipoOperacionString
-        }</h4>
-        `;
-
+          ${inmueble.tipoOperacionString === "AlquilerTemporal" ? `
+          <div class="d-flex ms-3 mb-2 align-items-end">
+            <p id="promedio" class="info-valoracion text-muted"></p>
+            <div class="rating" id="Valoracion">
+              <div class="rating-fill" id="avgValoracion">★★★★★</div>
+              <input value="5" name="rating" id="star5" type="radio" onclick="valoracion()">
+              <label for="star5" class="label"></label>
+              <input value="4" name="rating" id="star4" type="radio" onclick="valoracion()">
+              <label for="star4" class="label"></label>
+              <input value="3" name="rating" id="star3" type="radio" onclick="valoracion()">
+              <label for="star3" class="label"></label>
+              <input value="2" name="rating" id="star2" type="radio" onclick="valoracion()">
+              <label for="star2" class="label"></label>
+              <input value="1" name="rating" id="star1" type="radio" onclick="valoracion()">
+              <label for="star1" class="label"></label>
+            </div>
+            <p id="valoracion" class="info-valoracion text-muted"></p>
+          </div>` : ''}
+        </div>
+      `;
+      
+      datosPrincipales += `
+        <h2>${inmueble.tituloString}</h2>
+        <h3>${inmueble.moneda ? "U$D" : "AR$"} ${inmueble.precioString}</h3>
+        <h4>${inmueble.provinciaString} - ${inmueble.localidadString}</h4>
+        <h4>${inmueble.tipoInmuebleString} - ${inmueble.tipoOperacionString}</h4>
+      `;
+      
         // Datos Vendedor
-        if (inmueble.tipoOperacionString === "AlquilerTemporal") {
-        datosVendedor += `<div class="d-flex align-items-end">
-          <p id="promedio" class="info-vlaoracion"></p>
-          <div class="rating" id="Valoracion">
-    <div class="rating-fill" id="avgValoracion">★★★★★</div>
-    <input value="5" name="rating" id="star5" type="radio" onclick="valoracion()">
-    <label for="star5" class="label"></label>
-    <input value="4" name="rating" id="star4" type="radio" onclick="valoracion()">
-    <label for="star4" class="label"></label>
-    <input value="3" name="rating" id="star3" type="radio" onclick="valoracion()">
-    <label for="star3" class="label"></label>
-    <input value="2" name="rating" id="star2" type="radio" onclick="valoracion()">
-    <label for="star2" class="label"></label>
-    <input value="1" name="rating" id="star1" type="radio" onclick="valoracion()">
-    <label for="star1" class="label"></label>
-</div>
-<p id="valoracion" class="info-vlaoracion"></p>
-</div>
- `;
-        };
         datosVendedor += `<h2>Vendedor</h2>`;
         inmueble.datosUsuario.forEach((usuario) => {
           datosVendedor += `
@@ -209,7 +210,7 @@ function getComentarios() {
       $.each(data, function (index, comentario) {
         listaComentarios +=`
       <div class="comment">
-        <h6>${comentario.nombreUsuario}</h6>
+        <h6>${comentario.nombreUsuario}:</h6>
         <p>${comentario.mensaje}</p>
       </div>
       `

@@ -35,7 +35,7 @@
             <div class="col-lg-12 col-md-12 col-sm-12 ">
               <div class="property-details container-comments" id="ComentariosContainer">
                 <h4>Comentarios:</h4>
-                <button onclick="modalComentarios()">+</button>
+                <button onclick="modalComentarios()">Comentar</button>
                 <div id="Comentarios">
                 </div>
               </div>
@@ -69,15 +69,12 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Que le parecio el inmueble?</h5>
+          <h5 class="modal-title">¿Qué te pareció tu estadía?</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
 
         <div class="modal-body row">
-          <label for="rating">Calificación:</label>
-          
-          <label for="Comentario">Comentario:</label>
-          <textarea name="Comentario" id="Comentario" class="form-control"></textarea>
+          <textarea name="Comentario" id="Comentario" placeholder="Escribe tu comentario..." class="form-control"></textarea>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
