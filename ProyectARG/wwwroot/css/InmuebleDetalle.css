@@ -250,10 +250,16 @@ footer {
 }
 .container-comments{
   display: none;
+  
+}
+
+#Comentarios{
+  margin-top: 30px;
   overflow-y: scroll;
   min-height: 250px;
   max-height: 20px;
 }
+
 
 .container-comments button{
   position: absolute;
@@ -268,7 +274,8 @@ footer {
   font-size: 16px;
   cursor: pointer;
 }
-.container-comments button:hover{
+
+.button-comments:hover{
   background-color: var(--nav-color2);
 }
 
@@ -278,7 +285,7 @@ footer {
   height: auto;
   width: 100%;
   padding: 10px;
-  margin-top: 20px;
+  margin-bottom: 15px;
 }
 
 .comment p{

@@ -6,7 +6,7 @@
   align-items: start;
   background-color: transparent;
   border-radius: 5px;
-  margin-top: 5.5rem;
+  margin-top: 5rem;
 }
 
 
@@ -22,6 +22,7 @@
   }
   .filtros{
     padding-top: 100px;
+    background: var(--filtros-desplegables)!important;
   }
   .collapse {
     transition: height 0.3s ease, opacity 0.3s ease;
@@ -37,7 +38,7 @@
   
 }
 .navbar-toggler {
-  background-color: transparent;
+  background-color: var(--nav-color);
   margin: 5px 15px 5px 5px;
   width: 90%;
   margin: 20px;
@@ -49,7 +50,7 @@
   transition: 0.3s;
 }
 .navbar-toggler:hover {
-  background-color: var(--nav-color);
+  background-color: var(--nav-color2);
   box-shadow: none;
 }
 .span-filtros{
@@ -187,7 +188,6 @@ p.card-text{
   height: 100%;
   width: 250px;
   margin-right: 20px;
-  
   border-radius: 10px;
   overflow-x: hidden;
   overflow-y: auto;

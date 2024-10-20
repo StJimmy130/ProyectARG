@@ -18,6 +18,11 @@ for details on configuring this project to bundle and minify static web assets. 
     rgba(255, 255, 255, 1) 0%,
     rgba(151, 214, 255, 0.661) 100%
   );
+  --filtros-desplegables: linear-gradient(
+    335deg,
+    rgba(255, 255, 255, 1) 40%,
+    rgb(151, 213, 255) 100%
+  );
   --nav-color: #0099ff;
   --nav-color2: #0065a8;
   --side-nav: #010718;
@@ -27,7 +32,7 @@ for details on configuring this project to bundle and minify static web assets. 
   --search-text: #010718;
   --container-color: #eae6e5;
   --overlay-login: #0000003b;
-  --body-filter: #afafaf2c;
+  --body-filter: #9696964f;
   --scrollbar-color: #009bff;
   --text-info: #414141;
   --bg-info: #d7d7d7;
@@ -42,6 +47,7 @@ body.dark {
     rgba(255, 255, 255, 1) 0%,
     rgba(0, 0, 0, 0.8) 100%
   );
+  --filtros-desplegables: #515d68;
   --nav-color: #242526;
   --nav-color2: #161616;
   --side-nav: #242526;
