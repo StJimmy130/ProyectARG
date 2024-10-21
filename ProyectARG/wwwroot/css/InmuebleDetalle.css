@@ -4,10 +4,11 @@
   position: relative;
   height: auto;
   display: flex;
-  background-color: var(--body-filter);
+  background-color: transparent;
   margin-left: 80px;
   margin-right: 80px;
   margin-top: -30px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   padding: 20px;
   border-radius: 5px;
   min-width: 80%;
@@ -147,7 +148,6 @@ footer {
   color: var(--text-info);
   flex-direction: column;
   justify-content: space-between;
-  margin-top: 5px;
   padding: 15px;
   border-radius: 5px;
   background-color: var(--body-filter);
@@ -258,13 +258,14 @@ footer {
   overflow-y: scroll;
   min-height: 250px;
   max-height: 20px;
+  padding: 15px 10px 0 0;
 }
 
 
 .container-comments button{
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 20px;
+  right: 30px;
   border: none;
   background-color: var(--nav-color);
   border-radius: 10px;

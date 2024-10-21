@@ -87,7 +87,7 @@ function CargarDatosPublicacion() {
         datosPrincipales += `
         <div class="d-flex align-items-center justify-content-between">
           <p class="text-muted text-sm">${inmueble.fechaPublicacionString} - ${inmueble.cantidadVistas} <i class="fa-solid fa-eye"></i></p>
-          ${inmueble.tipoOperacionString === "AlquilerTemporal" ? `
+          ${inmueble.tipoOperacionString === "Alquiler Temporal" ? `
           <div class="d-flex ms-3 mb-2 align-items-end">
             <p id="promedio" class="info-valoracion text-muted"></p>
             <div class="rating" id="Valoracion">
@@ -112,13 +112,13 @@ function CargarDatosPublicacion() {
         <h2>${inmueble.tituloString}</h2>
         <h3>${inmueble.moneda ? "U$D" : "AR$"} ${inmueble.precioString}</h3>
         <h4>${inmueble.provinciaString} - ${inmueble.localidadString}</h4>
-        <h4>${inmueble.tipoInmuebleString} - ${inmueble.tipoOperacionString}</h4>
+        <h4>${inmueble.tipoInmuebleString} en ${inmueble.tipoOperacionString}</h4>
       `;
       
         // Datos Vendedor
-        datosVendedor += `<h2>Vendedor</h2>`;
         inmueble.datosUsuario.forEach((usuario) => {
           datosVendedor += `
+            <h5>Contacto</h5>
             <p>${usuario.nombre || ''}</p>
             <p>${usuario.nroTelefono || ''}</p>
             <div class="icons-vendedor">
@@ -135,7 +135,7 @@ function CargarDatosPublicacion() {
         inmueble.amobladoString = inmueble.amobladoString ? "Si" : "No";
 
         detallesPublicaciones += `
-          <h3>Detalles:</h3>
+          <h3>Detalles</h3>
           <p><i class="fa-solid fa-ruler-combined"></i> Superficie total: ${inmueble.superficieTotalString} m²</p>
           <p><i class="fa-solid fa-ruler-horizontal"></i> Superficie cubierta: ${inmueble.superficieCubiertaString} m²</p>
           <p><i class="fa-solid fa-bed"></i> Habitaciones: ${inmueble.dormitoriosString}</p>
@@ -174,7 +174,7 @@ function CargarDatosPublicacion() {
         $("#DatosPrincipales").html(datosPrincipales);
         $("#DatosVendedor").html(datosVendedor);
         $("#DetallesPublicaciones").html(detallesPublicaciones);
-        if(inmueble.tipoOperacionString == "AlquilerTemporal"){
+        if(inmueble.tipoOperacionString == "Alquiler Temporal"){
           document.getElementById("ComentariosContainer").style.display = "block";
           getComentarios();
           avgValoraciones()

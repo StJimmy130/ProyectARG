@@ -55,4 +55,7 @@ footer{
     .formulario{
         height: auto;
     }
+    .btn-safe{
+        margin-top: 100px;
+    }
 }
