@@ -186,7 +186,11 @@ function ListadoPublicaciones() {
         publicacionesOriginales = Listado; // Asigna las publicaciones originales
         renderizarTabla(publicacionesOriginales); // Renderiza la tabla con las publicaciones
       } else {
-        document.getElementById("publicaciones").innerHTML = "<p>No se encontraron publicaciones</p>";
+        document.getElementById("publicaciones").innerHTML = `
+        <div style="justify-content: center; text-align: center;">
+            <img src="/img/NoCasa.png" style="align-items: center; max-width: 100%; height: auto;">
+            <p class"fw-bold">NO SE ENCONTRARON PUBLICACIONES</p>
+        </div>`;
       }
       hideLoadingScreen(); // Ocultar pantalla de carga después de la respuesta
     },
@@ -222,7 +226,11 @@ function renderizarTabla(publicaciones) {
 
   // Si no hay publicaciones, mostrar mensaje
   if (publicaciones.length === 0) {
-    document.getElementById("publicaciones").innerHTML = "<p>No se encontraron resultados</p>";
+    document.getElementById("publicaciones").innerHTML = `
+        <div style="justify-content: center; text-align: center;">
+            <img src="/img/NoCasa.png" style="align-items: center; max-width: 100%; height: auto;">
+            <p class="fs-3" style="color: var(--text-color2);">NO SE ENCONTRARON PUBLICACIONES</p>
+        </div>`;
   } else {
     mostrarPagina(paginaActual); // Mostrar publicaciones si hay resultados
   }

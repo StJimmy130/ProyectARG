@@ -276,7 +276,8 @@ nav .nav-bar .sidebarOpen {
 .searchBox .search-field {
   position: absolute;
   bottom: -85px;
-  right: 5px;
+  right: 105px;
+  top: 85px;
   height: 50px;
   width: 300px;
   display: flex;
@@ -336,6 +337,10 @@ body.dark .search-field i {
     background-color: transparent; /* Cambia el color de fondo al pasar el mouse o enfocar un elemento del menú del dropdown */
     color: var(--text-color);
     border-radius: 3px;
+  }
+  .searchBox .search-field{
+    position: absolute;
+    right: 10px;
   }
   nav .nav-bar .sidebarOpen {
     display: block;

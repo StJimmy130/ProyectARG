@@ -36,7 +36,7 @@ public class HomeController : Controller
 
         var selectListItemsOperacion = new List<SelectListItem>
     {
-        new SelectListItem { Value = "0", Text = "[SELECCIONE...]" }
+        new SelectListItem { Value = "0", Text = "[Seleccione...]" }
     };
 
         var enumValuesOperacion = Enum.GetValues(typeof(Operacion)).Cast<Operacion>();
@@ -51,10 +51,10 @@ public class HomeController : Controller
         }
 
 
-        provincias.Add(new Provincia { ProvinciaID = 0, Nombre = "[SELECCIONE...]" });
+        provincias.Add(new Provincia { ProvinciaID = 0, Nombre = "[Seleccione...]" });
         ViewBag.ProvinciaID = new SelectList(provincias.OrderBy(c => c.Nombre), "ProvinciaID", "Nombre");
 
-        localidades.Add(new Localidad { LocalidadID = 0, Nombre = "[SELECCIONE...]" });
+        localidades.Add(new Localidad { LocalidadID = 0, Nombre = "[Seleccione...]" });
         ViewBag.LocalidadID = new SelectList(localidades.OrderBy(c => c.Nombre), "LocalidadID", "Nombre");
 
 
