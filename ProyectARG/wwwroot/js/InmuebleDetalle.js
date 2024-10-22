@@ -125,7 +125,7 @@ function CargarDatosPublicacion() {
               ${usuario.facebook ? `<a class="facebook" href="${usuario.facebook}" target="_blank"><i class='bx bxl-facebook'></i></a>` : ''}
               ${usuario.instagram ? `<a class="instagram" href="https://www.instagram.com/${usuario.instagram}/" target="_blank"><i class="bx bxl-instagram"></i></a>` : ''}
               ${usuario.whatsapp ? `<a class="whatsapp" href="https://wa.me/${usuario.whatsapp}" target="_blank"><i class="bx bxl-whatsapp"></i></a>` : ''}
-              ${usuario.gmail ? `<a class="gmail" href="mailto:${usuario.gmail}" target="_blank"><i class="bx bxl-gmail"></i></a>` : ''}
+              ${usuario.email ? `<a class="gmail" href="mailto:${usuario.email}" target="_blank"><i class="bx bxl-gmail"></i></a>` : ''}
             </div>
           `;
         });
