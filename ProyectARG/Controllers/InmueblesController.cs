@@ -210,13 +210,17 @@ public class InmueblesController : Controller
             CantidadVistas = cantidadVistas,
         };
 
+        var userID = usuario.CuentaID;
+        var email = _context.Users.Where(t => t.Id == userID).Select(t => t.Email).SingleOrDefault();
+
         var datosUsuario = new DatosUsuario
         {
             Nombre = usuario.Nombre,
             Whatsapp = usuario.Whatsapp,
             Facebook = usuario.Facebook,
             Instagram = usuario.Instagram,
-            NroTelefono = usuario.NroTelefono
+            NroTelefono = usuario.NroTelefono,
+            Email = email
         };
 
         vistaInmueble.DatosUsuario.Add(datosUsuario);

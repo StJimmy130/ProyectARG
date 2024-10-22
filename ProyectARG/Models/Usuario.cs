@@ -25,6 +25,7 @@ public class DatosUsuario{
     public string? Instagram { get; set; }
     public string? Facebook { get; set; }
     public String? Whatsapp { get; set; }
+    public string? Email { get; set; }
 }
 public class VistaUsuarios{
     public string? UsuarioID { get; set; }
