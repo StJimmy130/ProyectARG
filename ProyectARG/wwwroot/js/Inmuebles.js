@@ -173,7 +173,7 @@ function GuardarPublicacion() {
   let localidadID = document.getElementById("LocalidadID").value;
   let provinciaID = document.getElementById("ProvinciaID").value;
   let barrio = document.getElementById("Barrio").value;
-  let titulo = document.getElementById("Titulo").value;
+  let Titulo = document.getElementById("Titulo").value;
   let precio = document.getElementById("Precio").value;
   let moneda = document.getElementById("Moneda").checked;
   let superficieTotal = document.getElementById("Area").value;
@@ -189,7 +189,7 @@ function GuardarPublicacion() {
   let nroDireccion = document.getElementById("NroDireccion").value;
   let piso = document.getElementById("Piso").value;
   let nroDepartamento = document.getElementById("NroDepartamento").value;
-  let descripcion = document.getElementById("Descripcion").value;
+  let Descripcion = document.getElementById("Descripcion").value;
   let usuarioID = document.getElementById("UsuarioID").value;
 
   // Crear un objeto FormData para enviar los datos y archivos
@@ -198,7 +198,7 @@ function GuardarPublicacion() {
   formData.append("LocalidadID", localidadID);
   formData.append("ProvinciaID", provinciaID);
   formData.append("Barrio", barrio);
-  formData.append("Titulo", titulo);
+  formData.append("Titulo", Titulo);
   formData.append("Precio", precio);
   formData.append("SuperficieTotal", superficieTotal);
   formData.append("SuperficieCubierta", superficieCubierta);
@@ -213,7 +213,7 @@ function GuardarPublicacion() {
   formData.append("NroDireccion", nroDireccion);
   formData.append("Piso", piso);
   formData.append("NroDepartamento", nroDepartamento);
-  formData.append("Descripcion", descripcion);
+  formData.append("Descripcion", Descripcion);
   formData.append("UsuarioID", usuarioID);
   formData.append("Moneda", moneda);
 
@@ -223,6 +223,10 @@ function GuardarPublicacion() {
   for (let i = 0; i < imagenes.length; i++) {
     formData.append("Imagenes", imagenes[i]);
   }
+
+  if (imagenes.length != 0) {
+    
+  
   console.log(imagenes);
   $.ajax({
     url: "/Inmuebles/GuardarPublicacion",
@@ -265,6 +269,17 @@ function GuardarPublicacion() {
       console.error(err);
     },
   });
+  }
+
+  else {
+  icon.innerHTML = '<i class="bx bxs-error-circle"></i>';
+  icon.classList.add("alert-svg");
+  titulo.innerHTML = "Atencion!!!";
+  descripcion.innerHTML = `<label>Debe subir al menos una imagen</label>`;
+  aceptar.style.display = "block";
+  background.classList.add("alert");
+  alerta.classList.add("enter-alert");
+  }
 }
 
 function ValidarEliminacion(inmuebleID) {
