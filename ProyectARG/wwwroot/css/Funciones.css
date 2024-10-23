@@ -15,12 +15,14 @@
     --color-title: #1198ff;
     --color-shadow: #000000;
     --text-body: #505050;
+    --contenedor-graficos: linear-gradient(335deg, rgba(255,255,255,1) 0%, rgba(46, 171, 255, 0.425) 42%);;
   }
   body.dark{
     --fondo-card: #505050;
     --color-title: #1f7fc9;
     --color-shadow: #ffffffff;
-    --text-body: #adadad;
+    --text-body: #adadad; 
+    --contenedor-graficos: linear-gradient(335deg, rgba(255,255,255,1) 0%, rgba(30, 85, 122, 0.425) 42%);;
   }
 
 
@@ -142,9 +144,22 @@
 
 
 /* GRÁFICOS */
-.contenedorGraficos{
-  
+.graficos{
+  background: var(--contenedor-graficos);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  margin: 0 15px 0 15px;
+  border-radius: 8px;
 }
+
+.tituloGraficos{
+  color: var(--text-color2);
+  font-weight: 300;
+  font-size: 20px;
+  padding: 10px 0 10px 0;
+  text-align: center;
+
+}
+
 
 /* PROVINCIAS Y LOCALIDADES */
 .contenedor {

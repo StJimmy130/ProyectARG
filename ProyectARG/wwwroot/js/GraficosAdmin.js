@@ -1,6 +1,9 @@
 window.onload = GraficoTorta(),PublicacionesPorTipoDeOperacion();
 
 function GraficoTorta() {
+    // Obtener el color de la variable CSS
+    const textColor = getComputedStyle(document.documentElement).getPropertyValue('--text-color2').trim();
+
     $.ajax({
         url: '../../Administracion/InmueblesPorProvincia', // La URL del método en el backend
         type: 'POST', // Asegúrate de que tu método en el controlador acepte POST
@@ -31,9 +34,31 @@ function GraficoTorta() {
                     datasets: [{
                         data: dataTorta,
                         backgroundColor: fondoTorta,
-                        borderWidth: 3,
+                        borderColor: 'rgba(255, 255, 255, 0.7)', // Color de borde
+                        borderWidth: 1, // Bordes más finos
+                        hoverBorderColor: 'rgba(0, 0, 0, 0.8)', // Color del borde al pasar el ratón
+                        hoverBackgroundColor: 'rgba(255, 255, 255, 0.2)' // Color de fondo al pasar el ratón
                     }],
                 },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)', // Fondo del tooltip
+                            titleColor: 'white', // Color del título del tooltip
+                            bodyColor: 'white', // Color del texto del cuerpo del tooltip
+                            borderColor: 'rgba(255, 255, 255, 0.5)', // Color del borde del tooltip
+                            borderWidth: 1, // Grosor del borde del tooltip
+                        },
+                        legend: {
+                            labels: {
+                                color: textColor, // Color de la leyenda
+                                boxHeight: 10, // Altura de los cuadros en la leyenda
+                                padding: 20 // Espaciado entre leyenda
+                            }
+                        }
+                    },
+                }
             });
 
             let top10Provincias = inmueblesPorProvincia.sort((a, b) => b.cantidadInmuebles - a.cantidadInmuebles).slice(0, 10);
@@ -56,24 +81,42 @@ function GraficoTorta() {
                 data: {
                     labels: labelsBarras,
                     datasets: [{
-                        label: 'Top 10 provincias con más actividad',
+                        label: '',
                         data: dataBarras,
                         backgroundColor: fondoBarras,
-                        borderWidth: 3,
+                        borderColor: 'rgba(255, 255, 255, 0.7)', // Color de borde
+                        borderWidth: 1, // Bordes más finos
+                        hoverBorderColor: 'rgba(0, 0, 0, 0.8)', // Color del borde al pasar el ratón
+                        hoverBackgroundColor: 'rgba(255, 255, 255, 0.2)' // Color de fondo al pasar el ratón
                     }],
                 },
                 options: {
                     indexAxis: 'y', // Esto hace que las barras sean horizontales
                     scales: {
                         x: {
-                            beginAtZero: true // Para que el eje X comience desde 0
+                            beginAtZero: true, // Para que el eje X comience desde 0
+                            ticks: {
+                                color: textColor // Color del texto de los ticks
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.2)' // Color de las líneas de la cuadrícula
+                            }
+                        },
+                        y: {
+                            ticks: {
+                                color: textColor // Color del texto de los ticks
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.2)' // Color de las líneas de la cuadrícula
+                            }
                         }
                     },
                     plugins: {
                         legend: {
                             labels: {
                                 usePointStyle: true, // Usa un punto en lugar del cuadro
-                                pointStyle: 'line'   // Cambia el punto por una línea o cualquier otro estilo
+                                pointStyle: 'line',  // Cambia el punto por una línea o cualquier otro estilo
+                                color: 'white' // Color de la leyenda
                             }
                         },
                         tooltip: {
@@ -82,13 +125,16 @@ function GraficoTorta() {
                                     // Solo muestra el número de inmuebles
                                     return tooltipItem.raw;
                                 }
-                            }
+                            },
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)', // Fondo del tooltip
+                            titleColor: 'white', // Color del título del tooltip
+                            bodyColor: 'white', // Color del texto del cuerpo del tooltip
+                            borderColor: 'rgba(255, 255, 255, 0.5)', // Color del borde del tooltip
+                            borderWidth: 1, // Grosor del borde del tooltip
                         }
                     }
                 }
             });
-
-            
         },
         error: function (xhr, status) {
             Swal.fire({
@@ -101,8 +147,10 @@ function GraficoTorta() {
 }
 
 
-
 function PublicacionesPorTipoDeOperacion() {
+    // Obtener el color de la variable CSS
+    const textColor = getComputedStyle(document.documentElement).getPropertyValue('--text-color2').trim();
+
     $.ajax({
         url: '/Administracion/ContarPublicacionesPorTipoOperacion', // Ajusta esta ruta según tu controlador
         type: 'GET',
@@ -120,7 +168,7 @@ function PublicacionesPorTipoDeOperacion() {
                 dataTorta.push(item.cantidad); // Agregar la cantidad correspondiente
     
                 // Generar un color aleatorio en la gama de azules y verdes
-                let color = GenerarColorAzulVerde();
+                let color = GenerarColor();
                 coloresTorta.push(color);
             });
     
@@ -133,6 +181,10 @@ function PublicacionesPorTipoDeOperacion() {
                     datasets: [{
                         data: dataTorta, // Datos (cantidades)
                         backgroundColor: coloresTorta, // Colores generados
+                        borderColor: 'rgba(255, 255, 255, 0.7)', // Color de borde
+                        borderWidth: 1, // Bordes más finos
+                        hoverBorderColor: 'rgba(0, 0, 0, 0.8)', // Color del borde al pasar el ratón
+                        hoverBackgroundColor: 'rgba(255, 255, 255, 0.2)' 
                     }],
                 },
                 options: {
@@ -140,8 +192,18 @@ function PublicacionesPorTipoDeOperacion() {
                     plugins: {
                         legend: {
                             position: 'bottom', // Posición de la leyenda
+                            labels: {
+                                color: 'dark-gray', // Color de la leyenda
+                                boxHeight: 10, // Altura de los cuadros en la leyenda
+                                padding: 20 // Espaciado entre leyenda
+                            }
                         },
                         tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)', // Fondo del tooltip
+                            titleColor: 'white', // Color del título del tooltip
+                            bodyColor: 'white', // Color del texto del cuerpo del tooltip
+                            borderColor: 'rgba(255, 255, 255, 0.5)', // Color del borde del tooltip
+                            borderWidth: 1, // Grosor del borde del tooltip
                             callbacks: {
                                 label: function (context) {
                                     let label = context.label || '';
@@ -161,33 +223,16 @@ function PublicacionesPorTipoDeOperacion() {
 }
 
 
+function GenerarColor(saturacion = 1) {
+    // Ajusta los rangos para obtener colores más saturados
+    let rr = Math.floor(50 + Math.random() * (156 * saturacion)); // Rojo entre 50 y un rango ajustado por saturación
+    let gg = Math.floor(100 + Math.random() * (100 * saturacion)); // Verde entre 100 y un rango ajustado por saturación
+    let bb = Math.floor(150 + Math.random() * (106 * saturacion)); // Azul entre 150 y un rango ajustado por saturación
+    let aa = (0.6 + Math.random() * 0.4).toFixed(2); // Alfa entre 0.6 y 1 para transparencia leve
 
-// Función para generar colores en la gama de azules y verdes
-function GenerarColorAzulVerde() {
-    let rr = Math.floor(Math.random() * 50); // Componente rojo bajo
-    let gg = Math.floor(100 + Math.random() * 156); // Verde medio-alto
-    let bb = Math.floor(150 + Math.random() * 106); // Azul medio-alto
-    return `rgb(${rr}, ${gg}, ${bb})`; // Retorna un color en formato RGB
+    return `rgba(${rr}, ${gg}, ${bb}, ${aa})`;
 }
 
 
 
 
-function GenerarColor() {
-    let rr, gg, bb;
-  
-    // Función para generar un valor aleatorio entre un rango dado
-    function ajustarColor(min, max) {
-      return Math.floor(Math.random() * (max - min)) + min;
-    }
-  
-    // Generar colores entre azul, violeta, y rojo, evitando verdes
-    rr = ajustarColor(0, 100);    // Rango bajo para rojo (evita que el rojo sea predominante)
-    gg = ajustarColor(100, 256);  // Rango más alto para verde
-    bb = ajustarColor(150, 256);  // Rango alto para azul
-    
-    // Convertimos a hexadecimal y formateamos para que tenga siempre dos dígitos.
-    let colorHex = `#${rr.toString(16).padStart(2, '0')}${gg.toString(16).padStart(2, '0')}${bb.toString(16).padStart(2, '0')}`;
-    return colorHex;
-  }
-  

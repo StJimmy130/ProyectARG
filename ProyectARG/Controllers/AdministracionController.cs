@@ -393,12 +393,12 @@ public class AdministracionController : Controller
             .GroupBy(i => i.TipoOperacion)
             .Select(g => new
             {
-                tipoOperacion = g.Key.ToString(), // Usa SplitCamelCase para formatear
+                tipoOperacion = g.Key.ToString(), 
                 cantidad = g.Count()              // Contar la cantidad de publicaciones por cada tipo
             })
             .ToList();
 
-        return Json(conteo); // Devolver los resultados en formato JSON
+        return Json(conteo); 
     }
 
 }
