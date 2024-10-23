@@ -364,5 +364,28 @@ public class AdministracionController : Controller
 
 
 
-    
+    public IActionResult InformesGraficos()
+    {
+        return View();
+    }
+
+    public JsonResult InmueblesPorProvincia()
+    {
+        var inmueblesPorProvincia = _context.Inmuebles
+            .Include(inmueble => inmueble.Localidad.Provincias) // Incluir la provincia relacionada
+            .Where(i => i.Activo) // Filtrar solo inmuebles activos
+            .GroupBy(i => i.Localidad.Provincias.Nombre) // Agrupar por el nombre de la provincia
+            .Select(g => new
+            {
+                Provincia = g.Key,
+                CantidadInmuebles = g.Count()
+            })
+            .ToList();
+
+        return Json(inmueblesPorProvincia);
+    }
+
+
+
+
 }

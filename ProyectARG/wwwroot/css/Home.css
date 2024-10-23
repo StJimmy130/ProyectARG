@@ -7,6 +7,7 @@
   background-color: transparent;
   border-radius: 5px;
   margin-top: 5rem;
+  
 }
 
 
@@ -69,6 +70,8 @@
   border-radius: 10px;
   background-color: transparent;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 10px 0 10px 0;
+  
 }
 
 footer{
@@ -85,7 +88,7 @@ footer{
   padding: 0;
   height: 50vh;
   border-radius: 8px;
-  margin: 15px 0 0 0;
+  margin: 10px 0 10px 0;
   transition: 0.3s;
   overflow: hidden;
   box-shadow: 0 0 2px 1px rgba(36, 35, 35, 0.603);
@@ -365,7 +368,7 @@ input[type="range"] {
 }
 
 .botonera-pagination{
-  margin: 5px;
+  margin-top: 15px;
 }
 .pagination-item{
   height: 2.2rem;

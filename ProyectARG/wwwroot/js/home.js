@@ -302,7 +302,7 @@ function mostrarPagina(pagina) {
     </button>`;
   $.each(paginas[pagina], function (i, item) {
     contenidoTabla += `
-    <div class="col-lg-4 col-md-6 col-sm-12 mb-4 activo">
+    <div class="col-lg-4 col-md-6 col-sm-12 activo">
       <a href="../Inmuebles/Detalle/${item.inmuebleID}">
         <div class="card">
           <div class="image-container">
@@ -313,7 +313,7 @@ function mostrarPagina(pagina) {
           </div>
           <div class="card-body">
             <h5 class="card-title fs-4">${item.tituloString}</h5>
-              <p class="card-text fs-5">${item.precioString} ${item.moneda ? "U$D" : "AR$"} - ${item.tipoOperacionString}</p>
+              <p class="card-text fs-5">${item.moneda ? "U$D" : "AR$"} ${item.precioString} - ${item.tipoOperacionString}</p>
               <p class="card-title fs-5">${item.provinciaString}, ${item.localidadString} - ${item.direccionString} ${item.nroDireccionString}</p>
           </div>
         </div>

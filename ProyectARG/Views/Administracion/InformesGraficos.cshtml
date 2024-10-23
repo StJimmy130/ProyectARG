@@ -1,0 +1,26 @@
+<link rel="stylesheet" href="~/css/Funciones.css">
+
+<div class="row container-xxl conteiner-funciones">
+  <div class="col-12">
+    <div class="tituloContenedor">
+      <h1 class="titulo"><i class="fa-solid fa-chart-line"></i> Informes gráficos</h1>
+      <hr class="tituloHr">
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
+    <div class="card-body col-md-6 col-sm-12">
+        <canvas id="graficoTorta" width="400" height="400"></canvas>
+    </div>
+    <div class="card-body col-md-6 col-sm-12">
+        <canvas id="graficoTorta" width="400" height="400"></canvas>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script src="~/js/GraficosAdmin.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+}

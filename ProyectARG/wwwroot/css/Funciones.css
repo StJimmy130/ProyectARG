@@ -1,7 +1,8 @@
 /* HOME FUNCIONES */
 .contenedorFuncionesAdmin{
-  min-height: 70vh;
+  min-height: 50vh;
   justify-content: space-between;
+
 }
 
 .conteiner-funciones{
@@ -37,7 +38,7 @@
     height: 8rem;
     outline: solid 1px var(--color-title);
     background-color: var(--fondo-card);
-    border-radius: 15px;
+    border-radius: 10px;
     overflow: hidden;
     font-size: 16px;
     --gradient: linear-gradient(to bottom, #2eadff, #3d83ff, #7e61ff);
@@ -140,8 +141,10 @@
 
 
 
-
-
+/* GRÁFICOS */
+.contenedorGraficos{
+  
+}
 
 /* PROVINCIAS Y LOCALIDADES */
 .contenedor {

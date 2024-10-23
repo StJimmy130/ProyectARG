@@ -61,7 +61,9 @@
                   // Si el usuario es administrador, solo mostramos la pestaña "Administrar"
                   if (await UserManager.IsInRoleAsync(user, "Administrador"))
                   {
-                    
+                    <li>
+                      <a class="nav-link" asp-area="" asp-controller="Administracion" asp-action="Index">Administrar</a>
+                    </li>
                   }
                   else
                   {

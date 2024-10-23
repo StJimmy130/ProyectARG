@@ -125,7 +125,11 @@ function CargarDatosPublicacion() {
               ${usuario.facebook ? `<a class="facebook" href="${usuario.facebook}" target="_blank"><i class='bx bxl-facebook'></i></a>` : ''}
               ${usuario.instagram ? `<a class="instagram" href="https://www.instagram.com/${usuario.instagram}/" target="_blank"><i class="bx bxl-instagram"></i></a>` : ''}
               ${usuario.whatsapp ? `<a class="whatsapp" href="https://wa.me/${usuario.whatsapp}" target="_blank"><i class="bx bxl-whatsapp"></i></a>` : ''}
-              ${usuario.email ? `<a class="gmail" href="mailto:${usuario.email}" target="_blank"><i class="bx bxl-gmail"></i></a>` : ''}
+              ${usuario.email ? 
+                `<a class="gmail" href="mailto:${usuario.email}?subject=Consulta%20sobre%20${encodeURIComponent(inmueble.tituloString)}&body=¡Hola%20${encodeURIComponent(usuario.nombre)}!%20Estoy%20interesado%20en%20${encodeURIComponent(inmueble.tituloString)}.%20Me%20podría%20proporcionar%20información%20adicional?%20¡Muchas%20gracias!" target="_blank">
+                  <i class="bx bxl-gmail"></i>
+                </a>` 
+                : ''}              
             </div>
           `;
         });

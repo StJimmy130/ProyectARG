@@ -93,7 +93,7 @@ function cargarInformacion(inmuebleID) {
               "onclick",
               `ValidarEliminacionInmueble(${item.inmuebleID}, 'suspender')`
             );
-          document.getElementById("btn-suspender").innerHTML = "suspender";
+          document.getElementById("btn-suspender").innerHTML = "Suspender";
         } else {
           document
             .getElementById("btn-suspender")
@@ -101,7 +101,7 @@ function cargarInformacion(inmuebleID) {
               "onclick",
               `ValidarEliminacionInmueble(${item.inmuebleID}, 'suspender')`
             );
-          document.getElementById("btn-suspender").innerHTML = "activar";
+          document.getElementById("btn-suspender").innerHTML = "Activar";
         }
         document
           .getElementById("btn-editar")
