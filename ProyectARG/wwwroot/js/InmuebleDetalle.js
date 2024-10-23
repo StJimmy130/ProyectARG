@@ -86,7 +86,7 @@ function CargarDatosPublicacion() {
         // Datos Principales
         datosPrincipales += `
         <div class="d-flex align-items-center justify-content-between">
-          <p class="text-muted text-sm">${inmueble.fechaPublicacionString} - ${inmueble.cantidadVistas} <i class="fa-solid fa-eye"></i></p>
+          <p class="text-muted info-valoracion">${inmueble.fechaPublicacionString} - ${inmueble.cantidadVistas} <i class="fa-solid fa-eye"></i></p>
           ${inmueble.tipoOperacionString === "Alquiler Temporal" ? `
           <div class="d-flex ms-3 mb-2 align-items-end">
             <p id="promedio" class="info-valoracion text-muted"></p>

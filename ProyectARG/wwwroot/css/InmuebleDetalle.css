@@ -367,6 +367,19 @@ textarea.form-control {
   background-color: var(--text-area);
 }
 
+@media screen and (max-width: 1366px) {
+  .rating label{
+    font-size: 23px;
+  }
+  .rating-fill{
+    font-size: 23px;
+  }
+  .info-valoracion{
+    font-size: 0.9rem;
+    margin-bottom: 16px;
+  }
+}
+
 
 @media screen and (max-width: 768px) {
   .vistaDetalle {
