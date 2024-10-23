@@ -81,14 +81,14 @@ function GraficoTorta() {
                 data: {
                     labels: labelsBarras,
                     datasets: [{
-                        label: '',
+                        label: "Cantidad de Inmuebles",
                         data: dataBarras,
                         backgroundColor: fondoBarras,
                         borderColor: 'rgba(255, 255, 255, 0.7)', // Color de borde
                         borderWidth: 1, // Bordes más finos
                         hoverBorderColor: 'rgba(0, 0, 0, 0.8)', // Color del borde al pasar el ratón
-                        hoverBackgroundColor: 'rgba(255, 255, 255, 0.2)' // Color de fondo al pasar el ratón
-                    }],
+                        hoverBackgroundColor: 'rgba(255, 255, 255, 0.8)' // Color de fondo al pasar el ratón
+                    }]
                 },
                 options: {
                     indexAxis: 'y', // Esto hace que las barras sean horizontales
@@ -99,7 +99,7 @@ function GraficoTorta() {
                                 color: textColor // Color del texto de los ticks
                             },
                             grid: {
-                                color: 'rgba(255, 255, 255, 0.2)' // Color de las líneas de la cuadrícula
+                                color: 'rgba(1, 1, 1, 0.2)' // Color de las líneas de la cuadrícula
                             }
                         },
                         y: {
@@ -107,17 +107,13 @@ function GraficoTorta() {
                                 color: textColor // Color del texto de los ticks
                             },
                             grid: {
-                                color: 'rgba(255, 255, 255, 0.2)' // Color de las líneas de la cuadrícula
+                                color: 'rgba(1, 1, 1, 0.2)' // Color de las líneas de la cuadrícula
                             }
                         }
                     },
                     plugins: {
                         legend: {
-                            labels: {
-                                usePointStyle: true, // Usa un punto en lugar del cuadro
-                                pointStyle: 'line',  // Cambia el punto por una línea o cualquier otro estilo
-                                color: 'white' // Color de la leyenda
-                            }
+                            display: false // Oculta la leyenda del gráfico de barras
                         },
                         tooltip: {
                             callbacks: {
@@ -127,7 +123,7 @@ function GraficoTorta() {
                                 }
                             },
                             backgroundColor: 'rgba(0, 0, 0, 0.8)', // Fondo del tooltip
-                            titleColor: 'white', // Color del título del tooltip
+                            titleColor: 'rgba(255, 255, 255, 1)', // Color del título del tooltip
                             bodyColor: 'white', // Color del texto del cuerpo del tooltip
                             borderColor: 'rgba(255, 255, 255, 0.5)', // Color del borde del tooltip
                             borderWidth: 1, // Grosor del borde del tooltip
