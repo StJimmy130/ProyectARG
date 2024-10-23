@@ -1,4 +1,4 @@
-window.onload = GraficoTorta();
+window.onload = GraficoTorta(),PublicacionesPorTipoDeOperacion();
 
 function GraficoTorta() {
     $.ajax({
@@ -36,14 +36,14 @@ function GraficoTorta() {
                 },
             });
 
-            // Ordenar las provincias por la cantidad de inmuebles y tomar el top 10
             let top10Provincias = inmueblesPorProvincia.sort((a, b) => b.cantidadInmuebles - a.cantidadInmuebles).slice(0, 10);
 
             // Preparar los datos para el gráfico de barras
             $.each(top10Provincias, function (index, inmueble) {
-                // Verifica si el campo provincia está definido, si no asigna un valor por defecto
                 let nombreProvincia = inmueble.provincia ? inmueble.provincia : "Desconocido";
-                labelsBarras.push(nombreProvincia); // Provincias para las barras
+                let etiquetaProvincia = `Top #${index + 1} - ${nombreProvincia}`;
+                
+                labelsBarras.push(etiquetaProvincia); // Provincias para las barras
                 dataBarras.push(inmueble.cantidadInmuebles); // Cantidad de inmuebles
                 let color = GenerarColor(); // Generar un color para las barras
                 fondoBarras.push(color);
@@ -72,16 +72,23 @@ function GraficoTorta() {
                     plugins: {
                         legend: {
                             labels: {
-                                // Elimina el cuadro de color
                                 usePointStyle: true, // Usa un punto en lugar del cuadro
                                 pointStyle: 'line'   // Cambia el punto por una línea o cualquier otro estilo
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function (tooltipItem) {
+                                    // Solo muestra el número de inmuebles
+                                    return tooltipItem.raw;
+                                }
                             }
                         }
                     }
                 }
             });
 
-
+            
         },
         error: function (xhr, status) {
             Swal.fire({
@@ -94,6 +101,78 @@ function GraficoTorta() {
 }
 
 
+
+function PublicacionesPorTipoDeOperacion() {
+    $.ajax({
+        url: '/Administracion/ContarPublicacionesPorTipoOperacion', // Ajusta esta ruta según tu controlador
+        type: 'GET',
+        success: function (response) {
+            let labelsTorta = [];
+            let dataTorta = [];
+            let coloresTorta = [];
+    
+            // Recorrer la respuesta y preparar los datos para el gráfico
+            $.each(response, function (index, item) {
+                // Cambiar el nombre de la operación si es AlquilerTemporal
+                let tipoOperacion = item.tipoOperacion === "AlquilerTemporal" ? "Alquiler temporal" : item.tipoOperacion;
+
+                labelsTorta.push(tipoOperacion); // Agregar el nombre del tipo de operación
+                dataTorta.push(item.cantidad); // Agregar la cantidad correspondiente
+    
+                // Generar un color aleatorio en la gama de azules y verdes
+                let color = GenerarColorAzulVerde();
+                coloresTorta.push(color);
+            });
+    
+            // Crear el gráfico de torta
+            let ctxTorta = document.getElementById("graficoPublicacionesPorOperacion").getContext('2d');
+            let graficoTorta = new Chart(ctxTorta, {
+                type: 'pie', // Tipo de gráfico (torta)
+                data: {
+                    labels: labelsTorta, // Etiquetas (Alquiler, Venta, AlquilerTemporal)
+                    datasets: [{
+                        data: dataTorta, // Datos (cantidades)
+                        backgroundColor: coloresTorta, // Colores generados
+                    }],
+                },
+                options: {
+                    responsive: true, // Gráfico responsivo
+                    plugins: {
+                        legend: {
+                            position: 'bottom', // Posición de la leyenda
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    let label = context.label || '';
+                                    let value = context.raw || 0;
+                                    return `${label}: ${value}`; // Formato de la etiqueta en el tooltip
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        },
+        error: function (xhr, status, error) {
+            console.error("Error al realizar la solicitud: ", error);
+        }
+    });
+}
+
+
+
+// Función para generar colores en la gama de azules y verdes
+function GenerarColorAzulVerde() {
+    let rr = Math.floor(Math.random() * 50); // Componente rojo bajo
+    let gg = Math.floor(100 + Math.random() * 156); // Verde medio-alto
+    let bb = Math.floor(150 + Math.random() * 106); // Azul medio-alto
+    return `rgb(${rr}, ${gg}, ${bb})`; // Retorna un color en formato RGB
+}
+
+
+
+
 function GenerarColor() {
     let rr, gg, bb;
   
@@ -103,10 +182,10 @@ function GenerarColor() {
     }
   
     // Generar colores entre azul, violeta, y rojo, evitando verdes
-    rr = ajustarColor(0, 256); // 128 a 255 para rojo y violeta
-    gg = ajustarColor(0, 256); // 0 a 127 para evitar verdes
-    bb = ajustarColor(0, 256); // 128 a 255 para azul y violeta
-  
+    rr = ajustarColor(0, 100);    // Rango bajo para rojo (evita que el rojo sea predominante)
+    gg = ajustarColor(100, 256);  // Rango más alto para verde
+    bb = ajustarColor(150, 256);  // Rango alto para azul
+    
     // Convertimos a hexadecimal y formateamos para que tenga siempre dos dígitos.
     let colorHex = `#${rr.toString(16).padStart(2, '0')}${gg.toString(16).padStart(2, '0')}${bb.toString(16).padStart(2, '0')}`;
     return colorHex;

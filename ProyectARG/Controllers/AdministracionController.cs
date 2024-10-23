@@ -386,6 +386,19 @@ public class AdministracionController : Controller
     }
 
 
+    public IActionResult ContarPublicacionesPorTipoOperacion()
+    {
+        // Obtener la cantidad de publicaciones para cada tipo de operación
+        var conteo = _context.Inmuebles
+            .GroupBy(i => i.TipoOperacion)
+            .Select(g => new
+            {
+                tipoOperacion = g.Key.ToString(), // Usa SplitCamelCase para formatear
+                cantidad = g.Count()              // Contar la cantidad de publicaciones por cada tipo
+            })
+            .ToList();
 
+        return Json(conteo); // Devolver los resultados en formato JSON
+    }
 
 }
