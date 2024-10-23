@@ -387,6 +387,16 @@ input[type="range"] {
   color: rgb(33, 32, 32);
 }
 
+@media screen and (min-width: 1601px) {
+  .card-body {
+    height: 20%;
+  }
+
+  .card-body:hover {
+    height: 30%;
+  }
+}
+
 @media screen and (min-width: 769px) {
   .container{
   width: 100%;
