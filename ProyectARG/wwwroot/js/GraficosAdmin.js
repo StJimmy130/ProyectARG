@@ -2,46 +2,96 @@ window.onload = GraficoTorta();
 
 function GraficoTorta() {
     $.ajax({
-        url: '../../Administracion/InmueblesPorProvincia', // Cambia la URL según tu configuración
+        url: '../../Administracion/InmueblesPorProvincia', // La URL del método en el backend
         type: 'POST', // Asegúrate de que tu método en el controlador acepte POST
         dataType: 'json',
         success: function (inmueblesPorProvincia) { 
-            let labels = [];
-            let data = [];
-            let fondo = [];
+            let labelsTorta = [];
+            let dataTorta = [];
+            let fondoTorta = [];
 
-            // Iterar sobre los resultados recibidos
+            let labelsBarras = [];
+            let dataBarras = [];
+            let fondoBarras = [];
+
+            // Iterar sobre los resultados para el gráfico de torta
             $.each(inmueblesPorProvincia, function (index, inmueble) {  
-                labels.push(inmueble.provincia); // Agregar el nombre de la provincia
-                data.push(inmueble.cantidadInmuebles); // Agregar la cantidad de inmuebles
+                labelsTorta.push(inmueble.provincia); // Agregar el nombre de la provincia
+                dataTorta.push(inmueble.cantidadInmuebles); // Agregar la cantidad de inmuebles
                 let color = GenerarColor(); // Generar un color para cada sección
-                fondo.push(color);
+                fondoTorta.push(color);
             });
-            
+
+            // Crear el gráfico de torta
             let ctxTorta = document.getElementById("graficoTorta");
             graficoTortaEjercicio = new Chart(ctxTorta, {
                 type: 'pie', // Tipo de gráfico (torta)
                 data: {
-                    labels: labels,
+                    labels: labelsTorta,
                     datasets: [{
-                        data: data,
-                        backgroundColor: fondo,
+                        data: dataTorta,
+                        backgroundColor: fondoTorta,
                         borderWidth: 3,
                     }],
                 },
             });
 
+            // Ordenar las provincias por la cantidad de inmuebles y tomar el top 10
+            let top10Provincias = inmueblesPorProvincia.sort((a, b) => b.cantidadInmuebles - a.cantidadInmuebles).slice(0, 10);
+
+            // Preparar los datos para el gráfico de barras
+            $.each(top10Provincias, function (index, inmueble) {
+                // Verifica si el campo provincia está definido, si no asigna un valor por defecto
+                let nombreProvincia = inmueble.provincia ? inmueble.provincia : "Desconocido";
+                labelsBarras.push(nombreProvincia); // Provincias para las barras
+                dataBarras.push(inmueble.cantidadInmuebles); // Cantidad de inmuebles
+                let color = GenerarColor(); // Generar un color para las barras
+                fondoBarras.push(color);
+            });
+
+            // Crear el gráfico de barras horizontales
+            let ctxBarras = document.getElementById("graficoBarras");
+            let graficoBarras = new Chart(ctxBarras, {
+                type: 'bar', // Tipo de gráfico (barras)
+                data: {
+                    labels: labelsBarras,
+                    datasets: [{
+                        label: 'Top 10 provincias con más actividad',
+                        data: dataBarras,
+                        backgroundColor: fondoBarras,
+                        borderWidth: 3,
+                    }],
+                },
+                options: {
+                    indexAxis: 'y', // Esto hace que las barras sean horizontales
+                    scales: {
+                        x: {
+                            beginAtZero: true // Para que el eje X comience desde 0
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                // Elimina el cuadro de color
+                                usePointStyle: true, // Usa un punto en lugar del cuadro
+                                pointStyle: 'line'   // Cambia el punto por una línea o cualquier otro estilo
+                            }
+                        }
+                    }
+                }
+            });
+
+
         },
         error: function (xhr, status) {
             Swal.fire({
                 title: "Disculpe",
-                text: "Existió un problema al cargar el gráfico.",
+                text: "Existió un problema al cargar los gráficos.",
                 icon: "warning",
             });
         }
     });  
 }
-
 
 
 function GenerarColor() {
