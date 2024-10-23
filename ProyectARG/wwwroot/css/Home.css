@@ -144,7 +144,7 @@ p.card-text{
   bottom: 0;
   left: 0;
   right: 0;
-  height: 20%;
+  height: 25%;
   color: #fff;
   text-shadow: 0 0 5px black;
   overflow: hidden;
@@ -387,6 +387,15 @@ input[type="range"] {
   color: rgb(33, 32, 32);
 }
 
+@media screen and (min-width: 1601px) {
+  .card-body {
+    height: 20%;
+  }
+
+  .card-body:hover {
+    height: 30%;
+  }
+}
 
 @media screen and (min-width: 769px) {
   .container{
