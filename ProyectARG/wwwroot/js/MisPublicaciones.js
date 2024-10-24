@@ -191,6 +191,8 @@ function GuardarPublicacion() {
         background.classList.add("success");
         alerta.classList.add("enter-alert");
 
+        $("#ModalEditarPublicacion").modal("hide")
+
         setTimeout(function () {
           hiddenAlert();
         }, 3000);

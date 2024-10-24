@@ -254,7 +254,6 @@ label[for="Imagen"]:hover {
 
 .list-container {
   height: 50vh;
-  max-height: 50vh;
   width: auto;
   min-width: 180px;
   display: flex;
@@ -473,11 +472,6 @@ img.active {
   gap: 5px;
 }
 
-#list-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
 
 .miniatura {
   width: 100px;

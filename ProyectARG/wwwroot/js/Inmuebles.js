@@ -342,14 +342,14 @@ document.addEventListener("DOMContentLoaded", function () {
         img.addEventListener("dragstart", (event) => {
           draggedItem = img;
           setTimeout(() => {
-            img.style.display = "none"; // Ocultar el elemento mientras se arrastra
+            img.style.opacity = "0.5"; // Ocultar el elemento mientras se arrastra
           }, 0);
         });
 
         // Evento Drag End
         img.addEventListener("dragend", (event) => {
           setTimeout(() => {
-            draggedItem.style.display = "block"; // Mostrar el elemento cuando se suelta
+            draggedItem.style.opacity = "1"; // Mostrar el elemento cuando se suelta
             draggedItem = null;
           }, 0);
         });
