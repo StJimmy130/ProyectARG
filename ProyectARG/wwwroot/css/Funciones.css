@@ -15,14 +15,12 @@
     --color-title: #1198ff;
     --color-shadow: #000000;
     --text-body: #505050;
-    --contenedor-graficos: linear-gradient(335deg, rgba(255,255,255,1) 0%, rgba(46, 171, 255, 0.425) 42%);;
   }
   body.dark{
     --fondo-card: #505050;
     --color-title: #1f7fc9;
     --color-shadow: #ffffffff;
     --text-body: #adadad; 
-    --contenedor-graficos: linear-gradient(335deg, rgba(255,255,255,1) 0%, rgba(30, 85, 122, 0.425) 42%);;
   }
 
 
@@ -145,19 +143,31 @@
 
 /* GRÁFICOS */
 .graficos{
-  background: var(--contenedor-graficos);
+  background: linear-gradient(335deg, rgba(255,255,255,.8) 0%, rgba(46, 171, 255, .8) 42%);;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  margin: 0 15px 0 15px;
+  margin: 0 10px 0 10px;
   border-radius: 8px;
 }
 
 .tituloGraficos{
-  color: var(--text-color2);
-  font-weight: 300;
+  color: #3f3f3f;
+  font-weight: 400;
   font-size: 20px;
   padding: 10px 0 10px 0;
   text-align: center;
 
+}
+
+
+#graficoTorta {
+  flex-grow: 1; /* Permite que el gráfico de torta use el espacio restante */
+  height: auto; /* Altura automática para el gráfico de torta */
+}
+
+#graficoPublicacionesPorOperacion,
+#graficoBarras {
+  height: 200px; /* Fija la altura de los gráficos de barras y de operación */
+  margin-bottom: 1rem; /* Espaciado entre los gráficos */
 }
 
 
