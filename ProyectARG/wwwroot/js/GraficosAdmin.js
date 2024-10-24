@@ -28,32 +28,35 @@ function GraficoTorta() {
             // Crear el gráfico de torta
             let ctxTorta = document.getElementById("graficoTorta");
             graficoTortaEjercicio = new Chart(ctxTorta, {
-                type: 'pie', // Tipo de gráfico (torta)
+                type: 'pie',
                 data: {
                     labels: labelsTorta,
                     datasets: [{
                         data: dataTorta,
                         backgroundColor: fondoTorta,
-                        borderColor: 'rgba(255, 255, 255, 0.7)', // Color de borde
-                        borderWidth: 1, // Bordes más finos
-                        hoverBorderColor: 'rgba(0, 0, 0, 0.8)', // Color del borde al pasar el ratón
-                        hoverBackgroundColor: 'rgba(255, 255, 255, 0.2)' // Color de fondo al pasar el ratón
+                        borderColor: 'rgba(255, 255, 255, 0.7)',
+                        borderWidth: 1,
+                        hoverBorderColor: 'rgba(0, 0, 0, 0.8)',
+                        hoverBackgroundColor: 'rgba(255, 255, 255, 0.2)'
                     }],
                 },
                 options: {
                     responsive: true,
                     plugins: {
                         tooltip: {
-                            backgroundColor: 'rgba(0, 0, 0, 0.8)', // Fondo del tooltip
-                            titleColor: 'white', // Color del título del tooltip
-                            bodyColor: 'white', // Color del texto del cuerpo del tooltip
-                            borderColor: 'rgba(255, 255, 255, 0.5)', // Color del borde del tooltip
-                            borderWidth: 1, // Grosor del borde del tooltip
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            titleColor: 'white',
+                            bodyColor: 'white',
+                            borderColor: 'rgba(255, 255, 255, 0.5)',
+                            borderWidth: 1,
                         },
                         legend: {
+                            display: true, // Asegúrate de que la leyenda esté habilitada
+                            position: 'left', // Coloca la leyenda a la izquierda
+                            align: 'start', // Alinea la leyenda al inicio
                             labels: {
-                                color: textColor, // Color de la leyenda
-                                boxHeight: 10, // Altura de los cuadros en la leyenda
+                                usePointStyle: true, // Usa un punto en lugar del cuadro
+                                boxWidth: 10, // Ancho del cuadro
                                 padding: 20 // Espaciado entre leyenda
                             }
                         }
@@ -96,7 +99,7 @@ function GraficoTorta() {
                         x: {
                             beginAtZero: true, // Para que el eje X comience desde 0
                             ticks: {
-                                color: textColor // Color del texto de los ticks
+                                color: '#3f3f3f' // Color del texto de los ticks
                             },
                             grid: {
                                 color: 'rgba(1, 1, 1, 0.2)' // Color de las líneas de la cuadrícula
@@ -104,7 +107,7 @@ function GraficoTorta() {
                         },
                         y: {
                             ticks: {
-                                color: textColor // Color del texto de los ticks
+                                color: '#3f3f3f' // Color del texto de los ticks
                             },
                             grid: {
                                 color: 'rgba(1, 1, 1, 0.2)' // Color de las líneas de la cuadrícula
@@ -189,7 +192,9 @@ function PublicacionesPorTipoDeOperacion() {
                         legend: {
                             position: 'bottom', // Posición de la leyenda
                             labels: {
-                                color: 'dark-gray', // Color de la leyenda
+                                usePointStyle: true, // Usa puntos en lugar de cuadros
+                                pointStyle: 'circle', // Forma de los puntos en la leyenda
+                                color: '#3f3f3f', // Color de la leyenda
                                 boxHeight: 10, // Altura de los cuadros en la leyenda
                                 padding: 20 // Espaciado entre leyenda
                             }
@@ -211,6 +216,7 @@ function PublicacionesPorTipoDeOperacion() {
                     }
                 }
             });
+
         },
         error: function (xhr, status, error) {
             console.error("Error al realizar la solicitud: ", error);
