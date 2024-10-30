@@ -24,7 +24,7 @@
       </div>
       <div class="mb-3">
         <label for="ProvinciaNombre">Nombre de la provincia:</label>
-        <input type="text" id="ProvinciaNombre" class="form-control">
+        <input type="text" id="ProvinciaNombre" class="form-control mb-4">
       </div>
       <div class="mb-3">
         <button type="button" class="btn btn-success" onclick="GuardarProvincia()">Guardar Provincia</button>
@@ -57,10 +57,11 @@
         </div>
       </div>
       <div class="row mb-3">
-        <div class="col-6">
+        <div class="col-6 position-relative">
           <input type="hidden" value="0" id="LocalidadID">
           <label for="ProvinciaID">Seleccione la Provincia:</label>
-          @Html.DropDownList("ProvinciaID", null, htmlAttributes: new { @class = "form-control" , @onchange = "ListadoDeLocalidades()" })
+          @Html.DropDownList("ProvinciaID", null, htmlAttributes: new { @class = "form-control mb-2 " , @onchange = "ListadoDeLocalidades(), validacionProvincia()" })
+          <span id="ProvinciaIDError" class="text-danger validacion">Asigne una provincia</span>
         </div>
         <div class="col-6">
           <label for="LocalidadNombre">Nombre de la localidad:</label>

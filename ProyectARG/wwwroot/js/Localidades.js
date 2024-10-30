@@ -33,6 +33,7 @@ function ListadoDeLocalidades() {
                 `;
       });
       document.getElementById("tbodyLocalidades").innerHTML = tabla;
+      
     },
     error: function (xhr, status) {
       console.log("Disculpe, existió un problema al cargar el listado");
@@ -89,6 +90,7 @@ function GuardarLocalidad() {
         icon.classList.add("succes-svg");
         background.classList.add("success");
       }
+      validacionProvincia()
 
       titulo.innerHTML = resultado.titulo;
       descripcion.innerHTML = `<label>${resultado.texto}</label>`;
@@ -96,13 +98,29 @@ function GuardarLocalidad() {
       aceptar.setAttribute("onclick", `hiddenAlert()`);
       alerta.classList.add("enter-alert");
 
-
+      validacionProvincia();
       ListadoDeLocalidades();
     },
     error: function (xhr, status) {
       console.log("Disculpe, existió un problema al cargar el listado");
     },
   });
+}
+
+function validacionProvincia() {
+  var validacion = document.getElementById("ProvinciaIDError");
+  var provinciaID = document.getElementById("ProvinciaID").value;
+  var input = document.getElementById("ProvinciaID");
+  if (provinciaID == 0) {
+    validacion.style.display = "block";
+    input.classList.add("error");
+    return false;
+  }
+  else {
+    validacion.style.display = "none";
+    input.classList.remove("error");
+    return true;
+  }
 }
 
 function ModalEditarLocalidad(localidadID) {

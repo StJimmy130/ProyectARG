@@ -219,3 +219,12 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.validacion{
+  position: absolute;
+  bottom: -15px;
+  display: none;
+}
+.error{
+  border-color: rgb(206, 2, 2);
+}
