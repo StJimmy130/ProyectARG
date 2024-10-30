@@ -19,7 +19,8 @@
     <div class="filtros">
       <ul>
         <div class="d-lg-none d-flex justify-content-end">
-          <button class="btn-close me-4" data-bs-toggle="collapse" data-bs-target="#filterMenu" aria-label="Cerrar"></button>
+          <button class="btn-close me-4" data-bs-toggle="collapse" data-bs-target="#filterMenu"
+            aria-label="Cerrar"></button>
         </div>
         <li class="nav-item">
           <a class="filter-toggle" data-bs-toggle="collapse" href="#collapse1" role="button" aria-expanded="false"
@@ -82,22 +83,16 @@
             <div class="menu-desplegable">
               <!-- Opciones de rango de precio -->
               <label for="min-price">Precio mínimo:</label>
-              <div>
-                $<input type="number" id="min-price-input" name="min-price-input" min="0" step="10" value="0"
-                  oninput="updatePriceRange()">
+              <div class="d-flex mb-2">
+                $<input type="number" id="min-price" name="min-price" min="0" step="10" value="0">
               </div>
-              <input type="range" id="min-price" name="min-price" min="0" step="10" value="0"
-                oninput="syncInput('min-price')">
 
               <label for="max-price">Precio máximo:</label>
-              <div>
-                $<input type="number" id="max-price-input" name="max-price-input" min="0" max="100000000" step="10"
-                  value="0" oninput="updateMaxPrice()">
+              <div class="d-flex">
+                $<input type="number" id="max-price" name="max-price" min="0" value="0">
               </div>
-              <input type="range" id="max-price" name="max-price" min="0" max="100000000" step="10" value="0"
-                oninput="syncInput('max-price')">
+
             </div>
-          </div>
         </li>
         <li class="nav-item">
           <a class="filter-toggle" data-bs-toggle="collapse" href="#collapse3" role="button" aria-expanded="false"
@@ -145,7 +140,8 @@
           </div>
         </li>
         <div class="contenedor-boton">
-          <button class="boton-filtrar btn" onclick="ListadoPublicaciones()"><i class="fa-solid fa-sliders"></i>Filtrar</button>
+          <button class="boton-filtrar btn" onclick="ListadoPublicaciones()"><i
+              class="fa-solid fa-sliders"></i>Filtrar</button>
           <button class="boton-limpiar btn" onclick="LimpiarFiltros()"><i class="fa-solid fa-broom"></i>Limpiar</button>
         </div>
       </ul>

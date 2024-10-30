@@ -78,48 +78,45 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-
-
-// FUNCIÓN PARA VERIFICAR SI ES FAVORITO 
+// FUNCIÓN PARA VERIFICAR SI ES FAVORITO
 function ToggleFavorito(inmuebleId, button) {
-    let icon = $(button).find('i');
-    let usuarioId = document.getElementById("UsuarioID").value;
-    console.log('ID del usuario:', usuarioId);
-    console.log('ID del inmueble:', inmuebleId);
-    
-    $.ajax({
-        url: `../../Favoritos/ToggleFavorito`,
-        type: 'POST',
-        data: { inmuebleId: inmuebleId, usuarioId: usuarioId },
-        success: function (response) {
-            console.log('Respuesta del servidor:', response);
-            if (response.success) {
-                icon.toggleClass('fas far');
-                // Actualizar el estado visual del botón
-                if (response.isFavorito === true) {
-                    icon.removeClass('far').addClass('fas');
-                } else if (response.isFavorito === false){
-                    icon.removeClass('fas').addClass('far');
-                }
-            } else {
-                console.error('Error al actualizar el favorito: ' + response.message);
-            }
-        },
-        error: function (xhr, status, error) {
-            console.error('Error al actualizar el favorito: ' + error);
+  let icon = $(button).find("i");
+  let usuarioId = document.getElementById("UsuarioID").value;
+  console.log("ID del usuario:", usuarioId);
+  console.log("ID del inmueble:", inmuebleId);
+
+  $.ajax({
+    url: `../../Favoritos/ToggleFavorito`,
+    type: "POST",
+    data: { inmuebleId: inmuebleId, usuarioId: usuarioId },
+    success: function (response) {
+      console.log("Respuesta del servidor:", response);
+      if (response.success) {
+        icon.toggleClass("fas far");
+        // Actualizar el estado visual del botón
+        if (response.isFavorito === true) {
+          icon.removeClass("far").addClass("fas");
+        } else if (response.isFavorito === false) {
+          icon.removeClass("fas").addClass("far");
         }
-    });
+      } else {
+        console.error("Error al actualizar el favorito: " + response.message);
+      }
+    },
+    error: function (xhr, status, error) {
+      console.error("Error al actualizar el favorito: " + error);
+    },
+  });
 }
 
 // Asegúrate de que este código se ejecute cuando la página se carga
-$(document).ready(function() {
-    // Prevenir la navegación al hacer clic en el botón de favorito
-    $('.favorite-btn').on('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-    });
+$(document).ready(function () {
+  // Prevenir la navegación al hacer clic en el botón de favorito
+  $(".favorite-btn").on("click", function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+  });
 });
-
 
 function actualizarLocalidades() {
   var provinciaID = document.getElementById("ProvinciaID").value;
@@ -149,7 +146,7 @@ function actualizarLocalidades() {
 
 function ListadoPublicaciones() {
   showLoadingScreen();
-  
+
   let provinciaID = document.getElementById("ProvinciaID").value;
   let localidadID = document.getElementById("LocalidadID").value;
   let precioMinimo = document.getElementById("min-price").value;
@@ -175,20 +172,25 @@ function ListadoPublicaciones() {
       Operacion: operacion,
       PrecioMinimo: precioMinimo,
       PrecioMaximo: precioMaximo,
-      UsuarioID: usuarioId
+      UsuarioID: usuarioId,
     },
     type: "POST",
     dataType: "json",
     success: function (Listado) {
+      console.log(Listado);
+
       if (Listado && Listado.length > 0) {
         publicacionesOriginales = Listado; // Asigna las publicaciones originales
         renderizarTabla(publicacionesOriginales); // Renderiza la tabla con las publicaciones
+        paginacion.style.display = "block";
       } else {
+        var paginacion = document.getElementById("paginacion");
         document.getElementById("publicaciones").innerHTML = `
         <div style="justify-content: center; text-align: center;">
             <img src="/img/NoCasa.png" style="align-items: center; max-width: 100%; height: auto;">
             <p class"fw-bold">NO SE ENCONTRARON PUBLICACIONES</p>
-        </div>`;
+        </div>`
+        paginacion.style.display = "none";
       }
       hideLoadingScreen(); // Ocultar pantalla de carga después de la respuesta
     },
@@ -199,7 +201,6 @@ function ListadoPublicaciones() {
   });
 }
 
-
 function LimpiarFiltros() {
   // Restablecer los campos de entrada
   document.getElementById("ProvinciaID").value = 0;
@@ -209,14 +210,15 @@ function LimpiarFiltros() {
   document.getElementById("OperacionID").value = 0;
 
   // Desmarcar todos los checkboxes
-  document.querySelectorAll('input[type="checkbox"]:checked').forEach((checked) => {
-    checked.checked = false;
-  });
+  document
+    .querySelectorAll('input[type="checkbox"]:checked')
+    .forEach((checked) => {
+      checked.checked = false;
+    });
 
   // Opcional: Llamar a ListadoPublicaciones para refrescar la lista
   ListadoPublicaciones();
 }
-
 
 var paginaActual = 0;
 var itemsPorPagina = 12;
@@ -235,7 +237,7 @@ function paginarPublicaciones(publicaciones, itemsPorPagina) {
 function renderizarTabla(publicaciones) {
   publicacionesFiltradas = publicaciones; // Mantener el estado de las publicaciones filtradas
   paginas = paginarPublicaciones(publicacionesFiltradas, itemsPorPagina);
-  
+
   // Si la página actual es mayor que el total de páginas disponibles, resetear a la primera página
   if (paginaActual >= paginas.length) {
     paginaActual = 0;
@@ -255,7 +257,6 @@ function renderizarTabla(publicaciones) {
   renderizarPaginacion(); // Renderizar la paginación
 }
 
-
 function renderizarPaginacion() {
   var paginacion = document.getElementById("paginacion");
   paginacion.innerHTML = "";
@@ -271,9 +272,9 @@ function renderizarPaginacion() {
           paginaActual = pagina;
           mostrarPagina(pagina);
           renderizarPaginacion();
-          
+
           // Scroll a la parte superior
-          setTimeout(function() {
+          setTimeout(function () {
             window.scroll(0, 0);
           }, 0);
         };
@@ -293,18 +294,18 @@ function cambiarPagina(delta) {
   paginaActual += delta;
   if (paginaActual < 0) paginaActual = 0;
   if (paginaActual >= paginas.length) paginaActual = paginas.length - 1;
-  
+
   // Mostramos el contenido de la nueva página
   mostrarPagina(paginaActual);
-  
+
   // Renderizamos la paginación después de mostrar la nueva página
   renderizarPaginacion();
-  
+
   requestAnimationFrame(() => {
     window.scrollTo({
       top: 0,
       left: 0,
-      behavior: "auto"
+      behavior: "auto",
     });
   });
 }
@@ -319,9 +320,9 @@ function mostrarPagina(pagina) {
 
   $.each(paginas[pagina], function (i, item) {
     // Formatear el precio con miles y dos decimales
-    const precioFormateado = Number(item.precioString).toLocaleString('es-ES', {
+    const precioFormateado = Number(item.precioString).toLocaleString("es-ES", {
       minimumFractionDigits: 2,
-      maximumFractionDigits: 2
+      maximumFractionDigits: 2,
     });
 
     contenidoTabla += `
@@ -330,20 +331,26 @@ function mostrarPagina(pagina) {
         <div class="card">
           <div class="image-container">
             <img src="${item.imagenSrc}" alt="Imagen del Inmueble">
-            <button class="favorite-btn position-absolute top-0 end-0 m-2" onclick="ToggleFavorito(${item.inmuebleID}, this); return false;">
-              <i id="fav-icon-${item.inmuebleID}" class="${item.esFavorito ? 'fas fa-heart' : 'far fa-heart'}"></i>
+            <button class="favorite-btn position-absolute top-0 end-0 m-2" onclick="ToggleFavorito(${
+              item.inmuebleID
+            }, this); return false;">
+              <i id="fav-icon-${item.inmuebleID}" class="${
+      item.esFavorito ? "fas fa-heart" : "far fa-heart"
+    }"></i>
             </button>
           </div>
           <div class="card-body">
             <h5 class="card-title fs-4">${item.tituloString}</h5>
-            <p class="card-text fs-5">${item.moneda ? "U$D" : "AR$"} ${precioFormateado} - ${item.tipoOperacionString}</p>
-            <p class="card-title fs-5">${item.provinciaString}, ${item.localidadString} - ${item.direccionString} ${item.nroDireccionString}</p>
+            <p class="card-text fs-5">${
+              item.moneda ? "U$D" : "AR$"
+            } ${precioFormateado} - ${item.tipoOperacionString}</p>
+            <p class="card-title fs-5">${item.provinciaString}, ${
+      item.localidadString
+    } - ${item.direccionString} ${item.nroDireccionString}</p>
           </div>
         </div>
       </a>
     </div>`;
-    
-    
   });
 
   document.getElementById("publicaciones").innerHTML = contenidoTabla;
@@ -357,7 +364,9 @@ $(document).ready(function () {
     var searchQuery = $("#BuscadorPorTitulo").val().toLowerCase();
 
     // Filtramos las publicaciones originales en lugar de modificar las filtradas
-    var resultadosFiltrados = publicacionesOriginales.filter(function (publicacion) {
+    var resultadosFiltrados = publicacionesOriginales.filter(function (
+      publicacion
+    ) {
       return publicacion.tituloString.toLowerCase().indexOf(searchQuery) > -1;
     });
 
@@ -370,74 +379,6 @@ $(document).ready(function () {
   // Cargar el listado de publicaciones cuando la página esté lista
   ListadoPublicaciones(); // Asegúrate de que esta función ya esté definida
 });
-
-function updatePriceRange() {
-  const minPriceInput = document.getElementById("min-price-input");
-  const minPriceRange = document.getElementById("min-price");
-
-  const minPrice = parseInt(minPriceInput.value);
-  const maxPriceInput = document.getElementById("max-price-input");
-  const maxPriceRange = document.getElementById("max-price");
-  const maxPrice = parseInt(maxPriceInput.value);
-
-  // Si el valor del precio máximo es 0, permitimos la edición libre del precio mínimo
-  if (maxPrice === 0) {
-    minPriceInput.removeAttribute("max");
-    minPriceRange.removeAttribute("max");
-
-    // Resetear el mínimo del input de precio máximo para que no tenga restricciones
-    maxPriceInput.min = 0;
-    maxPriceRange.min = 0;
-  } else {
-    // Si el valor máximo no es 0, ajustamos el mínimo del input máximo al valor del mínimo actual
-    maxPriceInput.min = minPrice;
-    maxPriceRange.min = minPrice;
-
-    // Asegurarse de que el valor mínimo no supere al máximo
-    if (minPrice >= maxPrice) {
-      minPriceInput.value = maxPrice - parseInt(minPriceInput.step);
-    }
-  }
-
-  // Actualizar el valor del input range del precio mínimo
-  minPriceRange.value = minPriceInput.value;
-  updateMinPrice();
-}
-
-function updateMinPrice() {
-  const minPriceInput = document.getElementById("min-price-input");
-  const maxPriceInput = document.getElementById("max-price-input");
-  const minPriceRange = document.getElementById("min-price");
-  const maxPriceRange = document.getElementById("max-price");
-
-  const minPrice = parseInt(minPriceInput.value);
-
-  console.log(minPrice);
-
-  maxPriceInput.min = minPrice;
-  maxPriceRange.min = minPrice;
-  minPriceRange.max = minPrice;
-}
-
-function updateMaxPrice() {
-  const maxPriceInput = document.getElementById("max-price-input");
-  const maxPriceRange = document.getElementById("max-price");
-  const minPriceRange = document.getElementById("min-price");
-  const minPriceInput = document.getElementById("min-price-input");
-
-  const maxPrice = parseInt(maxPriceInput.value);
-
-  if (maxPriceInput == 0 || maxPriceRange == 0) {
-    minPriceInput.removeAttribute("max");
-    minPriceRange.removeAttribute("max");
-  } else {
-    // Actualizar el máximo del range del precio máximo
-    maxPriceRange.max = maxPrice;
-
-    // Ajustar el máximo del range del precio mínimo
-    minPriceRange.max = maxPrice;
-  }
-}
 
 function syncInput(id) {
   const input = document.getElementById(`${id}-input`);
@@ -452,14 +393,13 @@ searchToggle.addEventListener("click", () => {
   searchToggle.classList.toggle("active");
 });
 
-
 function checkSocialMedia() {
   let UsuarioID = document.getElementById("UsuarioID").value;
 
   $.ajax({
     url: "../../Home/CheckSocialMedia",
     data: {
-      UsuarioID: UsuarioID
+      UsuarioID: UsuarioID,
     },
     type: "POST",
     dataType: "json",
@@ -469,16 +409,16 @@ function checkSocialMedia() {
         icon.classList.add("succes-svg");
         background.classList.add("success");
 
-      titulo.innerHTML = "Atencion";
-      descripcion.innerHTML = `<label>${resultado}</label>`;
-      aceptar.style.display = "block";
-      aceptar.setAttribute("onclick", `hiddenAlert()`);
-      alerta.classList.add("enter-alert");
+        titulo.innerHTML = "Atencion";
+        descripcion.innerHTML = `<label>${resultado}</label>`;
+        aceptar.style.display = "block";
+        aceptar.setAttribute("onclick", `hiddenAlert()`);
+        alerta.classList.add("enter-alert");
 
-      setTimeout(function () {
-        hiddenAlert();
-      }, 5000);
-    }
+        setTimeout(function () {
+          hiddenAlert();
+        }, 5000);
+      }
     },
     error: function (xhr, status) {
       console.log("Disculpe, existió un problema al cargar el listado");
