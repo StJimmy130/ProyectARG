@@ -19,42 +19,40 @@ function getMisPublicaciones() {
 function renderizarTabla(publicaciones) {
   var tabla = ``;
   $.each(publicaciones, function (i, item) {
+    const precioFormateado = Number(item.precioString).toLocaleString('es-ES', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
+
     if (item.activo == true) {
       tabla += `
-          <tr class="text-sm-start">
-              <td class="text-start" style="text-overflow: ellipsis;">${
-                item.tituloString
-              }</td>
-              <td class="text-end" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${
-                item.precioString
-              } ${item.moneda ? "U$D" : "AR$"}</td>
-              <td class="text-start hide-on-small" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${
-                item.localidadString
-              }, ${item.provinciaString} - ${item.direccionString} ${
-        item.nroDireccionString
-      }</td>
-              <td class="text-start hide-on-small">${
-                item.tipoOperacionString
-              }</td>
-              <td><button type="button" class="btn btn-primary" onclick="cargarInformacion(${
-                item.inmuebleID
-              })">Administrar</button></td>
-          </tr>
+        <tr class="text-sm-start small">
+          <td class="text-start" title="${item.tituloString}">${item.tituloString}</td>
+          <td class="text-end" title="${precioFormateado} ${item.moneda ? "U$D" : "AR$"}">${precioFormateado} ${item.moneda ? "U$D" : "AR$"}</td>
+          <td class="text-start" title="${item.localidadString}, ${item.provinciaString} - ${item.direccionString} ${item.nroDireccionString}">
+            ${item.localidadString}, ${item.provinciaString} - ${item.direccionString} ${item.nroDireccionString}
+          </td>
+          <td class="text-start" title="${item.tipoOperacionString}">${item.tipoOperacionString}</td>
+          <td><button type="button" class="btn btn-primary" onclick="cargarInformacion(${item.inmuebleID})">Administrar</button></td>
+        </tr>
       `;
     } else {
       tabla += `
-          <tr class="item-suspendido">
-              <td><p>${item.tituloString}</p></td>
-              <td><p>${item.precioString}</p></td>
-              <td class="hide-on-small"><p>${item.provinciaString}, ${item.localidadString} - ${item.direccionString} ${item.nroDireccionString}</p></td>
-              <td class="hide-on-small"><p>${item.tipoOperacionString}</p></td>
-              <td><button type="button" class="btn btn-primary" onclick="cargarInformacion(${item.inmuebleID})">Administrar</button></td>
-          </tr>
+        <tr class="item-suspendido small">
+          <td class="text-start" title="${item.tituloString}">${item.tituloString}</td>
+          <td class="text-end" title="${precioFormateado} ${item.moneda ? "U$D" : "AR$"}">${precioFormateado} ${item.moneda ? "U$D" : "AR$"}</td>
+          <td class="text-start" title="${item.provinciaString}, ${item.localidadString} - ${item.direccionString} ${item.nroDireccionString}">
+            ${item.provinciaString}, ${item.localidadString} - ${item.direccionString} ${item.nroDireccionString}
+          </td>
+          <td class="text-start" title="${item.tipoOperacionString}">${item.tipoOperacionString}</td>
+          <td><button type="button" class="btn btn-primary" onclick="cargarInformacion(${item.inmuebleID})">Administrar</button></td>
+        </tr>
       `;
     }
   });
   document.getElementById("misPublicaciones").innerHTML = tabla;
 }
+
 
 $(document).ready(function () {
   $("#inputFiltro").on("keyup", function () {
@@ -112,6 +110,35 @@ function cargarInformacion(inmuebleID) {
   });
   showPanel();
 }
+
+
+
+
+// Función para actualizar la visibilidad de los campos
+// Función para actualizar la visibilidad de los campos
+function actualizarVisibilidad() {
+  const tipoInmueble = document.getElementById("TipoInmueble").value;
+  const pisoContainer = document.getElementById("piso-container");
+  const departamentoContainer = document.getElementById("departamento-container");
+
+  // Verificar si el tipo de inmueble es "Departamento"
+  if (tipoInmueble === "5") { 
+    pisoContainer.style.display = "flex"; // Ocultar campo de Piso
+    departamentoContainer.style.display = "flex"; // Ocultar campo de Número de departamento
+  } else {
+    pisoContainer.style.display = "none"; // Mostrar campo de Piso
+    departamentoContainer.style.display = "none"; // Mostrar campo de Número de departamento
+  }
+}
+
+// Añadir un event listener al dropdown
+document.getElementById("TipoInmueble").addEventListener("change", actualizarVisibilidad);
+
+// Llamar a la función al abrir el modal
+$('#ModalEditarPublicacion').on('shown.bs.modal', function () {
+  actualizarVisibilidad(); // Actualiza visibilidad al abrir el modal
+});
+
 
 function GuardarPublicacion() {
   let inmuebleID = document.getElementById("InmuebleID").value;

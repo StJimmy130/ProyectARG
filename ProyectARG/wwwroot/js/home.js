@@ -165,8 +165,6 @@ function ListadoPublicaciones() {
       selectedValues.push(checked.value);
     });
 
-  console.log(provinciaID);
-
   // Llamada AJAX para obtener las publicaciones
   $.ajax({
     url: "../../Home/ListadoInmuebles",
@@ -200,6 +198,25 @@ function ListadoPublicaciones() {
     },
   });
 }
+
+
+function LimpiarFiltros() {
+  // Restablecer los campos de entrada
+  document.getElementById("ProvinciaID").value = 0;
+  document.getElementById("LocalidadID").value = 0;
+  document.getElementById("min-price").value = 0;
+  document.getElementById("max-price").value = 0;
+  document.getElementById("OperacionID").value = 0;
+
+  // Desmarcar todos los checkboxes
+  document.querySelectorAll('input[type="checkbox"]:checked').forEach((checked) => {
+    checked.checked = false;
+  });
+
+  // Opcional: Llamar a ListadoPublicaciones para refrescar la lista
+  ListadoPublicaciones();
+}
+
 
 var paginaActual = 0;
 var itemsPorPagina = 12;
@@ -294,13 +311,19 @@ function cambiarPagina(delta) {
 
 function mostrarPagina(pagina) {
   showLoadingScreen(); // Mostrar pantalla de carga al renderizar una nueva página
-  
 
   let contenidoTabla = `<button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#filterMenu"
       aria-controls="filterMenu" aria-expanded="false" aria-label="Toggle navigation">
       <span class="container span-filtros"><i class='bx bx-menu-alt-left'></i>Filtros</span>
     </button>`;
+
   $.each(paginas[pagina], function (i, item) {
+    // Formatear el precio con miles y dos decimales
+    const precioFormateado = Number(item.precioString).toLocaleString('es-ES', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
+
     contenidoTabla += `
     <div class="col-lg-4 col-md-6 col-sm-12 activo">
       <a href="../Inmuebles/Detalle/${item.inmuebleID}">
@@ -313,13 +336,14 @@ function mostrarPagina(pagina) {
           </div>
           <div class="card-body">
             <h5 class="card-title fs-4">${item.tituloString}</h5>
-              <p class="card-text fs-5">${item.moneda ? "U$D" : "AR$"} ${item.precioString} - ${item.tipoOperacionString}</p>
-              <p class="card-title fs-5">${item.provinciaString}, ${item.localidadString} - ${item.direccionString} ${item.nroDireccionString}</p>
+            <p class="card-text fs-5">${item.moneda ? "U$D" : "AR$"} ${precioFormateado} - ${item.tipoOperacionString}</p>
+            <p class="card-title fs-5">${item.provinciaString}, ${item.localidadString} - ${item.direccionString} ${item.nroDireccionString}</p>
           </div>
         </div>
       </a>
     </div>`;
-    console.log('id:',item.inmuebleID, 'esFavorito:',item.esFavorito);
+    
+    
   });
 
   document.getElementById("publicaciones").innerHTML = contenidoTabla;

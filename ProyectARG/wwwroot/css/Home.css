@@ -333,9 +333,10 @@ input[type="range"] {
 
 .contenedor-boton{
   display: flex;
-  justify-content: right;
+  justify-content: space-around;
+  padding: 0 5px 0 5px;
   align-items: center;
-  padding-right: 20px;
+  
 }
 
 
@@ -343,11 +344,11 @@ input[type="range"] {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 30px;
+  font-size: 16px;
+  margin-top: 20px;
   padding: 7px 14px;
   gap: 15px;
   background-color: #0085dd;
-
   border-radius: 5px;
   border: none;
   cursor: pointer;
@@ -356,7 +357,7 @@ input[type="range"] {
 }
 
 .boton-filtrar i{
-  font-size: 20px;
+  font-size: 18px;
   margin-right: -10px;
 }
 
@@ -364,6 +365,34 @@ input[type="range"] {
   background-color: transparent;
   color: white;
   background-color: #0063a5;
+  outline: 1px #ffffff solid;
+}
+
+.boton-limpiar{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  margin-top: 20px;
+  padding: 7px 14px;
+  gap: 15px;
+  background-color: #f1c40f ;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: 100ms;
+  color: white;
+}
+
+.boton-limpiar i{
+  font-size: 18px;
+  margin-right: -10px;
+}
+
+.boton-limpiar:hover {
+  background-color: transparent;
+  color: white;
+  background-color: #f1c40f ;
   outline: 1px #ffffff solid;
 }
 

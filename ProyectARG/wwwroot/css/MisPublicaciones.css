@@ -1,5 +1,5 @@
 body {
-  padding-top: 80px;
+  padding-top: 20px;
 }
 
 section {
@@ -8,20 +8,18 @@ section {
 }
 
 :root {
-  --tr-odd: #caffda;
-  --tr-even: #b6e7c5;
   --text-area: #d6d6d6;
   --text-placeholder: #313131;
-  --border-color: #006834;
+  --border-color: #009bff;
   --fondo-dropdown: #494949;
+  --fondo-modal: #d6d6d6;
 }
 
 body.dark {
-  --tr-odd: #515050;
-  --tr-even: #595959;
+  --fondo-modal: #3b3b3b;
   --text-area: #303030;
-  --text-placeholder: #c9c9c9;
-  --border-color: #00ac56;
+  --text-placeholder: #dddddd;
+  --border-color: #0065a8;
   --fondo-dropdown: #494949;
 }
 
@@ -82,64 +80,7 @@ body.dark {
 
 /* fin search */
 
-.table-publicacion {
-  width: 100%;
-  background-color: var(--container-color);
-  border-radius: 15px;
-  padding: 0px;
-  background-color: transparent;
-}
 
-.table-publicacion tr:nth-child(even) td {
-  color: var(--text-color2);
-  background-color: var(--tr-even);
-}
-
-.table-publicacion tr:nth-child(odd) td {
-  color: var(--text-color2);
-  background-color: var(--tr-odd);
-}
-.table-publicacion thead tr th {
-  color: var(--text-color2);
-  background-color: var(--tr-even);
-}
-.table-publicacion thead tr th:first-child {
-  border-radius: 15px 0 0 0;
-}
-.table-publicacion thead tr th:last-child {
-  border-radius: 0 15px 0 0;
-}
-
-.table-publicacion tr {
-  border-bottom: solid transparent;
-  max-height: 10px;
-}
-
-.table-publicacion tr:last-child td:first-child {
-  border-radius: 0 0 0 15px;
-}
-
-.table-publicacion tr:last-child td:last-child {
-  border-radius: 0 0 15px 0;
-}
-.item-suspendido td {
-  opacity: 0.3;
-  filter: grayscale(100%);
-}
-.item-suspendido button {
-  background-color: black;
-}
-
-td {
-  text-align: center;
-}
-td p {
-  text-overflow: ellipsis;
-  display: -webkit-box; /* Necesario para aplicar -webkit-line-clamp */
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2; /* Limita a 4 líneas */
-  overflow: hidden;
-}
 
 #panel {
   display: none;
@@ -208,7 +149,7 @@ td p {
 /* ESTILOS MODAL EDITAR PUBLICACION */
 
 .modal-content {
-  background-color: var(--container-color);
+  background-color: var(--fondo-modal);
   border-radius: 5px;
   font-size: 18px;
   border-color: var(--side-nav);

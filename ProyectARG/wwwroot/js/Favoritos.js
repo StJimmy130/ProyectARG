@@ -79,6 +79,12 @@ function mostrarPublicaciones(publicaciones) {
     let contenidoTabla = "";
 
     $.each(publicaciones, function (i, item) {
+        // Formatear el precio con miles y dos decimales
+        const precioFormateado = Number(item.precioString).toLocaleString('es-ES', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        });
+
         contenidoTabla += `
         <div class="col-lg-4 col-md-6 col-sm-12 mb-4 activo">
             <a href="../Inmuebles/Detalle/${item.inmuebleID}">
@@ -91,7 +97,7 @@ function mostrarPublicaciones(publicaciones) {
                     </div>
                     <div class="card-body">
                         <h5 class="card-title fs-4">${item.tituloString}</h5>
-                        <p class="card-text fs-5">${item.precioString} ${item.moneda ? "U$D" : "AR$"} - ${item.tipoOperacionString}</p>
+                        <p class="card-text fs-5">${precioFormateado} ${item.moneda ? "U$D" : "AR$"} - ${item.tipoOperacionString}</p>
                         <p class="card-title fs-5">${item.provinciaString}, ${item.localidadString} - ${item.direccionString} ${item.nroDireccionString}</p>
                     </div>
                 </div>

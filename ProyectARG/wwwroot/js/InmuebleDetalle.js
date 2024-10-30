@@ -107,10 +107,15 @@ function CargarDatosPublicacion() {
           </div>` : ''}
         </div>
       `;
+
+      const precioFormateado = Number(inmueble.precioString).toLocaleString('es-ES', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
       
       datosPrincipales += `
         <h2>${inmueble.tituloString}</h2>
-        <h3>${inmueble.moneda ? "U$D" : "AR$"} ${inmueble.precioString}</h3>
+        <h3>${inmueble.moneda ? "U$D" : "AR$"} ${precioFormateado}</h3>
         <h4>${inmueble.provinciaString} - ${inmueble.localidadString}</h4>
         <h4>${inmueble.tipoInmuebleString} en ${inmueble.tipoOperacionString}</h4>
       `;
