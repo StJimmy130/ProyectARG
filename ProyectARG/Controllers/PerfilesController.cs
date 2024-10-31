@@ -28,7 +28,7 @@ public class PerfilesController : Controller
         UsuarioID = _context.Usuarios
                 .Where(t => t.CuentaID == userId)
                 .Select(t => t.UsuarioID) // Proyecta solo el campo UsuarioID
-                .SingleOrDefault(); ;
+                .SingleOrDefault(); 
 
         ViewBag.UsuarioID = UsuarioID;
         return View();

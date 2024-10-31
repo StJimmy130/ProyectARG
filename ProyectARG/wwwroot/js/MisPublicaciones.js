@@ -114,30 +114,20 @@ function cargarInformacion(inmuebleID) {
 
 
 
-// Función para actualizar la visibilidad de los campos
-// Función para actualizar la visibilidad de los campos
 function actualizarVisibilidad() {
   const tipoInmueble = document.getElementById("TipoInmueble").value;
   const pisoContainer = document.getElementById("piso-container");
   const departamentoContainer = document.getElementById("departamento-container");
 
-  // Verificar si el tipo de inmueble es "Departamento"
   if (tipoInmueble === "5") { 
-    pisoContainer.style.display = "flex"; // Ocultar campo de Piso
-    departamentoContainer.style.display = "flex"; // Ocultar campo de Número de departamento
+    pisoContainer.style.display = "flex"; 
+    departamentoContainer.style.display = "flex"; 
   } else {
-    pisoContainer.style.display = "none"; // Mostrar campo de Piso
-    departamentoContainer.style.display = "none"; // Mostrar campo de Número de departamento
+    pisoContainer.style.display = "none"; 
+    departamentoContainer.style.display = "none"; 
   }
 }
 
-// Añadir un event listener al dropdown
-document.getElementById("TipoInmueble").addEventListener("change", actualizarVisibilidad);
-
-// Llamar a la función al abrir el modal
-$('#ModalEditarPublicacion').on('shown.bs.modal', function () {
-  actualizarVisibilidad(); // Actualiza visibilidad al abrir el modal
-});
 
 
 function GuardarPublicacion() {
@@ -296,6 +286,7 @@ function AbrirModalEditar(inmuebleID) {
       });
  console.log(backFiles);
  actualizarDataIndex();
+ actualizarVisibilidad();
 
       $("#list-container").html(miniaturas);
 

@@ -146,6 +146,7 @@ p.card-text{
   right: 0;
   height: 25%;
   color: #fff;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.849) 0%, rgba(0, 0, 0, 0) 100%);
   text-shadow: 0 0 5px black;
   overflow: hidden;
   border-radius: 0 0 10px 10px;
@@ -249,8 +250,8 @@ li span{
     background: transparent;
     border-radius: 8px;
     padding: 8px;
-    margin: 1rem 0;
-    
+    margin: 1rem 0 3px 0;
+    color: var(--text-color2);
 }
 
 li:first-child .menu-desplegable{
@@ -265,6 +266,7 @@ li:first-child .menu-desplegable{
 .menu-desplegable input[type="number"] {
   width: auto;
   background: none;
+  color: var(--text-color2);
   border: none;
   outline: none;
   -webkit-appearance: none; /* Para Safari y Chrome */

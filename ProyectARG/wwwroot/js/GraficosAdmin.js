@@ -237,4 +237,33 @@ function GenerarColor(saturacion = 1) {
 
 
 
+$(document).ready(function() {
+    $.ajax({
+        url: '../Administracion/InmueblesTotalesActivos',
+        method: 'GET',
+        contentType: 'application/json',
+        success: function(data) {
+            $('#inmueblesActivos').text(data);
+        },
+        error: function() {
+            $('#inmueblesActivos').text('Error al cargar los datos');
+            console.error('Error al cargar los datos');
+        }
+    });
+});
 
+
+$(document).ready(function() {
+    $.ajax({
+        url: '../Administracion/UsuariosTotales',
+        method: 'GET',
+        contentType: 'application/json',
+        success: function(data) {
+            $('#usuariosRegistrados').text(data);
+        },
+        error: function() {
+            $('#usuariosRegistrados').text('Error al cargar los datos');
+            console.error('Error al cargar los datos');
+        }
+    });
+});

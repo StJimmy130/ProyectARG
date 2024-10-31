@@ -393,12 +393,29 @@ public class AdministracionController : Controller
             .GroupBy(i => i.TipoOperacion)
             .Select(g => new
             {
-                tipoOperacion = g.Key.ToString(), 
+                tipoOperacion = g.Key.ToString(),
                 cantidad = g.Count()              // Contar la cantidad de publicaciones por cada tipo
             })
             .ToList();
 
-        return Json(conteo); 
+        return Json(conteo);
+    }
+
+
+    public JsonResult InmueblesTotalesActivos()
+    {
+        var cantidadInmueblesActivos = _context.Inmuebles
+            .Where(i => i.Activo == true)
+            .Count();
+
+        return Json(cantidadInmueblesActivos);
+    }
+
+    public JsonResult UsuariosTotales()
+    {
+        var cantidadUsuariosTotales = _context.Usuarios.Count();
+
+        return Json(cantidadUsuariosTotales);
     }
 
 }

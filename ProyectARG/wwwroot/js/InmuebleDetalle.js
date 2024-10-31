@@ -114,18 +114,18 @@ function CargarDatosPublicacion() {
       });
       
       datosPrincipales += `
-        <h2>${inmueble.tituloString}</h2>
-        <h3>${inmueble.moneda ? "U$D" : "AR$"} ${precioFormateado}</h3>
-        <h4>${inmueble.provinciaString} - ${inmueble.localidadString}</h4>
-        <h4>${inmueble.tipoInmuebleString} en ${inmueble.tipoOperacionString}</h4>
+        <h2 style="font-weight: 500; font-size: 24px; text-transform: uppercase">${inmueble.tituloString}</h2>
+        <p style="font-weight: 300; font-size: 25px; margin-top: 20px">${inmueble.moneda ? "U$D" : "AR$"} ${precioFormateado}</p>
+        <h4 style="font-weight: 400; font-size: 18px; margin-top: 20px">${inmueble.provinciaString} - ${inmueble.localidadString}</h4>
+        <h4 style="font-weight: 400; font-size: 18px; margin-top: 10px">${inmueble.tipoInmuebleString} en ${inmueble.tipoOperacionString}</h4>
       `;
       
         // Datos Vendedor
         inmueble.datosUsuario.forEach((usuario) => {
           datosVendedor += `
-            <h5>Contacto</h5>
-            <p>${usuario.nombre || ''}</p>
-            <p>${usuario.nroTelefono || ''}</p>
+            <h5 style="font-weight: 400; font-size: 20px;">Contacto</h5>
+            <p style="font-weight: 300; font-size: 18px; margin-top: -5px"><i class="fa-solid fa-user"></i> ${usuario.nombre || ''}</p>
+            <p style="font-weight: 300; font-size: 18px; margin: -10px 0 10px 0"><i class="fa-solid fa-phone"></i>  ${usuario.nroTelefono || ''}</p>
             <div class="icons-vendedor">
               ${usuario.facebook ? `<a class="facebook" href="${usuario.facebook}" target="_blank"><i class='bx bxl-facebook'></i></a>` : ''}
               ${usuario.instagram ? `<a class="instagram" href="https://www.instagram.com/${usuario.instagram}/" target="_blank"><i class="bx bxl-instagram"></i></a>` : ''}
