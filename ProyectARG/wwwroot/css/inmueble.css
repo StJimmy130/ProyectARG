@@ -89,10 +89,8 @@ footer{
 
 /* Estilos para la lista desplegable del DropDownList */
 .input-form option {
-  background-color: var(--fondo-dropdown); /* Color de fondo de las opciones */
-  color: white; /* Color del texto de las opciones */
+  color: #161616; 
   font-size: 16px;
-  font-weight: 200;
 
 }
 

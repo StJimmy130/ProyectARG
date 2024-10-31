@@ -116,14 +116,14 @@ function CargarDatosPublicacion() {
       datosPrincipales += `
         <h2 style="font-weight: 500; font-size: 24px; text-transform: uppercase">${inmueble.tituloString}</h2>
         <p style="font-weight: 300; font-size: 25px; margin-top: 20px">${inmueble.moneda ? "U$D" : "AR$"} ${precioFormateado}</p>
-        <h4 style="font-weight: 400; font-size: 18px; margin-top: 20px">${inmueble.provinciaString} - ${inmueble.localidadString}</h4>
-        <h4 style="font-weight: 400; font-size: 18px; margin-top: 10px">${inmueble.tipoInmuebleString} en ${inmueble.tipoOperacionString}</h4>
-      `;
+        <h4 style="font-weight: 400; font-size: 18px; margin-top: 20px"><i class="fa-solid fa-arrow-right"></i> ${inmueble.tipoInmuebleString} en ${inmueble.tipoOperacionString}</h4>
+        <h4 style="font-weight: 400; font-size: 18px;"><i class="fa-solid fa-location-dot"></i> ${inmueble.provinciaString} - ${inmueble.localidadString}</h4>
+        `;
       
         // Datos Vendedor
         inmueble.datosUsuario.forEach((usuario) => {
           datosVendedor += `
-            <h5 style="font-weight: 400; font-size: 20px;">Contacto</h5>
+            <h5 style="font-weight: 300; font-size: 20px; margin-top: 20px">Contacto</h5>
             <p style="font-weight: 300; font-size: 18px; margin-top: -5px"><i class="fa-solid fa-user"></i> ${usuario.nombre || ''}</p>
             <p style="font-weight: 300; font-size: 18px; margin: -10px 0 10px 0"><i class="fa-solid fa-phone"></i>  ${usuario.nroTelefono || ''}</p>
             <div class="icons-vendedor">
@@ -144,25 +144,32 @@ function CargarDatosPublicacion() {
         inmueble.amobladoString = inmueble.amobladoString ? "Si" : "No";
 
         detallesPublicaciones += `
-          <h3>Detalles</h3>
-          <p><i class="fa-solid fa-ruler-combined"></i> Superficie total: ${inmueble.superficieTotalString} m²</p>
-          <p><i class="fa-solid fa-ruler-horizontal"></i> Superficie cubierta: ${inmueble.superficieCubiertaString} m²</p>
-          <p><i class="fa-solid fa-bed"></i> Habitaciones: ${inmueble.dormitoriosString}</p>
-          <p><i class="fa-solid fa-bath"></i> Baños: ${inmueble.baniosString}</p>
-          <p><i class="fa-solid fa-utensils"></i> Ambientes: ${inmueble.cantidadAmbientesString}</p>
-          <p><i class="fa-solid fa-car"></i> Cochera: ${inmueble.cocheraString}</p>
-          <p><i class="fa-solid fa-couch"></i> Amoblado: ${inmueble.amobladoString}</p>
-          <p><i class="fa-solid fa-city"></i> Barrio: ${inmueble.barrioString}</p>
-          <p><i class="fa-solid fa-signs-post"></i> Dirección: ${inmueble.direccionString} al ${inmueble.nroDireccionString}</p>
-          ${inmueble.pisoString && inmueble.nroDepartamentoString ? `<p><i class="fa-solid fa-building"></i> Piso: ${inmueble.pisoString} - Departamento: ${inmueble.nroDepartamentoString}</p>` : ''}
-
-        `;
+          <p style="font-weight: 300; font-size: 26px; margin-top: -5px">Detalles</p>
+          <div style="font-weight: 300; font-size: 16px;">
+            <p><i class="fa-solid fa-ruler-combined"></i> Superficie total: ${inmueble.superficieTotalString || 'Consultar'} m²</p>
+            <p><i class="fa-solid fa-ruler-horizontal"></i> Superficie cubierta: ${inmueble.superficieCubiertaString || 'Consultar'} m²</p>
+            <p><i class="fa-solid fa-bed"></i> Habitaciones: ${inmueble.dormitoriosString || 'Consultar'}</p>
+            <p><i class="fa-solid fa-bath"></i> Baños: ${inmueble.baniosString || 'Consultar'}</p>
+            <p><i class="fa-solid fa-utensils"></i> Ambientes: ${inmueble.cantidadAmbientesString || 'Consultar'}</p>
+            <p><i class="fa-solid fa-car"></i> Cochera: ${inmueble.cocheraString || 'Consultar'}</p>
+            <p><i class="fa-solid fa-couch"></i> Amoblado: ${inmueble.amobladoString || 'Consultar'}</p>
+            <p><i class="fa-solid fa-city"></i> Barrio: ${inmueble.barrioString || 'Consultar'}</p>
+            <p><i class="fa-solid fa-signs-post"></i> Dirección:
+              ${inmueble.direccionString || inmueble.nroDireccionString 
+              ? `${inmueble.direccionString || ''} ${inmueble.nroDireccionString ? 'al ' + inmueble.nroDireccionString : ''}`: 'Consultar'}
+            </p>
+            ${inmueble.pisoString && inmueble.nroDepartamentoString ? `<p><i class="fa-solid fa-building"></i> Piso: ${inmueble.pisoString} - Departamento: ${inmueble.nroDepartamentoString}</p>` : ''}
+        </div>
+          `;
 
         // Imágenes
         $("#MainImage").attr("src", inmueble.imagenes[0].imagenSrc);
         let descripcionConSaltos
         if(inmueble.descripcionString != null){
           descripcionConSaltos = inmueble.descripcionString.replace(/\n/g,"<br>");
+        }
+        else{
+          descripcionConSaltos = "El vendedor no ha incluido una descripción.";
         }
         
         $("#Descripcion").html(descripcionConSaltos);

@@ -1,3 +1,4 @@
+
 .catalogo {
   height: auto;
   width: 100%;
@@ -260,8 +261,9 @@ li:first-child .menu-desplegable{
 
 .menu-desplegable .form-control {
     border-radius: 5px;
-    height: auto;
+    height: auto;    
 }
+
 
 .menu-desplegable input[type="number"] {
   width: auto;
@@ -394,7 +396,7 @@ input[type="range"] {
 .boton-limpiar:hover {
   background-color: transparent;
   color: white;
-  background-color: #f1c40f ;
+  background-color: #d3a902 ;
   outline: 1px #ffffff solid;
 }
 

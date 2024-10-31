@@ -42,12 +42,9 @@ footer {
 
 .image-container {
   position: relative;
-  height: 420px;
-  /* Establece una altura fija */
+  height: 480px;
   width: 100%;
-  /* Toma todo el ancho disponible */
-  max-width: 700px;
-  /* Ajusta según sea necesario */
+  max-width: 900px;
   margin: 0 auto;
   border-radius: 5px;
   overflow: hidden;
@@ -61,7 +58,6 @@ footer {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
-  /* Mantiene la relación de aspecto */
 }
 
 .image-control {
@@ -159,7 +155,7 @@ footer {
 .info-vendedor .icons-vendedor {
   justify-content: left;
   display: flex;
-  margin: 20px 50px -10 0;
+  margin: 20px 50px -10px 20px;
 }
 
 .info-vendedor .icons-vendedor a {

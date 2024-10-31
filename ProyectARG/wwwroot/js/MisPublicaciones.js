@@ -30,7 +30,7 @@ function renderizarTabla(publicaciones) {
           <td class="text-start" title="${item.tituloString}">${item.tituloString}</td>
           <td class="text-end" title="${precioFormateado} ${item.moneda ? "U$D" : "AR$"}">${precioFormateado} ${item.moneda ? "U$D" : "AR$"}</td>
           <td class="text-start" title="${item.localidadString}, ${item.provinciaString} - ${item.direccionString} ${item.nroDireccionString}">
-            ${item.localidadString}, ${item.provinciaString} - ${item.direccionString} ${item.nroDireccionString}
+            ${item.localidadString}, ${item.provinciaString} - ${item.direccionString || ''} ${item.nroDireccionString || ''}
           </td>
           <td class="text-start" title="${item.tipoOperacionString}">${item.tipoOperacionString}</td>
           <td><button type="button" class="btn btn-primary" onclick="cargarInformacion(${item.inmuebleID})">Administrar</button></td>
