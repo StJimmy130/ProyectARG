@@ -13,7 +13,7 @@
 
 <section>
   <div class="row">
-    <div class="col-xl-12 col-sm-6 pb-3">
+    <div class="col-xl-8 col-sm-6 pb-3">
       <div class="d-flex justify-content-strart">
         <div class="search">
           <input type="text" id="inputFiltro" class="search__input" placeholder="Buscar...">
@@ -45,19 +45,21 @@
       </div>
 
       <div class="col-xl-8 col-sm-12 Tbody-class" id="table">
+        <div class="redondeo">
         <table class="table table-dark table-hover table-striped table-bordered">
           <thead class="headTabla">
             <tr class="text-center">
-              <th>TÍTULO</th>
+              <th id="tituloTd">TÍTULO</th>
               <th>PRECIO</th>
               <th>LOCALIDAD</th>
-              <th>OPERACIÓN</th>
+              <th id="operacionTd">OPERACIÓN</th>
               <th>ACCIONES</th>
             </tr>
           </thead>
           <tbody id="misPublicaciones" class="bodyTabla">
           </tbody>
         </table>
+        </div>
       </div>
     </div>
   </div>

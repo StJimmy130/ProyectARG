@@ -28,6 +28,7 @@ body.dark {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 100%;
   text-align: center;
 }
 
@@ -38,7 +39,7 @@ body.dark {
   color: var(--text-color2);
   padding: 0.7rem 1rem;
   border-radius: 30px;
-  width: 45vw;
+  width: 100%;
   margin-right: -2rem;
   margin-bottom: 5px;
   font-size: 1.2rem;
@@ -65,6 +66,7 @@ body.dark {
   background-color: transparent;
   margin-top: 0.1em;
   margin-bottom: 1em;
+  margin-right: 1em;
   color: var(--text-color2);
 }
 
@@ -259,6 +261,24 @@ input {
   display: flex;
   flex-direction: row; /* Muestra los divs uno al lado del otro en pantallas grandes */
   justify-content: space-between;
+  padding-right: 10px;
+}
+
+
+
+.redondeo{
+  border-radius: 15px;
+  height: 100%;
+  
+}
+#table{
+  padding-right: 5px;
+  
+}
+
+/*  */
+.headTabla th:last-child {
+  border-radius: 0 15px 0 0;
 }
 
 #panel {
@@ -288,7 +308,7 @@ input {
     height: 100%;
     padding: 0;
     margin-top: 20px;
-    margin-bottom: -60px;
+    margin-bottom: 60px;
   }
 
   .hide-on-small {
