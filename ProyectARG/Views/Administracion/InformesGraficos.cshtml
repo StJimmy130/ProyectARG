@@ -10,7 +10,7 @@
 </div>
 
 <div class="row pe-1 ps-1">
-  <div class="col-xl-6 col-md-12 mb-4">
+  <div class="col-xl-4 col-md-12 mb-4">
     <div class="card">
       <div class="card-body">
         <div class="d-flex justify-content-between p-md-1">
@@ -19,18 +19,18 @@
               <i class="fa-solid fa-cart-plus text-info fa-3x me-4"></i>
             </div>
             <div>
-              <h4>Inmuebles publicados</h4>
-              <p class="mb-0">Publicaciones activas actualmente</p>
+              <h4>Publicaciones activas</h4>
+              <p class="mb-0">Publicaciones realizadas activas actualmente</p>
             </div>
           </div>
-          <div class="align-self-center">
-            <h2 class="h1 mb-0" id="inmueblesActivos">Cargando...</h2>
+          <div class="d-flex align-items-end">
+            <h2 class="h1 mb-0 d-flex fw-light align-items-center" id="inmueblesActivos">Cargando...</h2>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="col-xl-6 col-md-12 mb-4">
+  <div class="col-xl-4 col-md-12 mb-4">
     <div class="card">
       <div class="card-body">
         <div class="d-flex justify-content-between p-md-1">
@@ -40,11 +40,31 @@
             </div>
             <div>
               <h4>Usuarios registrados</h4>
-              <p class="mb-0">Totalidad de usuarios registrados actualmente</p>
+              <p class="mb-0">Totalidad de usuarios registrados en el sitio</p>
             </div>
           </div>
-          <div class="align-self-center">
-            <h2 class="h1 mb-0" id="usuariosRegistrados">Cargando...</h2>
+          <div class="d-flex align-items-end">
+            <h2 class="h1 mb-0 fw-light" id="usuariosRegistrados">Cargando... </h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-4 col-md-12 mb-4">
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex justify-content-between p-md-1">
+          <div class="d-flex flex-row">
+            <div class="align-self-center">
+              <i class="fa-solid fa-timeline text-info fa-3x me-4"></i>
+            </div>
+            <div>
+              <h4>Últimos 30 días</h4>
+              <p class="mb-0">Publicaciones del último mes con respecto al anterior</p>
+            </div>
+          </div>
+          <div class="d-flex align-items-end">
+            <h2 class="h1 mb-0 d-flex fw-light align-items-center" id="inmueblesUltimos30Dias">Cargando...<i id="flechaIndicador"></i></h2>
           </div>
         </div>
       </div>
@@ -56,21 +76,24 @@
   <div class="card-body col-md-5 col-sm-12 graficos mt-4" style="max-height: 600px;">
     <div>
       <h3 class="tituloGraficos">PUBLICACIONES POR PROVINCIA</h3>
+      <hr>
     </div>
     <canvas id="graficoTorta" width="200" height="200"></canvas>
   </div>
   <div class="card-body col-md-3 col-sm-12 graficos mt-4">
-    <div style="max-height: 450px;">
+    <div>
       <div>
         <h3 class="tituloGraficos">PUBLICACIONES POR TIPO OPERACIÓN</h3>
+        <hr>
       </div>
       <canvas id="graficoPublicacionesPorOperacion" width="200" height="200"></canvas>
     </div>
   </div>
   <div class="card-body col-md-3 col-sm-12 graficos mt-4">
-    <div style="max-height: 450px;">
+    <div>
       <div>
         <h3 class="tituloGraficos">TOP 10 PROVINCIAS CON MÁS ACTIVIDAD</h3>
+        <hr>
       </div>
       <canvas id="graficoBarras" width="200" height="200"></canvas>
     </div>

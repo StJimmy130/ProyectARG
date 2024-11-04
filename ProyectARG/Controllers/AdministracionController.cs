@@ -404,6 +404,26 @@ public class AdministracionController : Controller
         return Json(cantidadInmueblesActivos);
     }
 
+        public JsonResult InmueblesUltimos30Dias()
+    {
+        var fechaHoy = DateTime.Now;
+        var fechaInicio30Dias = fechaHoy.AddDays(-30);
+        var fechaInicio60Dias = fechaHoy.AddDays(-60);
+
+        // Conteo de inmuebles en los últimos 30 días
+        var inmueblesUltimos30Dias = _context.Inmuebles
+            .Where(i => i.Activo == true && i.FechaAlta >= fechaInicio30Dias && i.FechaAlta <= fechaHoy)
+            .Count();
+
+        // Conteo de inmuebles en los 30 días anteriores (de 30 a 60 días atrás)
+        var inmueblesPeriodoAnterior = _context.Inmuebles
+            .Where(i => i.Activo == true && i.FechaAlta >= fechaInicio60Dias && i.FechaAlta < fechaInicio30Dias)
+            .Count();
+
+        return Json(new { inmueblesUltimos30Dias, inmueblesPeriodoAnterior });
+    }
+
+
     public JsonResult UsuariosTotales()
     {
         var cantidadUsuariosTotales = _context.Usuarios.Count();

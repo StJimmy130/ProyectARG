@@ -244,6 +244,7 @@ $(document).ready(function() {
         contentType: 'application/json',
         success: function(data) {
             $('#inmueblesActivos').text(data);
+
         },
         error: function() {
             $('#inmueblesActivos').text('Error al cargar los datos');
@@ -251,6 +252,35 @@ $(document).ready(function() {
         }
     });
 });
+
+$(document).ready(function() {
+    $.ajax({
+        url: '../Administracion/InmueblesUltimos30Dias',
+        method: 'GET',
+        contentType: 'application/json',
+        success: function(data) {
+            const { inmueblesUltimos30Dias, inmueblesPeriodoAnterior } = data;
+            $('#inmueblesUltimos30Dias').text(inmueblesUltimos30Dias);
+
+            // Lógica para mostrar la flecha de incremento o decremento
+            let flechaHtml = '';
+            if (inmueblesUltimos30Dias > inmueblesPeriodoAnterior) {
+                flechaHtml = '<i class="ms-2 fa-solid fa-circle-arrow-up" style="color: green; font-size: 18px"></i>';
+            } else if (inmueblesUltimos30Dias < inmueblesPeriodoAnterior) {
+                flechaHtml = '<i class="ms-2 fa-solid fa-circle-arrow-down" style="color: red; font-size: 18px"></i>';
+            } else {
+                flechaHtml = '<i class="ms-2 fa-solid fa-circle-minus" style="color: gray; font-size: 18px"></i>';
+            }
+
+            $('#inmueblesUltimos30Dias').append(flechaHtml);
+        },
+        error: function() {
+            $('#inmueblesActivos').text('Error al cargar los datos');
+            console.error('Error al cargar los datos');
+        }
+    });
+});
+
 
 
 $(document).ready(function() {

@@ -4,6 +4,7 @@ body{
 .selectInformes{
     background-color: transparent;
     border: none;
+    color: var(--text-color2);
     border-bottom: #0085dd solid 2px;
     height: 40px;
     width: 25%;
@@ -12,6 +13,12 @@ body{
     padding: 5px;
     border-radius: 5px;
 }
+
+.selectInformes option{
+    background-color: var(--text-color);
+    color: var(--text-color2);
+}
+
 
 .selectInformes:focus{
     outline: none;

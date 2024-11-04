@@ -25,17 +25,11 @@ footer {
   margin-top: 100px;
 }
 
-@media screen and (max-width: 768px) {
-  body{
-    margin-top: 25px;
-  }
-}
-
 
 /* IMAGENES DEL INMUEBLE */
 
 .contenedor-imagenes {
-  background: var(--body-filter);
+  background: var(--bg-descripcion-detalle);
   border-radius: 5px;
   padding: 10px;
 }
@@ -111,7 +105,7 @@ footer {
 }
 
 .miniaturas::-webkit-scrollbar-track {
-  background-color: var(--body-filter);
+  background: var(--bg-descripcion-detalle);
   border-radius: 3px;
 }
 
@@ -146,7 +140,7 @@ footer {
   justify-content: space-between;
   padding: 15px;
   border-radius: 5px;
-  background-color: var(--body-filter);
+  background: var(--bg-descripcion-detalle);
   overflow-y: auto;
 }
 
@@ -211,7 +205,7 @@ footer {
   border-radius: 5px;
   align-items: start;
   color: var(--text-info);
-  background-color: var(--body-filter);
+  background: var(--bg-descripcion-detalle);
 }
 
 .property-details h3 {
@@ -381,9 +375,17 @@ textarea.form-control {
   .vistaDetalle {
     margin: 0 5px;
     padding: 20px 0px 20px 0px;
+    margin: 0 10px 0 10px;
   }
 
   main {
     width: 100vw;
+  }
+  
+  body{
+    margin-top: 25px;
+  }
+  .info-container{
+    margin-top: 15px;
   }
 }

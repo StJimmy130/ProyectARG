@@ -249,6 +249,7 @@ function GuardarPublicacion() {
         setTimeout(function () {
           hiddenAlert();
         }, 3000);
+        window.location.href = "../../Home/Index";
       } else {
         icon.classList.add("denied-svg");
         icon.innerHTML = '<i class="bx bxs-x-circle"></i>';
@@ -261,9 +262,10 @@ function GuardarPublicacion() {
 
         setTimeout(function () {
           hiddenAlert();
-          window.location.href = "../../Home/Index";
         }, 3000);
+        window.location.href = "../../Home/Index";
       }
+      
     },
     error: function (err) {
       console.error(err);
