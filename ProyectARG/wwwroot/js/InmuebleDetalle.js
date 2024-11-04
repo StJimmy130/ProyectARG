@@ -125,7 +125,7 @@ function CargarDatosPublicacion() {
           datosVendedor += `
             <h5 style="font-weight: 300; font-size: 20px; margin-top: 20px">Contacto</h5>
             <p style="font-weight: 300; font-size: 18px; margin-top: -5px"><i class="fa-solid fa-user"></i> ${usuario.nombre || ''}</p>
-            <p style="font-weight: 300; font-size: 18px; margin: -10px 0 10px 0"><i class="fa-solid fa-phone"></i>  ${usuario.nroTelefono || ''}</p>
+            <p style="font-weight: 300; font-size: 18px; margin: -10px 0 10px 0"><i class="fa-solid fa-phone"></i>  ${formatPhoneNumber(usuario.nroTelefono) || ''}</p>
             <div class="icons-vendedor">
               ${usuario.facebook ? `<a class="facebook" href="${usuario.facebook}" target="_blank"><i class='bx bxl-facebook'></i></a>` : ''}
               ${usuario.instagram ? `<a class="instagram" href="https://www.instagram.com/${usuario.instagram}/" target="_blank"><i class="bx bxl-instagram"></i></a>` : ''}
@@ -233,6 +233,24 @@ function CargarDatosPublicacion() {
       hideLoadingScreen();
     },
   });
+}
+
+function formatPhoneNumber(phoneNumber) {
+  // Eliminar cualquier carácter que no sea un dígito
+  let cleaned = ('' + phoneNumber).replace(/\D/g, '');
+
+  // Verificar que tenga el largo adecuado
+  if (cleaned.length !== 10) {
+      return phoneNumber; // Retorna el original si no es un número válido
+  }
+
+  // Dividir el número en partes
+  let part1 = cleaned.slice(0, 4);
+  let part2 = cleaned.slice(4, 6);
+  let part3 = cleaned.slice(6);
+
+  // Armar el formato deseado
+  return `(${part1}) ${part2}-${part3}`;
 }
 
 function getComentarios() {

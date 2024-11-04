@@ -8,7 +8,7 @@ using ProyectARG.Models;
 
 namespace ProyectARG.Controllers;
 
-[Authorize]
+
 public class ComentariosController : Controller
 {
     private ApplicationDbContext _context;
@@ -68,6 +68,7 @@ public class ComentariosController : Controller
         return Json(resultado);
     }
 
+[Authorize]
     public JsonResult PostComentario(int ComentarioID, int InmuebleID, int UsuarioID, string Mensaje)
     {
         string Result = "";
@@ -93,6 +94,7 @@ public class ComentariosController : Controller
         return Json(Result);
     }
 
+[Authorize]
     public JsonResult PostValoracion(int InmuebleID, int UsuarioID, int Puntuacion)
     {
         bool Result = false;

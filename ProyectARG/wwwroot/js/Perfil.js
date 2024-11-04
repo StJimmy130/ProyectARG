@@ -11,10 +11,10 @@ function getInfo() {
 
 
       $("#nombre").val(data.nombre);
-      $("#phone").val(data.nroTelefono);
+      $("#phone").val(formatPhoneNumber(data.nroTelefono));
       $("#instagram").val(data.instagram);
       $("#facebook").val(data.facebook);
-      $("#whatsapp").val(data.whatsapp);
+      $("#whatsapp").val(formatPhoneNumber(data.whatsapp));
 
 
     },
@@ -22,6 +22,24 @@ function getInfo() {
       console.log("Disculpe, existió un problema al cargar el listado");
     },
   });
+}
+
+function formatPhoneNumber(phoneNumber) {
+  // Eliminar cualquier carácter que no sea un dígito
+  let cleaned = ('' + phoneNumber).replace(/\D/g, '');
+
+  // Verificar que tenga el largo adecuado
+  if (cleaned.length !== 10) {
+      return phoneNumber; // Retorna el original si no es un número válido
+  }
+
+  // Dividir el número en partes
+  let part1 = cleaned.slice(0, 4);
+  let part2 = cleaned.slice(4, 6);
+  let part3 = cleaned.slice(6);
+
+  // Armar el formato deseado
+  return `(${part1}) ${part2}-${part3}`;
 }
 
 function ActualizarInformacion() {
