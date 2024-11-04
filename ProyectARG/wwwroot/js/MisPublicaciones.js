@@ -27,31 +27,33 @@ function renderizarTabla(publicaciones) {
     if (item.activo == true) {
       tabla += `
         <tr class="text-sm-start small">
-          <td class="text-start" title="${item.tituloString}">${item.tituloString}</td>
+          <td class="text-start tituloTd" title="${item.tituloString}">${item.tituloString}</td>
           <td class="text-end" title="${precioFormateado} ${item.moneda ? "U$D" : "AR$"}">${precioFormateado} ${item.moneda ? "U$D" : "AR$"}</td>
           <td class="text-start" title="${item.localidadString}, ${item.provinciaString} - ${item.direccionString} ${item.nroDireccionString}">
             ${item.localidadString}, ${item.provinciaString} - ${item.direccionString || ''} ${item.nroDireccionString || ''}
           </td>
-          <td class="text-start" title="${item.tipoOperacionString}">${item.tipoOperacionString}</td>
+          <td class="text-start operacionTd"  title="${item.tipoOperacionString}">${item.tipoOperacionString}</td>
           <td><button type="button" class="btn btn-primary" onclick="cargarInformacion(${item.inmuebleID})">Administrar</button></td>
         </tr>
       `;
     } else {
       tabla += `
         <tr class="item-suspendido small">
-          <td class="text-start" title="${item.tituloString}">${item.tituloString}</td>
+          <td class="text-start tituloTd" title="${item.tituloString}">${item.tituloString}</td>
           <td class="text-end" title="${precioFormateado} ${item.moneda ? "U$D" : "AR$"}">${precioFormateado} ${item.moneda ? "U$D" : "AR$"}</td>
           <td class="text-start" title="${item.provinciaString}, ${item.localidadString} - ${item.direccionString} ${item.nroDireccionString}">
             ${item.provinciaString}, ${item.localidadString} - ${item.direccionString} ${item.nroDireccionString}
           </td>
-          <td class="text-start" title="${item.tipoOperacionString}">${item.tipoOperacionString}</td>
-          <td><button type="button" class="btn btn-primary" onclick="cargarInformacion(${item.inmuebleID})">Administrar</button></td>
+          <td class="text-start operacionTd"  title="${item.tipoOperacionString}">${item.tipoOperacionString}</td>
+          <td><button type="button" class="btn btn-primary" style="background-color: #AA0000; border: #AA0000;" onclick="cargarInformacion(${item.inmuebleID})">Administrar</button></td>
         </tr>
       `;
     }
   });
   document.getElementById("misPublicaciones").innerHTML = tabla;
+  
 }
+
 
 
 $(document).ready(function () {
@@ -100,6 +102,7 @@ function cargarInformacion(inmuebleID) {
               `ValidarEliminacionInmueble(${item.inmuebleID}, 'suspender')`
             );
           document.getElementById("btn-suspender").innerHTML = "Activar";
+          
         }
         document
           .getElementById("btn-editar")
@@ -110,6 +113,7 @@ function cargarInformacion(inmuebleID) {
   });
   showPanel();
 }
+
 
 
 
