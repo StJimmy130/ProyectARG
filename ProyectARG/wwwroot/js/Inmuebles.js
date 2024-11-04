@@ -284,6 +284,25 @@ function GuardarPublicacion() {
   }
 }
 
+// Añadir el evento de escucha al campo de entrada
+const inputField = document.getElementById("Precio");
+console.log(inputField);
+
+function formatNumber(input) {
+  // Eliminar cualquier carácter que no sea un dígito
+  let value = input.value.replace(/\D/g, '');
+  
+  // Insertar un punto cada 3 dígitos de derecha a izquierda
+  input.value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}
+
+
+
+inputField.addEventListener("input", function() {
+  formatNumber(inputField);
+  console.log(inputField.value);
+});
+
 function ValidarEliminacion(inmuebleID) {
   var elimina = confirm("¿Esta seguro que desea eliminar esta publicación?");
   if (elimina == true) {
