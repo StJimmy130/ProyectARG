@@ -25,11 +25,13 @@ public class AdministracionController : Controller
     }
 
 
-
-    public IActionResult InformePublicacionesPorUsuario()
+        public IActionResult InformePublicaciones()
     {
         return View();
     }
+
+
+
 
     private string SplitCamelCase(string input)
     {
@@ -80,11 +82,6 @@ public class AdministracionController : Controller
     }
 
 
-    public IActionResult InformePublicacionesPorProvincia()
-    {
-        return View();
-    }
-
 
     public JsonResult GetInformePublicacionesPorProvincia(int? id)
     {
@@ -129,10 +126,6 @@ public class AdministracionController : Controller
     }
 
 
-    public IActionResult InformePublicacionesPorFecha()
-    {
-        return View();
-    }
 
 
     public JsonResult GetInformePublicacionesPorFecha(int? id)

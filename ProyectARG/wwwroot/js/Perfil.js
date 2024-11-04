@@ -8,20 +8,7 @@ function getInfo() {
     type: "POST",
     dataType: "json",
     success: function (data) {
-        // if (
-        //     data.instagram == null ||
-        //     data.facebook == null ||
-        //     data.whatsapp == null ||
-        //     data.nroTelefono == null
-        //   ) {
-        //     icon.classList.add("alert-svg");
-        //     icon.innerHTML = '<i class="bx bxs-error-circle"></i>';
-        //     document.getElementById("alert-title").innerHTML = "Consejo";
-        //     document.getElementById("alert-description").innerHTML = "Le recomendamos que complete todos los campos";
-        //     aceptar.style.display = "block";
-        //     background.classList.add("alert");
-        //     alerta.classList.add("enter-alert");
-        //   }
+
 
       $("#nombre").val(data.nombre);
       $("#phone").val(data.nroTelefono);

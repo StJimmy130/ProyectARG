@@ -1,0 +1,52 @@
+@{
+  ViewData["Title"] = "InformePublicaciones";
+}
+
+<link rel="stylesheet" href="~/css/Informes.css">
+
+<div class="row container-xxl conteiner-funciones">
+  <div class="col-12">
+    <div class="tituloContenedor">
+      <h1 class="titulo"><i class="fa fa-book"></i> Informe</h1>
+      <hr class="tituloHr">
+    </div>
+  </div>
+  <div class="d-flex mt-0 mb-4">
+    <!-- Select para seleccionar el tipo de informe -->
+    <select id="informeSelect" class="selectInformes"  onchange="actualizarInforme()">
+      <option value="porFecha">Informe por Fecha</option>
+      <option value="porLugar">Informe por Provincia</option>
+      <option value="porUsuario">Informe por Usuario</option>
+    </select>
+
+    <!-- Botón para imprimir el informe seleccionado -->
+    <button id="btnImprimir" class="ms-3 btn btn-info" onclick="imprimirInforme()">
+      <i class="fa-solid fa-download"></i> Imprimir
+    </button>
+  </div>
+</div>
+<div class="Tbody-class">
+  <table id="TablaPorFecha" class="table table-dark table-hover table-striped table-bordered">
+    <thead id="thead-publicacionesPorFecha"></thead>
+    <tbody id="tbody-publicacionesPorFecha"></tbody>
+  </table>
+</div>
+<div class="Tbody-class">
+  <table id="TablaPorProvincia" class="table table-dark table-hover table-striped table-bordered"
+    style="display: none;">
+    <thead id="thead-publicacionesPorProvincia"></thead>
+    <tbody id="tbody-publicacionesPorProvincia"></tbody>
+  </table>
+</div>
+<div class="Tbody-class">
+  <table id="TablaPorUsuario" class="table table-dark table-hover table-striped table-bordered" style="display: none;">
+    <thead id="thead-publicacionesPorUsuario"></thead>
+    <tbody id="tbody-publicacionesPorUsuario"></tbody>
+  </table>
+</div>
+
+
+@section Scripts {
+  <script src="~/js/InformePublicaciones.js"></script>
+  <script src="~/js/ImprimirInformes.js"></script>
+}
