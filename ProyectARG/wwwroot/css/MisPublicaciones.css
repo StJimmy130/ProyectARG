@@ -310,7 +310,9 @@ input {
     margin-top: 20px;
     margin-bottom: 60px;
   }
-
+.cut_col{
+    display: none;
+}
   .hide-on-small {
     display: none;
   }
