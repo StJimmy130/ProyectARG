@@ -175,6 +175,7 @@ function GuardarPublicacion() {
   let barrio = document.getElementById("Barrio").value;
   let Titulo = document.getElementById("Titulo").value;
   let precio = document.getElementById("Precio").value;
+   precio = precio.replace(/\./g, "");
   let moneda = document.getElementById("Moneda").checked;
   let superficieTotal = document.getElementById("Area").value;
   let superficieCubierta = document.getElementById("AreaCubierta").value;
@@ -191,6 +192,8 @@ function GuardarPublicacion() {
   let nroDepartamento = document.getElementById("NroDepartamento").value;
   let Descripcion = document.getElementById("Descripcion").value;
   let usuarioID = document.getElementById("UsuarioID").value;
+
+  console.log(precio);
 
   // Crear un objeto FormData para enviar los datos y archivos
   let formData = new FormData();
@@ -285,8 +288,16 @@ function GuardarPublicacion() {
 }
 
 // Añadir el evento de escucha al campo de entrada
-const inputField = document.getElementById("Precio");
-console.log(inputField);
+document.addEventListener("DOMContentLoaded", function () {
+  const inputField = document.getElementById("Precio");
+  console.log(inputField);
+  if (inputField) {
+      inputField.addEventListener("input", (event) => {
+        formatNumber(inputField);
+        console.log(inputField.value);
+      });
+  }
+});
 
 function formatNumber(input) {
   // Eliminar cualquier carácter que no sea un dígito
@@ -298,10 +309,7 @@ function formatNumber(input) {
 
 
 
-inputField.addEventListener("input", function() {
-  formatNumber(inputField);
-  console.log(inputField.value);
-});
+
 
 function ValidarEliminacion(inmuebleID) {
   var elimina = confirm("¿Esta seguro que desea eliminar esta publicación?");
