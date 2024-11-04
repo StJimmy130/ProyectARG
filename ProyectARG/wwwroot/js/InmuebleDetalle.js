@@ -186,12 +186,37 @@ function CargarDatosPublicacion() {
         $("#Miniaturas-container").html(miniaturas);
         setupThumbnailClickHandler();
 
+        let comentarios = `
+          <div class="col-lg-12 col-md-12 col-sm-12 ">
+              <div class="property-details container-comments" id="ComentariosContainer">
+                <h4>Comentarios</h4>
+                <button onclick="modalComentarios()">Comentar</button>
+                <div id="Comentarios">
+
+                </div>
+              </div>
+            </div>
+          `;
+
+        let ancho = window.innerWidth;
+          if (ancho <= 768) {
+            $("#pos2").html(comentarios);
+          } else{
+            $("#pos1").html(comentarios);
+          }
+
         // Actualizar el DOM
         $("#DatosPrincipales").html(datosPrincipales);
         $("#DatosVendedor").html(datosVendedor);
         $("#DetallesPublicaciones").html(detallesPublicaciones);
         if(inmueble.tipoOperacionString == "Alquiler Temporal"){
           document.getElementById("ComentariosContainer").style.display = "block";
+
+          
+
+          
+
+
           getComentarios();
           avgValoraciones()
         }
