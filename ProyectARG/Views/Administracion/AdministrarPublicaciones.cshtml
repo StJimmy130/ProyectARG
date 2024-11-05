@@ -1,0 +1,72 @@
+@{
+  ViewData["Title"] = "Administrar publicaciones";
+}
+
+<link rel="stylesheet" href="~/css/Funciones.css">
+<link rel="stylesheet" href="~/css/MisPublicaciones.css">
+
+<div class="row container-xxl container-funciones">
+  <div class="col-12">
+    <div class="tituloContenedor">
+      <h1 class="titulo"><i class="fa-solid fa-users"></i> Administrar publicaciones</h1>
+      <hr class="tituloHr">
+    </div>
+  </div>
+</div>
+
+
+<section>
+  
+</section>
+<div class="row ps-2 pe-2">
+  <div class="col-xl-8 col-sm-6 pb-3">
+    <div class="d-flex justify-content-strart">
+      <div class="search">
+        <input type="text" id="inputFiltro" class="search__input" placeholder="Buscar...">
+        <button class="search__button">
+          <svg class="search__icon" aria-hidden="true" viewBox="0 0 24 24">
+            <g>
+              <path
+                d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z">
+              </path>
+            </g>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div id="contenedorMisPublicaciones">
+    <div class="col-xl-4 col-sm-12" id="panel">
+      <div class="contenedor-panel">
+        <img src="~/img/LogoConFondo.png" alt="" id="main-img">
+        <h3 id="main-title">Titulo</h3>
+        <p id="main-description">Descripción</p>
+        <div id="valoraciones" style="width: 100%;"></div>
+        <div class="d-flex botonera">
+          <button class="btn boton suspender" id="btn-suspender">Suspender</button>
+          <a href="" id="btn-detalle-link"><button class="btn btn-success" id="btn-detalle">Visitar</button></a>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-8 col-sm-12">
+      <table class="table table-primary table-hover table-striped table-bordered" id="table">
+        <thead>
+          <tr class="text-center">
+            <th>Vendedor</th>
+            <th>Fecha</th>
+            <th>Ubicación</th>
+            <th>Inmueble / Operación</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="AdministrarPublicaciones" class="bodyTabla">
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+@section Scripts {
+  <script src="~/js/AdministrarPublicaciones.js"></script>
+}
