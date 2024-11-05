@@ -141,7 +141,7 @@ function GuardarPublicacion() {
   let barrio = document.getElementById("Barrio").value;
   let titulo = document.getElementById("Titulo").value;
   let precio = document.getElementById("Precio").value;
-  // let moneda = document.getElementById("Moneda").checked;
+  let moneda = document.getElementById("Moneda").checked;
   let superficieTotal = document.getElementById("Area").value;
   let superficieCubierta = document.getElementById("AreaCubierta").value;
   let tipoOperacion = document.getElementById("Operacion").value;
@@ -181,7 +181,7 @@ function GuardarPublicacion() {
   formData.append("NroDepartamento", nroDepartamento);
   formData.append("Descripcion", descripcion);
   formData.append("UsuarioID", usuarioID);
-  // formData.append("Moneda", moneda);
+  formData.append("Moneda", moneda);
 
   // Obtener el orden actual de las imágenes en el list-container
   let imagenesBack = getBackFiles();
@@ -202,6 +202,7 @@ function GuardarPublicacion() {
     contentType: false,
     processData: false,
     success: function (resultado) {
+      
       if (resultado.estado == true) {
         icon.classList.add("succes-svg");
         icon.innerHTML = '<i class="bx bxs-check-circle"></i>';
@@ -229,7 +230,6 @@ function GuardarPublicacion() {
 
         setTimeout(function () {
           hiddenAlert();
-          window.location.href = "../../Home/Index";
         }, 3000);
       }
     },
@@ -259,23 +259,21 @@ function AbrirModalEditar(inmuebleID) {
       document.getElementById("Barrio").value = Inmueble.barrioString;
       document.getElementById("Titulo").value = Inmueble.tituloString;
       document.getElementById("Precio").value = Inmueble.precioString;
+      // Configurar el switch de moneda
+      const monedaSwitch = document.getElementById("Moneda");
+      monedaSwitch.checked = Inmueble.moneda === true; // Si es 1 (dólares), marca el switch; si es 0 (pesos), desmarca el switch
+
       document.getElementById("Area").value = Inmueble.superficieTotalString;
-      document.getElementById("AreaCubierta").value =
-        Inmueble.superficieCubiertaString;
+      document.getElementById("AreaCubierta").value = Inmueble.superficieCubiertaString;
       document.getElementById("Amoblado").checked = Inmueble.amobladoString;
-      document.getElementById("Habitaciones").value =
-        Inmueble.dormitoriosString;
+      document.getElementById("Habitaciones").value = Inmueble.dormitoriosString;
       document.getElementById("Banios").value = Inmueble.baniosString;
-      document.getElementById("Ambientes").value =
-        Inmueble.cantidadAmbientesString;
-      document.getElementById("Estacionamiento").checked =
-        Inmueble.cocheraString;
+      document.getElementById("Ambientes").value = Inmueble.cantidadAmbientesString;
+      document.getElementById("Estacionamiento").checked = Inmueble.cocheraString;
       document.getElementById("Direccion").value = Inmueble.direccionString;
-      document.getElementById("NroDireccion").value =
-        Inmueble.nroDireccionString;
+      document.getElementById("NroDireccion").value = Inmueble.nroDireccionString;
       document.getElementById("Piso").value = Inmueble.pisoString;
-      document.getElementById("NroDepartamento").value =
-        Inmueble.nroDepartamentoString;
+      document.getElementById("NroDepartamento").value = Inmueble.nroDepartamentoString;
       document.getElementById("Descripcion").value = Inmueble.descripcionString;
       backFiles = Inmueble.imagenes;
       // Al cargar la información desde el back

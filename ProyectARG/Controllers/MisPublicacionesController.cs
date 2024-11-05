@@ -130,7 +130,6 @@ public class MisPublicacionesController : Controller
                 DireccionString = Inmueble.Direccion,
                 DescripcionString = Inmueble.Descripcion,
                 NroDireccionString = Inmueble.NroDireccion,
-                
                 PrecioString = Inmueble.Precio.ToString(),
                 TipoOperacionString = SplitCamelCase(Inmueble.TipoOperacion.ToString()),
                 activo = Inmueble.Activo,

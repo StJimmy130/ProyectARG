@@ -241,7 +241,7 @@
 
 /* PROVINCIAS Y LOCALIDADES */
 .contenedor {
-    background-color: var(--container-color);
+    background-color: var(--contenedor-prov-loc);
     width: 100%;
     color: var(--text-color2);
     min-width: 300px;
@@ -268,7 +268,7 @@
   }
   
 .Tbody-class table thead {
-    background-color: var(--container-color);
+    background-color: var(--contenedor-prov-loc);
     color: var(--text-color2);
     position: -webkit-sticky; /* Safari... */
     position: sticky;

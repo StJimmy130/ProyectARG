@@ -1,6 +1,7 @@
 <link rel="stylesheet" href="~/css/InmuebleDetalle.css" />
 <link rel="stylesheet" href="~/css/MisPublicaciones.css" />
 
+
 <input type="hidden" id="UsuarioID" value="@ViewBag.UsuarioID">
 <div class="row container-xxl">
   <div class="col-12">
@@ -46,19 +47,19 @@
 
       <div class="col-xl-8 col-sm-12 Tbody-class" id="table">
         <div class="redondeo">
-        <table class="table table-dark table-hover table-striped table-bordered">
-          <thead class="headTabla">
-            <tr class="text-center">
-              <th>TÍTULO</th>
-              <th class="cut_col">PRECIO</th>
-              <th>LOCALIDAD</th>
-              <th class="cut_col">OPERACIÓN</th>
-              <th>ACCIONES</th>
-            </tr>
-          </thead>
-          <tbody id="misPublicaciones" class="bodyTabla">
-          </tbody>
-        </table>
+          <table class="table table-dark table-hover table-striped table-bordered">
+            <thead class="headTabla">
+              <tr class="text-center">
+                <th>TÍTULO</th>
+                <th class="cut_col">PRECIO</th>
+                <th>LOCALIDAD</th>
+                <th class="cut_col">OPERACIÓN</th>
+                <th>ACCIONES</th>
+              </tr>
+            </thead>
+            <tbody id="misPublicaciones" class="bodyTabla">
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
@@ -86,9 +87,19 @@
                 <input type="text" name="Titulo" id="Titulo" placeholder="Título: *" class="input-form input-container"
                   required>
               </div>
-              <div class="container">
-                <label for="Precio">Precio:</label>
-                <input type="number" class="input-form" id="Precio" placeholder="Precio: *" name="Precio" required>
+              <div class="container d-flex">
+                <div class="divisor-switchcase"> AR$<label class="switch" for="Moneda">
+                    <input checked="" type="checkbox" id="Moneda">
+                    <div class="slider">
+                      <div class="circle">
+                      </div>
+                    </div>
+                  </label>U$D
+                </div>
+                <div>
+                  <label for="Precio">Precio:</label>
+                  <input type="number" class="input-form" id="Precio" placeholder="Precio: *" name="Precio" required>
+                </div>
               </div>
             </div>
             <div class="d-flex flex-column">
@@ -235,7 +246,8 @@
                       <input type="file" id="Imagen" name="Imagen" accept="image/*" multiple>
                       <div class="list-container col-10" id="input-container"></div>
                       <div class="col-12 flex justify-content-center align-items-center">
-                        <button class="btn btn-primary mt-4 mx-auto" onclick="guardarImagenes()">Guardar imagenes</button>
+                        <button class="btn btn-primary mt-4 mx-auto" onclick="guardarImagenes()">Guardar
+                          imagenes</button>
                       </div>
                     </div>
                   </div>
