@@ -431,4 +431,62 @@ public class AdministracionController : Controller
         return Json(cantidadUsuariosTotales);
     }
 
+
+    public IActionResult AdministrarPublicaciones()
+    {
+        return View();
+    }
+
+
+
+
+    public JsonResult PublicacionesParaAdministrar(int InmuebleID)
+    {
+        List<VistaInmueble> informePublicacionesPorFechaMostrar = new List<VistaInmueble>();
+        
+        var inmuebles = _context.Inmuebles.ToList();
+        var usuarios = _context.Usuarios.ToList();
+        var Provincias = _context.Provincias.ToList();
+        var Localidades = _context.Localidades.ToList();
+
+
+        if (InmuebleID != 0){
+            inmuebles = _context.Inmuebles.Where(t => t.InmuebleID == InmuebleID).ToList();
+        }
+
+
+        
+        foreach (var inmueble in inmuebles)
+        {
+
+            var usuario = usuarios.Where(t => t.UsuarioID == inmueble.UsuarioID).SingleOrDefault();
+            var provincia = Provincias.Where(t => t.ProvinciaID == inmueble.Localidad.ProvinciaID).SingleOrDefault();
+            var localidad = Localidades.Where(t => t.LocalidadID == inmueble.LocalidadID).SingleOrDefault();
+            var cantidadVistas = _context.Vistas.Count(v => v.InmuebleID == inmueble.InmuebleID);
+
+            var informePublicacionPorFechaMostrar = new VistaInmueble
+            {
+                InmuebleID = inmueble.InmuebleID,
+                LocalidadID = inmueble.LocalidadID,
+                UsuarioID = inmueble.UsuarioID,
+                FechaPublicacionString = inmueble.FechaAlta.ToString("dd MMM yyyy"),
+                ProvinciaString = provincia.Nombre,
+                LocalidadString = localidad.Nombre,
+                NombreUsuario = usuario.Nombre,
+                TituloString = inmueble.Titulo,
+                TipoOperacionString = SplitCamelCase(inmueble.TipoOperacion.ToString()),
+                TipoInmuebleString = SplitCamelCase(inmueble.TipoInmueble.ToString()),
+                BarrioString = inmueble.Barrio,
+                DireccionString = inmueble.Direccion,
+                NroDireccionString = inmueble.NroDireccion,
+                activo = inmueble.Activo,
+            };
+            informePublicacionesPorFechaMostrar.Add(informePublicacionPorFechaMostrar);
+        }
+        informePublicacionesPorFechaMostrar = informePublicacionesPorFechaMostrar.ToList();
+
+        return Json(informePublicacionesPorFechaMostrar);
+    }
+
+
 }
