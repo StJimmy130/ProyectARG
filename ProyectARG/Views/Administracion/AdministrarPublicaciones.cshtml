@@ -2,7 +2,7 @@
   ViewData["Title"] = "Administrar publicaciones";
 }
 
-<link rel="stylesheet" href="~/css/Funciones.css">
+
 <link rel="stylesheet" href="~/css/MisPublicaciones.css">
 
 <div class="row container-xxl container-funciones">
@@ -48,10 +48,11 @@
         </div>
       </div>
     </div>
-    <div class="col-xl-8 col-sm-12">
-      <table class="table table-primary table-hover table-striped table-bordered" id="table">
-        <thead>
-          <tr class="text-center">
+    <div class="col-xl-8 col-sm-12 Tbody-class" id="table">
+        <div class="redondeo">
+          <table class="table table-primary table-hover table-striped table-bordered">
+            <thead class="headTabla">
+              <tr class="text-center">
             <th>Vendedor</th>
             <th>Fecha</th>
             <th>Ubicación</th>
@@ -62,6 +63,7 @@
         <tbody id="AdministrarPublicaciones" class="bodyTabla">
         </tbody>
       </table>
+    </div>
     </div>
   </div>
 </div>

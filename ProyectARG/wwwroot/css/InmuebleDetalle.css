@@ -245,9 +245,9 @@ footer {
 
 #Comentarios{
   margin-top: 30px;
-  overflow-y: scroll;
-  min-height: 250px;
-  max-height: 20px;
+  overflow-y: auto;
+  max-height: 500px;
+  min-height: 20px;
   padding: 15px 10px 0 0;
 }
 
