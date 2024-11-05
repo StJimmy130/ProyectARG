@@ -108,14 +108,11 @@ function CargarDatosPublicacion() {
         </div>
       `;
 
-      const precioFormateado = Number(inmueble.precioString).toLocaleString('es-ES', {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2
-      });
+      
       
       datosPrincipales += `
         <h2 style="font-weight: 500; font-size: 24px; text-transform: uppercase">${inmueble.tituloString}</h2>
-        <p style="font-weight: 300; font-size: 25px; margin-top: 20px">${inmueble.moneda ? "U$D" : "AR$"} ${precioFormateado}</p>
+        <p style="font-weight: 300; font-size: 25px; margin-top: 20px">${inmueble.moneda ? "U$D" : "AR$"} ${inmueble.precioString}</p>
         <h4 style="font-weight: 400; font-size: 18px; margin-top: 20px"><i class="fa-solid fa-arrow-right"></i> ${inmueble.tipoInmuebleString} en ${inmueble.tipoOperacionString}</h4>
         <h4 style="font-weight: 400; font-size: 18px;"><i class="fa-solid fa-location-dot"></i> ${inmueble.provinciaString} - ${inmueble.localidadString}</h4>
         `;
@@ -162,6 +159,32 @@ function CargarDatosPublicacion() {
         </div>
           `;
 
+          let comentarios = `
+        <div class="col-lg-12 col-md-12 col-sm-12 ">
+              <div class="property-details">
+                <p style="font-weight: 300; font-size: 26px; margin-top: -5px;">Descripción</p>
+                <p id="Descripcion"></p>
+              </div>
+            </div>
+          <div class="col-lg-12 col-md-12 col-sm-12 ">
+              <div class="property-details container-comments" id="ComentariosContainer">
+                <h4>Comentarios</h4>
+                <button onclick="modalComentarios()">Comentar</button>
+                <div id="Comentarios">
+
+                </div>
+              </div>
+            </div>
+          `;
+
+        let ancho = window.innerWidth;
+          if (ancho <= 768) {
+            $("#pos2").html(comentarios);
+          } else{
+            $("#pos1").html(comentarios);
+          }
+
+
         // Imágenes
         $("#MainImage").attr("src", inmueble.imagenes[0].imagenSrc);
         let descripcionConSaltos
@@ -186,24 +209,7 @@ function CargarDatosPublicacion() {
         $("#Miniaturas-container").html(miniaturas);
         setupThumbnailClickHandler();
 
-        let comentarios = `
-          <div class="col-lg-12 col-md-12 col-sm-12 ">
-              <div class="property-details container-comments" id="ComentariosContainer">
-                <h4>Comentarios</h4>
-                <button onclick="modalComentarios()">Comentar</button>
-                <div id="Comentarios">
-
-                </div>
-              </div>
-            </div>
-          `;
-
-        let ancho = window.innerWidth;
-          if (ancho <= 768) {
-            $("#pos2").html(comentarios);
-          } else{
-            $("#pos1").html(comentarios);
-          }
+        
 
         // Actualizar el DOM
         $("#DatosPrincipales").html(datosPrincipales);

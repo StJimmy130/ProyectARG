@@ -33,7 +33,7 @@ function renderizarTabla(publicaciones) {
             ${item.localidadString}, ${item.provinciaString} - ${item.direccionString || ''} ${item.nroDireccionString || ''}
           </td>
           <td class="text-start cut_col" title="${item.tipoOperacionString}">${item.tipoOperacionString}</td>
-          <td><button type="button" class="btn btn-sm btn-primary" onclick="cargarInformacion(${item.inmuebleID})">Administrar</button></td>
+          <td class="d-flex justify-content-center"><button type="button" class="btn btn-sm btn-primary" onclick="cargarInformacion(${item.inmuebleID})">Administrar</button></td>
         </tr>
       `;
     } else {
@@ -45,7 +45,7 @@ function renderizarTabla(publicaciones) {
             ${item.provinciaString}, ${item.localidadString} - ${item.direccionString} ${item.nroDireccionString}
           </td>
           <td class="text-start cut_col" title="${item.tipoOperacionString}">${item.tipoOperacionString}</td>
-          <td><button type="button" class="btn btn-sm btn-primary" style="background-color: #AA0000; border: #AA0000;" onclick="cargarInformacion(${item.inmuebleID})">Administrar</button></td>
+          <td class="d-flex justify-content-center"><button type="button" class="btn btn-sm btn-primary" style="background-color: #AA0000; border: #AA0000;" onclick="cargarInformacion(${item.inmuebleID})">Administrar</button></td>
         </tr>
       `;
     }

@@ -97,6 +97,11 @@ public class InmueblesController : Controller
         return Json(localidades);
     }
 
+     public static string FormatearMiles(float numero)
+    {
+        return numero.ToString("N0", new CultureInfo("es-AR"));
+    }
+
    public JsonResult GetDetallePublicacion(int InmuebleID, int? localidadID)
 {
     var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -199,7 +204,7 @@ public class InmueblesController : Controller
             CantidadAmbientesString = inmueble.CantidadAmbientes.ToString(),
             CocheraString = inmueble.Cochera.ToString(),
             DescripcionString = inmueble.Descripcion,
-            PrecioString = inmueble.Precio.ToString(),
+            PrecioString = FormatearMiles(inmueble.Precio).ToString(),
             TipoOperacionString = SplitCamelCase(inmueble.TipoOperacion.ToString()), 
             TipoInmuebleString = SplitCamelCase(inmueble.TipoInmueble.ToString()),
             PisoString = inmueble.Piso.ToString(),
@@ -252,7 +257,7 @@ public class InmueblesController : Controller
 
     [Authorize]
     public JsonResult GuardarPublicacion(int InmuebleID, int LocalidadID, string? Barrio, string? Titulo,
-    float? Precio, int? SuperficieTotal, int? SuperficieCubierta, Operacion TipoOperacion,
+    float Precio, int? SuperficieTotal, int? SuperficieCubierta, Operacion TipoOperacion,
     TipoInmueble TipoInmueble, bool Amoblado, int Dormitorios, int Banios, int CantidadAmbientes,
     bool Cochera, string? Direccion, int NroDireccion, string? Descripcion, int? UsuarioID,
     List<IFormFile> Imagenes, bool Moneda, int Piso, string? NroDepartamento, List<string>? ImagenesBack)
