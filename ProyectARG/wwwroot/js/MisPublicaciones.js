@@ -54,6 +54,25 @@ function renderizarTabla(publicaciones) {
   
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+  const inputField = document.getElementById("Precio");
+  console.log(inputField);
+  if (inputField) {
+      inputField.addEventListener("input", (event) => {
+        formatNumber(inputField);
+        console.log(inputField.value);
+      });
+  }
+});
+
+function formatNumber(input) {
+  // Eliminar cualquier carácter que no sea un dígito
+  let value = input.value.replace(/\D/g, '');
+  
+  // Insertar un punto cada 3 dígitos de derecha a izquierda
+  input.value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}
+
 
 
 $(document).ready(function () {
@@ -157,6 +176,7 @@ function GuardarPublicacion() {
   let nroDepartamento = document.getElementById("NroDepartamento").value;
   let descripcion = document.getElementById("Descripcion").value;
   let usuarioID = document.getElementById("UsuarioID").value;
+  precio = precio.replace(/\./g, "");
 
   // Crear un objeto FormData para enviar los datos y archivos
   let formData = new FormData();
