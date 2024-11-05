@@ -43,8 +43,8 @@
   padding: 5px 10px 0 10px;
 }
 .card-box h3 {
-  font-size: 27px;
-  font-weight: bold;
+  font-size: 25px;
+  font-weight: 500;
   margin: 0 0 8px 0;
   white-space: nowrap;
   padding: 0;
@@ -52,11 +52,12 @@
 }
 .card-box p {
   font-size: 15px;
+  font-weight: 200;
 }
 .card-box .icon {
   position: absolute;
   top: auto;
-  bottom: 5px;
+  bottom: 15px;
   right: 5px;
   z-index: 0;
   font-size: 72px;
@@ -215,6 +216,7 @@
   background: #ffffff;
   margin: 0 10px 0 10px;
   border-radius: 3px;
+  height: fit-content;
 }
 
 .tituloGraficos{

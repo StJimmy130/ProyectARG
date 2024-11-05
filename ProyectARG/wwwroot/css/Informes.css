@@ -15,7 +15,7 @@ body{
 }
 
 .selectInformes option{
-    background-color: var(--text-color);
+    background-color: var(--contenedor-prov-loc);
     color: var(--text-color2);
 }
 
