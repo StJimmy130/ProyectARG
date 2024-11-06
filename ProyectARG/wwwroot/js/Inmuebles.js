@@ -193,7 +193,7 @@ function GuardarPublicacion() {
   let Descripcion = document.getElementById("Descripcion").value;
   let usuarioID = document.getElementById("UsuarioID").value;
 
-  console.log(precio);
+  
 
   // Crear un objeto FormData para enviar los datos y archivos
   let formData = new FormData();
@@ -230,7 +230,7 @@ function GuardarPublicacion() {
   if (imagenes.length != 0) {
     
   
-  console.log(imagenes);
+  
   $.ajax({
     url: "/Inmuebles/GuardarPublicacion",
     data: formData,
@@ -290,11 +290,9 @@ function GuardarPublicacion() {
 // Añadir el evento de escucha al campo de entrada
 document.addEventListener("DOMContentLoaded", function () {
   const inputField = document.getElementById("Precio");
-  console.log(inputField);
   if (inputField) {
       inputField.addEventListener("input", (event) => {
         formatNumber(inputField);
-        console.log(inputField.value);
       });
   }
 });

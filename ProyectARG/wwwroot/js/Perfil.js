@@ -61,8 +61,17 @@ function ActualizarInformacion() {
     },
     type: "POST",
     dataType: "json",
-    success: function (data) {
-      console.log(data);
+    success: function () {
+      icon.innerHTML = '<i class="bx bxs-check-circle"></i>';
+      icon.classList.add("succes-svg");
+      titulo.innerHTML = "Hecho";
+      descripcion.innerHTML = `<label>Se ha actualizado la información</label>`;
+      aceptar.style.display = "block";
+      background.classList.add("success");
+      alerta.classList.add("enter-alert");
+      setTimeout(function () {
+        hiddenAlert();
+      }, 4000);
     },
     error: function (xhr, status) {
       console.log("Disculpe, existió un problema al cargar el listado");
