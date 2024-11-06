@@ -33,19 +33,19 @@ function renderizarTabla(publicaciones) {
             ${item.localidadString}, ${item.provinciaString} - ${item.direccionString || ''} ${item.nroDireccionString || ''}
           </td>
           <td class="text-start cut_col" title="${item.tipoOperacionString}">${item.tipoOperacionString}</td>
-          <td class="d-flex justify-content-center"><button type="button" class="btn btn-sm btn-primary" onclick="cargarInformacion(${item.inmuebleID})">Administrar</button></td>
+          <td class="justify-content-center"><button type="button" class="btn btn-sm btn-primary" onclick="cargarInformacion(${item.inmuebleID})">Administrar</button></td>
         </tr>
       `;
     } else {
       tabla += `
-        <tr class="item-suspendido"  style="font-size: 14px; vertical-align: middle;">
+        <tr class="item-suspendido text-sm-start text-center"  style="font-size: 14px; vertical-align: middle;">
           <td class="text-start" title="${item.tituloString}">${item.tituloString}</td>
           <td class="text-end cut_col" title="${precioFormateado} ${item.moneda ? "U$D" : "AR$"}">${precioFormateado} ${item.moneda ? "U$D" : "AR$"}</td>
           <td class="text-start" title="${item.provinciaString}, ${item.localidadString} - ${item.direccionString} ${item.nroDireccionString}">
             ${item.provinciaString}, ${item.localidadString} - ${item.direccionString} ${item.nroDireccionString}
           </td>
           <td class="text-start cut_col" title="${item.tipoOperacionString}">${item.tipoOperacionString}</td>
-          <td class="d-flex justify-content-center"><button type="button" class="btn btn-sm btn-primary" style="background-color: #AA0000; border: #AA0000;" onclick="cargarInformacion(${item.inmuebleID})">Administrar</button></td>
+          <td class="justify-content-center"><button type="button" class="btn btn-sm btn-primary" style="background-color: #AA0000; border: #AA0000;" onclick="cargarInformacion(${item.inmuebleID})">Administrar</button></td>
         </tr>
       `;
     }
@@ -56,7 +56,6 @@ function renderizarTabla(publicaciones) {
 
 document.addEventListener("DOMContentLoaded", function () {
   const inputField = document.getElementById("Precio");
-  
   if (inputField) {
       inputField.addEventListener("input", (event) => {
         formatNumber(inputField);

@@ -112,6 +112,67 @@ function cargarInformacion(inmuebleID) {
 }
 
 
+function suspenderInmueble(inmuebleID) {
+  $.ajax({
+    url: "/Inmuebles/SuspenderPublicacion",
+    data: { inmuebleID: inmuebleID },
+    type: "POST",
+    dataType: "json",
+
+    success: function (resultado) {
+      icon.classList.remove("alert-svg", "succes-svg", "denied-svg");
+      background.classList.remove("alert");
+      if (resultado.titulo != "Hubo un problema") {
+        if (resultado.estado === true) {
+          icon.innerHTML = "<i class='bx bxs-lock'></i>";
+        } else {
+          icon.innerHTML = '<i class="bx bxs-lock-open"></i>';
+        }
+      } else {
+        icon.innerHTML = '<i class="bx bxs-x-circle"></i>';
+        icon.classList.add("denied-svg");
+        background.classList.add("denied");
+      }
+
+      icon.classList.add("succes-svg");
+      background.classList.add("success");
+      titulo.innerHTML = `${resultado.titulo}`;
+      descripcion.innerHTML = `<label>${resultado.error}</label>`;
+      aceptar.style.display = "block";
+      aceptar.setAttribute("onclick", `hiddenAlert()`);
+      cancelar.style.display = "none";
+
+      getMisPublicaciones();
+      setTimeout(function () {
+        hiddenAlert();
+      }, 3000);
+    },
+
+    error: function (xhr, status) {
+      console.log("Disculpe, existió un problema al cargar el listado");
+    },
+  });
+  hiddenPanel();
+}
+
+function ValidarEliminacionInmueble(inmuebleID, Operacion) {
+  icon.innerHTML = '<i class="bx bxs-error-circle"></i>';
+  icon.classList.add("alert-svg");
+  titulo.innerHTML = "Atencion!";
+  descripcion.innerHTML = `<label>¿Está seguro de que desea ${Operacion} esta publicación?</label>`;
+  aceptar.style.display = "block";
+  background.classList.add("alert");
+  alerta.classList.add("enter-alert");
+  cancelar.setAttribute("onclick", `hiddenAlert()`);
+  cancelar.style.display = "block";
+
+  if (Operacion == "suspender") {
+    aceptar.setAttribute("onclick", `suspenderInmueble(${inmuebleID})`);
+  }
+
+  alerta.classList.add("enter-alert");
+}
+
 let panel = document.getElementById("panel");
 let table = document.getElementById("table");
 function showPanel() {

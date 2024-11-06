@@ -2,7 +2,9 @@ body {
   padding-top: 20px;
 }
 
-
+.vista-admin-publicaciones{
+  margin-top: 60px;
+}
 
 :root {
   --text-area: #d6d6d6;
@@ -124,7 +126,7 @@ body.dark {
 }
 
 .botonera {
-  gap: 3%;
+  gap: 5%;
   margin: 20px 0;
 }
 .boton {
