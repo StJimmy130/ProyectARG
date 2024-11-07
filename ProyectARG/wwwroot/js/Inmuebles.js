@@ -138,7 +138,7 @@ function actualizarLocalidades() {
     data: { provinciaID: provinciaID },
     success: function (localidades) {
       var localidadSelect = document.getElementById("LocalidadID");
-      localidadSelect.innerHTML = '<option value="0">[Localidad...] *</option>'; 
+      localidadSelect.innerHTML = '<option value="0">[Seleccionar]</option>'; 
 
       // Agregar nuevas opciones
       localidades.forEach(function (localidad) {

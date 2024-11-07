@@ -22,11 +22,13 @@
         <div class="col-12 justify-content-center align-items-center contenedor step active">
           <div class="d-flex">
             <div class="container">
-              <input type="text" name="Titulo" id="Titulo" placeholder="Titulo: *" class="input-form input-container"
-                required>
+              <label class="label-form" for="Titulo">Título</label>
+              <input type="text" name="Titulo" id="Titulo" placeholder="Ejemplo: Casa en venta..." class="input-form input-container" required>
             </div>
             <div class="container flex">
-              <div class="divisor-switchcase"> AR$<label class="switch" for="Moneda">
+              <div>
+                <label class="label-form" for="Moneda">Moneda</label>
+                <div class="divisor-switchcase"> AR$<label class="switch" for="Moneda">
                   <input checked="" type="checkbox" id="Moneda">
                   <div class="slider">
                     <div class="circle">
@@ -34,13 +36,17 @@
                   </div>
                 </label>U$D
               </div>
-              <input type="phone" class="input-form" id="Precio" placeholder="Precio: *"
-                name="Precio" required>
+              </div>
+              <div class="container">
+                <label class="label-form" for="Precio">Precio</label>
+                <input type="phone" class="input-form" id="Precio" placeholder="Ejemplo: $1.000.000,00" name="Precio" required>
+              </div>
             </div>
           </div>
           <div class="d-flex flex-column">
             <div class="d-flex">
               <div class="container">
+                <label class="label-form" for="Operacion">Tipo de operación</label>
                 <input type="hidden" id="InmuebleID" name="InmuebleID">
                 <select class="input-form" id="Operacion" name="Operacion">
                   @foreach (var item in ViewBag.Operaciones)
@@ -50,6 +56,7 @@
                 </select>
               </div>
               <div class="container">
+                <label class="label-form" for="TipoInmueble">Tipo de inmueble</label>
                 <select class="input-form" id="TipoInmueble" name="TipoInmueble">
                   @foreach (var item in ViewBag.TiposInmueble)
                   {
@@ -61,6 +68,7 @@
           </div>
           <div class="d-flex">
             <div class="container">
+              <label class="label-form" for="Provincia">Provincia</label>
               @Html.DropDownList("ProvinciaID", null, htmlAttributes: new
                 {
                   @class = "input-form",
@@ -70,6 +78,7 @@
                 })
             </div>
             <div class="container">
+              <label class="label-form" for="Localidad">Localidad</label>
               @Html.DropDownList("LocalidadID", null, htmlAttributes: new
                 {
                   @class = "input-form",
@@ -81,44 +90,44 @@
           <div class="row">
             <div class="col-md-6 col-xl-4 mb-3">
               <div class="container mx-auto">
-                <div class="d-flex justify-content-center">
-
-                  <input type="text" name="Barrio" id="Barrio" placeholder="Barrio:" class="input-form">
+                <div class="justify-content-center">
+                  <label class="label-form" for="Barrio">Barrio</label>
+                  <input type="text" name="Barrio" id="Barrio" placeholder="" class="input-form">
                 </div>
               </div>
             </div>
             <div class="col-md-6 col-xl-4 mb-3">
               <div class="container mx-auto">
-                <div class="d-flex justify-content-center">
-                  <input type="text" name="Direccion" id="Direccion" placeholder="Dirección:" class="input-form">
+                <div class="justify-content-center">
+                  <label class="label-form" for="Direccion">Dirección</label>
+                  <input type="text" name="Direccion" id="Direccion" placeholder="" class="input-form">
                 </div>
               </div>
             </div>
             <div class="col-md-6 col-xl-4 mb-3">
               <div class="container mx-auto">
-                <div class="d-flex justify-content-center">
-                  <input type="text" name="NroDireccion" id="NroDireccion" placeholder="Número de Dirección:"
+                <div class="justify-content-center">
+                  <label class="label-form" for="NroDireccion">Nº de Direccion</label>
+                  <input type="text" name="NroDireccion" id="NroDireccion" placeholder=""
                     class="input-form">
                 </div>
               </div>
             </div>
             <div class="col-md-6 col-lg-6 mb-3" id="piso-container">
-              <div class="container d-flex justify-content-center">
+              <div class="container justify-content-center">
+                <label class="label-form" for="Piso">Piso</label>
                 <input type="text" name="Piso" id="Piso" placeholder="Piso:" class="input-form">
-                </label>
               </div>
             </div>
             <div class="col-md-6 col-lg-6 mb-3" id="departamento-container">
-              <div class="container d-flex justify-content-center">
-                <input type="text" name="NroDepartamento" id="NroDepartamento" placeholder="Número de Departamento:"
-                  class="input-form">
+              <div class="container justify-content-center">
+                <label class="label-form" for="NroDepartamento">Nº de Departamento</label>
+                <input type="text" name="NroDepartamento" id="NroDepartamento" class="input-form">
               </div>
             </div>
             <div class="botonera">
-              <button type="button" class="btnPrevNext btn btn-secondary prev-btn"><i
-                  class='bx bx-left-arrow-alt'></i>Anterior</button>
-              <button type="button" class="btnPrevNext btn btn-secondary" id="boton-next">Siguiente<i
-                  class='bx bx-right-arrow-alt'></i></button>
+              <button type="button" class="btnPrevNext btn btn-secondary prev-btn"><i class='bx bx-left-arrow-alt'></i>Anterior</button>
+              <button type="button" class="btnPrevNext btn btn-secondary" id="boton-next">Siguiente<i class='bx bx-right-arrow-alt'></i></button>
             </div>
           </div>
         </div>
@@ -131,40 +140,44 @@
 
             <div class="d-flex">
               <div class="container">
-                <input type="number" class="input-form" id="Area" placeholder="Superficie en m²:" name="Area">
+                <label class="label-form" for="Area">Area en m²</label>
+                <input type="number" class="input-form" id="Area" name="Area">
               </div>
               <div class="container">
-                <input type="number" class="input-form" id="AreaCubierta" placeholder="Superficie cubierta en m²:"
-                  name="AreaCubierta">
+                <label class="label-form" for="AreaCubierta">Area cubierta en m²</label>
+                <input type="number" class="input-form" id="AreaCubierta" name="AreaCubierta">
               </div>
             </div>
             <div class="d-flex">
               <div class="container">
-                <input type="number" class="input-form" id="Habitaciones" placeholder="Habitaciones:"
-                  name="Habitaciones">
+                <label class="label-form" for="Habitaciones">Habitaciones</label>
+                <input type="number" class="input-form" id="Habitaciones" name="Habitaciones">
               </div>
               <div class="container">
-                <input type="number" class="input-form" id="Banios" placeholder="Baños:" name="Banios">
+                <label class="label-form" for="Banios">Baños</label>
+                <input type="number" class="input-form" id="Banios" name="Banios">
               </div>
               <div class="container">
-                <input type="number" class="input-form" id="Ambientes" placeholder="Ambientes:" name="Ambientes">
+                <label class="label-form" for="Ambientes">Ambientes</label>
+                <input type="number" class="input-form" id="Ambientes" name="Ambientes">
               </div>
 
             </div>
             <div class="container">
               <div class="row">
                 <div class="col-6 checkbox">
-                  <label for="Estacionamiento">Cochera:</label>
+                  <label class="label-form" for="Estacionamiento">Cochera:</label>
                   <input type="checkbox" id="Estacionamiento" name="Estacionamiento" class="ui-checkbox">
                 </div>
                 <div class="col-6 checkbox">
-                  <label for="Amoblado">Amoblado:</label>
+                  <label class="label-form" for="Amoblado">Amoblado:</label>
                   <input type="checkbox" id="Amoblado" name="Amoblado" class="ui-checkbox">
                 </div>
               </div>
             </div>
           </div>
           <div class="col-md-12 col-lg-12 mb-3 mx-6">
+            <label class="label-form" for="Descripcion">Descripción</label>
             <textarea name="Descripcion" id="Descripcion" placeholder="Descripción:" class="input-form" maxlength="600"oninput="actualizarContador()"></textarea>
           </div>
           <p id="Contador" class="text-muted d-flex">0/600 caracteres</p>

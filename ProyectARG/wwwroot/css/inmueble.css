@@ -69,16 +69,22 @@ footer{
   border-radius: 5px;
   padding: 5px;
   color: var(--text-placeholder);
-  margin-top: 10px; /* Ajusta el padding si es necesario */
   outline: none;
   background-color: transparent;
   height: 45px;
+  font-size: 14px;
+  font-weight: 300;
 }
 ::placeholder {
   color: var(--text-placeholder); /* Cambia el color del placeholder */
   opacity: 1; /* Asegúrate de que la opacidad esté al 100% */
+  font-size: 14px;
+  font-weight: 300;
+}
+.label-form{
   font-size: 18px;
-  font-weight: 400;
+  margin-bottom: -30px;
+  padding-left: 10px;
 }
 
 .checkbox label{
@@ -473,10 +479,11 @@ img.active {
 }
 
 .divisor-switchcase{
-  width: 35%;
+  font-size: 15px;
+  margin-top: 7px;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: end;
   gap: 5px;
 }
 

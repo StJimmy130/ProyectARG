@@ -27,7 +27,7 @@ public class InmueblesController : Controller
 
         var selectListItemsOperacion = new List<SelectListItem>
     {
-        new SelectListItem { Value = "0", Text = "[Tipo de operación...] *" }
+        new SelectListItem { Value = "0", Text = "[Seleccionar]" }
     };
 
         var enumValuesOperacion = Enum.GetValues(typeof(Operacion)).Cast<Operacion>();
@@ -43,7 +43,7 @@ public class InmueblesController : Controller
 
         var selectListItemsTipoInmueble = new List<SelectListItem>
     {
-        new SelectListItem { Value = "0", Text = "[Tipo de inmueble...] *" }
+        new SelectListItem { Value = "0", Text = "[Seleccionar]" }
     };
 
         var enumValuesTipoInmueble = Enum.GetValues(typeof(TipoInmueble)).Cast<TipoInmueble>();
@@ -60,10 +60,10 @@ public class InmueblesController : Controller
         var provincias = _context.Provincias.ToList();
         var localidades = _context.Localidades.ToList();
 
-        provincias.Add(new Provincia { ProvinciaID = 0, Nombre = "[Provincia...] *" });
+        provincias.Add(new Provincia { ProvinciaID = 0, Nombre = "[Seleccionar]" });
         ViewBag.ProvinciaID = new SelectList(provincias.OrderBy(c => c.Nombre), "ProvinciaID", "Nombre");
 
-        localidades.Add(new Localidad { LocalidadID = 0, Nombre = "[Localidad...] *" });
+        localidades.Add(new Localidad { LocalidadID = 0, Nombre = "[Seleccionar]" });
         ViewBag.LocalidadID = new SelectList(localidades.OrderBy(c => c.Nombre), "LocalidadID", "Nombre");
 
         ViewBag.Operaciones = selectListItemsOperacion;

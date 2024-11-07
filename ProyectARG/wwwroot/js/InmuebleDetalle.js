@@ -95,7 +95,7 @@ function CargarDatosPublicacion() {
           ${inmueble.tipoOperacionString === "Alquiler Temporal" ? `
           <div class="d-flex ms-3 mb-2 align-items-end" style="font-size: 13px">
             <p id="promedio" class="info-valoracion text-muted" style="font-size: 13px"></p>
-            <div class="rating" id="Valoracion">
+            <div class="rating" id="Valoracion" style="font-size: 13px">
               <div class="rating-fill" id="avgValoracion">★★★★★</div>
               <input value="5" name="rating" id="star5" type="radio" onclick="valoracion()">
               <label for="star5" class="label"></label>
@@ -136,8 +136,8 @@ function CargarDatosPublicacion() {
               ${usuario.instagram ? `<a class="instagram" href="https://www.instagram.com/${usuario.instagram}/" target="_blank"><i class="bx bxl-instagram"></i></a>` : ''}
               ${usuario.whatsapp ? `<a class="whatsapp" href="https://wa.me/${usuario.whatsapp}" target="_blank"><i class="bx bxl-whatsapp"></i></a>` : ''}
               ${usuario.email ? 
-                `<a class="gmail" href="mailto:${usuario.email}?subject=Consulta%20sobre%20${encodeURIComponent(inmueble.tituloString)}&body=¡Hola%20${encodeURIComponent(usuario.nombre)}!%20Estoy%20interesado%20en%20${encodeURIComponent(inmueble.tituloString)}%20Publicado%20en%20ProyectARG%20.%20Me%20podría%20proporcionar%20información%20adicional?%20¡Muchas%20gracias!" target="_blank">
-                  <i class="bx bxl-gmail"></i>
+                `<a class="gmail" href="mailto:${usuario.email}?subject=Consulta%20sobre%20${encodeURIComponent(inmueble.tituloString)}&body=¡Hola%20${encodeURIComponent(usuario.nombre)}!%20Estoy%20interesado%20en%20${encodeURIComponent(inmueble.tituloString)}%20Publicado%20en%20ProyectARG.%20¿Me%20podría%20proporcionar%20información%20adicional?%20¡Muchas%20gracias!" target="_blank">
+                  <i class='bx bx-mail-send'></i>
                 </a>` 
                 : ''}              
             </div>
@@ -186,7 +186,7 @@ function CargarDatosPublicacion() {
           `;
 
         let ancho = window.innerWidth;
-          if (ancho <= 768) {
+          if (ancho <= 1199) {
             $("#pos2").html(comentarios);
           } else{
             $("#pos1").html(comentarios);

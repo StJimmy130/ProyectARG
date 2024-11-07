@@ -181,7 +181,6 @@ function ListadoPublicaciones() {
       if (Listado && Listado.length > 0) {
         publicacionesOriginales = Listado; // Asigna las publicaciones originales
         renderizarTabla(publicacionesOriginales); // Renderiza la tabla con las publicaciones
-        paginacion.style.display = "block";
       } else {
         var paginacion = document.getElementById("paginacion");
         document.getElementById("publicaciones").innerHTML = `

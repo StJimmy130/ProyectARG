@@ -37,12 +37,26 @@
   .collapse:not(.show) {
     opacity: 0;
   }
+  .card:hover {
+    transform: scale(1.02);
+    z-index: 2;
+    box-shadow: 0 0 8px 0.5px rgb(36, 35, 35);
+  }
   
+  .card-body:hover {
+    opacity: 1;
+    visibility: visible;
+    height: 40%;
+  }
+  .image-container:hover + .card-body {
+    opacity: 0;
+  }
 }
+
 .navbar-toggler {
   background-color: var(--nav-color);
   margin: 5px 15px 5px 5px;
-  width: 90%;
+  width: 93%;
   margin: 20px;
   height: 2.5rem;
   display: flex;
@@ -165,22 +179,6 @@ p.card-text{
 
 
 
-@media (min-width: 1024px) {
-  .card:hover {
-    transform: scale(1.02);
-    z-index: 2;
-    box-shadow: 0 0 8px 0.5px rgb(36, 35, 35);
-  }
-  
-  .card-body:hover {
-    opacity: 1;
-    visibility: visible;
-    height: 40%;
-  }
-  .image-container:hover + .card-body {
-    opacity: 0;
-  }
-}
 
 
 
@@ -219,7 +217,6 @@ p.card-text{
     color: var(--text-color2);
     font-size: 16px;
     margin-top: 1rem;
-    transition: 0.2s;
 }
 .filtros ul li:hover a{
     color: var(--scrollbar-color);
@@ -422,11 +419,11 @@ input[type="range"] {
 
 @media screen and (min-width: 1601px) {
   .card-body {
-    height: 20%;
+    height: 18%;
   }
 
   .card-body:hover {
-    height: 30%;
+    height: 28%;
   }
 }
 
@@ -448,6 +445,6 @@ input[type="range"] {
     margin-top: 6rem;
   }
   .card-body{
-    height: 28%;
+    height: 25%;
   }
 }
