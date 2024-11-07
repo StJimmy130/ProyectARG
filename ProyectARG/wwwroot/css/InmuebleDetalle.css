@@ -290,7 +290,6 @@ footer {
 .info-valoracion{
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
   gap: 10px;
   margin-bottom: 18px;
@@ -371,7 +370,15 @@ textarea.form-control {
 }
 
 
+.views-valoraciones{
+  display: flex;
+}
 
+@media screen and (max-width: 1600px) and (min-width: 1200px) {
+  .views-valoraciones{
+    display: block;
+  }
+}
 
 @media screen and (max-width: 1200px) {
   .vistaDetalle {

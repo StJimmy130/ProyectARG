@@ -90,10 +90,10 @@ function CargarDatosPublicacion() {
 
         // Datos Principales
         datosPrincipales += `
-        <div class="d-flex align-items-center justify-content-between">
-          <p class="text-muted info-valoracion">${inmueble.fechaPublicacionString} - ${inmueble.cantidadVistas} <i class="fa-solid fa-eye"></i></p>
+        <div class="views-valoraciones align-items-center justify-content-between">
+          <p class="text-muted info-valoracion d-flex">${inmueble.fechaPublicacionString} - ${inmueble.cantidadVistas} <i class="fa-solid fa-eye"></i></p>
           ${inmueble.tipoOperacionString === "Alquiler Temporal" ? `
-          <div class="d-flex ms-3 mb-2 align-items-end" style="font-size: 13px">
+          <div class="d-flex mb-2 align-items-end" style="font-size: 13px">
             <p id="promedio" class="info-valoracion text-muted" style="font-size: 13px"></p>
             <div class="rating" id="Valoracion" style="font-size: 13px">
               <div class="rating-fill" id="avgValoracion">★★★★★</div>
