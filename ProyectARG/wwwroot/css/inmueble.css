@@ -226,6 +226,15 @@ label > p {
   margin: 0.5rem;
 }
 
+.error{
+  border-color: rgb(206, 2, 2);
+}
+.validacion{
+  position: absolute;
+  right:5%;
+  font-size: 2rem;
+  color: rgb(206, 2, 2)
+}
 
 
 input[type="number"]::-webkit-outer-spin-button,

@@ -44,6 +44,17 @@ document.addEventListener("DOMContentLoaded", () => {
           "Por favor, complete todos los campos requeridos.";
         aceptar.style.display = "block";
         alerta.classList.add("enter-alert");
+
+        inputs.forEach((input) =>{
+          if(input.value == "" && input.tagName == "INPUT" || input.value == 0 && input.tagName == "SELECT")
+          {
+            input.classList.add("error")
+            
+          }
+          else{
+            input.classList.remove("error")
+          }
+        })
         form.reportValidity();
 
         setTimeout(function () {
