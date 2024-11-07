@@ -12,7 +12,7 @@ function ToggleFavorito(inmuebleId, button) {
         type: 'POST',
         data: { inmuebleId: inmuebleId, usuarioId: usuarioId },
         success: function (response) {
-            console.log('Respuesta del servidor:', response);
+            
             if (response.success) {
                 icon.toggleClass('fas far');
                 // Actualizar el estado visual del botón
@@ -54,7 +54,13 @@ function ListadoFavoritos() {
             if (Listado.length > 0) {
                 publicacionesOriginales = Listado;
                 renderizarTabla(publicacionesOriginales);
-            }
+            } else {
+                document.getElementById("publicaciones").innerHTML = `
+                <div style="justify-content: center; text-align: center;">
+                    <img src="/img/NoCasa.png" style="align-items: center; max-width: 100%; height: auto;">
+                    <p class"fw-bold">No hay publicaciones favoritas</p>
+                </div>`
+              }
             hideLoadingScreen();
         },
         error: function () {

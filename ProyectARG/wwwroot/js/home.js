@@ -82,8 +82,7 @@ document.addEventListener("DOMContentLoaded", function () {
 function ToggleFavorito(inmuebleId, button) {
   let icon = $(button).find("i");
   let usuarioId = document.getElementById("UsuarioID").value;
-  console.log("ID del usuario:", usuarioId);
-  console.log("ID del inmueble:", inmuebleId);
+  
 
   $.ajax({
     url: `../../Favoritos/ToggleFavorito`,
@@ -177,7 +176,7 @@ function ListadoPublicaciones() {
     type: "POST",
     dataType: "json",
     success: function (Listado) {
-      console.log(Listado);
+      
 
       if (Listado && Listado.length > 0) {
         publicacionesOriginales = Listado; // Asigna las publicaciones originales
@@ -188,7 +187,7 @@ function ListadoPublicaciones() {
         document.getElementById("publicaciones").innerHTML = `
         <div style="justify-content: center; text-align: center;">
             <img src="/img/NoCasa.png" style="align-items: center; max-width: 100%; height: auto;">
-            <p class"fw-bold">NO SE ENCONTRARON PUBLICACIONES</p>
+            <p class"fw-bold">No se encontraron resultados</p>
         </div>`
         paginacion.style.display = "none";
       }

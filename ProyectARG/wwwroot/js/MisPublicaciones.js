@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (inputField) {
       inputField.addEventListener("input", (event) => {
         formatNumber(inputField);
-        console.log(inputField.value);
+        
       });
   }
 });
@@ -205,14 +205,14 @@ function GuardarPublicacion() {
   // Obtener el orden actual de las imágenes en el list-container
   let imagenesBack = getBackFiles();
 
-  console.log(imagenesBack);
+
 
 
 
   for (let i = 0; i < imagenesBack.length; i++) {
     formData.append(`ImagenesBack[${i}]`, JSON.stringify(imagenesBack[i]));
   }
-  console.log(formData);
+  
   $.ajax({
     url: "/Inmuebles/GuardarPublicacion",
     data: formData,
@@ -305,7 +305,7 @@ function AbrirModalEditar(inmuebleID) {
                         </div>`;
                         imagen.position = index + 1;
       });
- console.log(backFiles);
+ 
  actualizarDataIndex();
  actualizarVisibilidad();
 
@@ -553,7 +553,7 @@ function IniciarTouch() {
   draggables.forEach((draggable) => {
     draggable.addEventListener("click", function () {
       draggedElement = this;
-      console.log(draggedElement);
+      
     });
   
     draggable.addEventListener("dragstart", function () {
@@ -709,8 +709,7 @@ function updateImageOrder() {
     div.dataset.index = index + 1;
   });
   
-  console.log("Ordered Files: ", orderedFiles); // Verificar si se reordenan correctamente
-  console.log("Back Files: ", backFiles);
+ 
 }
 
 
@@ -731,7 +730,7 @@ function guardarImagenes() {
     contentType: false,
     success: function (response) {
       if (response === true) {
-        console.log("Imagenes guardadas exitosamente");
+        
         AbrirModalEditar(inmuebleID);
         document.getElementById("Imagen").value = "";
         document.getElementById("input-container").innerHTML = "";
@@ -754,7 +753,7 @@ function deleteImage(imagenID) {
     data: { imagenID: imagenID },
     success: function (response) {
       if (response === true) {
-        console.log("Imagen eliminada exitosamente");
+       
         updateDropArea();
         AbrirModalEditar(inmuebleID);
       } else {

@@ -79,7 +79,7 @@ function GuardarLocalidad() {
     type: "POST",
     dataType: "json",
     success: function (resultado) {
-      console.log(resultado);
+      
 
       if (resultado.error === true) {
         icon.innerHTML = '<i class="bx bxs-x-circle"></i>';
@@ -130,7 +130,7 @@ function ModalEditarLocalidad(localidadID) {
     type: "POST",
     dataType: "json",
     success: function (localidad) {
-      console.log(localidad[0]);
+      
       let localidades = localidad[0];
 
       document.getElementById("LocalidadID").value = localidadID;

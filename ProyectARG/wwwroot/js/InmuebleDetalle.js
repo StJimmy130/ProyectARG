@@ -278,7 +278,7 @@ function getComentarios() {
       inmuebleID: inmuebleID,
     },
     success: function (data) {
-      console.log(data);
+      
       let listaComentarios = "";
       $.each(data, function (index, comentario) {
         listaComentarios +=`
@@ -340,7 +340,7 @@ function avgValoraciones(){
       inmuebleID: inmuebleID,
     },
     success: function (data) {
-      console.log(data);
+      
 
       document.getElementById("avgValoracion").style = "width: " + data.porcentaje + "%";  
       document.getElementById("promedio").innerHTML = data.puntuacion.toFixed(1);  
@@ -369,16 +369,22 @@ function valoracion() {
       puntuacion: puntuacion,
     },
     success: function (response) {
-      icon.innerHTML = '<i class="bx bxs-error-circle"></i>';
-      icon.classList.add("alert-svg");
+      icon.innerHTML = '<i class="bx bxs-check-circle"></i>';
+      icon.classList.add("succes-svg");
       titulo.innerHTML = "Muchas gracias";
       descripcion.innerHTML = `<label>su valoración ha sido recibida</label>`;
       aceptar.style.display = "block";
-      background.classList.add("sucess");
-      alerta.classList.add("enter-success");
+      background.classList.add("success");
+      alerta.classList.add("enter-alert");
     },
     error: function (xhr, status, error) {
-      console.log("Disculpe, existió un problema al guardar el comentario", status, error);
+      icon.innerHTML = '<i class="bx bxs-error-circle"></i>';
+      icon.classList.add("denied-svg");
+      titulo.innerHTML = "Lo sentimos";
+      descripcion.innerHTML = `<label>debe estar registrado para valorar este inmueble</label>`;
+      aceptar.style.display = "block";
+      background.classList.add("denied");
+      alerta.classList.add("enter-alert");
     },
   })
   getComentarios()
