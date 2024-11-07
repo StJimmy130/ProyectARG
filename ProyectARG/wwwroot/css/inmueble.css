@@ -1,11 +1,7 @@
-html {
-  min-height: 100vh;
-}
+
 
 body {
-  padding-top: 4.5rem;
-  max-height: 150vh;
-  
+  padding-top: 80px;
 }
 
 :root{
@@ -53,7 +49,7 @@ footer{
   border-radius: 5px;
   width: 70vw;
   min-width: 300px;
-  margin-top: 80px;
+  margin-top: -20px !important;
   height: auto; /* Ajusta la altura automáticamente */
   margin: 5px;
   padding: 15px;
@@ -65,7 +61,7 @@ footer{
 .input-form {
   width: 100%;
   border: none; /* Quita todos los bordes */
-  border-bottom: 2px solid var(--border-color); /* Agrega solo el borde inferior */
+  border-bottom: 2.5px solid var(--border-color); /* Agrega solo el borde inferior */
   border-radius: 5px;
   padding: 5px;
   color: var(--text-placeholder);
@@ -83,8 +79,9 @@ footer{
 }
 .label-form{
   font-size: 18px;
-  margin-bottom: -30px;
+  margin-bottom: -25px;
   padding-left: 10px;
+  
 }
 
 .checkbox label{
@@ -102,9 +99,12 @@ footer{
 
 label:has(p) {
   display: flex;
+  
 }
 label > p {
   color: red;
+  font-size: 20px;
+  margin-left: 5px;
 }
 
 .column {
@@ -129,13 +129,25 @@ label > p {
   padding: 3px;
 }
 
-@media screen and (max-width: 1366px) {
+@media screen and (max-width: 1590px) {
   .formInmueble div div div div {
     margin: 0;
   }
+  label[for="Imagen"] {
+    font-size: 2rem;
+    height: 3rem;
+    width: 3rem;
+  }
+  .list-container {
+    display: none !important;
+  }
+  
 }
 
 @media screen and (max-width: 768px) {
+  .formInmueble{
+    margin-top: 140px;
+  }
   .contenedor {
     width: 90vw;
     height: auto;
@@ -170,17 +182,16 @@ label > p {
     width: 100%;
     justify-content: flex-start;
   }
-
-  label[for="Imagen"] {
-    font-size: 2rem;
-    height: 3rem;
-    width: 3rem;
-  }
-  .list-container {
-    display: none !important;
-  }
   #preview-container{
     min-height: 450px;
+  }
+
+  
+  footer{
+    margin-top: 200px;
+  }
+  body{
+    padding-top: 80px;
   }
 }
 

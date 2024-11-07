@@ -2,7 +2,7 @@ window.onload = function () {
   icon.innerHTML = '<i class="bx bxs-error-circle"></i>';
   icon.classList.add("alert-svg");
   titulo.innerHTML = "Atencion!!!";
-  descripcion.innerHTML = `<label>los campos con (<p>*</p>) son obligatorios</label>`;
+  descripcion.innerHTML = `<label>los campos con ⁽*⁾ son obligatorios</label>`;
   aceptar.style.display = "block";
   background.classList.add("alert");
   alerta.classList.add("enter-alert");

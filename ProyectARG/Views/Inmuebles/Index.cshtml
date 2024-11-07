@@ -13,22 +13,23 @@
   </div>
 </div>
 
-<div>
-  <input type="hidden" id="UsuarioID" value="@ViewBag.UsuarioID">
-  <form class="formInmueble" id="form">
-    <div class="container">
-      <div class="row justify-content-center align-items-center">
-        <!-- Step 1 -->
-        <div class="col-12 justify-content-center align-items-center contenedor step active">
-          <div class="d-flex">
-            <div class="container">
-              <label class="label-form" for="Titulo">Título</label>
-              <input type="text" name="Titulo" id="Titulo" placeholder="Ejemplo: Casa en venta..." class="input-form input-container" required>
-            </div>
-            <div class="container flex">
-              <div>
-                <label class="label-form" for="Moneda">Moneda</label>
-                <div class="divisor-switchcase"> AR$<label class="switch" for="Moneda">
+
+<input type="hidden" id="UsuarioID" value="@ViewBag.UsuarioID">
+<form class="formInmueble" id="form">
+  <div class="container">
+    <div class="row justify-content-center align-items-center">
+      <!-- Step 1 -->
+      <div class="col-12 justify-content-center align-items-center contenedor step active">
+        <div class="d-flex">
+          <div class="container">
+            <label class="label-form" for="Titulo">Título<p>⁽*⁾</p></label>
+            <input type="text" name="Titulo" id="Titulo" placeholder="Ejemplo: Casa en venta..."
+              class="input-form input-container" required>
+          </div>
+          <div class="container flex">
+            <div>
+              <label class="label-form" for="Moneda">Moneda</label>
+              <div class="divisor-switchcase"> AR$<label class="switch" for="Moneda">
                   <input checked="" type="checkbox" id="Moneda">
                   <div class="slider">
                     <div class="circle">
@@ -36,188 +37,191 @@
                   </div>
                 </label>U$D
               </div>
-              </div>
-              <div class="container">
-                <label class="label-form" for="Precio">Precio</label>
-                <input type="phone" class="input-form" id="Precio" placeholder="Ejemplo: $1.000.000,00" name="Precio" required>
-              </div>
-            </div>
-          </div>
-          <div class="d-flex flex-column">
-            <div class="d-flex">
-              <div class="container">
-                <label class="label-form" for="Operacion">Tipo de operación</label>
-                <input type="hidden" id="InmuebleID" name="InmuebleID">
-                <select class="input-form" id="Operacion" name="Operacion">
-                  @foreach (var item in ViewBag.Operaciones)
-                  {
-                    <option value="@item.Value">@item.Text</option>
-                  }
-                </select>
-              </div>
-              <div class="container">
-                <label class="label-form" for="TipoInmueble">Tipo de inmueble</label>
-                <select class="input-form" id="TipoInmueble" name="TipoInmueble">
-                  @foreach (var item in ViewBag.TiposInmueble)
-                  {
-                    <option value="@item.Value">@item.Text</option>
-                  }
-                </select>
-              </div>
-            </div>
-          </div>
-          <div class="d-flex">
-            <div class="container">
-              <label class="label-form" for="Provincia">Provincia</label>
-              @Html.DropDownList("ProvinciaID", null, htmlAttributes: new
-                {
-                  @class = "input-form",
-                  @id = "ProvinciaID",
-                  @onChange = "actualizarLocalidades()",
-
-                })
             </div>
             <div class="container">
-              <label class="label-form" for="Localidad">Localidad</label>
-              @Html.DropDownList("LocalidadID", null, htmlAttributes: new
-                {
-                  @class = "input-form",
-                  @id = "LocalidadID",
-                })
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-md-6 col-xl-4 mb-3">
-              <div class="container mx-auto">
-                <div class="justify-content-center">
-                  <label class="label-form" for="Barrio">Barrio</label>
-                  <input type="text" name="Barrio" id="Barrio" placeholder="" class="input-form">
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 col-xl-4 mb-3">
-              <div class="container mx-auto">
-                <div class="justify-content-center">
-                  <label class="label-form" for="Direccion">Dirección</label>
-                  <input type="text" name="Direccion" id="Direccion" placeholder="" class="input-form">
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 col-xl-4 mb-3">
-              <div class="container mx-auto">
-                <div class="justify-content-center">
-                  <label class="label-form" for="NroDireccion">Nº de Direccion</label>
-                  <input type="text" name="NroDireccion" id="NroDireccion" placeholder=""
-                    class="input-form">
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 col-lg-6 mb-3" id="piso-container">
-              <div class="container justify-content-center">
-                <label class="label-form" for="Piso">Piso</label>
-                <input type="text" name="Piso" id="Piso" placeholder="Piso:" class="input-form">
-              </div>
-            </div>
-            <div class="col-md-6 col-lg-6 mb-3" id="departamento-container">
-              <div class="container justify-content-center">
-                <label class="label-form" for="NroDepartamento">Nº de Departamento</label>
-                <input type="text" name="NroDepartamento" id="NroDepartamento" class="input-form">
-              </div>
-            </div>
-            <div class="botonera">
-              <button type="button" class="btnPrevNext btn btn-secondary prev-btn"><i class='bx bx-left-arrow-alt'></i>Anterior</button>
-              <button type="button" class="btnPrevNext btn btn-secondary" id="boton-next">Siguiente<i class='bx bx-right-arrow-alt'></i></button>
+              <label class="label-form" for="Precio">Precio <p>⁽*⁾</p></label>
+              <input type="phone" class="input-form" id="Precio" placeholder="Ejemplo: $1.000.000,00" name="Precio"
+                required>
             </div>
           </div>
         </div>
-      </div>
-
-      <!-- Step 2 -->
-      <div class="row justify-content-center align-items-center">
-        <div class="col-12 justify-content-center align-items-center contenedor step">
-          <div class="d-flex flex-column">
-
-            <div class="d-flex">
-              <div class="container">
-                <label class="label-form" for="Area">Area en m²</label>
-                <input type="number" class="input-form" id="Area" name="Area">
-              </div>
-              <div class="container">
-                <label class="label-form" for="AreaCubierta">Area cubierta en m²</label>
-                <input type="number" class="input-form" id="AreaCubierta" name="AreaCubierta">
-              </div>
-            </div>
-            <div class="d-flex">
-              <div class="container">
-                <label class="label-form" for="Habitaciones">Habitaciones</label>
-                <input type="number" class="input-form" id="Habitaciones" name="Habitaciones">
-              </div>
-              <div class="container">
-                <label class="label-form" for="Banios">Baños</label>
-                <input type="number" class="input-form" id="Banios" name="Banios">
-              </div>
-              <div class="container">
-                <label class="label-form" for="Ambientes">Ambientes</label>
-                <input type="number" class="input-form" id="Ambientes" name="Ambientes">
-              </div>
-
+        <div class="d-flex flex-column">
+          <div class="d-flex">
+            <div class="container">
+              <label class="label-form" for="Operacion">Tipo de operación <p>⁽*⁾</p></label>
+              <input type="hidden" id="InmuebleID" name="InmuebleID">
+              <select class="input-form" id="Operacion" name="Operacion">
+                @foreach (var item in ViewBag.Operaciones)
+                {
+                  <option value="@item.Value">@item.Text</option>
+                }
+              </select>
             </div>
             <div class="container">
-              <div class="row">
-                <div class="col-6 checkbox">
-                  <label class="label-form" for="Estacionamiento">Cochera:</label>
-                  <input type="checkbox" id="Estacionamiento" name="Estacionamiento" class="ui-checkbox">
-                </div>
-                <div class="col-6 checkbox">
-                  <label class="label-form" for="Amoblado">Amoblado:</label>
-                  <input type="checkbox" id="Amoblado" name="Amoblado" class="ui-checkbox">
-                </div>
+              <label class="label-form" for="TipoInmueble">Tipo de inmueble <p>⁽*⁾</p></label>
+              <select class="input-form" id="TipoInmueble" name="TipoInmueble">
+                @foreach (var item in ViewBag.TiposInmueble)
+                {
+                  <option value="@item.Value">@item.Text</option>
+                }
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex ">
+          <div class="container">
+            <label class="label-form" for="Provincia">Provincia <p>⁽*⁾</p></label>
+            @Html.DropDownList("ProvinciaID", null, htmlAttributes: new
+              {
+                @class = "input-form",
+                @id = "ProvinciaID",
+                @onChange = "actualizarLocalidades()",
+
+              })
+          </div>
+          <div class="container">
+            <label class="label-form" for="Localidad">Localidad <p>⁽*⁾</p></label>
+            @Html.DropDownList("LocalidadID", null, htmlAttributes: new
+              {
+                @class = "input-form",
+                @id = "LocalidadID",
+              })
+          </div>
+        </div>
+
+        <div class="row d-flex container justify-content-between">
+          <div class="col-md-6 col-xl-4 mb-3">
+            <div class="container">
+              <div class="justify-content-between">
+                <label class="label-form" for="Barrio">Barrio</label>
+                <input type="text" name="Barrio" id="Barrio" placeholder="Ejemplo: Centro" class="input-form">
               </div>
             </div>
           </div>
-          <div class="col-md-12 col-lg-12 mb-3 mx-6">
-            <label class="label-form" for="Descripcion">Descripción</label>
-            <textarea name="Descripcion" id="Descripcion" placeholder="Descripción:" class="input-form" maxlength="600"oninput="actualizarContador()"></textarea>
+          <div class="col-md-6 col-xl-4 mb-3">
+            <div class="container">
+              <div class="justify-content-center">
+                <label class="label-form" for="Direccion">Dirección</label>
+                <input type="text" name="Direccion" id="Direccion" placeholder="Ejemplo: Av. Rivadavia"
+                  class="input-form">
+              </div>
+            </div>
           </div>
-          <p id="Contador" class="text-muted d-flex">0/600 caracteres</p>
+          <div class="col-md-6 col-xl-4 mb-3">
+            <div class="container">
+              <div class="justify-content-center">
+                <label class="label-form" for="NroDireccion">Nº de Direccion</label>
+                <input type="text" name="NroDireccion" id="NroDireccion" placeholder="Ejemplo: 123" class="input-form">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-6 mb-3" id="piso-container">
+            <div class="container justify-content-center">
+              <label class="label-form" for="Piso">Piso</label>
+              <input type="text" name="Piso" id="Piso" placeholder="Piso:" class="input-form">
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-6 mb-3" id="departamento-container">
+            <div class="container justify-content-center">
+              <label class="label-form" for="NroDepartamento">Nº de Departamento</label>
+              <input type="text" name="NroDepartamento" id="NroDepartamento" class="input-form">
+            </div>
+          </div>
           <div class="botonera">
-            <button type="button" class="btnPrevNext btn btn-primary prev-btn"><i class='bx bx-left-arrow-alt'></i>
-              Anterior</button>
-            <button type="button" class="btnPrevNext btn btn-primary next-btn">Siguiente <i
+            <button type="button" class="btnPrevNext btn btn-secondary prev-btn"><i
+                class='bx bx-left-arrow-alt'></i>Anterior</button>
+            <button type="button" class="btnPrevNext btn btn-secondary" id="boton-next">Siguiente<i
                 class='bx bx-right-arrow-alt'></i></button>
           </div>
         </div>
       </div>
+    </div>
 
-      <!-- Step 3 -->
-      <div class="row justify-content-center align-items-center">
-        <div class="col-12 contenedor step">
-          <div class="d-flex flex-column">
+    <!-- Step 2 -->
+    <div class="row justify-content-center align-items-center">
+      <div class="col-12 justify-content-center align-items-center contenedor step">
+        <div class="d-flex flex-column">
+
+          <div class="d-flex">
+            <div class="container">
+              <label class="label-form" for="Area">Area en m²</label>
+              <input type="number" class="input-form" id="Area" name="Area">
+            </div>
+            <div class="container">
+              <label class="label-form" for="AreaCubierta">Area cubierta en m²</label>
+              <input type="number" class="input-form" id="AreaCubierta" name="AreaCubierta">
+            </div>
+          </div>
+          <div class="d-flex">
+            <div class="container">
+              <label class="label-form" for="Habitaciones">Habitaciones</label>
+              <input type="number" class="input-form" id="Habitaciones" name="Habitaciones">
+            </div>
+            <div class="container">
+              <label class="label-form" for="Banios">Baños</label>
+              <input type="number" class="input-form" id="Banios" name="Banios">
+            </div>
+            <div class="container">
+              <label class="label-form" for="Ambientes">Ambientes</label>
+              <input type="number" class="input-form" id="Ambientes" name="Ambientes">
+            </div>
+
+          </div>
+          <div class="container">
             <div class="row">
-              <div class="d-flex">
-                <div class="container">
-                  <div class="row">
-                    <label class="mb-2" for="Imagen"><i class='bx bx-photo-album'></i></label>
-                    <input type="file" id="Imagen" name="Imagen" accept="image/*" multiple>
-                    <div class="list-container" id="list-container" class="col-2"></div>
-                    <div class="col-9 container" id="preview-container"></div>
-                  </div>
-                </div>
+              <div class="col-6 checkbox">
+                <label class="label-form" for="Estacionamiento">Cochera:</label>
+                <input type="checkbox" id="Estacionamiento" name="Estacionamiento" class="ui-checkbox">
+              </div>
+              <div class="col-6 checkbox">
+                <label class="label-form" for="Amoblado">Amoblado:</label>
+                <input type="checkbox" id="Amoblado" name="Amoblado" class="ui-checkbox">
               </div>
             </div>
-            <div class="container text-center">
-              <p>Confirmar detalles y enviar.</p>
-            </div>
           </div>
-          <div class="botonera">
-            <button type="button" class="btnPrevNext btn btn-primary prev-btn"><i class='bx bx-left-arrow-alt'></i>
-              Anterior</button>
-            <button type="button" class="btnPrevNext btn btn-success" onclick="GuardarPublicacion()">Publicar <i
-                  class='bx bx-right-arrow-alt'></i></button>
-          </div>
+        </div>
+        <div class="col-md-12 col-lg-12 mb-3 mx-6">
+          <label class="label-form" for="Descripcion">Descripción</label>
+          <textarea name="Descripcion" id="Descripcion" placeholder="Ingrese una descripción de máximo 700 caracteres" class="input-form" maxlength="700"
+            oninput="actualizarContador()"></textarea>
+        </div>
+        <p id="Contador" class="text-muted d-flex">0/700 caracteres</p>
+        <div class="botonera">
+          <button type="button" class="btnPrevNext btn btn-primary prev-btn"><i class='bx bx-left-arrow-alt'></i>
+            Anterior</button>
+          <button type="button" class="btnPrevNext btn btn-primary next-btn">Siguiente <i
+              class='bx bx-right-arrow-alt'></i></button>
         </div>
       </div>
     </div>
-  </form>
-</div>
+
+    <!-- Step 3 -->
+    <div class="row justify-content-center align-items-center">
+      <div class="col-12 contenedor step">
+        <div class="d-flex flex-column">
+          <div class="row">
+            <div class="d-flex">
+              <div class="container">
+                <div class="row">
+                  <label class="mb-2" for="Imagen"><i class='bx bx-photo-album'></i></label>
+                  <input type="file" id="Imagen" name="Imagen" accept="image/*" multiple>
+                  <div class="list-container" id="list-container" class="col-2"></div>
+                  <div class="col-9 container" id="preview-container"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="container text-center">
+            <p>Confirmar detalles y enviar.</p>
+          </div>
+        </div>
+        <div class="botonera">
+          <button type="button" class="btnPrevNext btn btn-primary prev-btn"><i class='bx bx-left-arrow-alt'></i>
+            Anterior</button>
+          <button type="button" class="btnPrevNext btn btn-success" onclick="GuardarPublicacion()">Publicar <i
+              class='bx bx-right-arrow-alt'></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
