@@ -20,7 +20,7 @@ function setupThumbnailClickHandler() {
   const thumbnails = document.querySelectorAll(".miniatura");
   let currentImageIndex = 0;
 
-  // Función para actualizar la imagen principal y la clase active
+  // Función para actualizar la imagen principal, la clase active y desplazar la miniatura activa al centro
   function updateMainImage(index) {
     const mainImage = document.getElementById("MainImage");
     const newImageSrc = thumbnails[index].getAttribute("src");
@@ -31,7 +31,15 @@ function setupThumbnailClickHandler() {
     thumbnails.forEach((thumb) => thumb.classList.remove("active"));
 
     // Agregar la clase "active" al thumbnail seleccionado
-    thumbnails[index].classList.add("active");
+    const activeThumbnail = thumbnails[index];
+    activeThumbnail.classList.add("active");
+
+    // Desplazar el contenedor para que el thumbnail activo esté visible
+    activeThumbnail.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+      inline: "center"
+    });
   }
 
   // Asignar evento a cada miniatura para actualizar la imagen principal al hacer clic
@@ -59,9 +67,6 @@ function setupThumbnailClickHandler() {
     });
 }
 
-function changeImage(element) {
-  $("#MainImage").attr("src", $(element).attr("src"));
-}
 
 function CargarDatosPublicacion() {
   showLoadingScreen();
@@ -88,8 +93,8 @@ function CargarDatosPublicacion() {
         <div class="d-flex align-items-center justify-content-between">
           <p class="text-muted info-valoracion">${inmueble.fechaPublicacionString} - ${inmueble.cantidadVistas} <i class="fa-solid fa-eye"></i></p>
           ${inmueble.tipoOperacionString === "Alquiler Temporal" ? `
-          <div class="d-flex ms-3 mb-2 align-items-end">
-            <p id="promedio" class="info-valoracion text-muted"></p>
+          <div class="d-flex ms-3 mb-2 align-items-end" style="font-size: 13px">
+            <p id="promedio" class="info-valoracion text-muted" style="font-size: 13px"></p>
             <div class="rating" id="Valoracion">
               <div class="rating-fill" id="avgValoracion">★★★★★</div>
               <input value="5" name="rating" id="star5" type="radio" onclick="valoracion()">
@@ -103,16 +108,19 @@ function CargarDatosPublicacion() {
               <input value="1" name="rating" id="star1" type="radio" onclick="valoracion()">
               <label for="star1" class="label"></label>
             </div>
-            <p id="valoracion" class="info-valoracion text-muted"></p>
+            <p id="valoracion" class="info-valoracion text-muted" style="font-size: 13px"></p>
           </div>` : ''}
         </div>
       `;
 
-      
+      const precioFormateado = Number(inmueble.precioString).toLocaleString("es-ES", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      });
       
       datosPrincipales += `
         <h2 style="font-weight: 500; font-size: 24px; text-transform: uppercase">${inmueble.tituloString}</h2>
-        <p style="font-weight: 300; font-size: 25px; margin-top: 20px">${inmueble.moneda ? "U$D" : "AR$"} ${inmueble.precioString}</p>
+        <p style="font-weight: 300; font-size: 25px; margin-top: 20px">${inmueble.moneda ? "U$D" : "AR$"} ${precioFormateado}</p>
         <h4 style="font-weight: 400; font-size: 18px; margin-top: 20px"><i class="fa-solid fa-arrow-right"></i> ${inmueble.tipoInmuebleString} en ${inmueble.tipoOperacionString}</h4>
         <h4 style="font-weight: 400; font-size: 18px;"><i class="fa-solid fa-location-dot"></i> ${inmueble.provinciaString} - ${inmueble.localidadString}</h4>
         `;
@@ -128,7 +136,7 @@ function CargarDatosPublicacion() {
               ${usuario.instagram ? `<a class="instagram" href="https://www.instagram.com/${usuario.instagram}/" target="_blank"><i class="bx bxl-instagram"></i></a>` : ''}
               ${usuario.whatsapp ? `<a class="whatsapp" href="https://wa.me/${usuario.whatsapp}" target="_blank"><i class="bx bxl-whatsapp"></i></a>` : ''}
               ${usuario.email ? 
-                `<a class="gmail" href="mailto:${usuario.email}?subject=Consulta%20sobre%20${encodeURIComponent(inmueble.tituloString)}&body=¡Hola%20${encodeURIComponent(usuario.nombre)}!%20Estoy%20interesado%20en%20${encodeURIComponent(inmueble.tituloString)}.%20Me%20podría%20proporcionar%20información%20adicional?%20¡Muchas%20gracias!" target="_blank">
+                `<a class="gmail" href="mailto:${usuario.email}?subject=Consulta%20sobre%20${encodeURIComponent(inmueble.tituloString)}&body=¡Hola%20${encodeURIComponent(usuario.nombre)}!%20Estoy%20interesado%20en%20${encodeURIComponent(inmueble.tituloString)}%20Publicado%20en%20ProyectARG%20.%20Me%20podría%20proporcionar%20información%20adicional?%20¡Muchas%20gracias!" target="_blank">
                   <i class="bx bxl-gmail"></i>
                 </a>` 
                 : ''}              
