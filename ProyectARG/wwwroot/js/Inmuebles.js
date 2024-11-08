@@ -23,46 +23,53 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   document
-    .getElementById("boton-next")
-    .addEventListener("click", function (event) {
-      form = document.getElementById("form");
+  .getElementById("boton-next")
+  .addEventListener("click", function (event) {
+    const form = document.getElementById("form");
+    const inputs = form.querySelectorAll("input, select");
+    let isValid = true; // Variable para verificar si el formulario es válido
 
-      if (
-        document.getElementById("Titulo").value == "" ||
-        document.getElementById("Precio").value == "" ||
-        document.getElementById("Operacion").value == 0 ||
-        document.getElementById("TipoInmueble").value == 0 ||
-        document.getElementById("LocalidadID").value == 0 ||
-        document.getElementById("ProvinciaID").value == 0
-      ) {
-        // Si el formulario no es válido, mostrar un mensaje
-        background.classList.add("denied");
-        icon.classList.add("denied-svg");
-        icon.innerHTML = '<i class="bx bxs-x-circle" ></i>';
-        titulo.innerHTML = "Advertencia";
-        descripcion.innerHTML =
-          "Por favor, complete todos los campos requeridos.";
-        aceptar.style.display = "block";
-        alerta.classList.add("enter-alert");
-
-        inputs.forEach((input) =>{
-          if(input.value == "" && input.tagName == "INPUT" || input.value == 0 && input.tagName == "SELECT")
-          {
-            input.classList.add("error")
-            
-          }
-          else{
-            input.classList.remove("error")
-          }
-        })
-        form.reportValidity();
-
-        setTimeout(function () {
-          hiddenAlert();
-        }, 3000);
-      }
+    // Reiniciar clases de error y validación
+    inputs.forEach((input) => {
+      input.classList.remove("error", "valid"); // Eliminar clases previas
     });
 
+    if (
+      document.getElementById("Titulo").value == "" ||
+      document.getElementById("Precio").value == "" ||
+      document.getElementById("Operacion").value == 0 ||
+      document.getElementById("TipoInmueble").value == 0 ||
+      document.getElementById("LocalidadID").value == 0 ||
+      document.getElementById("ProvinciaID").value == 0
+    ) {
+      // Si el formulario no es válido, mostrar un mensaje
+      background.classList.add("denied");
+      icon.classList.add("denied-svg");
+      icon.innerHTML = '<i class="bx bxs-x-circle"></i>';
+      titulo.innerHTML = "Advertencia";
+      descripcion.innerHTML = "Por favor, complete todos los campos requeridos.";
+      aceptar.style.display = "block";
+      alerta.classList.add("enter-alert");
+
+      inputs.forEach((input) => {
+        if (input.value == "" && input.tagName == "INPUT" || input.value == 0 && input.tagName == "SELECT") {
+          input.classList.add("error");
+          isValid = false; // Un campo no es válido
+        } else {
+          input.classList.add("valid"); // Añadir clase de validación
+        }
+      });
+      
+      form.reportValidity();
+
+      setTimeout(function () {
+        hiddenAlert();
+      }, 3000);
+    }
+  });
+
+
+  
   const inputs = [
     document.getElementById("Titulo"),
     document.getElementById("Precio"),

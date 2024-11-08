@@ -226,8 +226,12 @@ label > p {
   margin: 0.5rem;
 }
 
-.error{
+.error {
   border-color: rgb(206, 2, 2);
+}
+
+.valid {
+  border-color: rgb(0, 128, 0); /* Color verde */
 }
 .validacion{
   position: absolute;
