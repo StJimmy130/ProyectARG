@@ -286,6 +286,10 @@ label[for="Imagen"]:hover {
   box-shadow: 0 0 20px var(--text-color);
   text-shadow: 0 0 10px var(--text-color);
 }
+#Contador{
+  font-size: 13px;
+  color: var(--text-color2);
+}
 
 .list-container {
   height: 50vh;
