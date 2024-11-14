@@ -33,7 +33,7 @@ for details on configuring this project to bundle and minify static web assets. 
   --container-color: #eae6e5;
   --overlay-login: #0000003b;
   --body-filter: #9696964f;
-  --scrollbar-color: #009bff;
+  --scrollbar-color: #0065a8;
   --text-info: #414141;
   --bg-info: #d7d7d7;
   --container-color: #ffffff;
@@ -59,7 +59,7 @@ body.dark {
   --container-color: #5a5a5a;
   --overlay-login: #0000008a;
   --body-filter: #00000062;
-  --scrollbar-color: #0065a8;
+  --scrollbar-color: #009bff;
   --text-info: #e1e1e1;
   --bg-info: #474747;
   --container-color: #cfcfcf;
@@ -332,7 +332,7 @@ body.dark .search-field input {
 body.dark .search-field i {
   color: var(--text-color);
 }
-@media (max-width: 950px) {
+@media (max-width: 1050px) {
   .dropdown-form:hover,
   .dropdown-form:focus {
     background-color: transparent; /* Cambia el color de fondo al pasar el mouse o enfocar un elemento del menú del dropdown */

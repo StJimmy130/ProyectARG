@@ -311,13 +311,19 @@ function cambiarPagina(delta) {
 function mostrarPagina(pagina) {
   showLoadingScreen(); // Mostrar pantalla de carga al renderizar una nueva página
 
-  let contenidoTabla = `<button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#filterMenu"
+  
+  let contenidoTabla = '';
+
+  // Condición para mostrar el botón solo en pantallas pequeñas cuando el menú está oculto
+  
+  contenidoTabla += `<button class="navbar-toggler d-xl-none" type="button" data-bs-toggle="collapse" data-bs-target="#filterMenu"
       aria-controls="filterMenu" aria-expanded="false" aria-label="Toggle navigation">
       <span class="container span-filtros"><i class='bx bx-menu-alt-left'></i>Filtros</span>
     </button>`;
+  
 
+  // Generar el resto del contenido de la tabla
   $.each(paginas[pagina], function (i, item) {
-    // Formatear el precio con miles y dos decimales
     const precioFormateado = Number(item.precioString).toLocaleString("es-ES", {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
@@ -354,6 +360,7 @@ function mostrarPagina(pagina) {
   document.getElementById("publicaciones").innerHTML = contenidoTabla;
   hideLoadingScreen(); // Ocultar pantalla de carga después de mostrar la página
 }
+
 
 // Función de búsqueda
 $(document).ready(function () {

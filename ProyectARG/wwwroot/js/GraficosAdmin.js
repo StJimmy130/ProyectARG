@@ -1,9 +1,6 @@
 window.onload = GraficoTorta(),PublicacionesPorTipoDeOperacion();
 
 function GraficoTorta() {
-    // Obtener el color de la variable CSS
-    const textColor = getComputedStyle(document.documentElement).getPropertyValue('--text-color2').trim();
-
     $.ajax({
         url: '../../Administracion/InmueblesPorProvincia', // La URL del método en el backend
         type: 'POST', // Asegúrate de que tu método en el controlador acepte POST
@@ -27,13 +24,22 @@ function GraficoTorta() {
 
             // Crear el gráfico de torta
             let ctxTorta = document.getElementById("graficoTorta");
-            graficoTortaEjercicio = new Chart(ctxTorta, {
+
+            // Verificar si la pantalla es pequeña
+            let isSmallScreen = window.innerWidth <= 1200; // Puedes ajustar el tamaño en función de tu diseño
+
+            // Limitar los datos a 10 registros si la pantalla es pequeña
+            let labelsTortaDisplay = isSmallScreen ? labelsTorta.slice(0, 10) : labelsTorta;
+            let dataTortaDisplay = isSmallScreen ? dataTorta.slice(0, 10) : dataTorta;
+            let fondoTortaDisplay = isSmallScreen ? fondoTorta.slice(0, 10) : fondoTorta;
+
+            graficoTortaInmuebles = new Chart(ctxTorta, {
                 type: 'pie',
                 data: {
-                    labels: labelsTorta,
+                    labels: labelsTortaDisplay,
                     datasets: [{
-                        data: dataTorta,
-                        backgroundColor: fondoTorta,
+                        data: dataTortaDisplay,
+                        backgroundColor: fondoTortaDisplay,
                         borderColor: 'rgba(255, 255, 255, 0.7)',
                         borderWidth: 1,
                         hoverBorderColor: 'rgba(0, 0, 0, 0.8)',
@@ -51,13 +57,13 @@ function GraficoTorta() {
                             borderWidth: 1,
                         },
                         legend: {
-                            display: true, // Asegúrate de que la leyenda esté habilitada
-                            position: 'left', // Coloca la leyenda a la izquierda
-                            align: 'start', // Alinea la leyenda al inicio
+                            display: true,
+                            position: 'right',
+                            align: 'start',
                             labels: {
-                                usePointStyle: true, // Usa un punto en lugar del cuadro
-                                boxWidth: 10, // Ancho del cuadro
-                                padding: 20 // Espaciado entre leyenda
+                                usePointStyle: true,
+                                boxWidth: 10,
+                                padding: 20
                             }
                         }
                     },
@@ -225,12 +231,12 @@ function PublicacionesPorTipoDeOperacion() {
 }
 
 
-function GenerarColor(saturacion = 1) {
+function GenerarColor() {
     // Ajusta los rangos para obtener colores más saturados
-    let rr = Math.floor(50 + Math.random() * (156 * saturacion)); // Rojo entre 50 y un rango ajustado por saturación
-    let gg = Math.floor(100 + Math.random() * (100 * saturacion)); // Verde entre 100 y un rango ajustado por saturación
-    let bb = Math.floor(150 + Math.random() * (106 * saturacion)); // Azul entre 150 y un rango ajustado por saturación
-    let aa = (0.6 + Math.random() * 0.4).toFixed(2); // Alfa entre 0.6 y 1 para transparencia leve
+    let rr = Math.floor(50 + Math.random() * (156)); // Rojo entre 50 y un rango ajustado por saturación
+    let gg = Math.floor(100 + Math.random() * (100)); // Verde entre 100 y un rango ajustado por saturación
+    let bb = Math.floor(150 + Math.random() * (106)); // Azul entre 150 y un rango ajustado por saturación
+    let aa = 1; // Opacidad siempre máxima
 
     return `rgba(${rr}, ${gg}, ${bb}, ${aa})`;
 }

@@ -29,7 +29,7 @@
   .collapse {
     transition: height 0.3s ease, opacity 0.3s ease;
   }
-  
+
   .collapse.show {
     opacity: 1;
   }
@@ -56,7 +56,7 @@
 .navbar-toggler {
   background-color: var(--nav-color);
   margin: 5px 15px 5px 5px;
-  width: 93%;
+  width: 95%;
   margin: 20px;
   height: 2.5rem;
   display: flex;
@@ -421,12 +421,23 @@ input[type="range"] {
 
 @media screen and (min-width: 1200px) {
   .card-body {
-    height: 23%;
+    height: 22%;
   }
 
   .card-body:hover {
-    height: 38%;
+    height: 34%;
   }
+}
+
+@media screen and (max-width: 1200px) {
+  .card-body {
+    height: 20%;
+  }
+
+  .card-body:hover {  
+    height: 33%;
+  }
+  
 }
 
 @media screen and (min-width: 769px) {
@@ -436,6 +447,9 @@ input[type="range"] {
   }
 }
 @media screen and (max-width: 768px) {
+  .navbar-toggler{
+    width: 90%;
+  }
   .container{
     padding: 0;
   }
