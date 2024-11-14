@@ -18,9 +18,13 @@
         if (!emailPattern.test(emailValue)) {
             loginEmailError.textContent = 'Email inválido';
             loginEmailError.style.display = 'block';  // Aseguramos que se muestre el error
+            loginEmailInput.classList.remove('valid');
+            loginEmailInput.classList.add('error');
         } else {
             loginEmailError.textContent = '';
             loginEmailError.style.display = 'none';  // Ocultamos el error si está bien
+            loginEmailInput.classList.remove('error');
+            loginEmailInput.classList.add('valid');
         }
     });
 
@@ -33,9 +37,13 @@
         if (passwordValue.trim() === '') {
             loginPasswordError.textContent = 'La contraseña no puede estar vacía';
             loginPasswordError.style.display = 'block';  // Mostramos el error
+            loginPasswordInput.classList.remove('valid');
+            loginPasswordInput.classList.add('error');
         } else {
             loginPasswordError.textContent = '';
             loginPasswordError.style.display = 'none';  // Ocultamos el error si está bien
+            loginPasswordInput.classList.remove('error');
+            loginPasswordInput.classList.add('valid');
         }
     });
 

@@ -27,9 +27,13 @@ document.addEventListener('DOMContentLoaded', function () {
         if (nameValue.trim() === '') {
             registerNameError.textContent = 'El nombre no puede estar vacío';
             registerNameError.style.display = 'block';
+            registerNameInput.classList.remove('valid');
+            registerNameInput.classList.add('error');
         } else {
             registerNameError.textContent = '';
             registerNameError.style.display = 'none';
+            registerNameInput.classList.remove('error');
+            registerNameInput.classList.add('valid');
         }
     });
 
@@ -41,25 +45,29 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!emailPattern.test(emailValue)) {
             registerEmailError.textContent = 'Email inválido';
             registerEmailError.style.display = 'block';
+            registerEmailInput.classList.remove('valid');
+            registerEmailInput.classList.add('error');
         } else {
             registerEmailError.textContent = '';
             registerEmailError.style.display = 'none';
+            registerEmailInput.classList.remove('error');
+            registerEmailInput.classList.add('valid');
         }
     });
 
     // Validación de la contraseña en tiempo real
     registerPasswordInput.addEventListener('input', function () {
         const passwordValue = registerPasswordInput.value;
-        if (passwordValue.trim() === '') {
+        if (passwordValue.trim() === '' || passwordValue.length < 8) {
             registerPasswordError.textContent = 'La contraseña no puede estar vacía';
             registerPasswordError.style.display = 'block';
-        }
-        else if (passwordValue.length < 8) {
-            registerPasswordError.textContent = 'La contraseña debe tener al menos 8 caracteres';
-            registerPasswordError.style.display = 'block';
+            registerPasswordInput.classList.remove('valid');
+            registerPasswordInput.classList.add('error');
         } else {
             registerPasswordError.textContent = '';
             registerPasswordError.style.display = 'none';
+            registerPasswordInput.classList.remove('error');
+            registerPasswordInput.classList.add('valid');
         }
     });
 
@@ -71,9 +79,13 @@ document.addEventListener('DOMContentLoaded', function () {
         if (confirmPasswordValue !== passwordValue) {
             registerConfirmPasswordError.textContent = 'Las contraseñas no coinciden';
             registerConfirmPasswordError.style.display = 'block';
+            registerConfirmPasswordInput.classList.remove('valid');
+            registerConfirmPasswordInput.classList.add('error');
         } else {
             registerConfirmPasswordError.textContent = '';
             registerConfirmPasswordError.style.display = 'none';
+            registerConfirmPasswordInput.classList.remove('error');
+            registerConfirmPasswordInput.classList.add('valid');
         }
     });
 });
