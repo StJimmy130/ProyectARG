@@ -12,6 +12,9 @@ window.onload = function () {
   }, 4000);
 };
 
+
+
+
 document.addEventListener("DOMContentLoaded", () => {
   let currentStep = 0;
   const steps = document.querySelectorAll(".step");
@@ -26,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
   .getElementById("boton-next")
   .addEventListener("click", function (event) {
     const form = document.getElementById("form");
-    const inputs = form.querySelectorAll("input, select");
+    
     let isValid = true; // Variable para verificar si el formulario es válido
 
     // Reiniciar clases de error y validación
@@ -54,9 +57,11 @@ document.addEventListener("DOMContentLoaded", () => {
       inputs.forEach((input) => {
         if (input.value == "" && input.tagName == "INPUT" || input.value == 0 && input.tagName == "SELECT") {
           input.classList.add("error");
+          input.classList.remove("valid");
           isValid = false; // Un campo no es válido
         } else {
           input.classList.add("valid"); // Añadir clase de validación
+          input.classList.remove("error");
         }
       });
       
@@ -69,7 +74,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 
-  
   const inputs = [
     document.getElementById("Titulo"),
     document.getElementById("Precio"),
