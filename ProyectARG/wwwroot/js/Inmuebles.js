@@ -308,6 +308,10 @@ function GuardarPublicacion() {
   alerta.classList.add("enter-alert");
   }
 }
+function hiddenPanel() {
+  var panel = document.getElementById("panel");
+  panel.classList.add("hidden");
+}
 
 // Añadir el evento de escucha al campo de entrada
 document.addEventListener("DOMContentLoaded", function () {

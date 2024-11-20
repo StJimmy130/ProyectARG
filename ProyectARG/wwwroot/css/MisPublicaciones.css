@@ -448,6 +448,11 @@ input {
   order: 1; /* La tabla va después por defecto */
 }
 
+.cerrar{
+  display: none;
+  background-color: #eb594f;
+}
+
 @media screen and (max-width: 1200px) {
   body {
     padding-top: 80px;
@@ -467,13 +472,20 @@ input {
   #panel {
     display: none; /* Inicialmente oculto */
     position: absolute;
+    z-index: 999;
+    left: 50%; 
     justify-content: center;
-    width: 90%;
+    min-width: 400px ;
+    max-width: 50% ;
+    transform: translateX(-50%);
     height: auto;
     padding: 0;
     margin: 0;
     margin-top: 20px;
     margin-bottom: 60px;
+  }
+  .cerrar{
+    display: block;
   }
   #table{
     padding: 0;
@@ -489,6 +501,12 @@ input {
   .contenedor-panel {
     margin: 0 auto;
     height: 70vh;
+  }
+  .botonera{
+    gap: 4px;
+    padding: 5px;
+
+
   }
   .notifications-container {
     top: 10%;
