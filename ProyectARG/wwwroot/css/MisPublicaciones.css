@@ -445,7 +445,7 @@ input {
 @media screen and (max-width: 1200px) {
   body {
     padding-top: 80px;
-    height: 100vh;
+    height: 100%;
   }
   main {
     height: 60%;
