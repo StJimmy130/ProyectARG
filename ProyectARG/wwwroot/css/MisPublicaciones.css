@@ -216,6 +216,7 @@ body.dark {
 
 .switch {
   display: inline-block;
+  margin: 0;
 }
 
 .switch svg {
