@@ -104,6 +104,9 @@ function cargarInformacion(inmuebleID) {
             "onclick",
             `ValidarEliminacionInmueble(${item.inmuebleID}, 'eliminar')`
           );
+          document
+          .getElementById("btn-detalle-link")
+          .setAttribute("href", `../Inmuebles/Detalle/${item.inmuebleID}`);
         if (item.activo == true) {
           document
             .getElementById("btn-suspender")

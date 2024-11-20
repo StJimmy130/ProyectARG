@@ -136,15 +136,17 @@ body.dark {
 .boton:hover {
   color: white;
 }
-
+.visitar{
+  background-color: #54bddd;
+}
 .editar {
-  background-color: #00c763;
+  background-color: #37cf83;
 }
 .suspender {
-  background-color: rgb(250, 226, 6);
+  background-color: rgb(226, 211, 70);
 }
 .eliminar {
-  background-color: rgb(212, 7, 7);
+  background-color: rgb(185, 81, 81);
 }
 
 /* ESTILOS MODAL EDITAR PUBLICACION */
