@@ -1,10 +1,11 @@
 ﻿@page
 @model AccessDeniedModel
 @{
-    ViewData["Title"] = "Access denied";
+    ViewData["Title"] = "Acceso denegado";
 }
 
-<header class="mt-lg-5">
-    <h1 class="text-danger">@ViewData["Title"]</h1>
-    <p class="text-danger">No tienes los permisos suficientes.</p>
-</header>
+<div style="margin-top: 100px;" class="text-center">
+    <h1 class="text-danger" style="font-weight: 400;">@ViewData["Title"]</h1>
+    <h5 class="text-danger" style="font-weight: 300;">No tienes los permisos suficientes para acceder a esta vista.</h5>
+    <img src="~/img/AccesoDenegado3.png" style="width: 350px; margin-top: 20px;">
+</div>

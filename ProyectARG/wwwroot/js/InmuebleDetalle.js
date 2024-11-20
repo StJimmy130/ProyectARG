@@ -93,9 +93,9 @@ function CargarDatosPublicacion() {
         <div class="views-valoraciones align-items-center justify-content-between">
           <p class="text-muted info-valoracion d-flex">${inmueble.fechaPublicacionString} - ${inmueble.cantidadVistas} <i class="fa-solid fa-eye"></i></p>
           ${inmueble.tipoOperacionString === "Alquiler Temporal" ? `
-          <div class="d-flex mb-2 align-items-end" style="font-size: 13px">
-            <p id="promedio" class="info-valoracion text-muted" style="font-size: 13px"></p>
-            <div class="rating" id="Valoracion" style="font-size: 13px">
+          <div class="d-flex mb-2 align-items-end" style="font-size: 12px">
+            <p id="promedio" class="info-valoracion text-muted" style="font-size: 12px"></p>
+            <div class="rating" id="Valoracion">
               <div class="rating-fill" id="avgValoracion">★★★★★</div>
               <input value="5" name="rating" id="star5" type="radio" onclick="valoracion()">
               <label for="star5" class="label"></label>
@@ -108,7 +108,7 @@ function CargarDatosPublicacion() {
               <input value="1" name="rating" id="star1" type="radio" onclick="valoracion()">
               <label for="star1" class="label"></label>
             </div>
-            <p id="valoracion" class="info-valoracion text-muted" style="font-size: 13px"></p>
+            <p id="valoracion" class="info-valoracion text-muted" style="font-size: 12px"></p>
           </div>` : ''}
         </div>
       `;
