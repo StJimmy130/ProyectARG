@@ -126,8 +126,10 @@ body.dark {
 }
 
 .botonera {
-  gap: 5%;
-  margin: 20px 0;
+  gap: 10px;
+  margin: 20px auto;
+  width: auto;
+  justify-content: center;
 }
 .boton {
   color: white;
