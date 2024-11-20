@@ -81,8 +81,7 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
     border: 2px solid gray ;
     transition: all 0.3s ease;
   }
-  .content .input-box input:focus,
-  .content .input-box input:valid{
+  .content .input-box input:focus{
     border-color: var(--nav-color);
     background-color: var(--container-color);
   }
@@ -157,6 +156,14 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
     width: 100%;
     top: 50px;
     z-index: 1;
+  }
+
+  .error {
+    border-color: rgb(206, 2, 2) !important;
+  }
+  
+  .valid {
+    border-color: rgb(0, 128, 0) !important; /* Color verde */
   }
   @media (max-width:1000px) {
     .content .image-box{
