@@ -292,6 +292,7 @@ footer {
   flex-direction: row;
   align-items: center;
   gap: 10px;
+  font-size: 14px;
   margin-bottom: 18px;
   margin-left: 5px;
   margin-right: 5px;
@@ -307,7 +308,7 @@ footer {
 .rating-fill{
   pointer-events: none;
   position: absolute;
-  font-size: 28px;
+  font-size: 23px;
   top: 0;
   left: 0;
   width: 0%;
@@ -328,7 +329,7 @@ footer {
   float: right;
   cursor: pointer;
   color: #838383;
-  font-size: 28px;
+  font-size: 23px;
   transition: all 0.3s;
   z-index: 2; /* Para estar encima del div de relleno */
 }
@@ -374,7 +375,7 @@ textarea.form-control {
   display: flex;
 }
 
-@media screen and (max-width: 1600px) and (min-width: 1200px) {
+@media screen and (max-width: 1400px) and (min-width: 1200px) {
   .views-valoraciones{
     display: block;
   }
