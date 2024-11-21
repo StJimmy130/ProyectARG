@@ -11,7 +11,7 @@ using System.Text.RegularExpressions;
 
 namespace ProyectARG.Controllers;
 
-
+[Authorize]
 public class PerfilesController : Controller
 {
     private ApplicationDbContext _context;
